@@ -33,43 +33,24 @@
 	<a class="carousel-control right" href="#recommend" 
 	   data-slide="next"  style="width:50px;height:90px; margin-top:130px;margin-right:250px;font-size:60px;background-image:url('<%=request.getContextPath()%>/img/front/home/bg.png');">&rsaquo;</a>
 </div> 
-
-<!--排行版对应页面-->
-<div class="tab-pane" id="rank">
-<p>22222222<br>
-<a class="ex3">互联网技能教育，免费的哦</a></p>
-</div>
-<!--电台对应页面-->
-<div class="tab-pane" id="radio">
-<p>3333333<br>
-学了就知道，我们不爱吹，低调是最牛逼的炫耀</p>
-</div>
-<!--歌手对应页面-->
-<div class="tab-pane" id="singer">
-<p>444444<br>
-屌丝逆袭不是传说,但关键是你学不学</p>
-</div>
-<!--新碟上架对应页面-->
-<div class="tab-pane" id="newsong">
-<p>444444<br>
-屌丝逆袭不是传说,但关键是你学不学</p>
-</div>
-
+<!-- 整体div -->
+<div>
 <!-- 热门搜索栏  导航栏-->
-<div style="margin-left:250px;margin-right:450px;">
-<ol class="breadcrumb" style="background:none;" >
+
+<div style="margin-left:280px;margin-right:500px;width:730px;margin-top:20px;border-bottom: 2px solid #C10D0C;">
+<ol class="breadcrumb" style="background:none;height:30px;" >
 	<li><a href="#" style="font-size:15pt; color:black;">热门推荐</a></li>
 	<li><a href="#" style="color:gray;">华语</a></li>
 	<li><a href="#" style="color:gray;">流行</a></li>
 	<li><a href="#" style="color:gray;">摇滚</a></li>
 	<li><a href="#" style="color:gray;">民谣</a></li>
 	<li><a href="#" style="color:gray;">电子</a></li>
-	<a href="#" style="margin-left:310px;color:gray;">更多<img src="<%=request.getContextPath()%>/img/front/home/more.png" style="margin-top:-5px;"></img></a>
+	<a href="#" style="margin-left:320px;color:gray;">更多<img src="<%=request.getContextPath()%>/img/front/home/more.png" style="margin-top:-5px;"></img></a>
 </ol>
 </div>
 
 <!--右侧栏-->
-<div style="float:right;position:absolute;right:180px;top:430px;width:250px;">
+<div style="float:right;position:absolute;right:300px;top:430px;width:250px;">
 	<!-- 没有登录显示-->
 	<!--<div style="background: 	#F5F5F5;border:1px solid  #DCDCDC">
 		<p style="font-size:10pt;margin-left:20px;margin-right:20px;margin-top:15px;">
@@ -157,7 +138,7 @@
 		 	</div>
 	</div>
     <!--热门DJ-->
-	<div style="border:1px solid #DCDCDC;height:920px;">
+	<div style="border:1px solid #DCDCDC;height:897px;">
 		<div style="margin-top:20px;">
 			<a style="margin-left:20px;">热门DJ</a>
 		
@@ -218,11 +199,9 @@
 
 <!--缩略图  热门推荐栏-->
 
-<div class="row" style="margin-left:250px;margin-right:250px;">
-		<div class="item" >
-			<img src="<%=request.getContextPath()%>/img/front/home/redBg.png" alt="Second slide"  width=78% height="3" style="margin-top:-55px;">
-		</div>
-    <div class="col-sm-6 col-md-3" style="height:200px;width:185px">
+<div class="row" style="margin-left:250px;margin-right:500px;">
+		
+    <div class="col-sm-6 col-md-3" style="margin-left:30px;margin-top:30px;height:200px;width:185px">
         <a href="#" class="thumbnail" style="height:160px;width:150px">
             <img src="<%=request.getContextPath()%>/img/front/home/music1.png"
                  alt="通用的占位符缩略图"
@@ -233,7 +212,7 @@
 		</div>
 		<div style="width:140px;height:25px;margin-left:10px;margin-top:-45px;"><a href="#" style="color:black;">我们的歌</a></div>
     </div>
-    <div class="col-sm-6 col-md-3" style="height:200px;width:185px">
+    <div class="col-sm-6 col-md-3" style="margin-left:0px;margin-top:30px;height:200px;width:185px">
         <a href="#" class="thumbnail" style="height:160px;width:150px">
             <img src="<%=request.getContextPath()%>/img/front/home/music1.png"
                  alt="通用的占位符缩略图"
@@ -244,7 +223,7 @@
 		</div>
 		<div style="width:140px;height:25px;margin-left:10px;margin-top:-45px;"><a href="#" style="color:black;">我们的歌</a></div>
     </div>
-     <div class="col-sm-6 col-md-3" style="height:200px;width:185px">
+     <div class="col-sm-6 col-md-3" style="margin-left:0px;margin-top:30px;height:200px;width:185px">
         <a href="#" class="thumbnail" style="height:160px;width:150px">
             <img src="<%=request.getContextPath()%>/img/front/home/music1.png"
                  alt="通用的占位符缩略图"
@@ -255,7 +234,7 @@
 		</div>
 		<div style="width:140px;height:25px;margin-left:10px;margin-top:-45px;"><a href="#" style="color:black;">我们的歌</a></div>
     </div>
-    <div class="col-sm-6 col-md-3" style="height:200px;width:185px">
+    <div class="col-sm-6 col-md-3" style="margin-left:0px;margin-top:30px;height:200px;width:185px">
         <a href="#" class="thumbnail" style="height:160px;width:150px">
             <img src="<%=request.getContextPath()%>/img/front/home/music1.png"
                  alt="通用的占位符缩略图"
@@ -267,8 +246,8 @@
 		<div style="width:140px;height:25px;margin-left:10px;margin-top:-45px;"><a href="#" style="color:black;">我们的歌</a></div>
     </div>
 </div>
-<div class="row" style="margin-left:250px;margin-right:250px;">
-    <div class="col-sm-6 col-md-3" style="height:200px;width:185px">
+<div class="row" style="margin-left:250px;margin-right:500px;">
+    <div class="col-sm-6 col-md-3" style="margin-left:30px;margin-top:15px;height:200px;width:185px">
         <a href="#" class="thumbnail" style="height:160px;width:150px">
             <img src="<%=request.getContextPath()%>/img/front/home/music1.png"
                  alt="通用的占位符缩略图"
@@ -279,7 +258,7 @@
 		</div>
 		<div style="width:140px;height:25px;margin-left:10px;margin-top:-45px;"><a href="#" style="color:black;">我们的歌</a></div>
     </div>
-    <div class="col-sm-6 col-md-3" style="height:200px;width:185px">
+    <div class="col-sm-6 col-md-3" style="margin-left:0px;margin-top:15px;height:200px;width:185px">
         <a href="#" class="thumbnail" style="height:160px;width:150px">
             <img src="<%=request.getContextPath()%>/img/front/home/music1.png"
                  alt="通用的占位符缩略图"
@@ -290,7 +269,7 @@
 		</div>
 		<div style="width:140px;height:25px;margin-left:10px;margin-top:-45px;"><a href="#" style="color:black;">我们的歌</a></div>
     </div>
-     <div class="col-sm-6 col-md-3" style="height:200px;width:185px">
+     <div class="col-sm-6 col-md-3" style="margin-left:0px;margin-top:15px;height:200px;width:185px">
         <a href="#" class="thumbnail" style="height:160px;width:150px">
             <img src="<%=request.getContextPath()%>/img/front/home/music1.png"
                  alt="通用的占位符缩略图"
@@ -301,7 +280,7 @@
 		</div>
 		<div style="width:140px;height:25px;margin-left:10px;margin-top:-45px;"><a href="#" style="color:black;">我们的歌</a></div>
     </div>
-    <div class="col-sm-6 col-md-3" style="height:200px;width:185px">
+    <div class="col-sm-6 col-md-3" style="margin-left:0px;margin-top:15px;height:200px;width:185px">
         <a href="#" class="thumbnail" style="height:160px;width:150px">
             <img src="<%=request.getContextPath()%>/img/front/home/music1.png"
                  alt="通用的占位符缩略图"
@@ -314,18 +293,17 @@
     </div>
 </div>
 <!--个性化推荐   导航栏-->
-<div style="margin-left:250px;margin-right:450px;margin-top:30px;">
-<ol class="breadcrumb" style="background:none;" >
+<div style="margin-left:280px;width:730px;margin-top:20px;border-bottom: 2px solid #C10D0C;">
+<ol class="breadcrumb" style="background:none;height:30px;" >
 	<li><a href="#" style="font-size:15pt;color:black;">个性化推荐</a></li>
 </ol>
 </div>
 
 <!-- 缩略图   个性化推荐-->
 
-<div class="row" style="margin-left:250px;margin-right:250px;">
-	<div class="item" >
-		<img src="<%=request.getContextPath()%>/img/front/home/redBg.png" alt="Second slide"  width=78% height="3" style="margin-top:-55px;">		</div>
-        <div class="col-sm-6 col-md-3" style="height:200px;width:185px">
+<div class="row" style="margin-left:250px;margin-right:500px;">
+	
+    <div class="col-sm-6 col-md-3" style="margin-left:30px;margin-top:20px;	height:200px;width:185px">
         <a href="#" class="thumbnail" style="height:160px;width:150px">
             <img src="<%=request.getContextPath()%>/img/front/home/music1.png"
                  alt="通用的占位符缩略图"
@@ -336,7 +314,7 @@
 		</div>
 		<div style="width:140px;height:25px;margin-left:10px;margin-top:-45px;"><a href="#" style="color:black;">我们的歌</a></div>
     </div>
-    <div class="col-sm-6 col-md-3" style="height:200px;width:185px">
+    <div class="col-sm-6 col-md-3" style="margin-left:0px;margin-top:20px;height:200px;width:185px">
         <a href="#" class="thumbnail" style="height:160px;width:150px">
             <img src="<%=request.getContextPath()%>/img/front/home/music1.png"
                  alt="通用的占位符缩略图"
@@ -347,7 +325,7 @@
 		</div>
 		<div style="width:140px;height:25px;margin-left:10px;margin-top:-45px;"><a href="#" style="color:black;">我们的歌</a></div>
     </div>
-     <div class="col-sm-6 col-md-3" style="height:200px;width:185px">
+     <div class="col-sm-6 col-md-3" style="margin-left:0px;margin-top:20px;height:200px;width:185px">
         <a href="#" class="thumbnail" style="height:160px;width:150px">
             <img src="<%=request.getContextPath()%>/img/front/home/music1.png"
                  alt="通用的占位符缩略图"
@@ -358,7 +336,7 @@
 		</div>
 		<div style="width:140px;height:25px;margin-left:10px;margin-top:-45px;"><a href="#" style="color:black;">我们的歌</a></div>
     </div>
-    <div class="col-sm-6 col-md-3" style="height:200px;width:185px">
+    <div class="col-sm-6 col-md-3" style="margin-left:0px;margin-top:20px;height:200px;width:185px">
         <a href="#" class="thumbnail" style="height:160px;width:150px">
             <img src="<%=request.getContextPath()%>/img/front/home/music1.png"
                  alt="通用的占位符缩略图"
@@ -371,18 +349,15 @@
     </div>
 </div>
 <!-- 新碟上架-->
-<div style="margin-left:250px;margin-right:450px;margin-top:30px;">
+<div style="margin-left:280px;width:730px;height:50px;margin-top:30px;border-bottom:2px solid #C10D0C; ">
 <ol class="breadcrumb" style="background:none;" >
 	<li><a href="#" style="font-size:15pt;color:black;">新碟上架</a></li>
 	<a href="#" style="margin-left:560px;color:gray;">更多<img src="<%=request.getContextPath()%>/img/front/home/more.png" style="margin-top:-5px;"></img></a>
 </ol>
 </div>
-	<div class="item" >
-		<img src="<%=request.getContextPath()%>/img/front/home/redBg.png" alt="Second slide"  width=51% height="3" style="margin-left:250px;margin-right:250px;margin-top:-55px;">
-	</div>
 
 <!--新碟上架  滚轮-->
-<div id="newdish" class="carousel slide" style="margin-top:-20px;margin-left:250px;margin-right:450px;background:none repeat scroll 0% 0% #F5F5F5;">
+<div id="newdish" class="carousel slide" style="margin-top:30px;margin-left:280px;width:720px;background:none repeat scroll 0% 0% #F5F5F5;">
 	<!-- 轮播（Carousel）指标 -->
 	<!--<ol class="carousel-indicators">
 		<li data-target="#newdish" data-slide-to="0" class="active"></li>
@@ -465,17 +440,15 @@
 	   data-slide="next"  style="width:30px;height:50px; margin-top:30px;font-size:40px;background:none repeat scroll 0% 0% #F5F5F5">&rsaquo;</a>
 	</div>
 <!-- 榜单 -->	
-<div style="margin-left:250px;margin-right:450px;margin-top:50px;">
+<div style="margin-left:280px;width:730px;height:50px;margin-top:30px;border-bottom:2px solid #C10D0C; ">
 <ol class="breadcrumb" style="background:none;">
 	<li><a href="#" style="font-size:15pt;color:black;">榜单</a></li>
 	<a href="#" style="margin-left:600px;color:gray;">更多<img src="<%=request.getContextPath()%>/img/front/home/more.png" style="margin-top:-5px;"></img></a>
 </ol>
 </div>
-	<div class="item" >
-		<img src="<%=request.getContextPath()%>/img/front/home/redBg.png" alt="Second slide"  width=51% height="3" style="margin-left:250px;margin-right:250px;margin-top:-55px;">
-	</div>
+
 <!--榜单 -->
-<div class="row" id="top-flag"  style="margin-left:260px;margin-right:483px;background-image:url('<%=request.getContextPath()%>/img/front/home/rankListBg.png')">
+<div class="row" id="top-flag"  style="margin-left:300px;margin-top:20px;width:690px;background-image:url('<%=request.getContextPath()%>/img/front/home/rankListBg.png')">
 	<div  class="col-sm-6 col-md-3" style="width:220px;" >
 	<dl style="width:212px;">
 		<dt class="top" style="width:212px;">
@@ -662,5 +635,6 @@
 	</dl>
 	</div>
 
+</div>
 </div>
 
