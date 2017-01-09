@@ -1,0 +1,21 @@
+@CHARSET "UTF-8";
+#musicList {
+	width:1000px;
+	height:1000px;
+	background-color: white;
+	border-left:1px solid #d3d3d3;
+	border-right:1px solid #d3d3d3;
+	margin:0 auto;
+}
+
+#musicList_choose {
+	width:910px;
+	margin:0 auto;
+	padding-top:20px;
+	border-bottom:2px solid #c20c0c;
+}
+
+#musicList_chooseBtn {
+	margin-bottom:8px;
+	margin-left:5px;
+}

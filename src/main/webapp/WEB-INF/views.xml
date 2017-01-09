@@ -16,7 +16,7 @@
 		<put-attribute name="content" value="/index.jsp" />
 	</definition>
 	
-	<!-- 歌手界面 -->	
+	<!-- 歌单界面 -->	
 	<definition name="showMusicList" extends="template_front">
 		<put-attribute name="content" value="/jsp/front/findMusic/musicList.jsp" />
 	</definition>
@@ -25,4 +25,20 @@
 	<definition name="showSinger" extends="template_front">
 		<put-attribute name="content" value="/jsp/front/findMusic/singer.jsp" />
 	</definition>
+	
+	<!-- 排行榜界面 -->	
+	<definition name="showRankList" extends="template_front">
+		<put-attribute name="content" value="/jsp/front/findMusic/rankList.jsp" />
+	</definition>
+	
+	<!-- 电台界面 -->	
+	<definition name="showRadio" extends="template_front">
+		<put-attribute name="content" value="/jsp/front/findMusic/radio.jsp" />
+	</definition>
+	
+	<!-- 新碟上架界面 -->	
+	<definition name="showAlbum" extends="template_front">
+		<put-attribute name="content" value="/jsp/front/findMusic/album.jsp" />
+	</definition>
+	
 </tiles-definitions>
