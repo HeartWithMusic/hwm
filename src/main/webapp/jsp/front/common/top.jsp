@@ -39,10 +39,10 @@
 
 <body>
 <!--第一栏 导航栏 + 搜索框 + 登陆按钮 -->
-<div style="min-width:1400px;background-image:url('<%=request.getContextPath()%>/img/front/home/背景黑条.png');background-repeat:repeat-x;" id="tab-header" >  																
+<div style="min-width:1400px;background-image:url('<%=request.getContextPath()%>/img/front/home/blackBg.png');background-repeat:repeat-x;" id="tab-header" >  																
 <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
 <!--导航-->
-<ul class="nav navbar-nav" style="width:450px;margin-left:150px;background-image:url('<%=request.getContextPath()%>/img/front/home/背景黑条.png');background-repeat:repeat-x;float:left;">
+<ul class="nav navbar-nav" style="width:450px;margin-left:150px;background-image:url('<%=request.getContextPath()%>/img/front/home/blackBg.png');background-repeat:repeat-x;float:left;">
   <a href="/#" class="navbar-brand" style="width:130px;"><img style="margin-top:-15px;width:130px;margin-left:-18px;" src="<%=request.getContextPath()%>/img/front/home/logo.png"/></a>
 <li id="first" ><a class="active" href="#home" role="tab" data-toggle="tab" style="color:white;">发现音乐</a></li>
 <li><a href="#profile" role="tab" data-toggle="tab" style="color:white;">我的音乐</a></li>
@@ -60,7 +60,7 @@
 
  <div class="dropdown" >
  
-  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" style="margin-top:8px;background-image:url('<%=request.getContextPath()%>/img/front/home/背景.png');background-repeat:repeat-x;;">
+  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" style="margin-top:8px;background-image:url('<%=request.getContextPath()%>/img/front/home/bg.png');background-repeat:repeat-x;;">
     <a style="margin:center;color:white;">登陆</a>
     <span class="caret"></span>
   </button>
@@ -79,28 +79,28 @@
 <!--导航栏所对应的转换页面-->
 <div class="tab-content" style="margin-top:20px;">
 <!--“我的音乐”对应转换第二导航栏-->
-<div class="tab-pane active" id="home" style="background-image:url('<%=request.getContextPath()%>/img/front/home/背景红条.png');background-repeat:repeat-x;">
+<div class="tab-pane active" id="home" style="background-image:url('<%=request.getContextPath()%>/img/front/home/redBg.png');background-repeat:repeat-x;">
 	<ul class="nav nav-pills" style="margin-left:290px;margin-top:-20px;">
-	<li ><a href="#recommend" role="tab" data-toggle="tab" style="height:34px;color:white;">推荐</a></li>
-	<li><a href="#rank" role="tab" data-toggle="tab" style="height:34px;color:white;">排行榜</a></li>
-	<li><a href="#radio" role="tab" data-toggle="tab" style="height:34px;color:white;">主播电台</a></li>
-	<li><a href="#singer" role="tab" data-toggle="tab" style="height:34px;color:white;">歌手</a></li>
-	<li><a href="#newsong" role="tab" data-toggle="tab" style="height:34px;color:white;">新碟上架</a></li>
+	<li ><a href="./discover/"  style="height:34px;color:white;">推荐</a></li>
+	<li><a href="./discover/rankList"  style="height:34px;color:white;">排行榜</a></li>
+	<li><a href="./discover/radio"  style="height:34px;color:white;">主播电台</a></li>
+	<li><a href="./discover/singer"  style="height:34px;color:white;">歌手</a></li>
+	<li><a href="./discover/album" style="height:34px;color:white;">新碟上架</a></li>
 </ul>
 </div>
 <div class="tab-pane" id="profile">
 		<div class="item" >
-			<img src="<%=request.getContextPath()%>/img/front/home/背景红条.png" alt="Second slide"  width=100% height="8" style="margin-top:-55px;">
+			<img src="<%=request.getContextPath()%>/img/front/home/redBg.png" alt="Second slide"  width=100% height="8" style="margin-top:-55px;">
 		</div>
 </div>
 <div class="tab-pane" id="messages">
 <div class="item" >
-			<img src="<%=request.getContextPath()%>/img/front/home/背景红条.png" alt="Second slide"  width=100% height="8" style="margin-top:-55px;">
+			<img src="<%=request.getContextPath()%>/img/front/home/redBg.png" alt="Second slide"  width=100% height="8" style="margin-top:-55px;">
 		</div>
 </div>
 <div class="tab-pane" id="settings">
 <div class="item" >
-			<img src="<%=request.getContextPath()%>/img/front/home/背景红条.png" alt="Second slide"  width=100% height="8" style="margin-top:-55px;">
+			<img src="<%=request.getContextPath()%>/img/front/home/redBg.png" alt="Second slide"  width=100% height="8" style="margin-top:-55px;">
 		</div>
 </div>
 </div>

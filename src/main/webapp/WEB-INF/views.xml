@@ -15,4 +15,14 @@
 	<definition name="showHome" extends="template_front">
 		<put-attribute name="content" value="/index.jsp" />
 	</definition>
+	
+	<!-- 歌手界面 -->	
+	<definition name="showMusicList" extends="template_front">
+		<put-attribute name="content" value="/jsp/front/findMusic/musicList.jsp" />
+	</definition>
+	
+	<!-- 歌手界面 -->	
+	<definition name="showSinger" extends="template_front">
+		<put-attribute name="content" value="/jsp/front/findMusic/singer.jsp" />
+	</definition>
 </tiles-definitions>

@@ -1,21 +1,30 @@
 package com.ruanko.hwm.controller;
 
-
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-
-
 @Controller
-@RequestMapping("/user")
+@RequestMapping("/home")
 public class UserController {
 	
-	@RequestMapping({"/",""})
-	public String toUser(Model model, HttpServletRequest request) {
-		model.addAttribute("title", "首页");
+	@RequestMapping({"/discover/"})
+	public String toHome(Model model, HttpServletRequest request) {
+		model.addAttribute("title", "心随乐动");
 		return "showHome";
+	}
+	
+	@RequestMapping({"/discover/musicList"})
+	public String toMusicList(Model model, HttpServletRequest request) {
+		model.addAttribute("title", "歌单");
+		return "showMusicList";
+	}
+	
+	@RequestMapping({"/discover/singer"})
+	public String toSinger(Model model, HttpServletRequest request) {
+		model.addAttribute("title", "歌手");
+		return "showSinger";
 	}
 }

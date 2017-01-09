@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <!--顶部分割线-->
 <div >
-<img src="<%=request.getContextPath()%>/img/front/home/底部横线.png" style="width:100%;height:1pt;"></img>
+<img src="<%=request.getContextPath()%>/img/front/home/bottomLine.png" style="width:100%;height:1pt;"></img>
 </div>
 <div style="margin-left:280px;margin-right:250px;">
 <a href="#">
