@@ -10,5 +10,6 @@ public interface IAdminService {
 	public Admin getAdminById(int adminId);
 	
 	public void addAdmin(Admin admin);
+
 	
 }

@@ -12,50 +12,12 @@
 	<!-- 启动mvc注解功能 -->
 	<mvc:annotation-driven/>
 	<!-- 设置访问静态资源 -->
-	<mvc:resources location="/images/" mapping="/images/**"/>
+	<mvc:resources location="/img/" mapping="/img/**"/>
 	<mvc:resources location="/css/" mapping="/css/**"/>
 	<mvc:resources location="/js/" mapping="/js/**"/>
-	
+	<mvc:resources location="/fonts/" mapping="/fonts/**"/>
 	<!-- 配置登录拦截器 -->
-	<mvc:interceptors>
-        <mvc:interceptor>
-            <mvc:mapping path="/admin/**"/>
-            <mvc:mapping path="/room/**"/>
-            <mvc:mapping path="/order/**"/>
-            <mvc:mapping path="/user/**"/>
-            <mvc:exclude-mapping path="/room/showRoom1/**"/>
-            <mvc:exclude-mapping path="/order/showOrder1/**"/>
-            <mvc:exclude-mapping path="/user/showLogin/**"/>
-            <mvc:exclude-mapping path="/user/login/**"/> 
-            <mvc:exclude-mapping path="/user/logout/**"/> 
-            <mvc:exclude-mapping path="/user/showRegister/**"/> 
-            <mvc:exclude-mapping path="/user/register/**"/>
-            <mvc:exclude-mapping path="/user/showFindPassword/**"/> 
-            <mvc:exclude-mapping path="/user/validateUsername/**"/>
-            <mvc:exclude-mapping path="/user/validatePhone/**"/>
-            <mvc:exclude-mapping path="/user/updatePassword/**"/>
-            <mvc:exclude-mapping path="/order/showAddOrder**"/>
-            <mvc:exclude-mapping path="/order/addOrder**"/>
-            <mvc:exclude-mapping path="/order/showOrderPay/**"/>
-            <mvc:exclude-mapping path="/order/pay/**"/>
-            <mvc:exclude-mapping path="/order/showUserOrder/**"/>
-            <mvc:exclude-mapping path="/user/showUserInfo/**"/>
-            <mvc:exclude-mapping path="/user/showUpdateInfo/**"/>
-            <mvc:exclude-mapping path="/user/updateInfo/**"/>
-            <bean id="adminLoginInterceptor" class="com.libaoshen.hrs.interceptor.AdminLoginInterceptor"/>
-        </mvc:interceptor>
-        <mvc:interceptor>
-            <mvc:mapping path="/order/showAddOrder/**"/>
-            <mvc:mapping path="/order/addOrder/**"/>
-            <mvc:mapping path="/order/showOrderPay/**"/>
-            <mvc:mapping path="/order/pay/**"/>
-            <mvc:mapping path="/order/showUserOrder/**"/>
-        	<mvc:mapping path="/user/showUserInfo/**"/>
-            <mvc:mapping path="/user/showUpdateInfo/**"/>
-            <mvc:mapping path="/user/updateInfo/**"/>
-            <bean id="userLoginInterceptor" class="com.libaoshen.hrs.interceptor.UserLoginInterceptor"/>
-        </mvc:interceptor>
-    </mvc:interceptors>
+	
     
     
 	<!-- 自动扫描该包，使SpringMVC认为包下用了@controller注解的类是控制器 -->
