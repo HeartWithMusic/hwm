@@ -16,8 +16,6 @@
 </a>
 </div>
 
-<script src="<%=request.getContextPath()%>/js/common/jquery-3.1.1.js"></script>
-<script src="<%=request.getContextPath()%>/js/bootstrap.min.js"></script>
 
 <script>
     $(function () {

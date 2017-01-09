@@ -12,6 +12,8 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1">
 	<title>${title }</title>
+	<script src="<%=request.getContextPath()%>/js/common/jquery-3.1.1.js"></script>
+	<script src="<%=request.getContextPath()%>/js/bootstrap.min.js"></script>
 </head>
 <body>
 	<div id="base">
