@@ -307,7 +307,9 @@
 					$("#volume").css("display","none");
 					flag1 = 1;
 				}
-			}else if($(e.target).attr("id") == "btn-playWays") {
+			}
+			
+			if($(e.target).attr("id") == "btn-playWays") {
 				if(flag2 == 0 ){
 					$("#btn-playWays").removeClass("glyphicon glyphicon-repeat");
 					$("#btn-playWays").addClass("glyphicon glyphicon-refresh");
@@ -326,7 +328,9 @@
 					$("#btn-playWays").attr("title","单曲循环");
 					flag2 = 0;
 				}
-			}else if($(e.target).attr("id") == "btn-showMenu") {
+			}
+			
+			if($(e.target).attr("id") == "btn-showMenu") {
 				if(flag3 == 0 ){
 					$("#list_lyc").css("display","inline");
 					flag3 = 1;
