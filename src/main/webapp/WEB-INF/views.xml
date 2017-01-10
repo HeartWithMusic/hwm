@@ -40,5 +40,9 @@
 	<definition name="showAlbum" extends="template_front">
 		<put-attribute name="content" value="/jsp/front/findMusic/album.jsp" />
 	</definition>
+	<!-- 歌曲信息界面 -->	
+	<definition name="showMusicInfo" extends="template_front">
+		<put-attribute name="content" value="/jsp/front/music/musicMessage.jsp" />
+	</definition>
 	
 </tiles-definitions>
