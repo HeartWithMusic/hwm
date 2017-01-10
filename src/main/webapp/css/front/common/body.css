@@ -3,10 +3,7 @@ body {
 	width :100%;
 	background-color: #f5f5f5;
 }
-a {
-	color:black;
-	text-decoration: none;
-}
+
 
 a:hover {
 	color:red;

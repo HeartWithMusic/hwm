@@ -16,6 +16,7 @@
 	<mvc:resources location="/css/" mapping="/css/**"/>
 	<mvc:resources location="/js/" mapping="/js/**"/>
 	<mvc:resources location="/fonts/" mapping="/fonts/**"/>
+	<mvc:resources location="/music/" mapping="/music/**"/>
 	<!-- 配置登录拦截器 -->
 	
     
