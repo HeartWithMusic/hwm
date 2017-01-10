@@ -1,0 +1,17 @@
+@CHARSET "UTF-8";
+#singer {
+	width:1000px;
+	height:1000px;
+	background-color: white;
+	border-left:1px solid #d3d3d3;
+	border-right:1px solid #d3d3d3;
+	margin:0 auto;
+}
+
+#singer_sort {
+	
+}
+
+#singer_list{
+	
+}
