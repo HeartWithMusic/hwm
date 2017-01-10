@@ -81,11 +81,12 @@
 <!--“我的音乐”对应转换第二导航栏-->
 <div class="tab-pane active" id="home" style="background-image:url('<%=request.getContextPath()%>/img/front/home/redBg.png');background-repeat:repeat-x;">
 	<ul class="nav nav-pills" style="margin-left:290px;margin-top:-20px;">
-	<li ><a href="./discover/"  style="height:34px;color:white;">推荐</a></li>
-	<li><a href="./discover/rankList"  style="height:34px;color:white;">排行榜</a></li>
-	<li><a href="./discover/radio"  style="height:34px;color:white;">主播电台</a></li>
-	<li><a href="./discover/singer"  style="height:34px;color:white;">歌手</a></li>
-	<li><a href="./discover/album" style="height:34px;color:white;">新碟上架</a></li>
+	<li ><a href="../discover/"  style="height:34px;color:white;">推荐</a></li>
+	<li><a href="../discover/rankList"  style="height:34px;color:white;">排行榜</a></li>
+	<li><a href="../discover/musicList"  style="height:34px;color:white;">歌单</a></li>
+	<li><a href="../discover/radio"  style="height:34px;color:white;">主播电台</a></li>
+	<li><a href="../discover/singer"  style="height:34px;color:white;">歌手</a></li>
+	<li><a href="../discover/album" style="height:34px;color:white;">新碟上架</a></li>
 </ul>
 </div>
 <div class="tab-pane" id="profile">
