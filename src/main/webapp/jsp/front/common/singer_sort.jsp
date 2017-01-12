@@ -2,7 +2,6 @@
     pageEncoding="UTF-8"%>
 <link href="<%=request.getContextPath()%>/css/front/findMusic/singer.css" rel="stylesheet">
 
-<div id="singer">
 	<div id="singer_sort">
 		<div id="conmmend">
 		<h3>推荐</h3>
@@ -86,4 +85,3 @@
 			</ul>
 		</div>
 	</div>
-</div>

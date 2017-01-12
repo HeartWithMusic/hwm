@@ -43,7 +43,7 @@
 	   data-slide="next"  style="width:50px;height:90px; margin-top:130px;margin-right:250px;font-size:60px;background-image:url('<%=request.getContextPath()%>/img/front/home/bg.png');">&rsaquo;</a>
 </div> 
 <!-- 整体div -->
-<div style="margin:0 auto;width:1050px;padding:0px;background:white;overflow:hidden;">
+<div style="margin:0 auto;width:1000px;padding:0px;background:white;overflow:hidden;">
 	<!-- 热门搜索栏  导航栏-->
 	<div style="width:750px;float:left;">
 		<!-- 热门推荐 -->

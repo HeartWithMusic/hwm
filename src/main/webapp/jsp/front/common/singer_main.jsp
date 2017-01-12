@@ -20,11 +20,16 @@
 		<div id="top">
 			<tiles:insertAttribute name="top"/>
 		</div>
-		<div id="content">
-			<tiles:insertAttribute name="content"/>
-		</div>
-		<div id="left">
-			<tiles:insertAttribute name="left"/>
+		<div style="margin:0 auto;width:1000px;overflow:hidden;background-color: white;
+	border-left:1px solid #d3d3d3;
+	border-right:1px solid #d3d3d3;
+	">
+			<div id="content">
+				<tiles:insertAttribute name="content"/>
+			</div>
+			<div id="left">
+				<tiles:insertAttribute name="left"/>
+			</div>
 		</div>
 		<div id="bottom">
 			<tiles:insertAttribute name="bottom"/>
