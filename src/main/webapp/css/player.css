@@ -15,17 +15,30 @@ music setting
 .navbar-collapse:after {
 	clear:none;
 }
-#img {
+#img{
 	width:100%;
 	height:44px;
 	background-image: url('./front/playbar.png');
 	background-repeat: repeat-x;
 	position:fixed;
 	bottom:0px;
-	opacity:0.9;
+	opacity:0.95;
 	z-index:20;
 }
-			
+
+#bottom_lock_whole{
+	position:fixed;
+	bottom:42px;
+	right:100px;
+	z-index:888;
+}	
+
+#bottom_lock_whole #bottom_lock {
+	float:right;
+	right:47px;
+	top:5px;
+}
+	
 #div-play {
 	float:left;
 	margin-right:10px;

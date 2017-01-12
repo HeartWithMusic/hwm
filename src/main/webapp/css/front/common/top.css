@@ -9,14 +9,12 @@
 }
 .tab-pane a:hover {
 	border:1px solid #AA2222;
-	
 	border-radius:15px;
-	box-shadow:inset 1px 1px 3px 3px #E6E6E6;
-	background-color:#BB0000 !important;
+	box-shadow:inset 0px 0px 1px 1px #BE3030;
+	background-color:#990000 !important;
 
 }
 .tab-pane a {
-	height:90%;
 }
 #home a {
 	
