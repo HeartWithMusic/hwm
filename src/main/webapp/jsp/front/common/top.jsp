@@ -50,7 +50,7 @@
 					
 				<div id="navbar" class="collapse navbar-collapse"><!-- 给导航栏添加响应式，包裹在带有.collapse、.navbar-collapse  -->
 					<ul class="nav navbar-nav" id="myTab"><!--nav navbar-nav 导航栏添加链接-->
-						<li class="active"><a href="/hwm/home/discover/"><span class="glyphicon glyphicon-home"></span> 发现音乐</a></li>
+						<li class="active"><a href="/hwm/home/discover/"><span class="glyphicon glyphicon-search"></span> 发现音乐</a></li>
 						<li><a href="#about"><span class="glyphicon glyphicon-user"></span> 我的音乐</a></li>
 						<li><a href="#about"><span class="glyphicon glyphicon-save"></span> 音乐人</a></li>
 						<li><a href="#contact">关于</a></li>
@@ -203,12 +203,15 @@
 						<span id="btn-showMenu" class="glyphicon glyphicon-tasks"  ></span>
 						<!-- 音量控制 -->
 						<span id="btn-showVolume" class="glyphicon glyphicon-volume-up"  ></span>
-	           		 </div>
-	           		 <img alt="" src="<%=request.getContextPath()%>/img/front/home/lockBg.png" style="margin-top:-50px; margin-left:300px;">
-	            </div>  
+	           		</div>
+	           	</div>  
 	       </div>  
 	    </div>  
 	</div>
+	<div id="bottom_lock_whole">
+	     <span id="bottom_lock" class="glyphicon glyphicon-lock" style="opacity:0.9;color:white;font-size:10px;z-index:888;"></span>
+	     <img id="bottom_lock_bg"  alt="" src="<%=request.getContextPath()%>/img/front/home/lockBg.png" style="opacity:0.9;"/>
+	</div> 
 	<%String path = request.getContextPath();%>
 	<input id="path" type="hidden" value="<%=path%>"/>
 </div>
@@ -221,6 +224,7 @@
 		var flag1 = 1;//声音控制切换
 		var flag2 = 0;//播放模式切换
 		var flag3 = 0;//歌单和歌词显示切换
+		var flag4 = 0;//底部隐藏
 		$( "#slider-range-max" ).slider();
 		$("#div-play").mouseover(function(){
 			$("#div-play").css("cursor","pointer");
@@ -293,6 +297,22 @@
 			$("#panel-close").css("color","#ABABAB");
 		});
 		
+		$("#bottom_lock_bg").mouseover(function(){
+			$("#bottom_lock_bg").css("cursor","pointer");
+			$("#bottom_lock").css("color","red");
+		});
+		$("#bottom_lock_bg").mouseout(function(){
+			$("#bottom_lock").css("color","white");
+		});
+		
+		$("#bottom_lock").mouseover(function(){
+			$("#bottom_lock").css("cursor","pointer");
+			$("#bottom_lock").css("color","red");
+		});
+		$("#bottom_lock").mouseout(function(){
+			$("#bottom_lock").css("color","white");
+		});
+		
 		$(document).on("click",function(e) { 
 			//console.info("hello");
 			if($(e.target).attr("id") != "volume" && $(e.target).attr("id") != "btn-showVolume" ) {
@@ -342,6 +362,22 @@
 				$("#list_lyc").css("display","none");
 				flag3 = 0;
 			}
+			
+			if($(e.target).attr("id") == "bottom_lock" || $(e.target).attr("id") == "bottom_lock_bg") {
+				if(flag4 == 0 ){
+					$("#img").css("display","none");
+					$("#bottom_lock_whole").css({"display":"inline","bottom":"0px"});
+					$("#list_lyc").css("display","none");
+					flag3 = 0;
+					flag4 = 1;
+					
+				}else {
+					$("#img").css("display","inline");
+					$("#bottom_lock_whole").css({"bottom":"42px"});
+					flag4 = 0;
+				}
+			}
+			
 		});
 		
 		//启用popover
