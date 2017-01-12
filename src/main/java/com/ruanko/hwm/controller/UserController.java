@@ -50,4 +50,9 @@ public class UserController {
 		model.addAttribute("title", "阳光宅男");
 		return "showMusicInfo";
 	}
+	@RequestMapping({"/singer"})
+	public String toSingerMess(Model model, HttpServletRequest request) {
+		model.addAttribute("title", "JayChou");
+		return "showSingerInfo";
+	}
 }

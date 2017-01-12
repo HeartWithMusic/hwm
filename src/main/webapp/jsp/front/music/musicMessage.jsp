@@ -69,7 +69,7 @@
         }  
     }  
 </script>  
-	<div id="musicMess" style="width:1000px;margin:0 auto;overflow:hidden;background-color:white;1px solid #d3d3d3;border-right:1px solid #d3d3d3;">
+	<div id="musicMess" style="width:1000px;margin:0 auto;overflow:hidden;background-color:white;border-left:1px solid #d3d3d3;border-right:1px solid #d3d3d3;">
 		<div id="musicMess_left" style = "width: 680px;float:left;border-right:1px solid #d3d3d3;">
 				<!--中间-->
 				<div id="musicMess_left_top" style = "width:580px;height:1450px;margin: 47px 30px 40px 39px;">
