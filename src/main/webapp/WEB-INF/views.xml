@@ -14,7 +14,8 @@
 	<definition name="singerMess" template="/jsp/front/common/singerMessTop.jsp">
 		<put-attribute name="top" value="/jsp/front/common/top.jsp" />
 		<put-attribute name="bottom" value="/jsp/front/common/bottom.jsp" />
-		<put-attribute name="singerMessTop" value="/jsp/front/common/singerMessImp.jsp" />		
+		<put-attribute name="singerMessTop" value="/jsp/front/common/singerMessImp.jsp" />	
+		<put-attribute name="singerMessRight" value="/jsp/front/singer/singerMessRight.jsp" />		
 		<put-attribute name="content" value="" />
 	</definition>
 	<!-- 主界面 -->	
@@ -48,7 +49,7 @@
 	</definition>
 	<!-- 歌手信息界面 -->	
 	<definition name="showSingerInfo" extends="singerMess">
-		<put-attribute name="content" value="/jsp/front/common/singerMessImp.jsp" />
+		<put-attribute name="content" value="/jsp/front/singer/singerMessage.jsp" />
 	</definition>
 	
 	<!-- 歌手分类 -->
