@@ -36,10 +36,10 @@ a{
     LINE-HEIGHT: 30px; 	
     WIDTH: 30px; 
     BOTTOM: 35px; 
-    HEIGHT: 33px; 
+    HEIGHT: 180px; 
     FONT-SIZE: 12px;
     CURSOR: pointer; 
-    RIGHT: 0px; 
+    RIGHT: 80px; 
     _position: absolute; 
     _right: auto  
 }  

@@ -45,6 +45,7 @@ public class UserController {
 		model.addAttribute("title", "新碟上架");
 		return "showAlbum";
 	}
+	
 	@RequestMapping({"/music"})
 	public String toMusic(Model model, HttpServletRequest request) {
 		model.addAttribute("title", "阳光宅男");
@@ -55,4 +56,5 @@ public class UserController {
 		model.addAttribute("title", "JayChou");
 		return "showSingerInfo";
 	}
+
 }

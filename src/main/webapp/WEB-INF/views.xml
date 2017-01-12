@@ -27,11 +27,6 @@
 		<put-attribute name="content" value="/jsp/front/findMusic/musicList.jsp" />
 	</definition>
 	
-	<!-- 歌手界面 -->	
-	<definition name="showSinger" extends="template_front">
-		<put-attribute name="content" value="/jsp/front/findMusic/singer.jsp" />
-	</definition>
-	
 	<!-- 排行榜界面 -->	
 	<definition name="showRankList" extends="template_front">
 		<put-attribute name="content" value="/jsp/front/findMusic/rankList.jsp" />
@@ -46,6 +41,7 @@
 	<definition name="showAlbum" extends="template_front">
 		<put-attribute name="content" value="/jsp/front/findMusic/album.jsp" />
 	</definition>
+
 	<!-- 歌曲信息界面 -->	
 	<definition name="showMusicInfo" extends="template_front">
 		<put-attribute name="content" value="/jsp/front/music/musicMessage.jsp" />
@@ -53,5 +49,18 @@
 	<!-- 歌手信息界面 -->	
 	<definition name="showSingerInfo" extends="singerMess">
 		<put-attribute name="content" value="/jsp/front/common/singerMessImp.jsp" />
+	</definition>
+	
+	<!-- 歌手分类 -->
+	<definition name="singersort" template="/jsp/front/common/singer_main.jsp">
+		<put-attribute name="top" value="/jsp/front/common/top.jsp" />
+		<put-attribute name="bottom" value="/jsp/front/common/bottom.jsp" />
+		<put-attribute name="left" value="/jsp/front/common/singer_sort.jsp" />
+		<put-attribute name="content" value="" />
+	</definition>
+	
+	<!-- 歌手界面 -->	
+	<definition name="showSinger" extends="singersort">
+		<put-attribute name="content" value="/jsp/front/common/singer_right.jsp" />
 	</definition>
 </tiles-definitions>

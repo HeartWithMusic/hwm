@@ -3,6 +3,7 @@
 <style>
 	.left_menu {
 		float:left;
+		border-left:1px solid #DCDCDC;
 	}
 	.left_menu_header {
 		margin-top:20px;
@@ -595,7 +596,7 @@
 			 	</div>
 		</div>
 	    <!--热门DJ-->
-		<div style="border:1px solid #DCDCDC;height:897px;">
+		<div style="border:1px solid #DCDCDC;height:931px;">
 			<div style="margin-top:20px;">
 				<a style="margin-left:20px;">热门DJ</a>
 			
