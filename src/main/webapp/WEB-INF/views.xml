@@ -5,7 +5,7 @@
 	
 <tiles-definitions>
 	<!-- 前台模板 -->
-	<definition name="template_front" template="/jsp/front/common/main.jsp">
+	<definition name="template_front" template="/jsp/front/common/main1.jsp">
 		<put-attribute name="top" value="/jsp/front/common/top.jsp" />
 		<put-attribute name="bottom" value="/jsp/front/common/bottom.jsp" />
 		<put-attribute name="content" value="" />
@@ -19,7 +19,9 @@
 		<put-attribute name="content" value="" />
 	</definition>
 	<!-- 主界面 -->	
-	<definition name="showHome" extends="template_front">
+	<definition name="showHome" template="/jsp/front/common/main.jsp"></definition>
+	<!-- 内嵌主界面 -->
+	<definition name="showHome1" extends="template_front">
 		<put-attribute name="content" value="/index.jsp" />
 	</definition>
 	

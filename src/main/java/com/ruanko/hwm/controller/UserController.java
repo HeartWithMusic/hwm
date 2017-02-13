@@ -15,7 +15,11 @@ public class UserController {
 		model.addAttribute("title", "心随乐动");
 		return "showHome";
 	}
-	
+	@RequestMapping({"/discover/1"})
+	public String toHome1(Model model, HttpServletRequest request) {
+		model.addAttribute("title", "心随乐动");
+		return "showHome1";
+	}
 	@RequestMapping({"/discover/rankList"})
 	public String toRankList(Model model, HttpServletRequest request) {
 		model.addAttribute("title", "排行榜");
