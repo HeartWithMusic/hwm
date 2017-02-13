@@ -26,4 +26,17 @@ public class AdminController {
 		model.addAttribute("title", "首页");
 		return "showAdminIndex";
 	}
+	
+	@RequestMapping({"/addMusic/"})
+	public String toAddMusic(Model model, HttpServletRequest request) {
+		//model.addAttribute("title", "首页");
+		return "showAddMusic";
+	}
+	
+	@RequestMapping({"/manageMusic/"})
+	public String toManageMusic(Model model, HttpServletRequest request) {
+		//model.addAttribute("title", "首页");
+		return "showManageMusic";
+	}
+	
 }

@@ -27,13 +27,13 @@ public class TestAdmin {
 		
 		System.out.println(admin.getAdminname());
 		
-		Admin admin1 = new Admin();
-		admin1.setAdminname("yaohaoyu");
-		admin1.setEmail("asf");
-		admin1.setPassword("afdf");
-		admin1.setTel("asdfdsf");
+//		Admin admin1 = new Admin();
+//		admin1.setAdminname("yaohaoyu");
+//		admin1.setEmail("asf");
+//		admin1.setPassword("afdf");
+//		admin1.setTel("asdfdsf");
 		
-		adminService.addAdmin(admin1);
+		//adminService.addAdmin(admin1);
 	}
 
 }

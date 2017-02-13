@@ -72,7 +72,11 @@
 	<definition name="showAdminLogin" template="/jsp/back/loginup/login.jsp"></definition>
 	<!-- 后台注册界面 -->	
 	<definition name="showAdminLogup" template="/jsp/back/loginup/logup.jsp"></definition>
-	<!-- 后台注册界面 -->	
+	<!-- 后台首页界面 -->	
 	<definition name="showAdminIndex" template="/jsp/back/main/index.jsp"></definition>
+	<!-- 后台添加音乐界面 -->	
+	<definition name="showAddMusic" template="/jsp/back/main/addMusic.jsp"></definition>
+	<!-- 后台管理音乐界面 -->	
+	<definition name="showManageMusic" template="/jsp/back/main/manageMusic.jsp"></definition>
 	
 </tiles-definitions>
