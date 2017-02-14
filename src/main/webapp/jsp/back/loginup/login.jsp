@@ -5,7 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="<%=request.getContextPath()%>/css/back/loginup/app.v2.css" type="text/css" />
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/app.v2.css" type="text/css" />
 </head>
 <body>
 	<section id="content" class="m-t-lg wrapper-md animated fadeInUp">
@@ -44,6 +44,6 @@
 	      &copy; 2013</small> </p>
 	  </div>
 	</footer>
-	<!-- / footer --> <script src="js/app.v2.js"></script> <!-- Bootstrap --> <!-- App -->
+	<!-- / footer --> <script src="<%=request.getContextPath()%>/js/back/app.v2.js"></script>  <!-- Bootstrap --> <!-- App -->
 </body>
 </html>
