@@ -15,12 +15,7 @@
 <section class="vbox">
   <header class="bg-dark dk header navbar navbar-fixed-top-xs">
     <div class="navbar-header aside-md"> <a class="btn btn-link visible-xs" data-toggle="class:nav-off-screen" data-target="#nav"> <i class="fa fa-bars"></i> </a> <a href="#" class="navbar-brand" data-toggle="fullscreen"><img src="<%=request.getContextPath()%>/img/front/home/logo.png" class="m-r-sm" style="height:100px !important;" >后台管理系统</a> <a class="btn btn-link visible-xs" data-toggle="dropdown" data-target=".nav-user"> <i class="fa fa-cog"></i> </a> </div>
-    <ul class="nav navbar-nav hidden-xs">
-      
-      <li>
-        <div class="m-t m-l"> <a href="price.html" class="dropdown-toggle btn btn-xs btn-primary" title="Upgrade"><i class="fa fa-long-arrow-up"></i></a> </div>
-      </li>
-    </ul>
+    
     <ul class="nav navbar-nav navbar-right hidden-xs nav-user">
       <!--  
       <li class="dropdown hidden-xs"> <a href="#" class="dropdown-toggle dker" data-toggle="dropdown"><i class="fa fa-fw fa-search"></i></a>
@@ -56,29 +51,29 @@
             <div class="slim-scroll" data-height="auto" data-disable-fade-out="true" data-distance="0" data-size="5px" data-color="#333333"> <!-- nav -->
               <nav class="nav-primary hidden-xs">
                 <ul class="nav">
-                  <li class="active"> <a href="<%=request.getContextPath()%>/admin/index/" class="active"> <i class="fa fa-bullhorn icon"> <b class="bg-danger"></b> </i> <span>通知</span> </a> </li>
-                  <li > <a href="#layout" > <i class="fa fa-music icon"> <b class="bg-warning"></b> </i> <span class="pull-right"> <i class="fa fa-angle-down text"></i> <i class="fa fa-angle-up text-active"></i> </span> <span>音乐管理</span> </a>
-                    <ul class="nav lt">
+                  <li > <a href="<%=request.getContextPath()%>/admin/index/" > <i class="fa fa-bullhorn icon"> <b class="bg-danger"></b> </i> <span>通知</span> </a> </li>
+                  <li class="active" > <a href="#layout" class="active"> <i class="fa fa-music icon"> <b class="bg-warning"></b> </i> <span class="pull-right"> <i class="fa fa-angle-down text"></i> <i class="fa fa-angle-up text-active"></i> </span> <span>音乐管理</span> </a>
+                    <ul class="nav lt" style="display:block;">
                       <li > <a href="<%=request.getContextPath()%>/admin/addMusic/" > <i class="fa fa-angle-right"></i> <span>添加音乐</span> </a> </li>
-                      <li > <a href="<%=request.getContextPath()%>/admin/manageMusic/" > <i class="fa fa-angle-right"></i> <span>管理音乐</span> </a> </li>
+                      <li class="active" > <a href="<%=request.getContextPath()%>/admin/manageMusic/" class="active" > <i class="fa fa-angle-right"></i> <span>管理音乐</span> </a> </li>
                     </ul>
                   </li>
                   <li > <a href="#uikit" > <i class="fa fa-group icon"> <b class="bg-success"></b> </i> <span class="pull-right"> <i class="fa fa-angle-down text"></i> <i class="fa fa-angle-up text-active"></i> </span> <span>歌手管理</span> </a>
                     <ul class="nav lt">
-                      <li > <a href="buttons.html" > <i class="fa fa-angle-right"></i> <span>添加歌手</span> </a> </li>
-                      <li > <a href="icons.html" >  <i class="fa fa-angle-right"></i> <span>管理歌手</span> </a> </li>
+                      <li > <a href="<%=request.getContextPath()%>/admin/addSinger" > <i class="fa fa-angle-right"></i> <span>添加歌手</span> </a> </li>
+                      <li > <a href="<%=request.getContextPath()%>/admin/manageSinger" >  <i class="fa fa-angle-right"></i> <span>管理歌手</span> </a> </li>
                     </ul>
                   </li>
                   <li > <a href="#pages" > <i class="fa fa-user icon"> <b class="bg-primary"></b> </i> <span class="pull-right"> <i class="fa fa-angle-down text"></i> <i class="fa fa-angle-up text-active"></i> </span> <span>用户管理</span> </a>
                     <ul class="nav lt">
-                      <li > <a href="gallery.html" > <i class="fa fa-angle-right"></i> <span>管理用户</span> </a> </li>
+                      <li > <a href="<%=request.getContextPath()%>/admin/manageUser" > <i class="fa fa-angle-right"></i> <span>管理用户</span> </a> </li>
                       
                     </ul>
                   </li>
                   <li > <a href="#pages" > <i class="fa fa-users icon"> <b class="bg-primary"></b> </i> <span class="pull-right"> <i class="fa fa-angle-down text"></i> <i class="fa fa-angle-up text-active"></i> </span> <span>管理员管理</span> </a>
                     <ul class="nav lt">
-                      <li > <a href="gallery.html" > <i class="fa fa-angle-right"></i> <span>新建管理员</span> </a> </li>
-                      <li > <a href="gallery.html" > <i class="fa fa-angle-right"></i> <span>管理管理员</span> </a> </li>
+                      <li > <a href="<%=request.getContextPath()%>/admin/addAdmin" > <i class="fa fa-angle-right"></i> <span>新建管理员</span> </a> </li>
+                      <li > <a href="<%=request.getContextPath()%>/admin/manageAdmin" > <i class="fa fa-angle-right"></i> <span>管理管理员</span> </a> </li>
                     </ul>
                   </li>
                   

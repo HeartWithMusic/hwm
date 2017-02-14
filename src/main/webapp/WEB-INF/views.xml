@@ -78,5 +78,14 @@
 	<definition name="showAddMusic" template="/jsp/back/main/addMusic.jsp"></definition>
 	<!-- 后台管理音乐界面 -->	
 	<definition name="showManageMusic" template="/jsp/back/main/manageMusic.jsp"></definition>
-	
+	<!-- 后台添加歌手界面 -->	
+	<definition name="showAddSinger" template="/jsp/back/main/addSinger.jsp"></definition>
+	<!-- 后台管理歌手界面 -->	
+	<definition name="showManageSinger" template="/jsp/back/main/manageSinger.jsp"></definition>
+	<!-- 后台管理用户界面 -->	
+	<definition name="showManageUser" template="/jsp/back/main/manageUser.jsp"></definition>
+	<!-- 后台添加管理员界面 -->	
+	<definition name="showAddAdmin" template="/jsp/back/main/addAdmin.jsp"></definition>
+	<!-- 后台管理管理员界面 -->	
+	<definition name="showManageAdmin" template="/jsp/back/main/manageAdmin.jsp"></definition>
 </tiles-definitions>

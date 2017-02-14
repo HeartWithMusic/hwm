@@ -27,7 +27,7 @@ public class AdminController {
 		return "showAdminIndex";
 	}
 	
-	@RequestMapping({"/addMusic/"})
+	@RequestMapping({"/addMusic/","/addMusic"})
 	public String toAddMusic(Model model, HttpServletRequest request) {
 		//model.addAttribute("title", "首页");
 		return "showAddMusic";
@@ -39,4 +39,33 @@ public class AdminController {
 		return "showManageMusic";
 	}
 	
+	@RequestMapping({"/addSinger/","/addSinger"})
+	public String toAddSinger(Model model, HttpServletRequest request) {
+		//model.addAttribute("title", "首页");
+		return "showAddSinger";
+	}
+	
+	@RequestMapping({"/manageSinger/","/manageSinger"})
+	public String toManageSinger(Model model, HttpServletRequest request) {
+		//model.addAttribute("title", "首页");
+		return "showManageSinger";
+	}
+	
+	@RequestMapping({"/manageUser/","/manageUser"})
+	public String toManageUser(Model model, HttpServletRequest request) {
+		//model.addAttribute("title", "首页");
+		return "showManageUser";
+	}
+	
+	@RequestMapping({"/addAdmin/","/addAdmin"})
+	public String toAddAdmin(Model model, HttpServletRequest request) {
+		//model.addAttribute("title", "首页");
+		return "showAddAdmin";
+	}
+	
+	@RequestMapping({"/manageAdmin/","/manageAdmin"})
+	public String toManageAdmin(Model model, HttpServletRequest request) {
+		//model.addAttribute("title", "首页");
+		return "showManageAdmin";
+	}
 }

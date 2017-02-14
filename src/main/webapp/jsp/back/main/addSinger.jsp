@@ -52,15 +52,15 @@
               <nav class="nav-primary hidden-xs">
                 <ul class="nav">
                   <li> <a href="<%=request.getContextPath()%>/admin/index/" > <i class="fa fa-bullhorn icon"> <b class="bg-danger"></b> </i> <span>通知</span> </a> </li>
-                  <li class="active"> <a href="#layout" class="active" > <i class="fa fa-music icon"> <b class="bg-warning"></b> </i> <span class="pull-right"> <i class="fa fa-angle-down text"></i> <i class="fa fa-angle-up text-active"></i> </span> <span>音乐管理</span> </a>
-                    <ul class="nav lt" style="display:block;">
-                      <li class="active" > <a href="<%=request.getContextPath()%>/admin/addMusic/" class="active"> <i class="fa fa-angle-right"></i> <span>添加音乐</span> </a> </li>
+                  <li> <a href="#layout"> <i class="fa fa-music icon"> <b class="bg-warning"></b> </i> <span class="pull-right"> <i class="fa fa-angle-down text"></i> <i class="fa fa-angle-up text-active"></i> </span> <span>音乐管理</span> </a>
+                    <ul class="nav lt" >
+                      <li > <a href="<%=request.getContextPath()%>/admin/addMusic/" > <i class="fa fa-angle-right"></i> <span>添加音乐</span> </a> </li>
                       <li > <a href="<%=request.getContextPath()%>/admin/manageMusic/" > <i class="fa fa-angle-right"></i> <span>管理音乐</span> </a> </li>
                     </ul>
                   </li>
-                  <li > <a href="#uikit" > <i class="fa fa-group icon"> <b class="bg-success"></b> </i> <span class="pull-right"> <i class="fa fa-angle-down text"></i> <i class="fa fa-angle-up text-active"></i> </span> <span>歌手管理</span> </a>
-                    <ul class="nav lt">
-                      <li > <a href="<%=request.getContextPath()%>/admin/addSinger" > <i class="fa fa-angle-right"></i> <span>添加歌手</span> </a> </li>
+                  <li class="active" > <a href="#uikit" class="active" > <i class="fa fa-group icon"> <b class="bg-success"></b> </i> <span class="pull-right"> <i class="fa fa-angle-down text"></i> <i class="fa fa-angle-up text-active"></i> </span> <span>歌手管理</span> </a>
+                    <ul class="nav lt" style="display:block;">
+                      <li class="active"  > <a href="<%=request.getContextPath()%>/admin/addSinger" class="active"  > <i class="fa fa-angle-right"></i> <span>添加歌手</span> </a> </li>
                       <li > <a href="<%=request.getContextPath()%>/admin/manageSinger" >  <i class="fa fa-angle-right"></i> <span>管理歌手</span> </a> </li>
                     </ul>
                   </li>
@@ -92,8 +92,8 @@
           <section class="scrollable padder">
             <ul class="breadcrumb no-border no-radius b-b b-light pull-in">
               <li><a href="<%=request.getContextPath()%>/admin/index/"><i class="fa fa-home"></i> 主页</a></li>
-              <li><a href="<%=request.getContextPath()%>/admin/index/"><i class="fa fa-home"></i> 音乐管理</a></li>
-              <li class="active">添加音乐</li>
+              <li><a href="<%=request.getContextPath()%>/admin/index/"><i class="fa fa-home"></i> 歌手管理</a></li>
+              <li class="active">添加歌手</li>
             </ul>
             <!--  <div class="m-b-md">
               <h3 class="m-b-none">Workset</h3>
