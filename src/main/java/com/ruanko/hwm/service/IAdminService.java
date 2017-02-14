@@ -10,6 +10,8 @@ public interface IAdminService {
 	public Admin getAdminById(int adminId);
 	
 	public void addAdmin(Admin admin);
+	
+	public Admin getAdminByName(String adminName);
 
 	
 }

@@ -1,5 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %>  
+<%@ taglib uri="http://www.springframework.org/tags" prefix="s" %> 
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="sf" %>
+<%@ page isELIgnored="false" %> 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en" class="app">
 <head>
@@ -33,11 +39,11 @@
           </section>
         </section>
       </li>-->
-      <li class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown"> <span class="thumb-sm avatar pull-left"> <img src="<%=request.getContextPath()%>/img/common/user_default_icon.jpg"> </span> 用户1 <b class="caret"></b> </a>
+      <li class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown"> <span class="thumb-sm avatar pull-left"> <img src="<%=request.getContextPath()%>/img/common/user_default_icon.jpg"> </span> ${admin.adminname} <b class="caret"></b> </a>
         <ul class="dropdown-menu animated fadeInRight">
           <span class="arrow top"></span>
           <li> <a href="docs.html">帮助</a> </li>
-          <li> <a href="modal.lockme.html" data-toggle="ajaxModal" >注销</a> </li>
+          <li> <a href="<%=request.getContextPath()%>/admin/doLogOut/" >注销</a> </li>
         </ul>
       </li>
     </ul>

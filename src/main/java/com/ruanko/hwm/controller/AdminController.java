@@ -1,20 +1,23 @@
 package com.ruanko.hwm.controller;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.ruanko.hwm.bean.Admin;
+import com.ruanko.hwm.service.IAdminService;
+import com.ruanko.hwm.utl.MD5Util;
 
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
-	@RequestMapping({"/login/"})
-	public String toLogin(Model model, HttpServletRequest request) {
-		model.addAttribute("title", "登录");
-		return "showAdminLogin";
-	}
-	
+
+	@Resource
+	public IAdminService adminService;	
 	@RequestMapping({"/logup/"})
 	public String toLogup(Model model, HttpServletRequest request) {
 		model.addAttribute("title", "注册");
@@ -67,5 +70,38 @@ public class AdminController {
 	public String toManageAdmin(Model model, HttpServletRequest request) {
 		//model.addAttribute("title", "首页");
 		return "showManageAdmin";
+	}
+	
+	@RequestMapping({"/login/"})
+	public String toLogin(Model model, HttpServletRequest request) {
+		model.addAttribute("title", "登录");
+		model.addAttribute(new Admin());
+		return "showAdminLogin";
+	}
+	@RequestMapping({"/doLogin/"})
+	public String login(@ModelAttribute("admin")Admin admin, Model model, HttpServletRequest request) throws Exception{
+		System.out.println(admin.getAdminname());
+		Admin ad = adminService.getAdminByName(admin.getAdminname());		
+		String message = "";
+		//System.out.println(MD5Util.getMD5Code(admin.getPassword()));
+		if(ad == null){
+			message = "账号不存在";
+			model.addAttribute("message",message);
+		}else if(ad.getPassword().equalsIgnoreCase((MD5Util.getMD5Code(admin.getPassword())))){
+			request.getSession().setAttribute("admin", admin);
+			return "showAdminIndex";
+		}else{
+			message = "密码错误";
+			model.addAttribute("message",message);
+		}
+		
+		
+		return "showAdminLogin";
+	}
+	@RequestMapping({"/doLogOut/"})
+	public String LogOut(Model model, HttpServletRequest request){
+		request.getSession().setAttribute("admin", null);
+		model.addAttribute(new Admin());
+		return "showAdminLogin";
 	}
 }

@@ -26,6 +26,10 @@ public class AdminServiceImpl implements IAdminService {
 		// TODO Auto-generated method stub
 		adminMapper.insert(admin);
 	}
+	public Admin getAdminByName(String adminName) {
+		// TODO Auto-generated method stub
+		return adminMapper.selectByName(adminName);
+	}
 
 	
 }
