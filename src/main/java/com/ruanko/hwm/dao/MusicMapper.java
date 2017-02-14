@@ -1,5 +1,7 @@
 package com.ruanko.hwm.dao;
 
+import java.util.List;
+
 import com.ruanko.hwm.bean.Music;
 
 public interface MusicMapper {
@@ -14,4 +16,6 @@ public interface MusicMapper {
     int updateByPrimaryKeySelective(Music record);
 
     int updateByPrimaryKey(Music record);
+    
+    List<Music> selectAllMusic();
 }

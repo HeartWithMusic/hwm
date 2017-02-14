@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.ruanko.hwm.bean.Admin;
+import com.ruanko.hwm.bean.Music;
 import com.ruanko.hwm.service.IAdminService;
 import com.ruanko.hwm.utl.MD5Util;
 
@@ -33,6 +34,7 @@ public class AdminController {
 	@RequestMapping({"/addMusic/","/addMusic"})
 	public String toAddMusic(Model model, HttpServletRequest request) {
 		//model.addAttribute("title", "首页");
+		model.addAttribute(new Music());
 		return "showAddMusic";
 	}
 	
