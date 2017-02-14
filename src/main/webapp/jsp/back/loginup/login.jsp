@@ -16,19 +16,18 @@
 </head>
 <body>
 	<section id="content" class="m-t-lg wrapper-md animated fadeInUp">
-	  <div class="container aside-xxl"> <a class="navbar-brand block" href="index.html">Notebook</a>
+	  <div class="container aside-xxl"> <a class="navbar-brand block" href="index.html">心随乐动后台管理</a>
 	    <section class="panel panel-default bg-white m-t-lg">
 	      <header class="panel-heading text-center"> <strong>管理员登录</strong> </header>
 	      <% String action = request.getContextPath() + "/admin/doLogin/";%>
-	     <sf:form class = "panel-body wrapper-lg" method="post" modelAttribute="admin" action="<%=action %>">
-	     
-	        <div class="form-group">
+	     <form class = "panel-body wrapper-lg" method="post" modelAttribute="admin" action="<%=action %>">
+        <div class="form-group">
 	          <label class="control-label">用户名</label>
-	          <sf:input type="email" class="form-control input-lg" path ="adminname"></sf:input>
+	          <input type="email" class="form-control input-lg" path ="adminname">
 	        </div>
 	        <div class="form-group">
 	          <label class="control-label">密码</label>
-	          <sf:input type="password" path="password" class="form-control input-lg"></sf:input>
+	          <input type="password" path="password" class="form-control input-lg">
 	        </div>
 	        <div class="checkbox">
 	          <label>
@@ -41,7 +40,7 @@
 	        <p class="text-muted text-center"><small>没有账号?</small></p>
 	        <a href="<%=request.getContextPath()%>/admin/logup/" class="btn btn-default btn-block">立即注册</a>
 	  
-	      </sf:form>
+	      </form>
 	      <div>
 	      	<c:out value="${message }"></c:out>
 	      </div>
@@ -51,8 +50,8 @@
 	<!-- footer -->
 	<footer id="footer">
 	  <div class="text-center padder">
-	    <p> <small>Web app framework base on Bootstrap<br>
-	      &copy; 2013</small> </p>
+	    <p> <small>Heart With Music<br>
+	      &copy; 2017</small> </p>
 	  </div>
 	</footer>
 	<!-- / footer --> <script src="<%=request.getContextPath()%>/js/app.v2.js"></script> <!-- Bootstrap --> <!-- App -->

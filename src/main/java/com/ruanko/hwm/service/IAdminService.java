@@ -12,6 +12,7 @@ public interface IAdminService {
 	public void addAdmin(Admin admin);
 	
 	public Admin getAdminByName(String adminName);
+	
 
 	
 }
