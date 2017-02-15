@@ -16,15 +16,14 @@
 </head>
 <body>
 	<section id="content" class="m-t-lg wrapper-md animated fadeInUp">
-	  <div class="container aside-xxl"> <a class="navbar-brand block" href="index.html">Notebook</a>
+	  <div class="container aside-xxl"> <a class="navbar-brand block" href="index.html">心随乐动后台管理</a>
 	    <section class="panel panel-default bg-white m-t-lg">
 	      <header class="panel-heading text-center"> <strong>管理员登录</strong> </header>
 	      <% String action = request.getContextPath() + "/admin/doLogin/";%>
 	     <sf:form class = "panel-body wrapper-lg" method="post" modelAttribute="admin" action="<%=action %>">
-	     
-	        <div class="form-group">
+        <div class="form-group">
 	          <label class="control-label">用户名</label>
-	          <sf:input type="email" class="form-control input-lg" path ="adminname"></sf:input>
+	          <sf:input type="text" class="form-control input-lg" path ="adminname"></sf:input>
 	        </div>
 	        <div class="form-group">
 	          <label class="control-label">密码</label>
@@ -51,8 +50,8 @@
 	<!-- footer -->
 	<footer id="footer">
 	  <div class="text-center padder">
-	    <p> <small>Web app framework base on Bootstrap<br>
-	      &copy; 2013</small> </p>
+	    <p> <small>Heart With Music<br>
+	      &copy; 2017</small> </p>
 	  </div>
 	</footer>
 	<!-- / footer --> <script src="<%=request.getContextPath()%>/js/app.v2.js"></script> <!-- Bootstrap --> <!-- App -->

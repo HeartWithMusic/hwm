@@ -22,6 +22,7 @@ public class AdminController {
 	@RequestMapping({"/logup/"})
 	public String toLogup(Model model, HttpServletRequest request) {
 		model.addAttribute("title", "注册");
+		model.addAttribute(new Admin());
 		return "showAdminLogup";
 	}
 	
@@ -80,12 +81,11 @@ public class AdminController {
 		model.addAttribute(new Admin());
 		return "showAdminLogin";
 	}
-	@RequestMapping({"/doLogin/"})
+	@RequestMapping({"/doLogin/"}) //登录
 	public String login(@ModelAttribute("admin")Admin admin, Model model, HttpServletRequest request) throws Exception{
 		System.out.println(admin.getAdminname());
 		Admin ad = adminService.getAdminByName(admin.getAdminname());		
 		String message = "";
-		//System.out.println(MD5Util.getMD5Code(admin.getPassword()));
 		if(ad == null){
 			message = "账号不存在";
 			model.addAttribute("message",message);
@@ -106,4 +106,18 @@ public class AdminController {
 		model.addAttribute(new Admin());
 		return "showAdminLogin";
 	}
+	
+	@RequestMapping({"/doLogup/"}) //注册
+	public String logup(@ModelAttribute("admin")Admin admin, Model model, HttpServletRequest request){
+		System.out.println(admin.getEmail());	
+		Admin ad = adminService.getAdminByName(admin.getAdminname());		
+		String message = "";
+		if(ad == null){
+			admin.setPassword(MD5Util.getMD5Code(admin.getPassword()));
+			adminService.addAdmin(admin);
+			return "showAdminLogin";
+		}
+		return "showAdminLogup";
+	}
+	
 }
