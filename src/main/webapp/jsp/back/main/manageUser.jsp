@@ -20,21 +20,7 @@
     <div class="navbar-header aside-md"> <a class="btn btn-link visible-xs" data-toggle="class:nav-off-screen" data-target="#nav"> <i class="fa fa-bars"></i> </a> <a href="#" class="navbar-brand" data-toggle="fullscreen"><img src="<%=request.getContextPath()%>/img/front/home/logo.png" class="m-r-sm" style="height:100px !important;" >后台管理系统</a> <a class="btn btn-link visible-xs" data-toggle="dropdown" data-target=".nav-user"> <i class="fa fa-cog"></i> </a> </div>
     
     <ul class="nav navbar-nav navbar-right hidden-xs nav-user">
-      <!--  
-      <li class="dropdown hidden-xs"> <a href="#" class="dropdown-toggle dker" data-toggle="dropdown"><i class="fa fa-fw fa-search"></i></a>
-        <section class="dropdown-menu aside-xl animated fadeInUp">
-          <section class="panel bg-white">
-            <form role="search">
-              <div class="form-group wrapper m-b-none">
-                <div class="input-group">
-                  <input type="text" class="form-control" placeholder="Search">
-                  <span class="input-group-btn">
-                  <button type="submit" class="btn btn-info btn-icon"><i class="fa fa-search"></i></button>
-                  </span> </div>
-              </div>
-            </form>
-          </section>
-        </section>
+      
       </li>-->
       <li class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown"> <span class="thumb-sm avatar pull-left"> <img src="<%=request.getContextPath()%>/img/common/user_default_icon.jpg"> </span> 用户1 <b class="caret"></b> </a>
         <ul class="dropdown-menu animated fadeInRight">
@@ -105,7 +91,116 @@
               <div class="table-responsive">
                 <table id="MyStretchGrid" class="table table-striped datagrid m-b-sm">
                   <thead>
-              
+              		<tr>
+              			<th> <div class="row">
+                          <div class="col-sm-8 m-t-xs m-b-xs">
+                            <div class="select filter" data-resize="auto">
+                           	   序号		
+                            </div>
+                          </div>
+                          <div class="col-sm-4 m-t-xs m-b-xs">
+                            <div class="input-group search datagrid-search">
+                              <div class="input-group-btn">
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </th>
+              		<th> 
+              		<div class="row">
+                          <div class="col-sm-8 m-t-xs m-b-xs">
+                            <div class="select filter" data-resize="auto">
+                           	  姓名	
+                            </div>
+                          </div>
+                          <div class="col-sm-4 m-t-xs m-b-xs">
+                            <div class="input-group search datagrid-search">
+                              <div class="input-group-btn">
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </th>
+                      <th> 
+              		<div class="row">
+                          <div class="col-sm-8 m-t-xs m-b-xs">
+                            <div class="select filter" data-resize="auto">
+                           	  头像	
+                            </div>
+                          </div>
+                          <div class="col-sm-4 m-t-xs m-b-xs">
+                            <div class="input-group search datagrid-search">
+                              <div class="input-group-btn">
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </th>
+              		 <th> 
+              		<div class="row">
+                          <div class="col-sm-8 m-t-xs m-b-xs">
+                            <div class="select filter" data-resize="auto">
+                           	  邮箱
+                            </div>
+                          </div>
+                          <div class="col-sm-4 m-t-xs m-b-xs">
+                            <div class="input-group search datagrid-search">
+                              <div class="input-group-btn">
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </th>
+                      
+                       <th> 
+              		<div class="row">
+                          <div class="col-sm-8 m-t-xs m-b-xs">
+                            <div class="select filter" data-resize="auto">
+                           	 年龄
+                            </div>
+                          </div>
+                          <div class="col-sm-4 m-t-xs m-b-xs">
+                            <div class="input-group search datagrid-search">
+                              <div class="input-group-btn">
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </th>
+                      
+                      <th> 
+              		<div class="row">
+                          <div class="col-sm-8 m-t-xs m-b-xs">
+                            <div class="select filter" data-resize="auto">
+                           	 等级
+                            </div>
+                          </div>
+                          <div class="col-sm-4 m-t-xs m-b-xs">
+                            <div class="input-group search datagrid-search">
+                              <div class="input-group-btn">
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </th>
+                      
+                         <th> 
+              		<div class="row">
+                          <div class="col-sm-8 m-t-xs m-b-xs">
+                            <div class="select filter" data-resize="auto">
+                           	 积分
+                            </div>
+                          </div>
+                          <div class="col-sm-4 m-t-xs m-b-xs">
+                            <div class="input-group search datagrid-search">
+                              <div class="input-group-btn">
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </th>
+                      
+              		</tr>
                   
                     <c:forEach var="user" items="${userList}" >
                     <tr>
@@ -187,7 +282,7 @@
                           <th> <div class="row">
                           <div class="col-sm-8 m-t-xs m-b-xs">
                             <div class="select filter" data-resize="auto">
-                              ${user.playcount}
+                              ${user.level}
                             </div>
                           </div>
                           <div class="col-sm-4 m-t-xs m-b-xs">
@@ -202,7 +297,7 @@
                        <th> <div class="row">
                           <div class="col-sm-8 m-t-xs m-b-xs">
                             <div class="select filter" data-resize="auto">
-                              ${user.lastlogintime}
+                              ${user.grade}
                             </div>
                           </div>
                           <div class="col-sm-4 m-t-xs m-b-xs">
@@ -214,21 +309,6 @@
                         </div>
                       </th>
                       
-                        <th> <div class="row">
-                          <div class="col-sm-8 m-t-xs m-b-xs">
-                            <div class="select filter" data-resize="auto">
-                              ${user.lastloginip}
-                            </div>
-                          </div>
-                          <div class="col-sm-4 m-t-xs m-b-xs">
-                            <div class="input-group search datagrid-search">
-                              <div class="input-group-btn">
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </th>
-                        
                       <th> <div class="row">
                           <div class="col-sm-8 m-t-xs m-b-xs">
                             <div class="select filter" data-resize="auto">
