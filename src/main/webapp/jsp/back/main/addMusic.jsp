@@ -283,6 +283,8 @@
 <script src="<%=request.getContextPath()%>/js/sortable/jquery.sortable.js" cache="false"></script>  
 <script src="<%=request.getContextPath()%>/js/file-input/bootstrap-filestyle.min.js" cache="false"></script>
 <script src="<%=request.getContextPath()%>/js/select2/select2.min.js" cache="false"></script>
+<script src="<%=request.getContextPath()%>/js/parsley/parsley.min.js" cache="false"></script>
+<script src="<%=request.getContextPath()%>/js/parsley/parsley.extend.js" cache="false"></script>
 <script>     
 	document.getElementById('time').innerHTML=new Date().toLocaleFormat();     
 	setInterval("document.getElementById('time').innerHTML=new Date().toLocaleFormat();",1000); 

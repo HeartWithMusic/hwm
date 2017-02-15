@@ -114,7 +114,7 @@
                       <p class="text-muted">请填充歌手相关信息</p>
                       <div class="form-group">
                         <label>歌手姓名</label>
-                        <sf:input style="width:400px" type="text" class="form-control" data-required="true" path="singername"></sf:input>
+                        <sf:input style="width:400px" type="text" class="form-control parsley-validated" data-required="true" path="singername"></sf:input>
                       </div>
                       <div class="form-group">
                                             <label>歌手类别</label>
@@ -174,12 +174,12 @@
                       
                       <div class="form-group">
                          <label>封面</label><br/>
-                         <input name="imageInfo" style="width:400px" type="file" class="filestyle" data-icon="false" data-classButton="btn btn-default" data-classInput="form-control inline input-s">
+                         <input  name="imageInfo" style="width:400px" type="file" class="filestyle  parsley-validated" data-icon="false" data-classButton="btn btn-default" data-classInput="form-control inline input-s">
                       </div>
                
                      <div class="form-group" style="width:500px;">
                         <label>歌手简介</label>
-                        <sf:textarea path="introduction" class="form-control" rows="5" data-minwords="6" data-required="true" placeholder="歌手简介"></sf:textarea>
+                        <sf:textarea path="introduction" class="form-control" rows="5" data-minwords="0" style="resize:none;"  data-required="true" placeholder="歌手简介"></sf:textarea>
                       </div>
                     </div>
                     <footer class="panel-footer text-right bg-light lter">
@@ -203,6 +203,8 @@
 <script src="<%=request.getContextPath()%>/js/sortable/jquery.sortable.js" cache="false"></script>  
 <script src="<%=request.getContextPath()%>/js/file-input/bootstrap-filestyle.min.js" cache="false"></script>
 <script src="<%=request.getContextPath()%>/js/select2/select2.min.js" cache="false"></script>
+<script src="<%=request.getContextPath()%>/js/parsley/parsley.min.js" cache="false"></script>
+<script src="<%=request.getContextPath()%>/js/parsley/parsley.extend.js" cache="false"></script>
 <script>     
 	document.getElementById('time').innerHTML=new Date().toLocaleFormat();     
 	setInterval("document.getElementById('time').innerHTML=new Date().toLocaleFormat();",1000);  
