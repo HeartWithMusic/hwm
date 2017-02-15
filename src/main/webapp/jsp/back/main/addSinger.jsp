@@ -106,15 +106,15 @@
             <!--  <div class="m-b-md">
               <h3 class="m-b-none">Workset</h3>
               <small>Welcome back, Noteman</small> </div>-->
-            <% String action = request.getContextPath() + "/music/doAddMusic/";%>
-            <sf:form data-validate="parsley" style="width:800px" method="post" modelAttribute="music" action="<%=action %>" enctype="multipart/form-data">
+            <% String action = request.getContextPath() + "/singer/doAddSinger/";%>
+            <sf:form data-validate="parsley" style="width:800px" method="post" modelAttribute="singer" action="<%=action %>" enctype="multipart/form-data">
                   <section class="panel panel-default">
                     <header class="panel-heading"> <span class="h4">添加歌手</span> </header>
                     <div class="panel-body">
                       <p class="text-muted">请填充歌手相关信息</p>
                       <div class="form-group">
                         <label>歌手姓名</label>
-                        <sf:input style="width:400px" type="text" class="form-control" data-required="true" path="musicname"></sf:input>
+                        <sf:input style="width:400px" type="text" class="form-control" data-required="true" path="singername"></sf:input>
                       </div>
                       <div class="form-group">
                                             <label>歌手类别</label>
@@ -179,7 +179,7 @@
                
                      <div class="form-group" style="width:500px;">
                         <label>歌手简介</label>
-                        <textarea class="form-control" rows="5" data-minwords="6" data-required="true" placeholder="歌手简介"></textarea>
+                        <sf:textarea path="introduction" class="form-control" rows="5" data-minwords="6" data-required="true" placeholder="歌手简介"></sf:textarea>
                       </div>
                     </div>
                     <footer class="panel-footer text-right bg-light lter">
