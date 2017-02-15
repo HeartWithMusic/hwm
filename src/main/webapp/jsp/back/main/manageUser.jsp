@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page isELIgnored="false" %> 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en" class="app">
 <head>
@@ -9,6 +11,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/app.v2.css" type="text/css" />
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/bootstrap_calendar.css" type="text/css" cache="false" />
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/fuelux/fuelux.css" type="text/css" cache="false">
 <!--[if lt IE 9]> <script src="js/ie/html5shiv.js" cache="false"></script> <script src="js/ie/respond.min.js" cache="false"></script> <script src="js/ie/excanvas.js" cache="false"></script> <![endif]-->
 </head>
 <body>
@@ -95,135 +98,204 @@
               <li><a href="<%=request.getContextPath()%>/admin/index/"><i class="fa fa-home"></i> 用户管理</a></li>
               <li class="active">管理用户</li>
             </ul>
-            <!--  <div class="m-b-md">
-              <h3 class="m-b-none">Workset</h3>
-              <small>Welcome back, Noteman</small> </div>-->
-            <section class="panel panel-default">
-              <div class="row m-l-none m-r-none bg-light lter">
-                <div class="col-sm-6 col-md-3 padder-v b-r b-light"> <span class="fa-stack fa-2x pull-left m-r-sm"> <i class="fa fa-circle fa-stack-2x text-info"></i> <i class="fa fa-music fa-stack-1x text-white"></i> </span> <a class="clear" href="#"> <span class="h3 block m-t-xs"><strong>52,000</strong></span> <small class="text-muted text-uc">歌曲数量</small> </a> </div>
-                <div class="col-sm-6 col-md-3 padder-v b-r b-light lt"> <span class="fa-stack fa-2x pull-left m-r-sm"> <i class="fa fa-circle fa-stack-2x text-warning"></i> <i class="fa fa-male fa-stack-1x text-white"></i> </span> <a class="clear" href="#"> <span class="h3 block m-t-xs"><strong id="bugs">468</strong></span> <small class="text-muted text-uc">歌手数量</small> </a> </div>
-                <div class="col-sm-6 col-md-3 padder-v b-r b-light"> <span class="fa-stack fa-2x pull-left m-r-sm"> <i class="fa fa-circle fa-stack-2x text-danger"></i> <i class="fa fa-play fa-stack-1x text-white"></i> </span> <a class="clear" href="#"> <span class="h3 block m-t-xs"><strong id="firers">359</strong></span> <small class="text-muted text-uc">播放次数</small> </a> </div>
-                <div class="col-sm-6 col-md-3 padder-v b-r b-light lt"> <span class="fa-stack fa-2x pull-left m-r-sm"> <i class="fa fa-circle fa-stack-2x icon-muted"></i> <i class="fa fa-clock-o fa-stack-1x text-white"></i> </span> <a class="clear" href="#"> <span style="font-size: 20px;"class="h3 block m-t-xs" id="time"></span> <small class="text-muted text-uc">时间</small> </a> </div>
+          </section>
+          
+           <section class="panel panel-default">
+              <header class="panel-heading"> 用户列表 <i class="fa fa-info-sign text-muted" data-toggle="tooltip" data-placement="bottom" data-title="ajax to load the data."></i> </header>
+              <div class="table-responsive">
+                <table id="MyStretchGrid" class="table table-striped datagrid m-b-sm">
+                  <thead>
+              
+                  
+                    <c:forEach var="user" items="${userList}" >
+                    <tr>
+                    
+                      <th> <div class="row">
+                          <div class="col-sm-8 m-t-xs m-b-xs">
+                            <div class="select filter" data-resize="auto">
+                              ${user.id}
+                            </div>
+                          </div>
+                          <div class="col-sm-4 m-t-xs m-b-xs">
+                            <div class="input-group search datagrid-search">
+                              <div class="input-group-btn">
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </th>
+                        
+                      <th> <div class="row">
+                          <div class="col-sm-8 m-t-xs m-b-xs">
+                            <div class="select filter" data-resize="auto">
+                              ${user.username}
+                            </div>
+                          </div>
+                          <div class="col-sm-4 m-t-xs m-b-xs">
+                            <div class="input-group search datagrid-search">
+                              <div class="input-group-btn">
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </th>
+                        
+                      <th> <div class="row">
+                          <div class="col-sm-8 m-t-xs m-b-xs">
+                            <div class="select filter" data-resize="auto">
+                              ${user.img}
+                            </div>
+                          </div>
+                          <div class="col-sm-4 m-t-xs m-b-xs">
+                            <div class="input-group search datagrid-search">
+                              <div class="input-group-btn">
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </th>
+                        
+                      <th> <div class="row">
+                          <div class="col-sm-8 m-t-xs m-b-xs">
+                            <div class="select filter" data-resize="auto">
+                              ${user.email}
+                            </div>
+                          </div>
+                          <div class="col-sm-4 m-t-xs m-b-xs">
+                            <div class="input-group search datagrid-search">
+                              <div class="input-group-btn">
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </th>
+                        
+                           <th> <div class="row">
+                          <div class="col-sm-8 m-t-xs m-b-xs">
+                            <div class="select filter" data-resize="auto">
+                              ${user.age}
+                            </div>
+                          </div>
+                          <div class="col-sm-4 m-t-xs m-b-xs">
+                            <div class="input-group search datagrid-search">
+                              <div class="input-group-btn">
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </th>
+                          <th> <div class="row">
+                          <div class="col-sm-8 m-t-xs m-b-xs">
+                            <div class="select filter" data-resize="auto">
+                              ${user.playcount}
+                            </div>
+                          </div>
+                          <div class="col-sm-4 m-t-xs m-b-xs">
+                            <div class="input-group search datagrid-search">
+                              <div class="input-group-btn">
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </th>
+                      
+                       <th> <div class="row">
+                          <div class="col-sm-8 m-t-xs m-b-xs">
+                            <div class="select filter" data-resize="auto">
+                              ${user.lastlogintime}
+                            </div>
+                          </div>
+                          <div class="col-sm-4 m-t-xs m-b-xs">
+                            <div class="input-group search datagrid-search">
+                              <div class="input-group-btn">
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </th>
+                      
+                        <th> <div class="row">
+                          <div class="col-sm-8 m-t-xs m-b-xs">
+                            <div class="select filter" data-resize="auto">
+                              ${user.lastloginip}
+                            </div>
+                          </div>
+                          <div class="col-sm-4 m-t-xs m-b-xs">
+                            <div class="input-group search datagrid-search">
+                              <div class="input-group-btn">
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </th>
+                        
+                      <th> <div class="row">
+                          <div class="col-sm-8 m-t-xs m-b-xs">
+                            <div class="select filter" data-resize="auto">
+                              <a>update</a> 
+                            </div>
+                          </div>
+                          <div class="col-sm-4 m-t-xs m-b-xs">
+                            <div class="input-group search datagrid-search">
+                              <div class="input-group-btn">
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </th>
+                        
+                      <th> <div class="row">
+                          <div class="col-sm-8 m-t-xs m-b-xs">
+                            <div class="select filter" data-resize="auto">
+                            <a>delete</a>  
+                            </div>
+                          </div>
+                          <div class="col-sm-4 m-t-xs m-b-xs">
+                            <div class="input-group search datagrid-search">
+                              <div class="input-group-btn">
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </th>
+                      
+                    </tr>
+                    </c:forEach>
+                  </thead>
+                  
+                  <!-- 分页的脚 -->
+                  <tfoot>
+                    <tr>
+                      <th class="row"> <div class="datagrid-footer-left col-sm-6 text-center-xs m-l-n" style="display:none;">
+                          <div class="grid-controls m-t-sm"> <span> <span class="grid-start"></span> - <span class="grid-end"></span> of <span class="grid-count"></span> </span>
+                            <div class="select grid-pagesize dropup" data-resize="auto">
+                            </div>
+                            <span>Per Page</span> </div>
+                        </div>
+                        <div class="datagrid-footer-right col-sm-6 text-right text-center-xs" style="display:none;">
+                          <div class="grid-pager m-r-n">
+                            <span>Page</span>
+                            <div class="inline">
+                              <div class="input-group dropdown combobox">
+                                <input class="input-sm form-control" type="text">
+                                <div class="input-group-btn dropup">
+                                  <button class="btn btn-sm btn-default" data-toggle="dropdown"><i class="caret"></i></button>
+                                  <ul class="dropdown-menu pull-right">
+                                  </ul>
+                                </div>
+                              </div>
+                            </div>
+                            <span>of <span class="grid-pages"></span></span>
+                          </div>
+                        </div>
+                      </th>
+                    </tr>
+                  </tfoot>
+                </table>
               </div>
             </section>
-            <div class="row">
-              <div class="col-md-8">
-                <section class="panel panel-default">
-                  <header class="panel-heading font-bold">Statistics</header>
-                  <div class="panel-body">
-                    <div id="flot-1ine" style="height:210px"></div>
-                  </div>
-                  <footer class="panel-footer bg-white no-padder">
-                    <div class="row text-center no-gutter">
-                      <div class="col-xs-3 b-r b-light"> <span class="h4 font-bold m-t block">5,860</span> <small class="text-muted m-b block">Orders</small> </div>
-                      <div class="col-xs-3 b-r b-light"> <span class="h4 font-bold m-t block">10,450</span> <small class="text-muted m-b block">Sellings</small> </div>
-                      <div class="col-xs-3 b-r b-light"> <span class="h4 font-bold m-t block">21,230</span> <small class="text-muted m-b block">Items</small> </div>
-                      <div class="col-xs-3"> <span class="h4 font-bold m-t block">7,230</span> <small class="text-muted m-b block">Customers</small> </div>
-                    </div>
-                  </footer>
-                </section>
-              </div>
-              <div class="col-md-4">
-                <section class="panel panel-default">
-                  <header class="panel-heading font-bold">Data graph</header>
-                  <div class="bg-light dk wrapper"> <span class="pull-right">Friday</span> <span class="h4">$540<br>
-                    <small class="text-muted">+1.05(2.15%)</small> </span>
-                    <div class="text-center m-b-n m-t-sm">
-                      <div class="sparkline" data-type="line" data-height="65" data-width="100%" data-line-width="2" data-line-color="#dddddd" data-spot-color="#bbbbbb" data-fill-color="" data-highlight-line-color="#fff" data-spot-radius="3" data-resize="true" values="280,320,220,385,450,320,345,250,250,250,400,380"></div>
-                      <div class="sparkline inline" data-type="bar" data-height="45" data-bar-width="6" data-bar-spacing="6" data-bar-color="#65bd77">10,9,11,10,11,10,12,10,9,10,11,9,8</div>
-                    </div>
-                  </div>
-                  <div class="panel-body">
-                    <div> <span class="text-muted">Total:</span> <span class="h3 block">$2500.00</span> </div>
-                    <div class="line pull-in"></div>
-                    <div class="row m-t-sm">
-                      <div class="col-xs-4"> <small class="text-muted block">Market</small> <span>$1500.00</span> </div>
-                      <div class="col-xs-4"> <small class="text-muted block">Referal</small> <span>$600.00</span> </div>
-                      <div class="col-xs-4"> <small class="text-muted block">Affiliate</small> <span>$400.00</span> </div>
-                    </div>
-                  </div>
-                </section>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-8">
-                <h4 class="m-t-none">Todos</h4>
-                <ul class="list-group gutter list-group-lg list-group-sp sortable">
-                  <li class="list-group-item box-shadow"> <a href="#" class="pull-right" data-dismiss="alert"> <i class="fa fa-times icon-muted"></i> </a> <span class="pull-left media-xs"> <i class="fa fa-sort icon-muted fa m-r-sm"></i> <a href="#todo-1" data-toggle="class:text-lt text-success" class="active"> <i class="fa fa-square-o fa-fw text"></i> <i class="fa fa-check-square-o fa-fw text-active text-success"></i> </a> </span>
-                    <div class="clear text-success text-lt" id="todo-1"> Browser compatibility </div>
-                  </li>
-                  <li class="list-group-item box-shadow"> <a href="#" class="pull-right" data-dismiss="alert"> <i class="fa fa-times icon-muted"></i> </a> <span class="pull-left media-xs"> <i class="fa fa-sort icon-muted fa m-r-sm"></i> <a href="#todo-2" data-toggle="class:text-lt text-danger"> <i class="fa fa-square-o fa-fw text"></i> <i class="fa fa-check-square-o fa-fw text-active text-danger"></i> </a> </span>
-                    <div class="clear" id="todo-2"> Looking for more example templates </div>
-                  </li>
-                  <li class="list-group-item box-shadow"> <a href="#" class="pull-right" data-dismiss="alert"> <i class="fa fa-times icon-muted"></i> </a> <span class="pull-left media-xs"> <i class="fa fa-sort icon-muted fa m-r-sm"></i> <a href="#todo-3" data-toggle="class:text-lt"> <i class="fa fa-square-o fa-fw text"></i> <i class="fa fa-check-square-o fa-fw text-active text-success"></i> </a> </span>
-                    <div class="clear" id="todo-3"> Customizing components </div>
-                  </li>
-                  <li class="list-group-item box-shadow"> <a href="#" class="pull-right" data-dismiss="alert"> <i class="fa fa-times icon-muted"></i> </a> <span class="pull-left media-xs"> <i class="fa fa-sort icon-muted fa m-r-sm"></i> <a href="#todo-4" data-toggle="class:text-lt"> <i class="fa fa-square-o fa-fw text"></i> <i class="fa fa-check-square-o fa-fw text-active text-success"></i> </a> </span>
-                    <div class="clear" id="todo-4"> The fastest way to get started </div>
-                  </li>
-                  <li class="list-group-item box-shadow"> <a href="#" class="pull-right" data-dismiss="alert"> <i class="fa fa-times icon-muted"></i> </a> <span class="pull-left media-xs"> <i class="fa fa-sort icon-muted fa m-r-sm"></i> <a href="#todo-5" data-toggle="class:text-lt"> <i class="fa fa-square-o fa-fw text"></i> <i class="fa fa-check-square-o fa-fw text-active text-success"></i> </a> </span>
-                    <div class="clear" id="todo-5"> HTML5 doctype required </div>
-                  </li>
-                  <li class="list-group-item box-shadow"> <a href="#" class="pull-right" data-dismiss="alert"> <i class="fa fa-times icon-muted"></i> </a> <span class="pull-left media-xs"> <i class="fa fa-sort icon-muted fa m-r-sm"></i> <a href="#todo-6" data-toggle="class:text-lt"> <i class="fa fa-square-o fa-fw text"></i> <i class="fa fa-check-square-o fa-fw text-active text-success"></i> </a> </span>
-                    <div class="clear" id="todo-6"> LessCSS compiling </div>
-                  </li>
-                </ul>
-              </div>
-              <div class="col-md-4">
-                <section class="panel b-light">
-                  <header class="panel-heading bg-primary dker no-border"><strong>Calendar</strong></header>
-                  <div id="calendar" class="bg-primary m-l-n-xxs m-r-n-xxs"></div>
-                  <div class="list-group"> <a href="#" class="list-group-item text-ellipsis"> <span class="badge bg-danger">7:30</span> Meet a friend </a> <a href="#" class="list-group-item text-ellipsis"> <span class="badge bg-success">9:30</span> Have a kick off meeting with .inc company </a> <a href="#" class="list-group-item text-ellipsis"> <span class="badge bg-light">19:30</span> Milestone release </a> </div>
-                </section>
-              </div>
-            </div>
-            <div>
-              <div class="btn-group m-b" data-toggle="buttons">
-                <label class="btn btn-sm btn-default active">
-                  <input type="radio" name="options" id="option1">
-                  Timeline </label>
-                <label class="btn btn-sm btn-default">
-                  <input type="radio" name="options" id="option2">
-                  Activity </label>
-              </div>
-              <section class="comment-list block">
-                <article id="comment-id-1" class="comment-item"> <span class="fa-stack pull-left m-l-xs"> <i class="fa fa-circle text-info fa-stack-2x"></i> <i class="fa fa-play-circle text-white fa-stack-1x"></i> </span>
-                  <section class="comment-body m-b-lg">
-                    <header> <a href="#"><strong>John smith</strong></a> shared a <a href="#" class="text-info">video</a> to you <span class="text-muted text-xs"> 24 minutes ago </span> </header>
-                    <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi id neque quam.</div>
-                  </section>
-                </article>
-                <!-- .comment-reply -->
-                <article id="comment-id-2" class="comment-reply">
-                  <article class="comment-item"> <a class="pull-left thumb-sm"> <img src="images/avatar_default.jpg" class="img-circle"> </a>
-                    <section class="comment-body m-b-lg">
-                      <header> <a href="#"><strong>John smith</strong></a> <span class="text-muted text-xs"> 26 minutes ago </span> </header>
-                      <div> Morbi id neque quam. Aliquam.</div>
-                    </section>
-                  </article>
-                  <article class="comment-item"> <a class="pull-left thumb-sm"> <img src="images/avatar.jpg" class="img-circle"> </a>
-                    <section class="comment-body m-b-lg">
-                      <header> <a href="#"><strong>Mike</strong></a> <span class="text-muted text-xs"> 26 minutes ago </span> </header>
-                      <div>Good idea.</div>
-                    </section>
-                  </article>
-                </article>
-                <!-- / .comment-reply -->
-                <article id="comment-id-2" class="comment-item"> <span class="fa-stack pull-left m-l-xs"> <i class="fa fa-circle text-danger fa-stack-2x"></i> <i class="fa fa-file-o text-white fa-stack-1x"></i> </span>
-                  <section class="comment-body m-b-lg">
-                    <header> <a href="#"><strong>John Doe</strong></a> <span class="text-muted text-xs"> 1 hour ago </span> </header>
-                    <div>Lorem ipsum dolor sit amet, consecteter adipiscing elit.</div>
-                  </section>
-                </article>
-                <article id="comment-id-2" class="comment-item"> <span class="fa-stack pull-left m-l-xs"> <i class="fa fa-circle text-success fa-stack-2x"></i> <i class="fa fa-check text-white fa-stack-1x"></i> </span>
-                  <section class="comment-body m-b-lg">
-                    <header> <a href="#"><strong>Jonathan</strong></a> completed a task <span class="text-muted text-xs"> 1 hour ago </span> </header>
-                    <div>Consecteter adipiscing elit.</div>
-                  </section>
-                </article>
-              </section>
-              <a href="#" class="btn btn-default btn-sm m-b"><i class="fa fa-plus icon-muted"></i> more</a> </div>
-          </section>
+          
+          
         </section>
         <a href="#" class="hide nav-off-screen-block" data-toggle="class:nav-off-screen" data-target="#nav"></a> </section>
       <aside class="bg-light lter b-l aside-md hide" id="notes">

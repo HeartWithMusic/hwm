@@ -1,20 +1,40 @@
 package com.ruanko.hwm.controller;
 
+import java.util.List;
+
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.ruanko.hwm.bean.User;
+import com.ruanko.hwm.service.IUserService;
+
 @Controller
-@RequestMapping("/home")
+@RequestMapping("/user")
 public class UserController {
+	
+	@Resource
+	private IUserService userService;
+	
+	//查询所有用户
+	@RequestMapping({"/manageUser/"})
+	public String toManageUser(Model model, HttpServletRequest request) {
+		System.out.println("跳转到了控制器中");
+		List<User> userList=userService.findAllUser();
+		
+		model.addAttribute("userList", userList);
+		return "showManageUser";
+	}
 	
 	@RequestMapping({"/discover/"})
 	public String toHome(Model model, HttpServletRequest request) {
 		model.addAttribute("title", "心随乐动");
 		return "showHome";
 	}
+	
 	@RequestMapping({"/discover/1"})
 	public String toHome1(Model model, HttpServletRequest request) {
 		model.addAttribute("title", "心随乐动");
