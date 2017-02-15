@@ -180,10 +180,13 @@
                       <div class="form-group">
                         <label>歌手</label>
                			<div class="m-b">
-                            <select id="select2-option" tabindex="-1" class="select2-offscreen" style="width:400px;">
-                                 						<optgroup label="Alaskan/Hawaiian Time Zone">
-                                                            <option value="AK">Alaska</option>
-                                                            <option value="HI">Hawaii</option>
+                            <select name="select" id="select2-option" tabindex="-1" class="select2-offscreen" style="width:400px;">
+       														<option value="CA">beyond</option>
+                                                            <option value="NV">陈奕迅</option>
+                                                            <option value="OR">周杰伦</option>
+                                                            <option value="WA">张靓颖</option>                         						<!--  <optgroup label="Alaskan/Hawaiian Time Zone">
+                                                            <option value="AK">李宇春</option>
+                                                            <option value="HI">费玉清</option>
                                                         </optgroup>
                                                         <optgroup label="Pacific Time Zone">
                                                             <option value="CA">California</option>
@@ -240,7 +243,7 @@
                                                             <option value="VT">Vermont</option>
                                                             <option value="VA">Virginia</option>
                                                             <option value="WV">West Virginia</option>
-                                                        </optgroup>
+                                                        </optgroup>-->
                                                     </select>
                                                 </div>
                       </div>
@@ -252,11 +255,11 @@
                
                       <div class="form-group">
                          <label>歌曲</label><br/>
-                         <input name="lrcInfo" style="width:400px" type="file" class="filestyle" data-icon="false" data-classButton="btn btn-default" data-classInput="form-control inline input-s">
+                         <input name="songInfo" style="width:400px" type="file" class="filestyle" data-icon="false" data-classButton="btn btn-default" data-classInput="form-control inline input-s">
                       </div>
                       <div class="form-group">
                          <label>歌词</label><br/>
-                         <input name="songInfo" style="width:400px" type="file" class="filestyle" data-icon="false" data-classButton="btn btn-default" data-classInput="form-control inline input-s">
+                         <input name="lrcInfo" style="width:400px" type="file" class="filestyle" data-icon="false" data-classButton="btn btn-default" data-classInput="form-control inline input-s">
                       </div>
                     </div>
                     <footer class="panel-footer text-right bg-light lter">
