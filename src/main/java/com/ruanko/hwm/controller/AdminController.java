@@ -48,6 +48,7 @@ public class AdminController {
 	@RequestMapping({"/addSinger/","/addSinger"})
 	public String toAddSinger(Model model, HttpServletRequest request) {
 		//model.addAttribute("title", "首页");
+		model.addAttribute(new Music());
 		return "showAddSinger";
 	}
 	

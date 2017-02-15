@@ -54,14 +54,14 @@ public class MusicController {
         String time = Upload_Download.getMusicLength(new File(request.getSession().getServletContext().getRealPath("/WEB-INF/music/song") + "/" + music.getMusicname() + ".mp3"));
         mus.setMusictime(time);
         
-        //System.out.println(request.getSession().getServletContext().getRealPath("/WEB-INF/music"));
+        System.out.println(request.getSession().getServletContext().getRealPath("/WEB-INF/music"));
 		//System.out.println(music.getMusicname());
 		String[] checkbox= request.getParameterValues("checkbox");
 		
 //		for(String s : checkbox) {
 //			System.out.println(s);
 //		}
-		//System.out.println(mus.getMusicname() + mus.getMusictime() + mus.getLyr() + mus.getImg() + mus.getPlaycounts() + mus.getUploadtime());
+		System.out.println(mus.getMusicname() + mus.getMusictime() + mus.getLyr() + mus.getImg() + mus.getPlaycounts() + mus.getUploadtime());
 		//System.out.println(song.getContentType());
 		//System.out.println(Upload_Download.getMusicLength(new File(request.getSession().getServletContext().getRealPath("/WEB-INF/music/song") + "/" + song.getOriginalFilename())));
 		//System.out.println(request.getParameter("select"));

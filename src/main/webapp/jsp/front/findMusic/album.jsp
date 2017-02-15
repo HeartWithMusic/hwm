@@ -86,7 +86,7 @@
 			<li><a href="#" style="color:gray;">电子</a></li>
 		</ol>
 	</div>
-	<div id="songpicture" style="height:1400px;">
+	<div id="songpicture" >
 		<ul >
 				<li style="margin-left:5px;">
 					<div> 	

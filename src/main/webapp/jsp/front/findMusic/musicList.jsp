@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <link href="<%=request.getContextPath()%>/css/front/findMusic/musicList.css" rel="stylesheet">
+<link href="<%=request.getContextPath()%>/css/front/findMusic/album.css" rel="stylesheet">
 <div id="musicList">
 	<div id="musicList_choose">
 		<span style="font-size: 25px;">全部</span>
@@ -80,8 +81,262 @@
 			选择分类<span class="glyphicon glyphicon-chevron-down" style="vertical-align:middle;margin-left:8px;"></span>
 		</button>
 	</div>
-	<div id="musicList_show">
+	<div id="songpicture">
+		<ul >
+				<li style="margin-left:5px;">
+					<div> 	
+						<a href="#"><img src="<%=request.getContextPath()%>/img/front/home/balloon.png" alt="通用的占位符缩略图"
+							></a></br>
+							<a href="#">周杰伦</a>
+					</div>
+				</li>
+				<li>
+					<div>
+						<a href="#"><img src="<%=request.getContextPath()%>/img/front/home/balloon.png" alt="通用的占位符缩略图"
+							></a></br><a href="#">周杰伦</a>
+					</div>
+				</li>
+				<li>
+					<div> 	
+						<a href="#"><img src="<%=request.getContextPath()%>/img/front/home/balloon.png" alt="通用的占位符缩略图"
+							></a></br><a href="#">周杰伦</a>
+					</div>
+				</li>
+				<li>
+					<div>
+						<a href="#"><img src="<%=request.getContextPath()%>/img/front/home/balloon.png" alt="通用的占位符缩略图"
+							></a></br><a href="#">周杰伦</a>
+					</div>
+				</li>
+				<li>
+					<div>
+						<a href="#"><img src="<%=request.getContextPath()%>/img/front/home/balloon.png" alt="通用的占位符缩略图"
+							></a></br>
+						<a href="#">周杰伦</a>
+					</div>
+				</li>
+			</ul>
 		
+			<ul id="second">
+				<li style="margin-left:5px;">
+					<div> 	
+						<a href="#"><img src="<%=request.getContextPath()%>/img/front/home/balloon.png" alt="通用的占位符缩略图"
+							></a></br>
+							<a href="#">周杰伦</a>
+					</div>
+				</li>
+				<li>
+					<div>
+						<a href="#"><img src="<%=request.getContextPath()%>/img/front/home/balloon.png" alt="通用的占位符缩略图"
+							></a></br><a href="#">周杰伦</a>
+					</div>
+				</li>
+				<li>
+					<div> 	
+						<a href="#"><img src="<%=request.getContextPath()%>/img/front/home/balloon.png" alt="通用的占位符缩略图"
+							></a></br><a href="#">周杰伦</a>
+					</div>
+				</li>
+				<li>
+					<div>
+						<a href="#"><img src="<%=request.getContextPath()%>/img/front/home/balloon.png" alt="通用的占位符缩略图"
+							></a></br><a href="#">周杰伦</a>
+					</div>
+				</li>
+				<li>
+					<div>
+						<a href="#"><img src="<%=request.getContextPath()%>/img/front/home/balloon.png" alt="通用的占位符缩略图"
+							></a></br>
+						<a href="#">周杰伦</a>
+					</div>
+				</li>
+			</ul>
+			<ul id="second">
+				<li style="margin-left:5px;">
+					<div> 	
+						<a href="#"><img src="<%=request.getContextPath()%>/img/front/home/balloon.png" alt="通用的占位符缩略图"
+							></a></br>
+							<a href="#">周杰伦</a>
+					</div>
+				</li>
+				<li>
+					<div>
+						<a href="#"><img src="<%=request.getContextPath()%>/img/front/home/balloon.png" alt="通用的占位符缩略图"
+							></a></br><a href="#">周杰伦</a>
+					</div>
+				</li>
+				<li>
+					<div> 	
+						<a href="#"><img src="<%=request.getContextPath()%>/img/front/home/balloon.png" alt="通用的占位符缩略图"
+							></a></br><a href="#">周杰伦</a>
+					</div>
+				</li>
+				<li>
+					<div>
+						<a href="#"><img src="<%=request.getContextPath()%>/img/front/home/balloon.png" alt="通用的占位符缩略图"
+							></a></br><a href="#">周杰伦</a>
+					</div>
+				</li>
+				<li>
+					<div>
+						<a href="#"><img src="<%=request.getContextPath()%>/img/front/home/balloon.png" alt="通用的占位符缩略图"
+							></a></br>
+						<a href="#">周杰伦</a>
+					</div>
+				</li>
+			</ul>
+			<ul id="second">
+				<li style="margin-left:5px;">
+					<div> 	
+						<a href="#"><img src="<%=request.getContextPath()%>/img/front/home/balloon.png" alt="通用的占位符缩略图"
+							></a></br>
+							<a href="#">周杰伦</a>
+					</div>
+				</li>
+				<li>
+					<div>
+						<a href="#"><img src="<%=request.getContextPath()%>/img/front/home/balloon.png" alt="通用的占位符缩略图"
+							></a></br><a href="#">周杰伦</a>
+					</div>
+				</li>
+				<li>
+					<div> 	
+						<a href="#"><img src="<%=request.getContextPath()%>/img/front/home/balloon.png" alt="通用的占位符缩略图"
+							></a></br><a href="#">周杰伦</a>
+					</div>
+				</li>
+				<li>
+					<div>
+						<a href="#"><img src="<%=request.getContextPath()%>/img/front/home/balloon.png" alt="通用的占位符缩略图"
+							></a></br><a href="#">周杰伦</a>
+					</div>
+				</li>
+				<li>
+					<div>
+						<a href="#"><img src="<%=request.getContextPath()%>/img/front/home/balloon.png" alt="通用的占位符缩略图"
+							></a></br>
+						<a href="#">周杰伦</a>
+					</div>
+				</li>
+			</ul>
+			<ul id="second">
+				<li style="margin-left:5px;">
+					<div> 	
+						<a href="#"><img src="<%=request.getContextPath()%>/img/front/home/balloon.png" alt="通用的占位符缩略图"
+							></a></br>
+							<a href="#">周杰伦</a>
+					</div>
+				</li>
+				<li>
+					<div>
+						<a href="#"><img src="<%=request.getContextPath()%>/img/front/home/balloon.png" alt="通用的占位符缩略图"
+							></a></br><a href="#">周杰伦</a>
+					</div>
+				</li>
+				<li>
+					<div> 	
+						<a href="#"><img src="<%=request.getContextPath()%>/img/front/home/balloon.png" alt="通用的占位符缩略图"
+							></a></br><a href="#">周杰伦</a>
+					</div>
+				</li>
+				<li>
+					<div>
+						<a href="#"><img src="<%=request.getContextPath()%>/img/front/home/balloon.png" alt="通用的占位符缩略图"
+							></a></br><a href="#">周杰伦</a>
+					</div>
+				</li>
+				<li>
+					<div>
+						<a href="#"><img src="<%=request.getContextPath()%>/img/front/home/balloon.png" alt="通用的占位符缩略图"
+							></a></br>
+						<a href="#">周杰伦</a>
+					</div>
+				</li>
+			</ul>
+			<ul id="second">
+				<li style="margin-left:5px;">
+					<div> 	
+						<a href="#"><img src="<%=request.getContextPath()%>/img/front/home/balloon.png" alt="通用的占位符缩略图"
+							></a></br>
+							<a href="#">周杰伦</a>
+					</div>
+				</li>
+				<li>
+					<div>
+						<a href="#"><img src="<%=request.getContextPath()%>/img/front/home/balloon.png" alt="通用的占位符缩略图"
+							></a></br><a href="#">周杰伦</a>
+					</div>
+				</li>
+				<li>
+					<div> 	
+						<a href="#"><img src="<%=request.getContextPath()%>/img/front/home/balloon.png" alt="通用的占位符缩略图"
+							></a></br><a href="#">周杰伦</a>
+					</div>
+				</li>
+				<li>
+					<div>
+						<a href="#"><img src="<%=request.getContextPath()%>/img/front/home/balloon.png" alt="通用的占位符缩略图"
+							></a></br><a href="#">周杰伦</a>
+					</div>
+				</li>
+				<li>
+					<div>
+						<a href="#"><img src="<%=request.getContextPath()%>/img/front/home/balloon.png" alt="通用的占位符缩略图"
+							></a></br>
+						<a href="#">周杰伦</a>
+					</div>
+				</li>
+			</ul>
+			<ul id="second">
+				<li style="margin-left:5px;">
+					<div> 	
+						<a href="#"><img src="<%=request.getContextPath()%>/img/front/home/balloon.png" alt="通用的占位符缩略图"
+							></a></br>
+							<a href="#">周杰伦</a>
+					</div>
+				</li>
+				<li>
+					<div>
+						<a href="#"><img src="<%=request.getContextPath()%>/img/front/home/balloon.png" alt="通用的占位符缩略图"
+							></a></br><a href="#">周杰伦</a>
+					</div>
+				</li>
+				<li>
+					<div> 	
+						<a href="#"><img src="<%=request.getContextPath()%>/img/front/home/balloon.png" alt="通用的占位符缩略图"
+							></a></br><a href="#">周杰伦</a>
+					</div>
+				</li>
+				<li>
+					<div>
+						<a href="#"><img src="<%=request.getContextPath()%>/img/front/home/balloon.png" alt="通用的占位符缩略图"
+							></a></br><a href="#">周杰伦</a>
+					</div>
+				</li>
+				<li>
+					<div>
+						<a href="#"><img src="<%=request.getContextPath()%>/img/front/home/balloon.png" alt="通用的占位符缩略图"
+							></a></br>
+						<a href="#">周杰伦</a>
+					</div>
+				</li>
+			</ul>
+	</div>
+	<div id="paging">
+		<ul class="pagination">
+			<li><a href="#">上一页</a></li>
+			<li><a href="#">1</a></li>
+			<li><a href="#">2</a></li>
+			<li><a href="#">3</a></li>
+			<li><a href="#">4</a></li>
+			<li><a href="#">5</a></li>
+			<li><a href="#">6</a></li>
+			<li><span>...</span></li>
+			<li><a href="#">9</a></li>
+			<li><a href="#">10</a></li>
+			<li><a href="#">11</a></li>
+			<li><a href="#">下一页</a></li>
+		</ul>
 	</div>
 </div>
 
