@@ -1,5 +1,7 @@
 package com.ruanko.hwm.controller;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
@@ -10,7 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.ruanko.hwm.bean.Admin;
 import com.ruanko.hwm.bean.Music;
+import com.ruanko.hwm.bean.User;
 import com.ruanko.hwm.service.IAdminService;
+import com.ruanko.hwm.service.IUserService;
 import com.ruanko.hwm.utl.MD5Util;
 
 @Controller
@@ -18,7 +22,11 @@ import com.ruanko.hwm.utl.MD5Util;
 public class AdminController {
 
 	@Resource
-	public IAdminService adminService;	
+	public IAdminService adminService;
+	
+	@Resource
+	private IUserService userService;
+	
 	@RequestMapping({"/logup/"})
 	public String toLogup(Model model, HttpServletRequest request) {
 		model.addAttribute("title", "注册");
@@ -58,11 +66,18 @@ public class AdminController {
 		return "showManageSinger";
 	}
 	
+	//获取所有用户
 	@RequestMapping({"/manageUser/","/manageUser"})
 	public String toManageUser(Model model, HttpServletRequest request) {
-		//model.addAttribute("title", "首页");
+		System.out.println("admin中查询所有用户");
+		
+		List<User> userList=userService.findAllUser();
+		System.out.println(userList.toString());
+		model.addAttribute("userList", userList);
+		
 		return "showManageUser";
 	}
+	
 	
 	@RequestMapping({"/addAdmin/","/addAdmin"})
 	public String toAddAdmin(Model model, HttpServletRequest request) {

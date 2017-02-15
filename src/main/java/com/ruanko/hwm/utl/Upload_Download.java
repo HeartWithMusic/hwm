@@ -97,8 +97,12 @@ public class Upload_Download {
 	 * @throws IOException
 	 */
 	public static void upload_img(MultipartFile file, HttpServletRequest request, String name) throws FileNotFoundException, IOException {
+		String root = request.getSession().getServletContext().getRealPath("/WEB-INF/music/img");
+		//判断文件夹是否存在
+		existFolder(root);
+		
 		if (!file.isEmpty()){
-            Streams.copy(file.getInputStream(),new FileOutputStream(request.getSession().getServletContext().getRealPath("/WEB-INF/music/img")+ "\\" + name + ".jpg"),true);
+            Streams.copy(file.getInputStream(),new FileOutputStream(root + "\\" + name + ".jpg"),true);
         }
 	}
 	/**
@@ -109,8 +113,12 @@ public class Upload_Download {
 	 * @throws IOException
 	 */
 	public static void upload_lrc(MultipartFile file, HttpServletRequest request, String name) throws FileNotFoundException, IOException {
+		String root = request.getSession().getServletContext().getRealPath("/WEB-INF/music/lrc");
+		//判断文件夹是否存在
+		existFolder(root);
+		
 		if (!file.isEmpty()){
-            Streams.copy(file.getInputStream(),new FileOutputStream(request.getSession().getServletContext().getRealPath("/WEB-INF/music/lrc")+ "\\" + name + ".lrc"),true);
+            Streams.copy(file.getInputStream(),new FileOutputStream(root + "\\" + name + ".lrc"),true);
         }
 	}
 	/**
@@ -121,8 +129,12 @@ public class Upload_Download {
 	 * @throws IOException
 	 */
 	public static void upload_song(MultipartFile file, HttpServletRequest request, String name) throws FileNotFoundException, IOException {
+		String root = request.getSession().getServletContext().getRealPath("/WEB-INF/music/song");
+		//判断文件夹是否存在
+		existFolder(root);
+		
 		if (!file.isEmpty()){
-            Streams.copy(file.getInputStream(),new FileOutputStream(request.getSession().getServletContext().getRealPath("/WEB-INF/music/song")+ "\\" + name + ".mp3"),true);
+            Streams.copy(file.getInputStream(),new FileOutputStream(root + "\\" + name + ".mp3"),true);
         }
 	}
 	
@@ -154,6 +166,18 @@ public class Upload_Download {
         return fi.getStoreLocation(); 
 	}
 	
+	/**
+	 * 文件夹是否存在，若不存在则新建
+	 * @param path
+	 */
+	public static void existFolder(String path) {
+		File file =new File(path);    
+		//如果文件夹不存在则创建    
+		if  (!file .exists()  && !file .isDirectory()) {       
+		    //System.out.println("//不存在");  
+		    file .mkdir();    
+		}  
+	}
 
 	public static void download() {
 
