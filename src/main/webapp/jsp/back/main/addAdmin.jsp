@@ -1,5 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %>  
+<%@ taglib uri="http://www.springframework.org/tags" prefix="s" %> 
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="sf" %>
+<%@ page isELIgnored="false" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en" class="app">
 <head>
@@ -10,6 +16,9 @@
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/app.v2.css" type="text/css" />
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/bootstrap_calendar.css" type="text/css" cache="false" />
 <!--[if lt IE 9]> <script src="js/ie/html5shiv.js" cache="false"></script> <script src="js/ie/respond.min.js" cache="false"></script> <script src="js/ie/excanvas.js" cache="false"></script> <![endif]-->
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/select2/select2.css" type="text/css" cache="false" />
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/select2/theme.css" type="text/css" cache="false" />
+
 </head>
 <body>
 <section class="vbox">
@@ -88,144 +97,49 @@
       </aside>
       <!-- /.aside -->
       <section id="content">
+        <!-- 添加管理员 -->
         <section class="vbox">
-          <section class="scrollable padder">
+         <% String action = request.getContextPath() + "/admin/doAddAdmin/";%>
+      	<section class="scrollable padder">
             <ul class="breadcrumb no-border no-radius b-b b-light pull-in">
               <li><a href="<%=request.getContextPath()%>/admin/index/"><i class="fa fa-home"></i> 主页</a></li>
               <li><a href="<%=request.getContextPath()%>/admin/index/"><i class="fa fa-home"></i> 管理员管理</a></li>
               <li class="active">添加管理员</li>
             </ul>
-            <!--  <div class="m-b-md">
-              <h3 class="m-b-none">Workset</h3>
-              <small>Welcome back, Noteman</small> </div>-->
-            <section class="panel panel-default">
-              <div class="row m-l-none m-r-none bg-light lter">
-                <div class="col-sm-6 col-md-3 padder-v b-r b-light"> <span class="fa-stack fa-2x pull-left m-r-sm"> <i class="fa fa-circle fa-stack-2x text-info"></i> <i class="fa fa-music fa-stack-1x text-white"></i> </span> <a class="clear" href="#"> <span class="h3 block m-t-xs"><strong>52,000</strong></span> <small class="text-muted text-uc">歌曲数量</small> </a> </div>
-                <div class="col-sm-6 col-md-3 padder-v b-r b-light lt"> <span class="fa-stack fa-2x pull-left m-r-sm"> <i class="fa fa-circle fa-stack-2x text-warning"></i> <i class="fa fa-male fa-stack-1x text-white"></i> </span> <a class="clear" href="#"> <span class="h3 block m-t-xs"><strong id="bugs">468</strong></span> <small class="text-muted text-uc">歌手数量</small> </a> </div>
-                <div class="col-sm-6 col-md-3 padder-v b-r b-light"> <span class="fa-stack fa-2x pull-left m-r-sm"> <i class="fa fa-circle fa-stack-2x text-danger"></i> <i class="fa fa-play fa-stack-1x text-white"></i> </span> <a class="clear" href="#"> <span class="h3 block m-t-xs"><strong id="firers">359</strong></span> <small class="text-muted text-uc">播放次数</small> </a> </div>
-                <div class="col-sm-6 col-md-3 padder-v b-r b-light lt"> <span class="fa-stack fa-2x pull-left m-r-sm"> <i class="fa fa-circle fa-stack-2x icon-muted"></i> <i class="fa fa-clock-o fa-stack-1x text-white"></i> </span> <a class="clear" href="#"> <span style="font-size: 20px;"class="h3 block m-t-xs" id="time"></span> <small class="text-muted text-uc">时间</small> </a> </div>
-              </div>
-            </section>
-            <div class="row">
-              <div class="col-md-8">
-                <section class="panel panel-default">
-                  <header class="panel-heading font-bold">Statistics</header>
-                  <div class="panel-body">
-                    <div id="flot-1ine" style="height:210px"></div>
-                  </div>
-                  <footer class="panel-footer bg-white no-padder">
-                    <div class="row text-center no-gutter">
-                      <div class="col-xs-3 b-r b-light"> <span class="h4 font-bold m-t block">5,860</span> <small class="text-muted m-b block">Orders</small> </div>
-                      <div class="col-xs-3 b-r b-light"> <span class="h4 font-bold m-t block">10,450</span> <small class="text-muted m-b block">Sellings</small> </div>
-                      <div class="col-xs-3 b-r b-light"> <span class="h4 font-bold m-t block">21,230</span> <small class="text-muted m-b block">Items</small> </div>
-                      <div class="col-xs-3"> <span class="h4 font-bold m-t block">7,230</span> <small class="text-muted m-b block">Customers</small> </div>
-                    </div>
-                  </footer>
-                </section>
-              </div>
-              <div class="col-md-4">
-                <section class="panel panel-default">
-                  <header class="panel-heading font-bold">Data graph</header>
-                  <div class="bg-light dk wrapper"> <span class="pull-right">Friday</span> <span class="h4">$540<br>
-                    <small class="text-muted">+1.05(2.15%)</small> </span>
-                    <div class="text-center m-b-n m-t-sm">
-                      <div class="sparkline" data-type="line" data-height="65" data-width="100%" data-line-width="2" data-line-color="#dddddd" data-spot-color="#bbbbbb" data-fill-color="" data-highlight-line-color="#fff" data-spot-radius="3" data-resize="true" values="280,320,220,385,450,320,345,250,250,250,400,380"></div>
-                      <div class="sparkline inline" data-type="bar" data-height="45" data-bar-width="6" data-bar-spacing="6" data-bar-color="#65bd77">10,9,11,10,11,10,12,10,9,10,11,9,8</div>
-                    </div>
-                  </div>
-                  <div class="panel-body">
-                    <div> <span class="text-muted">Total:</span> <span class="h3 block">$2500.00</span> </div>
-                    <div class="line pull-in"></div>
-                    <div class="row m-t-sm">
-                      <div class="col-xs-4"> <small class="text-muted block">Market</small> <span>$1500.00</span> </div>
-                      <div class="col-xs-4"> <small class="text-muted block">Referal</small> <span>$600.00</span> </div>
-                      <div class="col-xs-4"> <small class="text-muted block">Affiliate</small> <span>$400.00</span> </div>
-                    </div>
-                  </div>
-                </section>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-8">
-                <h4 class="m-t-none">Todos</h4>
-                <ul class="list-group gutter list-group-lg list-group-sp sortable">
-                  <li class="list-group-item box-shadow"> <a href="#" class="pull-right" data-dismiss="alert"> <i class="fa fa-times icon-muted"></i> </a> <span class="pull-left media-xs"> <i class="fa fa-sort icon-muted fa m-r-sm"></i> <a href="#todo-1" data-toggle="class:text-lt text-success" class="active"> <i class="fa fa-square-o fa-fw text"></i> <i class="fa fa-check-square-o fa-fw text-active text-success"></i> </a> </span>
-                    <div class="clear text-success text-lt" id="todo-1"> Browser compatibility </div>
-                  </li>
-                  <li class="list-group-item box-shadow"> <a href="#" class="pull-right" data-dismiss="alert"> <i class="fa fa-times icon-muted"></i> </a> <span class="pull-left media-xs"> <i class="fa fa-sort icon-muted fa m-r-sm"></i> <a href="#todo-2" data-toggle="class:text-lt text-danger"> <i class="fa fa-square-o fa-fw text"></i> <i class="fa fa-check-square-o fa-fw text-active text-danger"></i> </a> </span>
-                    <div class="clear" id="todo-2"> Looking for more example templates </div>
-                  </li>
-                  <li class="list-group-item box-shadow"> <a href="#" class="pull-right" data-dismiss="alert"> <i class="fa fa-times icon-muted"></i> </a> <span class="pull-left media-xs"> <i class="fa fa-sort icon-muted fa m-r-sm"></i> <a href="#todo-3" data-toggle="class:text-lt"> <i class="fa fa-square-o fa-fw text"></i> <i class="fa fa-check-square-o fa-fw text-active text-success"></i> </a> </span>
-                    <div class="clear" id="todo-3"> Customizing components </div>
-                  </li>
-                  <li class="list-group-item box-shadow"> <a href="#" class="pull-right" data-dismiss="alert"> <i class="fa fa-times icon-muted"></i> </a> <span class="pull-left media-xs"> <i class="fa fa-sort icon-muted fa m-r-sm"></i> <a href="#todo-4" data-toggle="class:text-lt"> <i class="fa fa-square-o fa-fw text"></i> <i class="fa fa-check-square-o fa-fw text-active text-success"></i> </a> </span>
-                    <div class="clear" id="todo-4"> The fastest way to get started </div>
-                  </li>
-                  <li class="list-group-item box-shadow"> <a href="#" class="pull-right" data-dismiss="alert"> <i class="fa fa-times icon-muted"></i> </a> <span class="pull-left media-xs"> <i class="fa fa-sort icon-muted fa m-r-sm"></i> <a href="#todo-5" data-toggle="class:text-lt"> <i class="fa fa-square-o fa-fw text"></i> <i class="fa fa-check-square-o fa-fw text-active text-success"></i> </a> </span>
-                    <div class="clear" id="todo-5"> HTML5 doctype required </div>
-                  </li>
-                  <li class="list-group-item box-shadow"> <a href="#" class="pull-right" data-dismiss="alert"> <i class="fa fa-times icon-muted"></i> </a> <span class="pull-left media-xs"> <i class="fa fa-sort icon-muted fa m-r-sm"></i> <a href="#todo-6" data-toggle="class:text-lt"> <i class="fa fa-square-o fa-fw text"></i> <i class="fa fa-check-square-o fa-fw text-active text-success"></i> </a> </span>
-                    <div class="clear" id="todo-6"> LessCSS compiling </div>
-                  </li>
-                </ul>
-              </div>
-              <div class="col-md-4">
-                <section class="panel b-light">
-                  <header class="panel-heading bg-primary dker no-border"><strong>Calendar</strong></header>
-                  <div id="calendar" class="bg-primary m-l-n-xxs m-r-n-xxs"></div>
-                  <div class="list-group"> <a href="#" class="list-group-item text-ellipsis"> <span class="badge bg-danger">7:30</span> Meet a friend </a> <a href="#" class="list-group-item text-ellipsis"> <span class="badge bg-success">9:30</span> Have a kick off meeting with .inc company </a> <a href="#" class="list-group-item text-ellipsis"> <span class="badge bg-light">19:30</span> Milestone release </a> </div>
-                </section>
-              </div>
-            </div>
-            <div>
-              <div class="btn-group m-b" data-toggle="buttons">
-                <label class="btn btn-sm btn-default active">
-                  <input type="radio" name="options" id="option1">
-                  Timeline </label>
-                <label class="btn btn-sm btn-default">
-                  <input type="radio" name="options" id="option2">
-                  Activity </label>
-              </div>
-              <section class="comment-list block">
-                <article id="comment-id-1" class="comment-item"> <span class="fa-stack pull-left m-l-xs"> <i class="fa fa-circle text-info fa-stack-2x"></i> <i class="fa fa-play-circle text-white fa-stack-1x"></i> </span>
-                  <section class="comment-body m-b-lg">
-                    <header> <a href="#"><strong>John smith</strong></a> shared a <a href="#" class="text-info">video</a> to you <span class="text-muted text-xs"> 24 minutes ago </span> </header>
-                    <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi id neque quam.</div>
-                  </section>
-                </article>
-                <!-- .comment-reply -->
-                <article id="comment-id-2" class="comment-reply">
-                  <article class="comment-item"> <a class="pull-left thumb-sm"> <img src="images/avatar_default.jpg" class="img-circle"> </a>
-                    <section class="comment-body m-b-lg">
-                      <header> <a href="#"><strong>John smith</strong></a> <span class="text-muted text-xs"> 26 minutes ago </span> </header>
-                      <div> Morbi id neque quam. Aliquam.</div>
-                    </section>
-                  </article>
-                  <article class="comment-item"> <a class="pull-left thumb-sm"> <img src="images/avatar.jpg" class="img-circle"> </a>
-                    <section class="comment-body m-b-lg">
-                      <header> <a href="#"><strong>Mike</strong></a> <span class="text-muted text-xs"> 26 minutes ago </span> </header>
-                      <div>Good idea.</div>
-                    </section>
-                  </article>
-                </article>
-                <!-- / .comment-reply -->
-                <article id="comment-id-2" class="comment-item"> <span class="fa-stack pull-left m-l-xs"> <i class="fa fa-circle text-danger fa-stack-2x"></i> <i class="fa fa-file-o text-white fa-stack-1x"></i> </span>
-                  <section class="comment-body m-b-lg">
-                    <header> <a href="#"><strong>John Doe</strong></a> <span class="text-muted text-xs"> 1 hour ago </span> </header>
-                    <div>Lorem ipsum dolor sit amet, consecteter adipiscing elit.</div>
-                  </section>
-                </article>
-                <article id="comment-id-2" class="comment-item"> <span class="fa-stack pull-left m-l-xs"> <i class="fa fa-circle text-success fa-stack-2x"></i> <i class="fa fa-check text-white fa-stack-1x"></i> </span>
-                  <section class="comment-body m-b-lg">
-                    <header> <a href="#"><strong>Jonathan</strong></a> completed a task <span class="text-muted text-xs"> 1 hour ago </span> </header>
-                    <div>Consecteter adipiscing elit.</div>
-                  </section>
-                </article>
-              </section>
-              <a href="#" class="btn btn-default btn-sm m-b"><i class="fa fa-plus icon-muted"></i> more</a> </div>
-          </section>
-        </section>
-        <a href="#" class="hide nav-off-screen-block" data-toggle="class:nav-off-screen" data-target="#nav"></a> </section>
+            <sf:form  data-validate="parsley" style="width:800px" method="post" modelAttribute="admin" action="<%=action %>" enctype="multipart/form-data">
+                  <section class="panel panel-default">
+                    <header class="panel-heading"> <span class="h4">添加管理员</span> </header>
+                    <div class="panel-body">
+                      <p class="text-muted">请填充音乐相关信息</p>
+                      <div class="form-group">
+                        <label>用户名</label>
+                        <sf:input value="" style="width:400px" type="text" class="form-control" data-required="true" path="adminname"></sf:input>
+                      </div>
+                      <div class="form-group">
+                        <label>密码</label>
+                        <sf:input value="" style="width:400px" id = "pwd" type="password" class="form-control" data-required="true" path="password"></sf:input>
+                      </div>
+                      <div class="form-group">
+                        <label>确认密码</label>
+                        <input  value="" style="width:400px" data-equalto="#pwd" type="password" class="form-control" data-required="true"></input>
+                      </div>
+                      <div class="form-group">
+                        <label>邮箱</label>
+                        <sf:input  value="" style="width:400px" type="email" class="form-control" data-required="true" path="email"></sf:input>
+                      </div>
+                       <div class="form-group">
+                        <label>电话</label>
+                        <sf:input  value="" style="width:400px" type="text" data-type = "phone"  class="form-control" data-required="true" path="tel"></sf:input>
+                      </div></div>
+             			 <footer class="panel-footer text-right bg-light lter">
+                      <button type="submit" class="btn btn-success btn-s-xs">添加</button>
+                    </footer>
+                    <c:out value="${message }"></c:out></section>
+                </sf:form>
+               </section>
+    </section>
+    
+        <a href="#" class="hide nav-off-screen-block" data-toggle="class:nav-off-screen" data-target="#nav"></a> </section></section>
       <aside class="bg-light lter b-l aside-md hide" id="notes">
         <div class="wrapper">Notification</div>
       </aside>
@@ -243,6 +157,9 @@
 <script src="<%=request.getContextPath()%>/js/common/bootstrap_calendar.js" cache="false"></script>
 <script src="<%=request.getContextPath()%>/js/common/demo.js" cache="false"></script>
 <script src="<%=request.getContextPath()%>/js/common/jquery.sortable.js" cache="false"></script>  
+<script src="<%=request.getContextPath()%>/js/file-input/bootstrap-filestyle.min.js" cache="false"></script>
+<script src="<%=request.getContextPath()%>/js/select2/select2.min.js" cache="false"></script>
+<script src="<%=request.getContextPath()%>/js/parsley/parsley.min.js" cache="false"></script><script src="<%=request.getContextPath()%>/js/parsley/parsley.extend.js" cache="false"></script>
 <script>     
 	document.getElementById('time').innerHTML=new Date().toLocaleFormat();     
 	setInterval("document.getElementById('time').innerHTML=new Date().toLocaleFormat();",1000);  

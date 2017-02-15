@@ -81,6 +81,7 @@ public class AdminController {
 	@RequestMapping({"/addAdmin/","/addAdmin"})
 	public String toAddAdmin(Model model, HttpServletRequest request) {
 		//model.addAttribute("title", "首页");
+		model.addAttribute(new Admin());
 		return "showAddAdmin";
 	}
 	
@@ -122,15 +123,23 @@ public class AdminController {
 		return "showAdminLogin";
 	}
 	
-	@RequestMapping({"/doLogup/"}) //注册
+	@RequestMapping({"/doAddAdmin/"}) //添加管理员
 	public String logup(@ModelAttribute("admin")Admin admin, Model model, HttpServletRequest request){
-		System.out.println(admin.getEmail());	
+		System.out.println(admin.getAdminname());	
+		//model.addAttribute(new Admin());
 		Admin ad = adminService.getAdminByName(admin.getAdminname());		
 		String message = "";
 		if(ad == null){
 			admin.setPassword(MD5Util.getMD5Code(admin.getPassword()));
 			adminService.addAdmin(admin);
-			return "showAdminLogin";
+			message ="添加成功！";
+			model.addAttribute("message",message);
+			model.addAttribute(new Admin());
+			return "showAddAdmin";
+		}
+		else{
+			message ="该用户名已存在";
+			model.addAttribute("message",message);
 		}
 		return "showAdminLogup";
 	}
