@@ -1,5 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %>  
+<%@ taglib uri="http://www.springframework.org/tags" prefix="s" %> 
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="sf" %>
+<%@ page isELIgnored="false" %> 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en" class="app">
 <head>
@@ -9,6 +15,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/app.v2.css" type="text/css" />
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/bootstrap_calendar.css" type="text/css" cache="false" />
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/select2/select2.css" type="text/css" cache="false" />
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/select2/theme.css" type="text/css" cache="false" />
 <!--[if lt IE 9]> <script src="js/ie/html5shiv.js" cache="false"></script> <script src="js/ie/respond.min.js" cache="false"></script> <script src="js/ie/excanvas.js" cache="false"></script> <![endif]-->
 </head>
 <body>
@@ -98,14 +106,87 @@
             <!--  <div class="m-b-md">
               <h3 class="m-b-none">Workset</h3>
               <small>Welcome back, Noteman</small> </div>-->
-            <section class="panel panel-default">
-              <div class="row m-l-none m-r-none bg-light lter">
-                <div class="col-sm-6 col-md-3 padder-v b-r b-light"> <span class="fa-stack fa-2x pull-left m-r-sm"> <i class="fa fa-circle fa-stack-2x text-info"></i> <i class="fa fa-music fa-stack-1x text-white"></i> </span> <a class="clear" href="#"> <span class="h3 block m-t-xs"><strong>52,000</strong></span> <small class="text-muted text-uc">歌曲数量</small> </a> </div>
-                <div class="col-sm-6 col-md-3 padder-v b-r b-light lt"> <span class="fa-stack fa-2x pull-left m-r-sm"> <i class="fa fa-circle fa-stack-2x text-warning"></i> <i class="fa fa-male fa-stack-1x text-white"></i> </span> <a class="clear" href="#"> <span class="h3 block m-t-xs"><strong id="bugs">468</strong></span> <small class="text-muted text-uc">歌手数量</small> </a> </div>
-                <div class="col-sm-6 col-md-3 padder-v b-r b-light"> <span class="fa-stack fa-2x pull-left m-r-sm"> <i class="fa fa-circle fa-stack-2x text-danger"></i> <i class="fa fa-play fa-stack-1x text-white"></i> </span> <a class="clear" href="#"> <span class="h3 block m-t-xs"><strong id="firers">359</strong></span> <small class="text-muted text-uc">播放次数</small> </a> </div>
-                <div class="col-sm-6 col-md-3 padder-v b-r b-light lt"> <span class="fa-stack fa-2x pull-left m-r-sm"> <i class="fa fa-circle fa-stack-2x icon-muted"></i> <i class="fa fa-clock-o fa-stack-1x text-white"></i> </span> <a class="clear" href="#"> <span style="font-size: 20px;"class="h3 block m-t-xs" id="time"></span> <small class="text-muted text-uc">时间</small> </a> </div>
-              </div>
-            </section>
+            <% String action = request.getContextPath() + "/singer/doAddSinger/";%>
+            <sf:form data-validate="parsley" style="width:800px" method="post" modelAttribute="singer" action="<%=action %>" enctype="multipart/form-data">
+                  <section class="panel panel-default">
+                    <header class="panel-heading"> <span class="h4">添加歌手</span> </header>
+                    <div class="panel-body">
+                      <p class="text-muted">请填充歌手相关信息</p>
+                      <div class="form-group">
+                        <label>歌手姓名</label>
+                        <sf:input style="width:400px" type="text" class="form-control" data-required="true" path="singername"></sf:input>
+                      </div>
+                      <div class="form-group">
+                                            <label>歌手类别</label>
+                                            <div>
+                                            	<label>华语</label>
+                                                <label class="checkbox-inline">
+                                                    <input id="inlineCheckbox1" name="checkbox" value="1" type="checkbox"> 华语男歌手 </label>
+                                                <label class="checkbox-inline">
+                                                    <input id="inlineCheckbox2" name="checkbox" value="2" type="checkbox"> 华语女歌手 </label>
+                                                <label class="checkbox-inline">
+                                                    <input id="inlineCheckbox3" name="checkbox" value="3" type="checkbox"> 华语组合/乐队 </label>
+                                               
+                                            </div>
+                                       		<div>
+                                            	<label>欧美</label>
+                                                <label class="checkbox-inline">
+                                                    <input id="inlineCheckbox1" name="checkbox" value="1" type="checkbox"> 欧美男歌手 </label>
+                                                <label class="checkbox-inline">
+                                                    <input id="inlineCheckbox2" name="checkbox" value="2" type="checkbox"> 欧美女歌手 </label>
+                                                <label class="checkbox-inline">
+                                                    <input id="inlineCheckbox3" name="checkbox" value="3" type="checkbox"> 欧美组合/乐队 </label>
+                                               
+                                            </div>
+                                            <div>
+                                            	<label>日本</label>
+                                                <label class="checkbox-inline">
+                                                    <input id="inlineCheckbox1" name="checkbox" value="1" type="checkbox"> 日本男歌手 </label>
+                                                <label class="checkbox-inline">
+                                                    <input id="inlineCheckbox2" name="checkbox" value="2" type="checkbox"> 日本女歌手 </label>
+                                                <label class="checkbox-inline">
+                                                    <input id="inlineCheckbox3" name="checkbox" value="3" type="checkbox"> 日本组合/乐队 </label>
+                                               
+                                            </div>
+                                            <div>
+                                            	<label>韩国</label>
+                                                <label class="checkbox-inline">
+                                                    <input id="inlineCheckbox1" name="checkbox" value="1" type="checkbox"> 韩国男歌手 </label>
+                                                <label class="checkbox-inline">
+                                                    <input id="inlineCheckbox2" name="checkbox" value="2" type="checkbox"> 韩国女歌手 </label>
+                                                <label class="checkbox-inline">
+                                                    <input id="inlineCheckbox3" name="checkbox" value="3" type="checkbox"> 韩国组合/乐队 </label>
+                                               
+                                            </div>
+                                            <div>
+                                            	<label>其他</label>
+                                                <label class="checkbox-inline">
+                                                    <input id="inlineCheckbox1" name="checkbox" value="1" type="checkbox"> 其他男歌手 </label>
+                                                <label class="checkbox-inline">
+                                                    <input id="inlineCheckbox2" name="checkbox" value="2" type="checkbox"> 其他女歌手 </label>
+                                                <label class="checkbox-inline">
+                                                    <input id="inlineCheckbox3" name="checkbox" value="3" type="checkbox"> 其他组合/乐队 </label>
+                                               
+                                            </div>
+                                            
+                      </div>
+
+                      
+                      <div class="form-group">
+                         <label>封面</label><br/>
+                         <input name="imageInfo" style="width:400px" type="file" class="filestyle" data-icon="false" data-classButton="btn btn-default" data-classInput="form-control inline input-s">
+                      </div>
+               
+                     <div class="form-group" style="width:500px;">
+                        <label>歌手简介</label>
+                        <sf:textarea path="introduction" class="form-control" rows="5" data-minwords="6" data-required="true" placeholder="歌手简介"></sf:textarea>
+                      </div>
+                    </div>
+                    <footer class="panel-footer text-right bg-light lter">
+                      <button type="submit" class="btn btn-success btn-s-xs">上传</button>
+                    </footer>
+                  </section>
+                </sf:form>
     </section>
   </section>
 </section>
@@ -120,6 +201,8 @@
 <script src="<%=request.getContextPath()%>/js/common/bootstrap_calendar.js" cache="false"></script>
 <script src="<%=request.getContextPath()%>/js/calendar/demo.js" cache="false"></script>
 <script src="<%=request.getContextPath()%>/js/sortable/jquery.sortable.js" cache="false"></script>  
+<script src="<%=request.getContextPath()%>/js/file-input/bootstrap-filestyle.min.js" cache="false"></script>
+<script src="<%=request.getContextPath()%>/js/select2/select2.min.js" cache="false"></script>
 <script>     
 	document.getElementById('time').innerHTML=new Date().toLocaleFormat();     
 	setInterval("document.getElementById('time').innerHTML=new Date().toLocaleFormat();",1000);  
