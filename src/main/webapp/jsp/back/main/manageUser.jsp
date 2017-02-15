@@ -199,7 +199,32 @@
                           </div>
                         </div>
                       </th>
-                      
+                         <th> <div class="row">
+                          <div class="col-sm-8 m-t-xs m-b-xs">
+                            <div class="select filter" data-resize="auto">
+                            </div>
+                          </div>
+                          <div class="col-sm-4 m-t-xs m-b-xs">
+                            <div class="input-group search datagrid-search">
+                              <div class="input-group-btn">
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </th>
+                        <th> <div class="row">
+                          <div class="col-sm-8 m-t-xs m-b-xs">
+                            <div class="select filter" data-resize="auto">
+                            </div>
+                          </div>
+                          <div class="col-sm-4 m-t-xs m-b-xs">
+                            <div class="input-group search datagrid-search">
+                              <div class="input-group-btn">
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </th>
               		</tr>
                   
                     <c:forEach var="user" items="${userList}" >
