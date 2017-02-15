@@ -177,14 +177,14 @@ public class AdminController {
 			adminService.addAdmin(admin);
 			message ="添加成功！";
 			model.addAttribute("message",message);
-			model.addAttribute(new Admin());
-			return "showAddAdmin";
+				
 		}
 		else{
 			message ="该用户名已存在";
-			model.addAttribute("message",message);
+			model.addAttribute("message",message);			
 		}
-		return "showAdminLogup";
+		model.addAttribute(new Admin());	
+		return "showAddAdmin";
 	}
 	
 }
