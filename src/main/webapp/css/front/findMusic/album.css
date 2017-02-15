@@ -1,7 +1,7 @@
 @CHARSET "UTF-8";
 #album {
 	width:1000px;
-	height:2200px;
+	overflow:hidden;
 	background-color: white;
 	border-left:1px solid #d3d3d3;
 	border-right:1px solid #d3d3d3;

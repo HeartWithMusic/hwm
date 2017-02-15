@@ -98,7 +98,11 @@ window.ParsleyConfig = window.ParsleyConfig || {};
       }
     }
     , messages: {
+<<<<<<< HEAD
         minwords:       "This value should have %s words at least."
+=======
+        minwords:       "必须有 %s 个字."
+>>>>>>> branch 'master' of https://github.com/HeartWithMusic/hwm.git
       , maxwords:       "This value should have %s words maximum."
       , rangewords:     "This value should have between %s and %s words."
       , greaterthan:    "This value should be greater than %s."

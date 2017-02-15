@@ -7,6 +7,7 @@
 	}
 	.left_menu_header {
 		margin-top:20px;
+		height:50px;
 		border-bottom: 2px solid #C10D0C;"
 	}
 </style>    
@@ -215,7 +216,7 @@
 		
 		<!-- 新碟上架-->
 		<div class="left_menu">
-			<div class="left_menu_header" ">
+			<div class="left_menu_header" >
 				<ol class="breadcrumb" style="background:none;" >
 					<li><a href="#" style="font-size:15pt;color:black;">新碟上架</a></li>
 					<a href="#" style="margin-left:560px;color:gray;">更多<img src="<%=request.getContextPath()%>/img/front/home/more.png" style="margin-top:-5px;"></img></a>
@@ -301,9 +302,9 @@
 			
 			<!-- 轮播（Carousel）导航 -->
 			<a class="carousel-control left" href="#newdish" 
-			   data-slide="prev"  style="width:30px;height:50px; margin-top:30px;font-size:40px;background:none repeat scroll 0% 0% #F5F5F5">&lsaquo;</a>
+			   data-slide="prev"  style="width:30px;height:50px; margin-top:20px;font-size:40px;background:none repeat scroll 0% 0% #F5F5F5">&lsaquo;</a>
 			<a class="carousel-control right" href="#newdish" 
-			   data-slide="next"  style="width:30px;height:50px; margin-top:30px;font-size:40px;background:none repeat scroll 0% 0% #F5F5F5">&rsaquo;</a>
+			   data-slide="next"  style="width:30px;height:50px; margin-top:20px;font-size:40px;background:none repeat scroll 0% 0% #F5F5F5">&rsaquo;</a>
 		</div>
 		</div>
 		

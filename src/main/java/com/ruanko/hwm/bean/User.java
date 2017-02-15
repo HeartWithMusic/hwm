@@ -27,7 +27,17 @@ public class User {
 
     private String lastloginip;
 
-    public Integer getId() {
+    
+    
+    
+    @Override
+	public String toString() {
+		return "User [id=" + id + ", username=" + username + ", password=" + password + ", img=" + img + ", tel=" + tel
+				+ ", level=" + level + ", grade=" + grade + ", email=" + email + ", age=" + age + ", playcount="
+				+ playcount + ", lastlogintime=" + lastlogintime + ", lastloginip=" + lastloginip + "]";
+	}
+
+	public Integer getId() {
         return id;
     }
 

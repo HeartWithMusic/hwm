@@ -18,6 +18,11 @@
     from tb_singer
     where id = #{id,jdbcType=INTEGER}
   </select>
+  <select id="selectAllSinger" resultMap="BaseResultMap"  >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_singer
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from tb_singer
     where id = #{id,jdbcType=INTEGER}
