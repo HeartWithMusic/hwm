@@ -6,4 +6,6 @@ import com.ruanko.hwm.bean.User;
 
 public interface IUserService {
 	public List<User> findAllUser();
+
+	public void  deleteUserById(int userId);
 }

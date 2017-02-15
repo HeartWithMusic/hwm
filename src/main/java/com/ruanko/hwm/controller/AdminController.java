@@ -77,6 +77,20 @@ public class AdminController {
 		return "showManageUser";
 	}
 	
+	//删除用户
+	@RequestMapping({"/deleteUser/","/deleteUser"})
+	public String toDeleteUser(Model model, HttpServletRequest request) {
+		System.out.println("管理员删除用户");
+		int userId=Integer.parseInt(request.getParameter("newsNo"));
+		System.out.println("页面获取参数："+userId);
+		
+		userService.deleteUserById(userId);
+
+		return toManageUser(model, request);//spring相互调用
+		
+		
+	}
+	
 	
 	@RequestMapping({"/addAdmin/","/addAdmin"})
 	public String toAddAdmin(Model model, HttpServletRequest request) {
