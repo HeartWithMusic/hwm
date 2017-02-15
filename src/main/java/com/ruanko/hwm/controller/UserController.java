@@ -13,7 +13,7 @@ import com.ruanko.hwm.bean.User;
 import com.ruanko.hwm.service.IUserService;
 
 @Controller
-@RequestMapping("/user")
+@RequestMapping("/home")
 public class UserController {
 	
 	@Resource
