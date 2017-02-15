@@ -81,10 +81,37 @@ public class AdminController {
 	@RequestMapping({"/deleteUser/","/deleteUser"})
 	public String toDeleteUser(Model model, HttpServletRequest request) {
 		System.out.println("管理员删除用户");
-		int userId=Integer.parseInt(request.getParameter("newsNo"));
+		int userId=Integer.parseInt(request.getParameter("userId"));
 		System.out.println("页面获取参数："+userId);
 		
 		userService.deleteUserById(userId);
+
+		return toManageUser(model, request);//spring相互调用
+		
+		
+	}
+	
+	//由主键查找用户
+	@RequestMapping({"/findUser/","/findUser"})
+	public String toFindUser(Model model, HttpServletRequest request) {
+		int userId=Integer.parseInt(request.getParameter("userId"));
+
+		System.out.println("由主键"+userId+"查找用户");
+		User userPast=userService.findUser(userId);
+		System.out.println("查找到的用户"+userPast.toString());
+		
+		model.addAttribute("userPast", userPast);
+		return "showUser";
+	}
+	
+	//修改用户
+	@RequestMapping({"/updateUser/","/updateUser"})
+	public String toUpdateUser(Model model, HttpServletRequest request) {
+		System.out.println("管理员修改用户");
+		int userId=Integer.parseInt(request.getParameter("userId"));
+		System.out.println("页面获取参数："+userId);
+		
+		userService.updateUser(userId);
 
 		return toManageUser(model, request);//spring相互调用
 		

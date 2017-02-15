@@ -8,4 +8,8 @@ public interface IUserService {
 	public List<User> findAllUser();
 
 	public void  deleteUserById(int userId);
+
+	public void updateUser(int userId);
+
+	public User findUser(int userId);
 }

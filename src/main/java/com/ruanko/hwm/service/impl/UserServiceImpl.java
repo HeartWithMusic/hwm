@@ -25,4 +25,11 @@ public class UserServiceImpl implements IUserService{
 		userMapper.deleteByPrimaryKey(userId);
 	}
 
+	public void updateUser(int userId) {
+	}
+
+	public User findUser(int userId) {
+		return userMapper.selectByPrimaryKey(userId);
+	}
+
 }

@@ -312,7 +312,7 @@
                       <th> <div class="row">
                           <div class="col-sm-8 m-t-xs m-b-xs">
                             <div class="select filter" data-resize="auto">
-                              <a href="<%=request.getContextPath()%>/admin/updateUser/"><i class="fa fa-home"></i> update</a>
+                              <a href="<%=request.getContextPath()%>/admin/findUser/?userId=${user.id}"><i class="fa fa-edit"></i>修改</a>
                             </div>
                           </div>
                           <div class="col-sm-4 m-t-xs m-b-xs">
@@ -327,7 +327,7 @@
                       <th> <div class="row">
                           <div class="col-sm-8 m-t-xs m-b-xs">
                             <div class="select filter" data-resize="auto">
-                              <a href="<%=request.getContextPath()%>/admin/deleteUser/?newsNo=${user.id}"><i class="fa fa-home"></i> delete</a>
+                              <a href="<%=request.getContextPath()%>/admin/deleteUser/?userId=${user.id}"><i class="fa fa-times"></i>删除</a>
                             </div>
                           </div>
                           <div class="col-sm-4 m-t-xs m-b-xs">
