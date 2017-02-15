@@ -21,6 +21,7 @@ public class AdminController {
 	@RequestMapping({"/logup/"})
 	public String toLogup(Model model, HttpServletRequest request) {
 		model.addAttribute("title", "注册");
+		model.addAttribute(new Admin());
 		return "showAdminLogup";
 	}
 	
@@ -103,10 +104,18 @@ public class AdminController {
 		model.addAttribute(new Admin());
 		return "showAdminLogin";
 	}
+	
 	@RequestMapping({"/doLogup/"}) //注册
 	public String logup(@ModelAttribute("admin")Admin admin, Model model, HttpServletRequest request){
-		System.out.println(admin.getEmail());		
-		return null;
+		System.out.println(admin.getEmail());	
+		Admin ad = adminService.getAdminByName(admin.getAdminname());		
+		String message = "";
+		if(ad == null){
+			admin.setPassword(MD5Util.getMD5Code(admin.getPassword()));
+			adminService.addAdmin(admin);
+			return "showAdminLogin";
+		}
+		return "showAdminLogup";
 	}
 	
 }

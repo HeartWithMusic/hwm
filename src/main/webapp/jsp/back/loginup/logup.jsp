@@ -1,5 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %>  
+<%@ taglib uri="http://www.springframework.org/tags" prefix="s" %> 
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="sf" %>
+<%@ page isELIgnored="false" %> 
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en" class="bg-dark">
 <head>
@@ -15,24 +22,29 @@
   <div class="container aside-xxl"> <a class="navbar-brand block" href="index.html">心随乐动后台管理</a>
     <section class="panel panel-default m-t-lg bg-white">
       <header class="panel-heading text-center"> <strong>注册账号</strong> </header>
-      <form action="index.html" class="panel-body wrapper-lg">
+      <% String action = request.getContextPath() + "/admin/doLogup/";%>
+      <sf:form class="panel-body wrapper-lg" modelAttribute="admin" action="<%=action %>">
         <div class="form-group">
           <label class="control-label">用户名</label>
-          <input type="text" placeholder="请输入用户名" class="form-control input-lg">
+          <sf:input type="text" placeholder="请输入用户名" class="form-control input-lg" path = "adminname"></sf:input>
         </div>
         <div class="form-group">
           <label class="control-label">邮箱</label>
-          <input type="email" placeholder="请输入邮箱" class="form-control input-lg">
+          <sf:input type="email" placeholder="请输入邮箱" class="form-control input-lg" path="email"></sf:input>
+        </div>
+        <div class="form-group">
+          <label class="control-label">电话</label>
+          <sf:input type="text" placeholder="请输入电话号码" class="form-control input-lg" path="tel"></sf:input>
         </div>
         <div class="form-group">
           <label class="control-label">密码</label>
-          <input type="password" id="inputPassword" placeholder="请输入密码" class="form-control input-lg">
+          <sf:input type="password" id="inputPassword" placeholder="请输入密码" class="form-control input-lg" path = "password"></sf:input>
         </div>
         <button type="submit" class="btn btn-primary">注册</button>
         <div class="line line-dashed"></div>
         <p class="text-muted text-center"><small>已经拥有账号?</small></p>
         <a href="<%=request.getContextPath()%>/admin/login/" class="btn btn-default btn-block">登录</a>
-      </form>
+      </sf:form>
     </section>
   </div>
 </section>

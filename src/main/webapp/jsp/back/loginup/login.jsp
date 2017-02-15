@@ -20,14 +20,14 @@
 	    <section class="panel panel-default bg-white m-t-lg">
 	      <header class="panel-heading text-center"> <strong>管理员登录</strong> </header>
 	      <% String action = request.getContextPath() + "/admin/doLogin/";%>
-	     <form class = "panel-body wrapper-lg" method="post" modelAttribute="admin" action="<%=action %>">
+	     <sf:form class = "panel-body wrapper-lg" method="post" modelAttribute="admin" action="<%=action %>">
         <div class="form-group">
 	          <label class="control-label">用户名</label>
-	          <input type="email" class="form-control input-lg" path ="adminname">
+	          <sf:input type="text" class="form-control input-lg" path ="adminname"></sf:input>
 	        </div>
 	        <div class="form-group">
 	          <label class="control-label">密码</label>
-	          <input type="password" path="password" class="form-control input-lg">
+	          <sf:input type="password" path="password" class="form-control input-lg"></sf:input>
 	        </div>
 	        <div class="checkbox">
 	          <label>
@@ -40,7 +40,7 @@
 	        <p class="text-muted text-center"><small>没有账号?</small></p>
 	        <a href="<%=request.getContextPath()%>/admin/logup/" class="btn btn-default btn-block">立即注册</a>
 	  
-	      </form>
+	      </sf:form>
 	      <div>
 	      	<c:out value="${message }"></c:out>
 	      </div>
