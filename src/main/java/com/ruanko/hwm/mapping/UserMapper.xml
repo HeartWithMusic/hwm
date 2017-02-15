@@ -37,6 +37,7 @@
     delete from tb_user
     where id = #{id,jdbcType=INTEGER}
   </delete>
+  
   <insert id="insert" parameterType="com.ruanko.hwm.bean.User" >
     insert into tb_user (id, username, password, 
       img, tel, level, grade, 
