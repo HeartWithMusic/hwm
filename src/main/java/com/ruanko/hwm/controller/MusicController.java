@@ -68,4 +68,10 @@ public class MusicController {
 		//插入数据库
 		musicService.addMusic(mus);
 	}
+	
+	public void manageMusic(Model model, HttpServletRequest request, HttpServletResponse response) {
+		
+	}
+		
+	
 }
