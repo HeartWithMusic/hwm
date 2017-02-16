@@ -1,5 +1,6 @@
 package com.ruanko.hwm.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -15,6 +16,7 @@ import com.ruanko.hwm.bean.Music;
 import com.ruanko.hwm.bean.Singer;
 import com.ruanko.hwm.bean.User;
 import com.ruanko.hwm.service.IAdminService;
+import com.ruanko.hwm.service.IMusicService;
 import com.ruanko.hwm.service.IUserService;
 import com.ruanko.hwm.utl.MD5Util;
 
@@ -27,6 +29,9 @@ public class AdminController {
 	
 	@Resource
 	private IUserService userService;
+	
+	@Resource
+	private IMusicService musicService;
 	
 	@RequestMapping({"/logup/"})
 	public String toLogup(Model model, HttpServletRequest request) {
@@ -51,6 +56,10 @@ public class AdminController {
 	@RequestMapping({"/manageMusic/"})
 	public String toManageMusic(Model model, HttpServletRequest request) {
 		//model.addAttribute("title", "首页");
+		List<Music> musicList = musicService.getAllMusic();
+		//System.out.println(musicList);
+		model.addAttribute("musicList", musicList);
+		model.addAttribute(new Music());
 		return "showManageMusic";
 	}
 	
