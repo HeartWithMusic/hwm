@@ -43,6 +43,12 @@ public class SingerController {
 		sin.setUploadtime(DateTime.getCurrentTime());
 		//上传音乐相关文件
 		//System.out.println(image.getName()+"---"+image.getContentType()+"---"+image.getOriginalFilename());
+		if(!image.getContentType().equals("image/jpeg")) {
+			model.addAttribute("message","图片文件必须是jpg格式");
+			model.addAttribute(new Singer());
+			return "showAddSinger";
+		}
+		
         try {
         	Upload_Download.upload_img1(image, request,singer.getSingername());
         	

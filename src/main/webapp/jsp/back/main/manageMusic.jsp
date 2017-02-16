@@ -17,7 +17,11 @@
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/bootstrap_calendar.css" type="text/css" cache="false" />
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/select2/select2.css" type="text/css" cache="false" />
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/select2/theme.css" type="text/css" cache="false" />
-
+<style>
+	#filestyle-0,#filestyle-1,#filestyle-2 {
+		display:none !important;
+	}
+</style>
 <!--[if lt IE 9]> <script src="js/ie/html5shiv.js" cache="false"></script> <script src="js/ie/respond.min.js" cache="false"></script> <script src="js/ie/excanvas.js" cache="false"></script> <![endif]-->
 </head>
 <body>
@@ -104,15 +108,11 @@
                         <label>歌手</label>
                			<div class="m-b">
                             <select name="select" id="select2-option" tabindex="-1" class="select2-offscreen" style="width:400px;">
-       														<option value="CA">beyond</option>
-                                                            <option value="NV">陈奕迅</option>
-                                                            <option value="OR">周杰伦</option>
-                                                            <option value="WA">张靓颖</option>                  
-                                                            <option value="AK">李宇春</option>
-                                                            <option value="HI">费玉清</option>
-                                                        
-                                                    </select>
-                                                </div>
+       							<c:forEach items="${singerList}" var="singer">
+                            		<option value="${singer.id }">${singer.singername }</option>
+                            	</c:forEach>	
+                            </select>
+                        </div>
                       </div>
                       
                       <div class="form-group">
@@ -132,8 +132,9 @@
                     </section>
                     </div>
 		            <div class="modal-footer">
+		            	<span style="color:red"><c:out value="${message}"></c:out></span>
 		                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-		                <button onclick="updateMuisc()" type="button" class="btn btn-primary">提交更改</button>
+		                <button  type="submit" class="btn btn-primary">提交更改</button>
 		            </div>
             </sf:form>
         </div><!-- /.modal-content -->

@@ -100,7 +100,7 @@ public class Upload_Download {
 		String root = request.getSession().getServletContext().getRealPath("/WEB-INF/singer/");
 		//判断文件夹是否存在
 		existFolder(root);
-		
+		deleteFile(root + "\\" + name + ".jpg" );
 		if (!file.isEmpty()){
             Streams.copy(file.getInputStream(),new FileOutputStream(root + "\\" + name + ".jpg"),true);
         }
@@ -117,7 +117,7 @@ public class Upload_Download {
 		String root = request.getSession().getServletContext().getRealPath("/WEB-INF/music/img");
 		//判断文件夹是否存在
 		existFolder(root);
-		
+		deleteFile(root + "\\" + name + ".jpg" );
 		if (!file.isEmpty()){
             Streams.copy(file.getInputStream(),new FileOutputStream(root + "\\" + name + ".jpg"),true);
         }
@@ -133,7 +133,7 @@ public class Upload_Download {
 		String root = request.getSession().getServletContext().getRealPath("/WEB-INF/music/lrc");
 		//判断文件夹是否存在
 		existFolder(root);
-		
+		deleteFile(root + "\\" + name + ".lrc" );
 		if (!file.isEmpty()){
             Streams.copy(file.getInputStream(),new FileOutputStream(root + "\\" + name + ".lrc"),true);
         }
@@ -149,7 +149,7 @@ public class Upload_Download {
 		String root = request.getSession().getServletContext().getRealPath("/WEB-INF/music/song");
 		//判断文件夹是否存在
 		existFolder(root);
-		
+		deleteFile(root + "\\" + name + ".mp3" );
 		if (!file.isEmpty()){
             Streams.copy(file.getInputStream(),new FileOutputStream(root + "\\" + name + ".mp3"),true);
         }

@@ -183,7 +183,7 @@
                       </div>
                     </div>
                     <footer class="panel-footer text-right bg-light lter">
-                      <c:out value="${message }"></c:out>
+                      <span style="color:red;"><c:out value="${message }" ></c:out></span>
                       <button type="submit" class="btn btn-success btn-s-xs">上传</button>
                     </footer>
                   </section>

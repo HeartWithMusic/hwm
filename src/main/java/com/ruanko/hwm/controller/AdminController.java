@@ -17,6 +17,7 @@ import com.ruanko.hwm.bean.Singer;
 import com.ruanko.hwm.bean.User;
 import com.ruanko.hwm.service.IAdminService;
 import com.ruanko.hwm.service.IMusicService;
+import com.ruanko.hwm.service.ISingerService;
 import com.ruanko.hwm.service.IUserService;
 import com.ruanko.hwm.utl.MD5Util;
 
@@ -32,6 +33,9 @@ public class AdminController {
 	
 	@Resource
 	private IMusicService musicService;
+	
+	@Resource
+	private ISingerService singerService;
 	
 	@RequestMapping({"/logup/"})
 	public String toLogup(Model model, HttpServletRequest request) {
@@ -49,6 +53,10 @@ public class AdminController {
 	@RequestMapping({"/addMusic/","/addMusic"})
 	public String toAddMusic(Model model, HttpServletRequest request) {
 		//model.addAttribute("title", "首页");
+		//获取所有的歌手并返回前台
+		List<Singer> singerList = singerService.getAllSinger();
+		model.addAttribute("singerList", singerList);
+		
 		model.addAttribute(new Music());
 		return "showAddMusic";
 	}
