@@ -33,7 +33,7 @@ public class SingerController {
 	public ISingerService singerService;	
 	
 	@RequestMapping({"/doAddSinger/"})
-	public void addMusic(@ModelAttribute("singer")Singer singer, @RequestParam("imageInfo") MultipartFile image, Model model, HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+	public String addMusic(@ModelAttribute("singer")Singer singer, @RequestParam("imageInfo") MultipartFile image, Model model, HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		//保存音乐到数据库中
 		Singer sin = new Singer();
 		sin.setSingername(singer.getSingername());
@@ -43,6 +43,12 @@ public class SingerController {
 		sin.setUploadtime(DateTime.getCurrentTime());
 		//上传音乐相关文件
 		//System.out.println(image.getName()+"---"+image.getContentType()+"---"+image.getOriginalFilename());
+		if(!image.getContentType().equals("image/jpeg")) {
+			model.addAttribute("message","图片文件必须是jpg格式");
+			model.addAttribute(new Singer());
+			return "showAddSinger";
+		}
+		
         try {
         	Upload_Download.upload_img1(image, request,singer.getSingername());
         	
@@ -63,5 +69,9 @@ public class SingerController {
 		//System.out.println(request.getParameter("select"));
 		//插入数据库
 		singerService.addSinger(sin);
+		
+		model.addAttribute(new Singer());
+		model.addAttribute("message","添加歌曲成功");
+		return "showAddSinger";
 	}
 }

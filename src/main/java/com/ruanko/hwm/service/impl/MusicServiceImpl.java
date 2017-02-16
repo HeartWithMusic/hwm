@@ -15,7 +15,7 @@ public class MusicServiceImpl implements IMusicService {
 	@Resource
 	private MusicMapper musicMapper;
 	
-	public Music getAdminById(int musicId) {
+	public Music getMusicById(int musicId) {
 		return musicMapper.selectByPrimaryKey(musicId);
 	}
 
@@ -25,6 +25,14 @@ public class MusicServiceImpl implements IMusicService {
 
 	public List<Music> getAllMusic() {
 		return musicMapper.selectAllMusic();
+	}
+
+	public void deleteMusic(Integer id) {
+		musicMapper.deleteByPrimaryKey(id);
+	}
+
+	public void updateMusic(Music music) {
+		musicMapper.updateByPrimaryKey(music);
 	}
 
 }
