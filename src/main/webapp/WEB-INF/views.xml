@@ -66,7 +66,8 @@
 	<definition name="showSinger" extends="singersort">
 		<put-attribute name="content" value="/jsp/front/common/singer_right.jsp" />
 	</definition>
-	
+	<!-- 用户注册界面 -->
+	<definition name="showLogup" template="/jsp/front/common/logup.jsp"></definition>
 	
 	<!-- 后台登录界面 -->	
 	<definition name="showAdminLogin" template="/jsp/back/loginup/login.jsp"></definition>

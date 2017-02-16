@@ -29,7 +29,8 @@
                 if (getScrollTop() < 1) clearInterval(goTop);  
             }  
         }  
-    }  
+    } 
+   
 </script>  
 	<!--第一栏 导航栏 + 搜索框 + 登陆按钮 -->
 	<div id="tab-header" >  										
@@ -58,7 +59,7 @@
 				
 				<!-- 登陆 -->
 				<div class="dropdown pull-right" >
-					  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown">
+					  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="modal" data-target="#myModal">
 					  	<span style="margin:0 auto;color:white;">登陆</span>
 					    <span class="caret"></span>
 					  </button>
@@ -116,8 +117,62 @@
 	          <span class="glyphicon glyphicon-chevron-up"></span><br/> TOP
 	    </button>
 	</div>
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog" id = "dialog" style = "width:330px;"role="document"> <!--修改窗口位置-->
+		<div class="modal-content" style = "width:330px;height:350px;">
+			<div class="modal-header" id ="aaa" style = "padding:0px !important; background-color:#2D2D2D;border-radius:5px 5px 0px 0px;height:40px;">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true" style = "color:white;padding-right:20px;padding-top:10px;">
+					&times;
+				</button>
+				<h4 class="modal-title" id="myModalLabel" style = "color:white;font-size:150%;padding-left:15px;padding-top:5px;">
+					登录
+				</h4>
+			</div>
+			<div class="modal-body" style = "height:300px;width:330px;"> 
+				
+					<div style = "width:300px;height:230px;">
+						<div style = "padding-top:20px;margin-left:45px;height:140px;width:200px">
+						<sf:form>
+							<div>
+								<sf:input type="text" class="form-control" id="name" placeholder="请输入账号"></sf:input>
+							</div>
+							<div style = "margin-top:20px;">
+								<sf:input type="password" class="form-control" id="password" placeholder="请输入密码"></sf:input>
+							</div>
+							<div style = "height:15px;width:200px;margin-top:10px;">
+								<label style = "height:15px;width:200px;">
+									<input type="checkbox" style = "float:left;"> 
+									 <p style = "height:12px;color:gray;font-size:90%;font-weight:lighter;float:left; padding-top:2px;padding-left:10px;">自动登录</p>
+									 <a href = "#" style = "color:gray;font-size:90%;font-weight:lighter;float:left;padding-top:2px;padding-left:60px;">
+										忘记密码？
+									 </a>
+								</label>
+							</div>
+						</div>
+						<div style = "padding-top:30px;margin-left:45px;width:200px">
+							<button type="button" class="btn btn-primary" style = "width:200px;">登陆</button>
+						</div>
+						</sf:form>
+						<div style = "padding-top:10px;margin-left:45px;width:200px">
+							<button type="button" class="btn btn-default" data-dismiss="modal" style = "width:200px;" onclick = "toLogup()">注册</button>
+						</div>
+					</div>
+					
+					
+					
+	
+			
+				
+			</div>
+			
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal -->
+</div>
 	<script>
-		goTopEx();
+		goTopEx();		
+		function toLogup() {
+			window.location.href="http://localhost:8080/hwm/home/logup";
+		}
 	</script>
 	  
 	

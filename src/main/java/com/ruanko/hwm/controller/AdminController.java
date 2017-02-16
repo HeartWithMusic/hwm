@@ -168,7 +168,7 @@ public class AdminController {
 	
 	@RequestMapping({"/doAddAdmin/"}) //添加管理员
 	public String logup(@ModelAttribute("admin")Admin admin, Model model, HttpServletRequest request){
-		System.out.println(admin.getAdminname());	
+		//System.out.println(admin.getAdminname());	
 		//model.addAttribute(new Admin());
 		Admin ad = adminService.getAdminByName(admin.getAdminname());		
 		String message = "";

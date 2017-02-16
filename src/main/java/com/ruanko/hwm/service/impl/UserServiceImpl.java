@@ -32,4 +32,14 @@ public class UserServiceImpl implements IUserService{
 		return userMapper.selectByPrimaryKey(userId);
 	}
 
+	public void addUser(User user) {
+		// TODO Auto-generated method stub
+		userMapper.insert(user);
+	}
+
+	public User getUserByName(String username) {
+		// TODO Auto-generated method stub
+		return userMapper.SelectByUsername(username);
+	}
+
 }

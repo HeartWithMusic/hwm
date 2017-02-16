@@ -23,10 +23,10 @@
     <section class="panel panel-default m-t-lg bg-white">
       <header class="panel-heading text-center"> <strong>注册账号</strong> </header>
       <% String action = request.getContextPath() + "/admin/doLogup/";%>
-      <sf:form class="panel-body wrapper-lg" modelAttribute="admin" action="<%=action %>">
+      <sf:form class="panel-body wrapper-lg" modelAttribute="user" action="<%=action %>">
         <div class="form-group">
           <label class="control-label">用户名</label>
-          <sf:input type="text" placeholder="请输入用户名" class="form-control input-lg" path = "adminname"></sf:input>
+          <sf:input type="text" placeholder="请输入用户名" class="form-control input-lg" path = "username"></sf:input>
         </div>
         <div class="form-group">
           <label class="control-label">邮箱</label>
