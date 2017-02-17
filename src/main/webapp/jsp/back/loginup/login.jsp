@@ -11,12 +11,12 @@
 <html class="bg-dark js no-touch no-android no-chrome firefox no-iemobile no-ie no-ie10 no-ie11 no-ios">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>心随乐动</title>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/app.v2.css" type="text/css" />
 </head>
 <body>
 	<section id="content" class="m-t-lg wrapper-md animated fadeInUp">
-	  <div class="container aside-xxl"> <a class="navbar-brand block" href="index.html">心随乐动后台管理</a>
+	  <div class="container aside-xxl"> <a class="navbar-brand block" href="#">心随乐动后台管理</a>
 	    <section class="panel panel-default bg-white m-t-lg">
 	      <header class="panel-heading text-center"> <strong>管理员登录</strong> </header>
 	      <% String action = request.getContextPath() + "/admin/doLogin/";%>

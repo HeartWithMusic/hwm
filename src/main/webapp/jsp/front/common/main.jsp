@@ -10,7 +10,9 @@
 <body>
 	<iframe scrolling="auto" name="aa" frameborder="0" src="<%=request.getContextPath()%>/home/discover/1" style="position: absolute;left: 0;top: 0;width: 100%;height: 100%;border: 0;"></iframe>
 	<jsp:include page="player.jsp"></jsp:include>
+	
 	<script type="text/javascript">
+	
 		function ifrurl(url){
 			var stateObject = {};
 			var title = "Wow Title";

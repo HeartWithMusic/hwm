@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ruanko.hwm.bean.User;
 import com.ruanko.hwm.service.IUserService;
@@ -34,12 +35,14 @@ public class UserController {
 	@RequestMapping({"/discover/"})
 	public String toHome(Model model, HttpServletRequest request) {
 		model.addAttribute("title", "心随乐动");
+		model.addAttribute(new User());
 		return "showHome";
 	}
 	
 	@RequestMapping({"/discover/1"})
 	public String toHome1(Model model, HttpServletRequest request) {
 		model.addAttribute("title", "心随乐动");
+		model.addAttribute(new User());
 		return "showHome1";
 	}
 	@RequestMapping({"/discover/rankList"})
@@ -110,5 +113,31 @@ public class UserController {
 		}
 		model.addAttribute(new User());
 		return "showLogup";
+	}
+	@RequestMapping({"/doLogin"})
+	public String doLogin(@ModelAttribute("user") User user, Model model,HttpServletRequest request){
+		//System.out.println(user.getUsername());
+		String message = "";
+		User user1 = userService.getUserByName(user.getUsername());		
+		if(user1 == null){
+			message = "用户名不存在";
+		}
+		else if(user1.getPassword().equalsIgnoreCase(MD5Util.getMD5Code(user.getPassword()))){
+			request.getSession().setAttribute("user", user1);
+			
+		}
+		else{
+			message = "密码错误";
+			
+		}
+		System.out.println(message);
+		model.addAttribute(new User());
+		request.getSession().setAttribute("message",message);
+		
+		return "showHome";
+	}
+	@RequestMapping({"/clearSession/"})
+	public @ResponseBody void clearSession(HttpServletRequest request) {
+		request.getSession().setAttribute("message", "");
 	}
 }

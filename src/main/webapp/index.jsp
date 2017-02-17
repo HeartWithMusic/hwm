@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ page isELIgnored="false" %> 
 <style>
 	.left_menu {
 		float:left;
@@ -524,8 +525,8 @@
 				<a href="#">
 					<img src="<%=request.getContextPath()%>/img/front/home/personImg.png" style="margin-left:20px;margin-top:20px;width:75px;height:90px;">
 				</a>
-				<a href="#" style="float:right;margin-right:60px;padding-top:18px;"><strong>Zoro_zxq<strong></a>
-				<a href="#" style="float:right;margin-right:95px;margin-top:-70px;color:#A9A9A9"><i>LV.3</i></a>
+				<a href="#" style="float:right;margin-right:100px;padding-top:18px;"><strong>${sessionScope.user.username}<strong></a>
+				<a href="#" style="float:right;margin-right:95px;margin-top:-70px;color:#A9A9A9"><i>LV.${sessionScope.user.level}</i></a>
 				 <button type="button" class="btn btn-primary btn-sm" style="width:100px;float:right;margin-right:25px;margin-top:-35px;">签到</button>
 				
 			</div>

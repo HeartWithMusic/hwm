@@ -1,5 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %>  
+<%@ taglib uri="http://www.springframework.org/tags" prefix="s" %> 
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="sf" %>
+<%@ page isELIgnored="false" %> 
 
 <link href="<%=request.getContextPath()%>/css/bootstrap.min.css" rel="stylesheet">
 <link href="<%=request.getContextPath()%>/css/front/common/body.css" rel="stylesheet">
@@ -30,7 +36,7 @@
             }  
         }  
     } 
-   
+    
 </script>  
 	<!--第一栏 导航栏 + 搜索框 + 登陆按钮 -->
 	<div id="tab-header" >  										
@@ -83,6 +89,7 @@
 			  </div>
 		</nav>
 	</div>
+	
 	<div class="tab-content" style="margin-top:70px;">
 		<!--我的音乐对应转换第二导航栏 -->
 		<div class="tab-pane active" id="home" style="background-image:url('<%=request.getContextPath()%>/img/front/home/redBg.png');background-repeat:repeat-x;">
@@ -131,13 +138,15 @@
 			<div class="modal-body" style = "height:300px;width:330px;"> 
 				
 					<div style = "width:300px;height:230px;">
+					<% String action = request.getContextPath() + "/home/doLogin";%>
+						<sf:form method="post" modelAttribute="user" action="<%=action %>">
 						<div style = "padding-top:20px;margin-left:45px;height:140px;width:200px">
-						<sf:form>
+						
 							<div>
-								<sf:input type="text" class="form-control" id="name" placeholder="请输入账号"></sf:input>
+								<sf:input type="text" class="form-control" id="name" path = "username" placeholder="请输入账号"></sf:input>
 							</div>
 							<div style = "margin-top:20px;">
-								<sf:input type="password" class="form-control" id="password" placeholder="请输入密码"></sf:input>
+								<sf:input type="password" class="form-control" id="password" path = "password" placeholder="请输入密码"></sf:input>
 							</div>
 							<div style = "height:15px;width:200px;margin-top:10px;">
 								<label style = "height:15px;width:200px;">
@@ -148,15 +157,21 @@
 									 </a>
 								</label>
 							</div>
+							
 						</div>
 						<div style = "padding-top:30px;margin-left:45px;width:200px">
-							<button type="button" class="btn btn-primary" style = "width:200px;">登陆</button>
+							<button type="submit" class="btn btn-primary" style = "width:200px;">登陆</button>
 						</div>
 						</sf:form>
+						
+						
 						<div style = "padding-top:10px;margin-left:45px;width:200px">
 							<button type="button" class="btn btn-default" data-dismiss="modal" style = "width:200px;" onclick = "toLogup()">注册</button>
 						</div>
+						<div style = "padding-top:10px;margin-left:45px;width:200px;color:red;">
+						<c:out value="${message}"></c:out></div>
 					</div>
+						<input type="hidden" value="<%=request.getContextPath()%>" id="contextPath"/>
 					
 					
 					
@@ -168,11 +183,34 @@
 		</div><!-- /.modal-content -->
 	</div><!-- /.modal -->
 </div>
-	<script>
+	<script runat="server">
 		goTopEx();		
 		function toLogup() {
 			window.location.href="http://localhost:8080/hwm/home/logup";
 		}
+
+		if("${message}" != "") {
+			$('#myModal').modal('show');
+			clearSession();
+		}
+		function clearSession() {
+			$.ajax({  
+		        type : "get",  
+		        url : $('#contextPath').val() + "/home/clearSession/",  
+		        dataType:"json",
+		        cache : false,  
+		        data : {  
+		            
+		        },  
+		        async : false,  
+		        error : function() {  
+		        },  
+		        success : function(data) { 
+		        	
+		        }  
+		    }); 
+		}
+		
 	</script>
 	  
 	

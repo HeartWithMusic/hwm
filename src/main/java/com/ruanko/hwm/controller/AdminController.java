@@ -159,7 +159,7 @@ public class AdminController {
 	}
 	@RequestMapping({"/doLogin/"}) //登录
 	public String login(@ModelAttribute("admin")Admin admin, Model model, HttpServletRequest request) throws Exception{
-		System.out.println(admin.getAdminname());
+		//System.out.println(admin.getAdminname());
 		Admin ad = adminService.getAdminByName(admin.getAdminname());		
 		String message = "";
 		if(ad == null){
