@@ -1,5 +1,7 @@
 package com.ruanko.hwm.dao;
 
+import java.util.List;
+
 import com.ruanko.hwm.bean.Role;
 
 public interface RoleMapper {
@@ -14,4 +16,6 @@ public interface RoleMapper {
     int updateByPrimaryKeySelective(Role record);
 
     int updateByPrimaryKey(Role record);
+    
+    List<Role> selectAllRole();
 }

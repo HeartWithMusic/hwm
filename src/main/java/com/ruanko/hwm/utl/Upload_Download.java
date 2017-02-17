@@ -107,6 +107,23 @@ public class Upload_Download {
 	}
 	
 	/**
+	 * 上传用户头像
+	 * @param file
+	 * @param request
+	 * @throws FileNotFoundException
+	 * @throws IOException
+	 */
+	public static void upload_img2(MultipartFile file, HttpServletRequest request, String name) throws FileNotFoundException, IOException {
+		String root = request.getSession().getServletContext().getRealPath("/WEB-INF/user/");
+		//判断文件夹是否存在
+		existFolder(root);
+		deleteFile(root + "\\" + name + ".jpg" );
+		if (!file.isEmpty()){
+            Streams.copy(file.getInputStream(),new FileOutputStream(root + "\\" + name + ".jpg"),true);
+        }
+	}
+	
+	/**
 	 * 上传音乐封面
 	 * @param file
 	 * @param request

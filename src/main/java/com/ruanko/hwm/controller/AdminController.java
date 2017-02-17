@@ -1,25 +1,37 @@
 package com.ruanko.hwm.controller;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.ruanko.hwm.bean.Admin;
+import com.ruanko.hwm.bean.AdminRoleRela;
 import com.ruanko.hwm.bean.Music;
+import com.ruanko.hwm.bean.Role;
 import com.ruanko.hwm.bean.Singer;
+import com.ruanko.hwm.bean.SingerTypeRela;
 import com.ruanko.hwm.bean.User;
+import com.ruanko.hwm.service.IAdminRoleService;
 import com.ruanko.hwm.service.IAdminService;
 import com.ruanko.hwm.service.IMusicService;
+import com.ruanko.hwm.service.IRoleService;
 import com.ruanko.hwm.service.ISingerService;
 import com.ruanko.hwm.service.IUserService;
+import com.ruanko.hwm.utl.DateTime;
 import com.ruanko.hwm.utl.MD5Util;
+import com.ruanko.hwm.utl.Upload_Download;
 
 @Controller
 @RequestMapping("/admin")
@@ -36,6 +48,12 @@ public class AdminController {
 	
 	@Resource
 	private ISingerService singerService;
+	
+	@Resource
+	private IRoleService roleService;
+	
+	@Resource
+	private IAdminRoleService adminRoleService;
 	
 	//每页项数
 	private Integer pageSize = 5;
@@ -139,70 +157,292 @@ public class AdminController {
 		return "showManageSinger";
 	}
 	
-	//获取所有用户
 	@RequestMapping({"/manageUser/","/manageUser"})
 	public String toManageUser(Model model, HttpServletRequest request) {
-		System.out.println("admin中查询所有用户");
-		
-		List<User> userList=userService.findAllUser();
-		System.out.println(userList.toString());
+		//model.addAttribute("title", "首页");
+		List<User> userList = userService.findAllUser();
+		//System.out.println(musicList);
 		model.addAttribute("userList", userList);
-		
+		model.addAttribute("pageSize", pageSize);
+  		model.addAttribute("counts", userList.size());
+		model.addAttribute(new User());
 		return "showManageUser";
 	}
 	
-	//删除用户
-	@RequestMapping({"/deleteUser/","/deleteUser"})
-	public String toDeleteUser(Model model, HttpServletRequest request) {
-		System.out.println("管理员删除用户");
-		int userId=Integer.parseInt(request.getParameter("userId"));
-		System.out.println("页面获取参数："+userId);
-		
-		userService.deleteUserById(userId);
-
-		return toManageUser(model, request);//spring相互调用
-		
-		
+	@RequestMapping({"/searchUser/"})
+	public String toSearchUser(Model model, HttpServletRequest request) {
+		String username = request.getParameter("username");
+		//System.out.println(musicname);
+		//model.addAttribute("title", "首页");
+		List<User> userList = userService.findAllUser();
+		List<User> result = new ArrayList<User>();
+		//获取搜索项
+		for(User s : userList) {
+			if(s.getUsername().contains(username)) {
+				result.add(s);
+			}
+		}
+		//System.out.println(musicList);
+		model.addAttribute("userList", result);
+		model.addAttribute("pageSize", pageSize);
+  		model.addAttribute("counts", result.size());
+		model.addAttribute(new User());
+		model.addAttribute("username", username);
+		return "showManageUser";
 	}
 	
-	//由主键查找用户
-	@RequestMapping({"/findUser/","/findUser"})
-	public String toFindUser(Model model, HttpServletRequest request) {
-		int userId=Integer.parseInt(request.getParameter("userId"));
-
-		System.out.println("由主键"+userId+"查找用户");
-		User userPast=userService.findUser(userId);
-		System.out.println("查找到的用户"+userPast.toString());
-		
-		model.addAttribute("userPast", userPast);
-		return "showUser";
+	@RequestMapping({"/searchAdmin/"})
+	public String toSearchAdmin(Model model, HttpServletRequest request) {
+		String adminname = request.getParameter("adminname");
+		//System.out.println(musicname);
+		//model.addAttribute("title", "首页");
+		List<Admin> adminList = adminService.getAllAdmin();
+		List<Admin> result = new ArrayList<Admin>();
+		//获取搜索项
+		for(Admin a : adminList) {
+			if(a.getAdminname().contains(adminname)) {
+				result.add(a);
+			}
+		}
+		//System.out.println(musicList);
+		model.addAttribute("adminList", result);
+		model.addAttribute("pageSize", pageSize);
+  		model.addAttribute("counts", result.size());
+		model.addAttribute(new Admin());
+		model.addAttribute("adminname", adminname);
+		return "showManageAdmin";
 	}
-	
-	//修改用户
-	@RequestMapping({"/updateUser/","/updateUser"})
-	public String toUpdateUser(Model model, HttpServletRequest request) {
-		System.out.println("管理员修改用户");
-		int userId=Integer.parseInt(request.getParameter("userId"));
-		System.out.println("页面获取参数："+userId);
-		
-		userService.updateUser(userId);
-
-		return toManageUser(model, request);//spring相互调用
-		
-		
-	}
-	
 	
 	@RequestMapping({"/addAdmin/","/addAdmin"})
 	public String toAddAdmin(Model model, HttpServletRequest request) {
 		//model.addAttribute("title", "首页");
 		model.addAttribute(new Admin());
+		List<Role> roleList = roleService.getAllRole();
+		model.addAttribute("roleList", roleList);
 		return "showAddAdmin";
+	}
+	
+	@RequestMapping({"/doAddAdmin/"}) //添加管理员
+	public String logup(@ModelAttribute("admin")Admin admin, Model model, HttpServletRequest request){
+		//System.out.println(admin.getAdminname());	
+		//model.addAttribute(new Admin());
+		Admin ad = adminService.getAdminByName(admin.getAdminname());		
+		String message = "";
+		if(ad == null){
+			admin.setPassword(MD5Util.getMD5Code(admin.getPassword()));
+			adminService.addAdmin(admin);
+			
+			// 查询管理员
+			int adminId = 0;
+			List<Admin> adminList1 = adminService.getAllAdmin();
+			for (Admin a : adminList1) {
+				if (a.getAdminname().equals(a.getAdminname())) {
+					adminId = a.getId();
+				}
+			}
+			//保存权限
+			Integer roleId = Integer.parseInt(request.getParameter("select"));
+			AdminRoleRela arr = new AdminRoleRela();
+			arr.setAdminid(adminId);
+			arr.setRoleid(roleId);
+			adminRoleService.addAdminRole(arr);;
+			
+			
+			message ="添加成功！";
+			model.addAttribute("message",message);
+				
+		}
+		else{
+			message ="该用户名已存在";
+			model.addAttribute("message",message);			
+		}
+		model.addAttribute(new Admin());	
+		List<Role> roleList = roleService.getAllRole();
+		model.addAttribute("roleList", roleList);
+		return "showAddAdmin";
+	}
+	
+	/**
+	 * 删除管理员
+	 * 
+	 * @param model
+	 * @param request
+	 * @param response
+	 */
+	@RequestMapping({ "/deleteAdmin" })
+	public String deleteMusic(Model model, HttpServletRequest request, HttpServletResponse response) {
+		int id = Integer.parseInt(request.getParameter("id"));
+		System.out.println(id);
+		Admin admin = adminService.getAdminById(id);
+		adminService.deleteAdmin(admin);
+		
+		List<Admin> adminList = adminService.getAllAdmin();
+		// System.out.println(musicList);
+		model.addAttribute("adminList", adminList);
+		model.addAttribute("pageSize", pageSize);
+  		model.addAttribute("counts", adminList.size());
+		model.addAttribute(new Admin());
+		return "showManageAdmin";
+	}
+
+	/**
+	 * 修改管理员获取管理员
+	 * 
+	 * @param model
+	 * @param request
+	 * @param response
+	 */
+	@RequestMapping({ "/getAdmin" })
+	public String getSinger(Model model, HttpServletRequest request, HttpServletResponse response) {
+		int id = Integer.parseInt(request.getParameter("id"));
+		Admin admin = adminService.getAdminById(id);
+
+//		// 获取所有的歌手并返回前台
+//		List<Singer> singerList = singerService.getAllSinger();
+//		model.addAttribute("singerList", singerList);
+
+		List<Admin> adminList = adminService.getAllAdmin();
+		// System.out.println(musicList);
+		model.addAttribute("pageSize", pageSize);
+  		model.addAttribute("counts", adminList.size());
+		model.addAttribute("adminList", adminList);
+		List<Role> roleList = roleService.getAllRole();
+		model.addAttribute("roleList", roleList);
+		model.addAttribute("admin", admin);
+		return "showManageAdmin";
+	}
+
+	/**
+	 * 更新歌手
+	 * 
+	 * @param model
+	 * @param request
+	 * @param response
+	 */
+	@RequestMapping({ "/updateAdmin" })
+	public String updateMusic(@ModelAttribute("admin") Admin admin, Model model,
+			HttpServletRequest request, HttpServletResponse response) {
+		int id = Integer.parseInt(request.getParameter("id"));
+		Admin ad = adminService.getAdminById(id);
+		
+		ad.setAdminname(admin.getAdminname());
+		ad.setEmail(admin.getEmail());
+		ad.setTel(admin.getTel());
+		
+		//System.out.println(image.getContentType());
+		//String s[] = lrc.getOriginalFilename().split("\\.");
+		// System.out.println(s.length);
+		
+
+		// 播放时长
+//		String time = Upload_Download
+//				.getMusicLength(new File(request.getSession().getServletContext().getRealPath("/WEB-INF/music/song")
+//						+ "/" + music.getMusicname() + ".mp3"));
+//		mus.setMusictime(time);
+
+		adminService.updateAdmin(ad);;
+
+		// 更新至歌曲类别表中
+		String select = request.getParameter("select");
+		// System.out.println(musicId);
+		// for(String s1 : checkbox) {
+		// System.out.println(s1);
+		// }
+		
+	    AdminRoleRela arr = adminRoleService.getAdminRole_adminId(ad.getId());
+	    arr.setRoleid(Integer.parseInt(select));
+	    
+	    adminRoleService.updateAdminRole(arr);
+
+		// 更新至歌曲歌手关联表
+//		int singerId = Integer.parseInt(request.getParameter("select"));
+//		MusicSingerRela msr = new MusicSingerRela();
+//		msr.setMusicid(id);
+//		msr.setSingerid(singerId);
+//		musicSingerService.updateMS(msr);
+
+		List<Admin> adminList = adminService.getAllAdmin();
+		// System.out.println(musicList);
+		model.addAttribute("adminList", adminList);
+		model.addAttribute("message", "修改成功");
+		model.addAttribute(admin);
+		return "showManageAdmin";
+	}
+
+	
+
+	/**
+	 * ajax
+	 * 
+	 * @param pageIndex
+	 * @param pageSize
+	 * @param totalPage
+	 * @return
+	 */
+	@RequestMapping("/ajax_operation")
+	public @ResponseBody List<Object> findSingerAjax1(String pageIndex, String pageSize, String totalPage, String adminName) {
+		//System.out.println(musicName);
+		return ajax_common1(pageIndex, pageSize, totalPage, adminName);
+		
+	}
+	
+	/**
+	 * 返回每页的数据
+	 * @param pageIndex
+	 * @param pageSize
+	 * @param totalPage
+	 * @return
+	 */
+	public List<Object> ajax_common1(String pageIndex, String pageSize, String totalPage, String adminname) {
+		List<Admin> resultList = new ArrayList<Admin>();
+		List<Role> roleList = new ArrayList<Role>();
+		//判断是否为搜索
+		if(adminname == "") {
+			resultList = adminService.getAllAdmin();
+			
+		}else {
+			List<Admin> al = adminService.getAllAdmin();
+			List<Role> rl = roleService.getAllRole();
+			for(Admin a : al) {
+				if(a.getAdminname().contains(adminname)) {
+					resultList.add(a);
+				}
+			}
+		}
+		//获取对应的歌手
+		for(Admin a : resultList) {
+			//System.out.println(m.getId());
+			Role role = roleService.getRoleById(adminRoleService.getRoleId(a.getId()));
+			roleList.add(role);
+		}
+		
+		Integer pageIndex1 = Integer.parseInt(pageIndex);
+		Integer pageSize1 = Integer.parseInt(pageSize);
+		Integer totalPage1 = Integer.parseInt(totalPage);
+		List<Admin> resultList1 = new ArrayList<Admin>();
+		List<Role> resultList2 = new ArrayList<Role>();
+		List<Object> resultList3 = new ArrayList<Object>();
+		if (pageIndex1 <= totalPage1 / pageSize1) {
+			resultList1 = resultList.subList((pageIndex1 - 1) * pageSize1, pageIndex1 * pageSize1);
+			resultList2 = roleList.subList((pageIndex1 - 1) * pageSize1, pageIndex1 * pageSize1);
+		} else {
+			resultList1 = resultList.subList((pageIndex1 - 1) * pageSize1, totalPage1);
+			resultList2 = roleList.subList((pageIndex1 - 1) * pageSize1, totalPage1);
+		}
+		resultList3.add(resultList1);
+		resultList3.add(resultList2);
+		return resultList3;
 	}
 	
 	@RequestMapping({"/manageAdmin/","/manageAdmin"})
 	public String toManageAdmin(Model model, HttpServletRequest request) {
 		//model.addAttribute("title", "首页");
+		List<Admin> adminList = adminService.getAllAdmin();
+		// System.out.println(musicList);
+		model.addAttribute("pageSize", pageSize);
+  		model.addAttribute("counts", adminList.size());
+		model.addAttribute("adminList", adminList);
+		model.addAttribute(new Admin());
 		return "showManageAdmin";
 	}
 	
@@ -238,25 +478,6 @@ public class AdminController {
 		return "showAdminLogin";
 	}
 	
-	@RequestMapping({"/doAddAdmin/"}) //添加管理员
-	public String logup(@ModelAttribute("admin")Admin admin, Model model, HttpServletRequest request){
-		//System.out.println(admin.getAdminname());	
-		//model.addAttribute(new Admin());
-		Admin ad = adminService.getAdminByName(admin.getAdminname());		
-		String message = "";
-		if(ad == null){
-			admin.setPassword(MD5Util.getMD5Code(admin.getPassword()));
-			adminService.addAdmin(admin);
-			message ="添加成功！";
-			model.addAttribute("message",message);
-				
-		}
-		else{
-			message ="该用户名已存在";
-			model.addAttribute("message",message);			
-		}
-		model.addAttribute(new Admin());	
-		return "showAddAdmin";
-	}
+	
 	
 }

@@ -1,5 +1,7 @@
 package com.ruanko.hwm.dao;
 
+import java.util.List;
+
 import com.ruanko.hwm.bean.Admin;
 
 public interface AdminMapper {
@@ -16,4 +18,6 @@ public interface AdminMapper {
     int updateByPrimaryKeySelective(Admin record);
 
     int updateByPrimaryKey(Admin record);
+    
+    List<Admin> selectAllAdmin();
 }

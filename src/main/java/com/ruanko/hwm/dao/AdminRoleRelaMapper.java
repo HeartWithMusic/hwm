@@ -14,4 +14,8 @@ public interface AdminRoleRelaMapper {
     int updateByPrimaryKeySelective(AdminRoleRela record);
 
     int updateByPrimaryKey(AdminRoleRela record);
+    
+    int selectRoleId(Integer adminId);
+    
+    AdminRoleRela getAdminRole(Integer adminId);
 }

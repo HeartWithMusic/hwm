@@ -16,4 +16,8 @@ public interface IUserService {
 	public void addUser(User user);
 	
 	public User getUserByName(String username);
+	
+	public User getUserById(Integer id);
+	
+	public void updateUser(User user);
 }

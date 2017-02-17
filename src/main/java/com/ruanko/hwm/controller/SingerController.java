@@ -81,7 +81,7 @@ public class SingerController {
         }
         
       
-		String[] checkbox= request.getParameterValues("checkbox");
+		String radio = request.getParameter("radio");
 		
 //		for(String s : checkbox) {
 //			System.out.println(s);
@@ -102,10 +102,10 @@ public class SingerController {
 			}
 		}
 		//插入到歌手关联表
-		addSingerAndTypeToRela(checkbox, singerId);
+		addSingerAndTypeToRela(radio, singerId);
 		
 		model.addAttribute(new Singer());
-		model.addAttribute("message","添加歌曲成功");
+		model.addAttribute("message","添加歌手成功");
 		return "showAddSinger";
 	}
 	
@@ -115,18 +115,17 @@ public class SingerController {
 	 * @param type
 	 * @param mid
 	 */
-	public void addSingerAndTypeToRela(String[] type, Integer sid) {
+	public void addSingerAndTypeToRela(String type, Integer sid) {
 		// System.out.println(mid);
 		// for(String s1 : type) {
 		// System.out.println(s1);
 		// }
 
-		for (String s : type) {
-			SingerTypeRela str = new SingerTypeRela();
-			str.setSingerid(sid);
-			str.setTypeid(Integer.parseInt(s));
-			singerTypeRelaService.addSingerTR(str);
-		}
+		SingerTypeRela str = new SingerTypeRela();
+		str.setSingerid(sid);
+		str.setTypeid(Integer.parseInt(type));
+		singerTypeRelaService.addSingerTR(str);
+		
 	}
 
 	/**
@@ -149,6 +148,8 @@ public class SingerController {
 		List<Singer> singerList = singerService.getAllSinger();
 		// System.out.println(musicList);
 		model.addAttribute("singerList", singerList);
+		model.addAttribute("pageSize", pageSize);
+  		model.addAttribute("counts", singerList.size());
 		model.addAttribute(new Singer());
 		return "showManageSinger";
 	}
@@ -212,7 +213,7 @@ public class SingerController {
 		} 
 
 		try {
-			Upload_Download.upload_img(image, request, singer.getSingername());
+			Upload_Download.upload_img1(image, request, singer.getSingername());
 		} catch (IOException e) {
 			System.out.println("文件上传失败");
 			e.printStackTrace();
@@ -227,12 +228,12 @@ public class SingerController {
 		singerService.updateSinger(sin);
 
 		// 更新至歌曲类别表中
-		String[] checkbox = request.getParameterValues("checkbox");
+		String radio = request.getParameter("radio");
 		// System.out.println(musicId);
 		// for(String s1 : checkbox) {
 		// System.out.println(s1);
 		// }
-		updateSingerAndTypeToRela(checkbox, id);
+		updateSingerAndTypeToRela(radio, id);
 
 		// 更新至歌曲歌手关联表
 //		int singerId = Integer.parseInt(request.getParameter("select"));
@@ -255,18 +256,18 @@ public class SingerController {
 	 * @param type
 	 * @param mid
 	 */
-	public void updateSingerAndTypeToRela(String[] type, Integer sid) {
+	public void updateSingerAndTypeToRela(String type, Integer sid) {
 		// System.out.println(mid);
 		// for(String s1 : type) {
 		// System.out.println(s1);
 		// }
 
-		for (String s : type) {
-			SingerTypeRela str = new SingerTypeRela();
-			str.setSingerid(sid);
-			str.setTypeid(Integer.parseInt(s));
-			singerTypeRelaService.updateSingerTR(str);
-		}
+		
+		SingerTypeRela str = new SingerTypeRela();
+		str.setSingerid(sid);
+		str.setTypeid(Integer.parseInt(type));
+		singerTypeRelaService.updateSingerTR(str);
+		
 	}
 
 	/**

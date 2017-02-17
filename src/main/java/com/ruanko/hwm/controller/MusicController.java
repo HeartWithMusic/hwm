@@ -86,13 +86,23 @@ public class MusicController {
 		if (!image.getContentType().equals("image/jpeg")) {
 			model.addAttribute("message", "图片文件必须是jpg格式");
 			model.addAttribute(new Music());
+			//获取所有的歌手并返回前台
+			List<Singer> singerList = singerService.getAllSinger();
+			model.addAttribute("singerList", singerList);
+			
 			return "showAddMusic";
 		} else if (!song.getContentType().equals("audio/mpeg")) {
 			model.addAttribute("message", "音频文件必须是mp3格式");
+			//获取所有的歌手并返回前台
+			List<Singer> singerList = singerService.getAllSinger();
+			model.addAttribute("singerList", singerList);
 			model.addAttribute(new Music());
 			return "showAddMusic";
 		} else if (!s[1].equals("lrc") && !s[1].equals("krc")) {
 			model.addAttribute("message", "歌词文件必须是lrc格式");
+			//获取所有的歌手并返回前台
+			List<Singer> singerList = singerService.getAllSinger();
+			model.addAttribute("singerList", singerList);
 			model.addAttribute(new Music());
 			return "showAddMusic";
 		}
@@ -147,7 +157,9 @@ public class MusicController {
 		// File(request.getSession().getServletContext().getRealPath("/WEB-INF/music/song")
 		// + "/" + song.getOriginalFilename())));
 		// System.out.println(request.getParameter("select"));
-
+		//获取所有的歌手并返回前台
+		List<Singer> singerList = singerService.getAllSinger();
+		model.addAttribute("singerList", singerList);
 		model.addAttribute(new Music());
 		model.addAttribute("message", "添加歌曲成功");
 		return "showAddMusic";
@@ -195,6 +207,8 @@ public class MusicController {
 		List<Music> musicList = musicService.getAllMusic();
 		// System.out.println(musicList);
 		model.addAttribute("musicList", musicList);
+		model.addAttribute("pageSize", pageSize);
+  		model.addAttribute("counts", musicList.size());
 		model.addAttribute(new Music());
 		return "showManageMusic";
 	}
@@ -303,8 +317,7 @@ public class MusicController {
 
 		// 更新至歌曲歌手关联表
 		int singerId = Integer.parseInt(request.getParameter("select"));
-		MusicSingerRela msr = new MusicSingerRela();
-		msr.setMusicid(id);
+		MusicSingerRela msr = musicSingerService.getSingerByMusicId(id);
 		msr.setSingerid(singerId);
 		musicSingerService.updateMS(msr);
 

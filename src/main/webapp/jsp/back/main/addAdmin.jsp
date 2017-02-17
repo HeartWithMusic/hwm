@@ -124,6 +124,16 @@
                         <input  value="" style="width:400px" data-equalto="#pwd" type="password" class="form-control" data-required="true"></input>
                       </div>
                       <div class="form-group">
+                        <label>权限</label>
+               			<div class="m-b">
+                            <select name="select" id="select2-option" tabindex="-1" class="select2-offscreen" style="width:400px;">
+       							<c:forEach items="${roleList}" var="role">
+                            		<option value="${role.id }">${role.role }</option>
+                            	</c:forEach>	
+                            </select>
+                        </div>
+                      </div>
+                      <div class="form-group">
                         <label>邮箱</label>
                         <sf:input  value="" style="width:400px" type="email" class="form-control" data-required="true" path="email"></sf:input>
                       </div>
@@ -132,9 +142,12 @@
                         <sf:input  value="" style="width:400px" type="text" data-type = "phone"  class="form-control" data-required="true" path="tel"></sf:input>
                       </div></div>
              			 <footer class="panel-footer text-right bg-light lter">
-                      <button type="submit" class="btn btn-success btn-s-xs">添加</button>
+             			 <span style="color:red;"> <c:out value="${message }"></c:out></span>
+             			  <button type="submit" class="btn btn-success btn-s-xs">添加</button>
                     </footer>
-                    <c:out value="${message }"></c:out></section>
+             			 </section> 
+                     
+                   
                 </sf:form>
                </section>
     </section>

@@ -1,6 +1,8 @@
 package com.ruanko.hwm.service.impl;
 
 
+import java.util.List;
+
 import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
@@ -29,6 +31,22 @@ public class AdminServiceImpl implements IAdminService {
 	public Admin getAdminByName(String adminName) {
 		// TODO Auto-generated method stub
 		return adminMapper.selectByName(adminName);
+	}
+
+
+	public List<Admin> getAllAdmin() {
+		return adminMapper.selectAllAdmin();
+	}
+
+
+	public void deleteAdmin(Admin admin) {
+		adminMapper.deleteByPrimaryKey(admin.getId());
+	}
+
+
+	public void updateAdmin(Admin admin) {
+		adminMapper.updateByPrimaryKey(admin);
+		
 	}
 
 	

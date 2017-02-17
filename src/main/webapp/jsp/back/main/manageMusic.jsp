@@ -49,7 +49,7 @@
                                             <div>
                                             	<label>语言</label>
                                                 <label class="checkbox-inline">
-                                                    <input id="inlineCheckbox1" name="checkbox" value="1" type="checkbox"> 华语 </label>
+                                                    <input id="inlineCheckbox1" name="checkbox" value="1" type="checkbox" checked="checked" /> 华语 </label>
                                                 <label class="checkbox-inline">
                                                     <input id="inlineCheckbox2" name="checkbox" value="2" type="checkbox"> 英语 </label>
                                                 <label class="checkbox-inline">
@@ -63,7 +63,7 @@
                                             <div>
                                             	<label>风格</label>
                                                 <label class="checkbox-inline">
-                                                    <input id="inlineCheckbox6" name="checkbox" value="6" type="checkbox"> 流行 </label>
+                                                    <input id="inlineCheckbox6" name="checkbox" value="6" type="checkbox" checked="checked"> 流行 </label>
                                                 <label class="checkbox-inline">
                                                     <input id="inlineCheckbox7" name="checkbox" value="7" type="checkbox"> 摇滚 </label>
                                                 <label class="checkbox-inline">
@@ -82,7 +82,7 @@
                                             <div>
                                             	<label>场景</label>
                                                 <label class="checkbox-inline">
-                                                    <input id="inlineCheckbox14" name="checkbox" value="14" type="checkbox"> 清晨 </label>
+                                                    <input id="inlineCheckbox14" name="checkbox" value="14" type="checkbox" checked="checked"> 清晨 </label>
                                                 <label class="checkbox-inline">
                                                     <input id="inlineCheckbox15" name="checkbox" value="15" type="checkbox"> 夜晚 </label>
                                                 <label class="checkbox-inline">
@@ -154,7 +154,7 @@
             </div>
             <div class="modal-footer">
                 <button onclick="delete_ok()"  type="button" class="btn btn-warning" data-dismiss="modal">删除</button>
-                <button type="button" class="btn btn-primary">取消</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal">取消</button>
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal -->
@@ -325,6 +325,7 @@
 	/*  
 	js由毫秒数得到年月日 
 	*/
+	var id1;
 	var format = function(time, format){
 		var t = new Date(time);
 		var tf = function(i){return (i < 10 ? '0' : '') + i};
@@ -414,7 +415,7 @@
 	    			html += '         <td>' + data[1][i].singername + '</td>';
 	    			html += '        <td>' + format(data[0][i].uploadtime, 'yyyy年MM月dd日 HH时mm分ss秒') + '</td>';
 	    			html += '      <td>' + data[0][i].playcounts + '</td>';
-		            html += '        <td>' + data[0][i].musicname + '</td>';
+		            html += '        <td>' + data[0][i].musicname + '.mp3' +'</td>';
 		            html += ' <td>' + data[0][i].img + '</td>';
 		            html += '  <td>' + data[0][i].lyr + '</td>';
 		            html += ' <td>' + data[0][i].musictime + '</td>';

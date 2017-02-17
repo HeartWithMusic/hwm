@@ -122,9 +122,9 @@
                                             <div>
                                             	<label>语言</label>
                                                 <label class="checkbox-inline">
-                                                    <input id="inlineCheckbox1" name="checkbox" value="1" type="checkbox"> 华语 </label>
+                                                    <input id="inlineCheckbox1" name="checkbox" value="1" type="checkbox" checked="checked"> 华语 </label>
                                                 <label class="checkbox-inline">
-                                                    <input id="inlineCheckbox2" name="checkbox" value="2" type="checkbox"> 英语 </label>
+                                                    <input id="inlineCheckbox2" name="checkbox" value="2" type="checkbox" > 英语 </label>
                                                 <label class="checkbox-inline">
                                                     <input id="inlineCheckbox3" name="checkbox" value="3" type="checkbox"> 粤语 </label>
                                                 <label class="checkbox-inline">
@@ -136,7 +136,7 @@
                                             <div>
                                             	<label>风格</label>
                                                 <label class="checkbox-inline">
-                                                    <input id="inlineCheckbox6" name="checkbox" value="6" type="checkbox"> 流行 </label>
+                                                    <input id="inlineCheckbox6" name="checkbox" value="6" type="checkbox" checked="checked"> 流行 </label>
                                                 <label class="checkbox-inline">
                                                     <input id="inlineCheckbox7" name="checkbox" value="7" type="checkbox"> 摇滚 </label>
                                                 <label class="checkbox-inline">
@@ -155,7 +155,7 @@
                                             <div>
                                             	<label>场景</label>
                                                 <label class="checkbox-inline">
-                                                    <input id="inlineCheckbox14" name="checkbox" value="14" type="checkbox"> 清晨 </label>
+                                                    <input id="inlineCheckbox14" name="checkbox" value="14" type="checkbox" checked="checked"> 清晨 </label>
                                                 <label class="checkbox-inline">
                                                     <input id="inlineCheckbox15" name="checkbox" value="15" type="checkbox"> 夜晚 </label>
                                                 <label class="checkbox-inline">

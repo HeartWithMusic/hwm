@@ -1,19 +1,28 @@
 package com.ruanko.hwm.controller;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.ruanko.hwm.bean.Singer;
+import com.ruanko.hwm.bean.SingerTypeRela;
 import com.ruanko.hwm.bean.User;
 import com.ruanko.hwm.service.IUserService;
+import com.ruanko.hwm.utl.DateTime;
 import com.ruanko.hwm.utl.MD5Util;
+import com.ruanko.hwm.utl.Upload_Download;
 import com.sun.mail.handlers.message_rfc822;
 
 @Controller
@@ -23,15 +32,193 @@ public class UserController {
 	@Resource
 	private IUserService userService;
 	
-	//查询所有用户
-	@RequestMapping({"/manageUser/"})
-	public String toManageUser(Model model, HttpServletRequest request) {
-		System.out.println("跳转到了控制器中");
-		List<User> userList=userService.findAllUser();
+	//每页项数
+	private Integer pageSize = 5;
+	
+	/**
+	 * 删除用户
+	 * 
+	 * @param model
+	 * @param request
+	 * @param response
+	 */
+	@RequestMapping({ "/deleteUser" })
+	public String deleteUser(Model model, HttpServletRequest request, HttpServletResponse response) {
+		int id = Integer.parseInt(request.getParameter("id"));
+		User user = userService.getUserById(id);
+		userService.deleteUserById(id);
+		// 删除歌曲相关文件
+		String root = request.getSession().getServletContext().getRealPath("/WEB-INF/user");
+		String username = user.getUsername();
+		if(user.getImg() != "" && user.getImg() != null) {
+			Upload_Download.deleteFile(root + "/img/" + username + ".jpg");
+		}
 		
+
+		List<User> userList = userService.findAllUser();
+		// System.out.println(musicList);
 		model.addAttribute("userList", userList);
+		model.addAttribute("pageSize", pageSize);
+  		model.addAttribute("counts", userList.size());
+		model.addAttribute(new User());
 		return "showManageUser";
 	}
+
+	/**
+	 * 修改用户获取用户
+	 * 
+	 * @param model
+	 * @param request
+	 * @param response
+	 */
+	@RequestMapping({ "/getUser" })
+	public String getUser(Model model, HttpServletRequest request, HttpServletResponse response) {
+		int id = Integer.parseInt(request.getParameter("id"));
+		User user = userService.getUserById(id);
+
+//		// 获取所有的歌手并返回前台
+//		List<Singer> singerList = singerService.getAllSinger();
+//		model.addAttribute("singerList", singerList);
+
+		List<User> userList = userService.findAllUser();
+		// System.out.println(musicList);
+		model.addAttribute("pageSize", pageSize);
+  		model.addAttribute("counts", userList.size());
+		model.addAttribute("singerList", userList);
+		model.addAttribute("user",user);
+		return "showManageUser";
+	}
+
+	/**
+	 * 更新用户
+	 * 
+	 * @param model
+	 * @param request
+	 * @param response
+	 */
+	@RequestMapping({ "/updateUser" })
+	public String updateMusic(@ModelAttribute("user") User user, @RequestParam("imageInfo") MultipartFile image, Model model,
+			HttpServletRequest request, HttpServletResponse response) {
+		int id = Integer.parseInt(request.getParameter("id"));
+		User us = userService.getUserById(id);
+		
+		us.setAge(user.getAge());
+		us.setEmail(user.getEmail());
+		us.setImg(user.getUsername() + ".jpg");
+		us.setTel(user.getTel());
+		us.setUsername(user.getUsername());
+		
+		
+		//System.out.println(image.getContentType());
+		//String s[] = lrc.getOriginalFilename().split("\\.");
+		// System.out.println(s.length);
+		// 判断上传的文件类型
+		if (!image.getContentType().equals("image/jpeg")) {
+			model.addAttribute("message", "图片文件必须是jpg格式");
+			List<User> userList = userService.findAllUser();
+			//System.out.println(musicList);
+			model.addAttribute("userList", userList);
+			model.addAttribute("pageSize", pageSize);
+	  		model.addAttribute("counts", userList.size());
+			model.addAttribute(user);
+			return "showManageUser";
+		} 
+
+		try {
+			Upload_Download.upload_img2(image, request, user.getUsername());
+		} catch (IOException e) {
+			System.out.println("文件上传失败");
+			e.printStackTrace();
+		}
+
+		// 播放时长
+//		String time = Upload_Download
+//				.getMusicLength(new File(request.getSession().getServletContext().getRealPath("/WEB-INF/music/song")
+//						+ "/" + music.getMusicname() + ".mp3"));
+//		mus.setMusictime(time);
+
+		userService.updateUser(us);
+
+//		// 更新至歌曲类别表中
+//		String radio = request.getParameter("radio");
+//		// System.out.println(musicId);
+//		// for(String s1 : checkbox) {
+//		// System.out.println(s1);
+//		// }
+//		updateSingerAndTypeToRela(radio, id);
+
+		// 更新至歌曲歌手关联表
+//		int singerId = Integer.parseInt(request.getParameter("select"));
+//		MusicSingerRela msr = new MusicSingerRela();
+//		msr.setMusicid(id);
+//		msr.setSingerid(singerId);
+//		musicSingerService.updateMS(msr);
+
+		List<User> userList = userService.findAllUser();
+		// System.out.println(musicList);
+		model.addAttribute("singerList", userList);
+		model.addAttribute("message", "修改成功");
+		model.addAttribute(user);
+		return "showManageUser";
+	}
+
+
+	/**
+	 * ajax
+	 * 
+	 * @param pageIndex
+	 * @param pageSize
+	 * @param totalPage
+	 * @return
+	 */
+	@RequestMapping("/ajax_operation")
+	public @ResponseBody List<User> findSingerAjax1(String pageIndex, String pageSize, String totalPage, String userName) {
+		//System.out.println(musicName);
+		return ajax_common1(pageIndex, pageSize, totalPage, userName);
+		
+	}
+	
+	/**
+	 * 返回每页的数据
+	 * @param pageIndex
+	 * @param pageSize
+	 * @param totalPage
+	 * @return
+	 */
+	public List<User> ajax_common1(String pageIndex, String pageSize, String totalPage, String username) {
+		List<User> userList = new ArrayList<User>();
+		//判断是否为搜索
+		if(username == "") {
+			userList = userService.findAllUser();
+			
+		}else {
+			List<User> sl = userService.findAllUser();
+			for(User u : sl) {
+				if(u.getUsername().contains((username))) {
+					userList.add(u);
+				}
+			}
+		}
+//		//获取对应的歌手
+//		for(Music m : resultList) {
+//			//System.out.println(m.getId());
+//			Singer singer = singerService.getSingerById(musicSingerService.getSingerByMusicId(m.getId()).getSingerid());
+//			singerList.add(singer);
+//		}
+		
+		Integer pageIndex1 = Integer.parseInt(pageIndex);
+		Integer pageSize1 = Integer.parseInt(pageSize);
+		Integer totalPage1 = Integer.parseInt(totalPage);
+		List<User> resultList = new ArrayList<User>();
+		if (pageIndex1 <= totalPage1 / pageSize1) {
+			resultList = userList.subList((pageIndex1 - 1) * pageSize1, pageIndex1 * pageSize1);
+		} else {
+			resultList = userList.subList((pageIndex1 - 1) * pageSize1, totalPage1);
+		}
+		
+		return resultList;
+	}
+	
 	
 	@RequestMapping({"/discover/"})
 	public String toHome(Model model, HttpServletRequest request) {
