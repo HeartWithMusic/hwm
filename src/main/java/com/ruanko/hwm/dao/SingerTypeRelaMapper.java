@@ -1,5 +1,7 @@
 package com.ruanko.hwm.dao;
 
+import java.util.List;
+
 import com.ruanko.hwm.bean.SingerTypeRela;
 
 public interface SingerTypeRelaMapper {
@@ -14,4 +16,6 @@ public interface SingerTypeRelaMapper {
     int updateByPrimaryKeySelective(SingerTypeRela record);
 
     int updateByPrimaryKey(SingerTypeRela record);
+    
+    List<SingerTypeRela> selectByTypeId(Integer typeid);
 }

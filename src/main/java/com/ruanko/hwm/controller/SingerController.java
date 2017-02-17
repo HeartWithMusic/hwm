@@ -3,6 +3,8 @@ package com.ruanko.hwm.controller;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.ServletException;
@@ -15,12 +17,17 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.ruanko.hwm.bean.Music;
+import com.ruanko.hwm.bean.MusicSingerRela;
+import com.ruanko.hwm.bean.MusicTypeRela;
 import com.ruanko.hwm.bean.Singer;
+import com.ruanko.hwm.bean.SingerTypeRela;
 import com.ruanko.hwm.service.IMusicService;
 import com.ruanko.hwm.service.ISingerService;
+import com.ruanko.hwm.service.ISingerTypeRelaService;
 import com.ruanko.hwm.utl.DateTime;
 import com.ruanko.hwm.utl.Upload_Download;
 
@@ -31,7 +38,23 @@ public class SingerController {
 
 	@Resource
 	public ISingerService singerService;	
+	@Resource
+	public ISingerTypeRelaService singerTypeRelaService;
 	
+	//每页项数
+	private Integer pageSize = 5;
+	
+	/**
+	 * 添加歌手
+	 * @param singer
+	 * @param image
+	 * @param model
+	 * @param request
+	 * @param response
+	 * @return
+	 * @throws IOException
+	 * @throws ServletException
+	 */
 	@RequestMapping({"/doAddSinger/"})
 	public String addMusic(@ModelAttribute("singer")Singer singer, @RequestParam("imageInfo") MultipartFile image, Model model, HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		//保存音乐到数据库中
@@ -70,8 +93,235 @@ public class SingerController {
 		//插入数据库
 		singerService.addSinger(sin);
 		
+		// 查询歌曲
+		int singerId = 0;
+		List<Singer> singerList1 = singerService.getAllSinger();
+		for (Singer s : singerList1) {
+			if (s.getSingername().equals(sin.getSingername())) {
+				singerId = s.getId();
+			}
+		}
+		//插入到歌手关联表
+		addSingerAndTypeToRela(checkbox, singerId);
+		
 		model.addAttribute(new Singer());
 		model.addAttribute("message","添加歌曲成功");
 		return "showAddSinger";
+	}
+	
+	/**
+	 * 添加歌手到歌手类型关联表中
+	 * 
+	 * @param type
+	 * @param mid
+	 */
+	public void addSingerAndTypeToRela(String[] type, Integer sid) {
+		// System.out.println(mid);
+		// for(String s1 : type) {
+		// System.out.println(s1);
+		// }
+
+		for (String s : type) {
+			SingerTypeRela str = new SingerTypeRela();
+			str.setSingerid(sid);
+			str.setTypeid(Integer.parseInt(s));
+			singerTypeRelaService.addSingerTR(str);
+		}
+	}
+
+	/**
+	 * 删除歌手
+	 * 
+	 * @param model
+	 * @param request
+	 * @param response
+	 */
+	@RequestMapping({ "/deleteSinger" })
+	public String deleteMusic(Model model, HttpServletRequest request, HttpServletResponse response) {
+		int id = Integer.parseInt(request.getParameter("id"));
+		Singer singer = singerService.getSingerById(id);
+		singerService.deleteSinger(id);;
+		// 删除歌曲相关文件
+		String root = request.getSession().getServletContext().getRealPath("/WEB-INF/singer");
+		String singername = singer.getSingername();
+		Upload_Download.deleteFile(root + "/img/" + singername + ".jpg");
+
+		List<Singer> singerList = singerService.getAllSinger();
+		// System.out.println(musicList);
+		model.addAttribute("singerList", singerList);
+		model.addAttribute(new Singer());
+		return "showManageSinger";
+	}
+
+	/**
+	 * 修改歌手获取歌手
+	 * 
+	 * @param model
+	 * @param request
+	 * @param response
+	 */
+	@RequestMapping({ "/getSinger" })
+	public String getSinger(Model model, HttpServletRequest request, HttpServletResponse response) {
+		int id = Integer.parseInt(request.getParameter("id"));
+		Singer singer = singerService.getSingerById(id);
+
+//		// 获取所有的歌手并返回前台
+//		List<Singer> singerList = singerService.getAllSinger();
+//		model.addAttribute("singerList", singerList);
+
+		List<Singer> singerList = singerService.getAllSinger();
+		// System.out.println(musicList);
+		model.addAttribute("pageSize", pageSize);
+  		model.addAttribute("counts", singerList.size());
+		model.addAttribute("singerList", singerList);
+		model.addAttribute("singer",singer);
+		return "showManageSinger";
+	}
+
+	/**
+	 * 更新歌手
+	 * 
+	 * @param model
+	 * @param request
+	 * @param response
+	 */
+	@RequestMapping({ "/updateSinger" })
+	public String updateMusic(@ModelAttribute("singer") Singer singer, @RequestParam("imageInfo") MultipartFile image, Model model,
+			HttpServletRequest request, HttpServletResponse response) {
+		int id = Integer.parseInt(request.getParameter("id"));
+		Singer sin = singerService.getSingerById(id);
+		
+		sin.setSingername(singer.getSingername());
+		sin.setCounts(sin.getCounts());
+		sin.setImg(singer.getSingername() + ".jpg");
+		sin.setIntroduction(singer.getIntroduction());
+		sin.setUploadtime(DateTime.getCurrentTime());
+		//System.out.println(image.getContentType());
+		//String s[] = lrc.getOriginalFilename().split("\\.");
+		// System.out.println(s.length);
+		// 判断上传的文件类型
+		if (!image.getContentType().equals("image/jpeg")) {
+			model.addAttribute("message", "图片文件必须是jpg格式");
+			List<Singer> singerList = singerService.getAllSinger();
+			//System.out.println(musicList);
+			model.addAttribute("singerList", singerList);
+			model.addAttribute("pageSize", pageSize);
+	  		model.addAttribute("counts", singerList.size());
+			model.addAttribute(singer);
+			return "showManageSinger";
+		} 
+
+		try {
+			Upload_Download.upload_img(image, request, singer.getSingername());
+		} catch (IOException e) {
+			System.out.println("文件上传失败");
+			e.printStackTrace();
+		}
+
+		// 播放时长
+//		String time = Upload_Download
+//				.getMusicLength(new File(request.getSession().getServletContext().getRealPath("/WEB-INF/music/song")
+//						+ "/" + music.getMusicname() + ".mp3"));
+//		mus.setMusictime(time);
+
+		singerService.updateSinger(sin);
+
+		// 更新至歌曲类别表中
+		String[] checkbox = request.getParameterValues("checkbox");
+		// System.out.println(musicId);
+		// for(String s1 : checkbox) {
+		// System.out.println(s1);
+		// }
+		updateSingerAndTypeToRela(checkbox, id);
+
+		// 更新至歌曲歌手关联表
+//		int singerId = Integer.parseInt(request.getParameter("select"));
+//		MusicSingerRela msr = new MusicSingerRela();
+//		msr.setMusicid(id);
+//		msr.setSingerid(singerId);
+//		musicSingerService.updateMS(msr);
+
+		List<Singer> singerList = singerService.getAllSinger();
+		// System.out.println(musicList);
+		model.addAttribute("singerList", singerList);
+		model.addAttribute("message", "修改成功");
+		model.addAttribute(singer);
+		return "showManageSinger";
+	}
+
+	/**
+	 * 更新音乐到歌手类型关联表中
+	 * 
+	 * @param type
+	 * @param mid
+	 */
+	public void updateSingerAndTypeToRela(String[] type, Integer sid) {
+		// System.out.println(mid);
+		// for(String s1 : type) {
+		// System.out.println(s1);
+		// }
+
+		for (String s : type) {
+			SingerTypeRela str = new SingerTypeRela();
+			str.setSingerid(sid);
+			str.setTypeid(Integer.parseInt(s));
+			singerTypeRelaService.updateSingerTR(str);
+		}
+	}
+
+	/**
+	 * ajax
+	 * 
+	 * @param pageIndex
+	 * @param pageSize
+	 * @param totalPage
+	 * @return
+	 */
+	@RequestMapping("/ajax_operation")
+	public @ResponseBody List<Singer> findSingerAjax1(String pageIndex, String pageSize, String totalPage, String singerName) {
+		//System.out.println(musicName);
+		return ajax_common1(pageIndex, pageSize, totalPage, singerName);
+		
+	}
+	
+	/**
+	 * 返回每页的数据
+	 * @param pageIndex
+	 * @param pageSize
+	 * @param totalPage
+	 * @return
+	 */
+	public List<Singer> ajax_common1(String pageIndex, String pageSize, String totalPage, String singername) {
+		List<Singer> singerList = new ArrayList<Singer>();
+		//判断是否为搜索
+		if(singername == "") {
+			singerList = singerService.getAllSinger();
+			
+		}else {
+			List<Singer> sl = singerService.getAllSinger();
+			for(Singer s : sl) {
+				if(s.getSingername().contains((singername))) {
+					singerList.add(s);
+				}
+			}
+		}
+//		//获取对应的歌手
+//		for(Music m : resultList) {
+//			//System.out.println(m.getId());
+//			Singer singer = singerService.getSingerById(musicSingerService.getSingerByMusicId(m.getId()).getSingerid());
+//			singerList.add(singer);
+//		}
+		
+		Integer pageIndex1 = Integer.parseInt(pageIndex);
+		Integer pageSize1 = Integer.parseInt(pageSize);
+		Integer totalPage1 = Integer.parseInt(totalPage);
+		List<Singer> resultList = new ArrayList<Singer>();
+		if (pageIndex1 <= totalPage1 / pageSize1) {
+			resultList = singerList.subList((pageIndex1 - 1) * pageSize1, pageIndex1 * pageSize1);
+		} else {
+			resultList = singerList.subList((pageIndex1 - 1) * pageSize1, totalPage1);
+		}
+		
+		return resultList;
 	}
 }

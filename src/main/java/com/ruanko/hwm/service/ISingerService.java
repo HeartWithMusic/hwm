@@ -11,4 +11,8 @@ public interface ISingerService {
 	public void addSinger(Singer singer);
 	
 	public List<Singer> getAllSinger();
+	
+	public void deleteSinger(Integer id);
+	
+	public void updateSinger(Singer singer);
 }

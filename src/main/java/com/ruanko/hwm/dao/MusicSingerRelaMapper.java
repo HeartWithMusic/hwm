@@ -14,6 +14,8 @@ public interface MusicSingerRelaMapper {
     MusicSingerRela selectByPrimaryKey(Integer id);
     
     List<MusicSingerRela> selectBySingerId(Integer singerid);
+    
+    MusicSingerRela selectSingerByMusicId(Integer musicId);
 
     int updateByPrimaryKeySelective(MusicSingerRela record);
 
