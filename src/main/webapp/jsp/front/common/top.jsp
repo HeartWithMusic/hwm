@@ -152,7 +152,7 @@
 								<label style = "height:15px;width:200px;">
 									<input type="checkbox" style = "float:left;"> 
 									 <p style = "height:12px;color:gray;font-size:90%;font-weight:lighter;float:left; padding-top:2px;padding-left:10px;">自动登录</p>
-									 <a href = "#" style = "color:gray;font-size:90%;font-weight:lighter;float:left;padding-top:2px;padding-left:60px;">
+									 <a href = "<%=request.getContextPath()%>/home/getPassword/" style = "color:gray;font-size:90%;font-weight:lighter;float:left;padding-top:2px;padding-left:60px;">
 										忘记密码？
 									 </a>
 								</label>

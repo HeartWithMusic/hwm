@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.ruanko.hwm.bean.User;
 import com.ruanko.hwm.service.IUserService;
 import com.ruanko.hwm.utl.MD5Util;
+import com.sun.mail.handlers.message_rfc822;
 
 @Controller
 @RequestMapping("/home")
@@ -114,30 +115,62 @@ public class UserController {
 		model.addAttribute(new User());
 		return "showLogup";
 	}
-	@RequestMapping({"/doLogin"})
+	@RequestMapping({"/doLogin"})//用户登录
 	public String doLogin(@ModelAttribute("user") User user, Model model,HttpServletRequest request){
-		//System.out.println(user.getUsername());
 		String message = "";
 		User user1 = userService.getUserByName(user.getUsername());		
 		if(user1 == null){
 			message = "用户名不存在";
 		}
 		else if(user1.getPassword().equalsIgnoreCase(MD5Util.getMD5Code(user.getPassword()))){
-			request.getSession().setAttribute("user", user1);
-			
+			request.getSession().setAttribute("user", user1);			
 		}
 		else{
 			message = "密码错误";
 			
 		}
-		System.out.println(message);
 		model.addAttribute(new User());
-		request.getSession().setAttribute("message",message);
-		
+		request.getSession().setAttribute("message",message);	
 		return "showHome";
 	}
 	@RequestMapping({"/clearSession/"})
 	public @ResponseBody void clearSession(HttpServletRequest request) {
 		request.getSession().setAttribute("message", "");
+	}
+	@RequestMapping({"/getPassword/"})
+	public String toGetPwd(Model model, HttpServletRequest request){
+		model.addAttribute("title", "找回密码");
+		model.addAttribute(new User());
+		model.addAttribute("message","");
+		return "showGetPassword";
+	}
+	@RequestMapping({"/doGetPwd/"})//用户找回密码
+	public String doGetPwd(@ModelAttribute("user") User user,Model model, HttpServletRequest request){
+		String message = "";
+		System.out.println(user.getUsername());
+		User user1 = userService.getUserByName(user.getUsername());
+		if(user1 == null){
+			message = "该用户名未注册";	
+			//model.addAttribute(new User());
+			model.addAttribute("message",message);
+			
+		}
+		else if(user1.getEmail().equals(user.getEmail())){
+			//message = "验证成功";
+			//model.addAttribute("message",message);
+			return "showAlterPwd";
+		}
+		else{
+			System.out.println(user1.getEmail());
+			message = "邮箱和用户名不一致";
+			model.addAttribute("message",message);
+			
+		}
+		return "showGetPassword";		
+	}
+	@RequestMapping({"/doAlterPwd/"})//用户找回密码
+	public String doAlterPwd(@ModelAttribute("user") User user,Model model, HttpServletRequest request){
+		
+		return null;
 	}
 }

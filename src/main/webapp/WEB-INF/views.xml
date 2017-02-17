@@ -68,7 +68,10 @@
 	</definition>
 	<!-- 用户注册界面 -->
 	<definition name="showLogup" template="/jsp/front/common/logup.jsp"></definition>
-	
+	<!-- 用户找回密码界面 -->
+	<definition name="showGetPassword" template="/jsp/front/common/getPassword.jsp"></definition>
+	<!-- 用户修改密码界面 -->
+	<definition name="showAlterPwd" template="/jsp/front/common/alterPassword.jsp"></definition>
 	<!-- 后台登录界面 -->	
 	<definition name="showAdminLogin" template="/jsp/back/loginup/login.jsp"></definition>
 	<!-- 后台注册界面 -->	
