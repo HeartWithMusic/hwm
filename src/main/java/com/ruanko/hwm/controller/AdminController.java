@@ -37,6 +37,9 @@ public class AdminController {
 	@Resource
 	private ISingerService singerService;
 	
+	//每页项数
+	private Integer pageSize = 5;
+	
 	@RequestMapping({"/logup/"})
 	public String toLogup(Model model, HttpServletRequest request) {
 		model.addAttribute("title", "注册");
@@ -67,6 +70,8 @@ public class AdminController {
 		List<Music> musicList = musicService.getAllMusic();
 		//System.out.println(musicList);
 		model.addAttribute("musicList", musicList);
+		model.addAttribute("pageSize", pageSize);
+  		model.addAttribute("counts", musicList.size());
 		model.addAttribute(new Music());
 		return "showManageMusic";
 	}

@@ -262,7 +262,12 @@
                     </span> </div>
                 </div>
               </div>
-              <div class="table-responsive text-center">
+              <div>
+              	<input type="hidden" value="${pageSize }" id="pageSize"/>
+              	<input type="hidden" value="${counts }" id="counts"/>
+              	<input type="hidden" value="<%=request.getContextPath()%>" id="contextPath"/>
+              </div>
+              <div class="table-responsive text-center" id="result">
                 <table class="table table-striped b-t b-light text-sm">
                   <thead>
                     <tr >
@@ -305,14 +310,15 @@
                   </div>
                   <div class="col-sm-4 text-center">  </div>
                   <div class="col-sm-4 text-right text-center-xs">
-                    <ul class="pagination pagination-sm m-t-none m-b-none">
-                      <li><a href="#"><i class="fa fa-chevron-left"></i></a></li>
+					
+                    <ul class="pagination pagination-sm m-t-none m-b-none" id="pagination">
+                      <!--  <li><a href="#"><i class="fa fa-chevron-left"></i></a></li>
                       <li><a href="#">1</a></li>
                       <li><a href="#">2</a></li>
                       <li><a href="#">3</a></li>
                       <li><a href="#">4</a></li>
                       <li><a href="#">5</a></li>
-                      <li><a href="#"><i class="fa fa-chevron-right"></i></a></li>
+                      <li><a href="#"><i class="fa fa-chevron-right"></i></a></li>-->
                     </ul>
                   </div>
                 </div>
@@ -337,7 +343,7 @@
 <script src="<%=request.getContextPath()%>/js/select2/select2.min.js" cache="false"></script>
 <script src="<%=request.getContextPath()%>/js/parsley/parsley.min.js" cache="false"></script>
 <script src="<%=request.getContextPath()%>/js/parsley/parsley.extend.js" cache="false"></script>
-
+<script type="text/javascript" src="<%=request.getContextPath()%>/js/common/jqPaginator.js"></script>
 <script>     
 	document.getElementById('time').innerHTML=new Date().toLocaleFormat();     
 	setInterval("document.getElementById('time').innerHTML=new Date().toLocaleFormat();",1000);  
@@ -364,6 +370,78 @@
 	if("${music.musicname}" != "") {
 		$('#myModal1').modal('show');
 	}
+	//记录总页面和每页数
+	var ps = Number(document.getElementById("pageSize").value);
+	var tc = Number(document.getElementById("counts").value);
+	//分页
+	$('.pagination').jqPaginator({
+		totalCounts: tc,
+		pageSize: ps,
+		visiblePages: 5,
+		currentPage: 1,
+		first: '<li class="first"><a href="javascript:;">首页</a></li>',
+		last: '<li class="last"><a href="javascript:;">尾页</a></li>',
+		prev: '<li class="prev"><a href="javascript:;">上一页</a></li>',
+		next: '<li class="next"><a href="javascript:;">下一页</a></li>',
+		page: '<li class="page"><a href="javascript:;">{{page}}</a></li>',
+		onPageChange: function (num, type) {
+			if($("#orderpages_hidden").val()!= 0 ){
+				getPage(num);
+			}
+			
+			//$('#p3').html('当前第' + num + '页');
+		}
+	});
+	//获取每页的数据
+	function getPage(page,k){
+		var ps = Number(document.getElementById("pageSize").value);
+		var tc = Number(document.getElementById("counts").value);
+		//alert(tc);
+		//alert(k);
+		$.ajax({  
+	        type : "POST",  
+	        url : $('#contextPath').val() + "/music/ajax_operation",  
+	        dataType:"json",
+	        cache : false,  
+	        data : {  
+	            pageIndex: page,
+	            pageSize: ps,
+	            totalPage:tc
+	        },  
+	        async : false,  
+	        error : function() {  
+	            alert("网络异常！");  
+	        },  
+	        success : function(data) { 
+	        	var html = "";
+	        	html += '<table class="table table-striped b-t b-light text-sm"><thead><tr ><th class="text-center">编号  </th><th class="text-center">歌名</th><th class="text-center">上传时间</th><th class="text-center">播放次数</th><th class="text-center">歌曲文件</th><th class="text-center">封面文件</th><th class="text-center">歌词文件</th><th class="text-center">时长</th><th class="text-center" width="15%">操作</th></tr></thead><tbody>';
+	    		for(var i=0;i<data.length;i++){	
+	    			html += '	<tr>';
+	    			html += '          <td>' + data[i].id + '</td>';
+	    			html += '         <td>' + data[i].musicname + '</td>';
+	    			html += '        <td>' + data[i].uploadtime + '</td>';
+	    			html += '      <td>' + data[i].playcounts + '</td>';
+		            html += '        <td>' + data[i].musicname + '</td>';
+		            html += ' <td>' + data[i].img + '</td>';
+		            html += '  <td>' + data[i].lyr + '</td>';
+		            html += ' <td>' + data[i].musictime + '</td>';
+		            html += '  <td>';
+		            html += '	<a href="javascript:void(0)" onclick="updateMusic_get(' + data[0].id + ')" class="active" ><i style="font-size:15px;" class="fa fa-edit"></i>编辑</a>';
+		            html += '  	&nbsp;&nbsp;&nbsp;';
+		            html += '  	<a href="javascript:void(0)" onclick="delete_music(' + data[0].id + ')" class="active" data-toggle="modal" data-target="#myModal2"><i style="font-size:15px;" class="fa fa-times"></i>删除</a>';
+		            html += '   </td>';
+		            html += '  </tr>';
+		                    									  
+	    		}
+	    		html += ' </tbody>';
+				html += '</table>';
+	    		$('#result').html(html);
+	        }  
+	    });  
+	};
+	
+	
+	
 	
 </script>
 </html>
