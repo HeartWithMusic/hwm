@@ -76,6 +76,28 @@ public class AdminController {
 		return "showManageMusic";
 	}
 	
+	@RequestMapping({"/searchMusic/"})
+	public String toSearchMusic(Model model, HttpServletRequest request) {
+		String musicname = request.getParameter("musicname");
+		//System.out.println(musicname);
+		//model.addAttribute("title", "首页");
+		List<Music> musicList = musicService.getAllMusic();
+		List<Music> result = new ArrayList<Music>();
+		//获取搜索项
+		for(Music m : musicList) {
+			if(m.getMusicname().contains(musicname)) {
+				result.add(m);
+			}
+		}
+		//System.out.println(musicList);
+		model.addAttribute("musicList", result);
+		model.addAttribute("pageSize", pageSize);
+  		model.addAttribute("counts", result.size());
+		model.addAttribute(new Music());
+		model.addAttribute("musicname", musicname);
+		return "showManageMusic";
+	}
+	
 	@RequestMapping({"/addSinger/","/addSinger"})
 	public String toAddSinger(Model model, HttpServletRequest request) {
 		//model.addAttribute("title", "首页");
@@ -86,6 +108,34 @@ public class AdminController {
 	@RequestMapping({"/manageSinger/","/manageSinger"})
 	public String toManageSinger(Model model, HttpServletRequest request) {
 		//model.addAttribute("title", "首页");
+		List<Singer> singerList = singerService.getAllSinger();
+		//System.out.println(musicList);
+		model.addAttribute("singerList", singerList);
+		model.addAttribute("pageSize", pageSize);
+  		model.addAttribute("counts", singerList.size());
+		model.addAttribute(new Singer());
+		return "showManageSinger";
+	}
+	
+	@RequestMapping({"/searchSinger/"})
+	public String toSearchSinger(Model model, HttpServletRequest request) {
+		String singername = request.getParameter("singername");
+		//System.out.println(musicname);
+		//model.addAttribute("title", "首页");
+		List<Singer> singerList = singerService.getAllSinger();
+		List<Singer> result = new ArrayList<Singer>();
+		//获取搜索项
+		for(Singer m : singerList) {
+			if(m.getSingername().contains(singername)) {
+				result.add(m);
+			}
+		}
+		//System.out.println(musicList);
+		model.addAttribute("singerList", result);
+		model.addAttribute("pageSize", pageSize);
+  		model.addAttribute("counts", result.size());
+		model.addAttribute(new Singer());
+		model.addAttribute("singername", singername);
 		return "showManageSinger";
 	}
 	

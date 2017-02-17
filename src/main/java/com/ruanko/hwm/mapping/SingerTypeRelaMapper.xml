@@ -15,6 +15,12 @@
     from tb_singer_type_rela
     where id = #{id,jdbcType=INTEGER}
   </select>
+  <select id="selectByTypeId" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_singer_type_rela
+    where typeId = #{typeid,jdbcType=INTEGER}
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from tb_singer_type_rela
     where id = #{id,jdbcType=INTEGER}

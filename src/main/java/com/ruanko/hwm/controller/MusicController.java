@@ -249,16 +249,31 @@ public class MusicController {
 		// 判断上传的文件类型
 		if (!image.getContentType().equals("image/jpeg")) {
 			model.addAttribute("message", "图片文件必须是jpg格式");
-			model.addAttribute(new Music());
-			return "showAddMusic";
+			List<Music> musicList = musicService.getAllMusic();
+			//System.out.println(musicList);
+			model.addAttribute("musicList", musicList);
+			model.addAttribute("pageSize", pageSize);
+	  		model.addAttribute("counts", musicList.size());
+			model.addAttribute(music);
+			return "showManageMusic";
 		} else if (!song.getContentType().equals("audio/mpeg")) {
 			model.addAttribute("message", "音频文件必须是mp3格式");
-			model.addAttribute(new Music());
-			return "showAddMusic";
+			List<Music> musicList = musicService.getAllMusic();
+			//System.out.println(musicList);
+			model.addAttribute("musicList", musicList);
+			model.addAttribute("pageSize", pageSize);
+	  		model.addAttribute("counts", musicList.size());
+			model.addAttribute(music);
+			return "showManageMusic";
 		} else if (!s[1].equals("lrc") && !s[1].equals("krc")) {
 			model.addAttribute("message", "歌词文件必须是lrc格式");
-			model.addAttribute(new Music());
-			return "showAddMusic";
+			List<Music> musicList = musicService.getAllMusic();
+			//System.out.println(musicList);
+			model.addAttribute("musicList", musicList);
+			model.addAttribute("pageSize", pageSize);
+	  		model.addAttribute("counts", musicList.size());
+			model.addAttribute(music);
+			return "showManageMusic";
 		}
 
 		try {
@@ -330,8 +345,10 @@ public class MusicController {
 	 * @return
 	 */
 	@RequestMapping("/ajax_operation")
-	public @ResponseBody List<Music> findContactAjax1(String pageIndex, String pageSize, String totalPage) {
-		return ajax_common(pageIndex, pageSize, totalPage);
+	public @ResponseBody List<Object> findMusicAjax1(String pageIndex, String pageSize, String totalPage, String musicName) {
+		//System.out.println(musicName);
+		return ajax_common1(pageIndex, pageSize, totalPage, musicName);
+		
 	}
 	
 	/**
@@ -341,18 +358,47 @@ public class MusicController {
 	 * @param totalPage
 	 * @return
 	 */
-	public List<Music> ajax_common(String pageIndex, String pageSize, String totalPage) {
-		List<Music> resultList = musicService.getAllMusic();
+	public List<Object> ajax_common1(String pageIndex, String pageSize, String totalPage, String musicname) {
+		List<Music> resultList = new ArrayList<Music>();
+		List<Singer> singerList = new ArrayList<Singer>();
+		//判断是否为搜索
+		if(musicname == "") {
+			resultList = musicService.getAllMusic();
+			
+		}else {
+			List<Music> rl = musicService.getAllMusic();
+			List<Singer> sl = singerService.getAllSinger();
+			for(Music m : rl) {
+				if(m.getMusicname().contains(musicname)) {
+					resultList.add(m);
+				}
+			}
+		}
+		//获取对应的歌手
+		for(Music m : resultList) {
+			//System.out.println(m.getId());
+			Singer singer = singerService.getSingerById(musicSingerService.getSingerByMusicId(m.getId()).getSingerid());
+			singerList.add(singer);
+		}
+		
 		Integer pageIndex1 = Integer.parseInt(pageIndex);
 		Integer pageSize1 = Integer.parseInt(pageSize);
 		Integer totalPage1 = Integer.parseInt(totalPage);
 		List<Music> resultList1 = new ArrayList<Music>();
+		List<Singer> resultList2 = new ArrayList<Singer>();
+		List<Object> resultList3 = new ArrayList<Object>();
 		if (pageIndex1 <= totalPage1 / pageSize1) {
 			resultList1 = resultList.subList((pageIndex1 - 1) * pageSize1, pageIndex1 * pageSize1);
+			resultList2 = singerList.subList((pageIndex1 - 1) * pageSize1, pageIndex1 * pageSize1);
 		} else {
 			resultList1 = resultList.subList((pageIndex1 - 1) * pageSize1, totalPage1);
+			resultList2 = singerList.subList((pageIndex1 - 1) * pageSize1, totalPage1);
 		}
-		return resultList1;
+		resultList3.add(resultList1);
+		resultList3.add(resultList2);
+		return resultList3;
 	}
+	
+	
 
 }

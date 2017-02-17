@@ -10,4 +10,6 @@ public interface IMusicSingerService {
 	void addMS(MusicSingerRela msr);
 	
 	void updateMS(MusicSingerRela msr);
+	
+	MusicSingerRela getSingerByMusicId(Integer musicId);
 }
