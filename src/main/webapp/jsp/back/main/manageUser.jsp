@@ -164,7 +164,7 @@
             </ul>
           
           <section class="panel panel-default">
-              <header class="panel-heading"> 用户列表 </header>
+              <header class="panel-heading"> 用户列表(<c:out value="${counts}"></c:out>) </header>
               <div class="row text-sm wrapper">
                 <div class="col-sm-5 m-b-xs">
                   

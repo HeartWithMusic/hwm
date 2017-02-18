@@ -219,7 +219,7 @@
               <h3 class="m-b-none">Workset</h3>
               <small>Welcome back, Noteman</small> </div>-->
             <section class="panel panel-default">
-              <header class="panel-heading"> 歌手列表 </header>
+              <header class="panel-heading"> 歌手列表(<c:out value="${counts}"></c:out>) </header>
               <div class="row text-sm wrapper">
                 <div class="col-sm-5 m-b-xs">
                   
