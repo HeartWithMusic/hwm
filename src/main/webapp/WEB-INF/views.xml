@@ -92,4 +92,6 @@
 	<definition name="showAddAdmin" template="/jsp/back/main/addAdmin.jsp"></definition>
 	<!-- 后台管理管理员界面 -->	
 	<definition name="showManageAdmin" template="/jsp/back/main/manageAdmin.jsp"></definition>
+	<!-- 后台没有权限界面 -->	
+	<definition name="showNoAuth" template="/jsp/back/noAuth.jsp"></definition>
 </tiles-definitions>

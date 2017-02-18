@@ -15,8 +15,8 @@
     from tb_admin_role_rela
     where id = #{id,jdbcType=INTEGER}
   </select>
-  <select id="selectRoleId" resultType="java.lang.Integer" parameterType="java.lang.Integer" >
-    select roleId
+  <select id="selectRoleByAdminId" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
     <include refid="Base_Column_List" />
     from tb_admin_role_rela
     where adminId = #{adminId,jdbcType=INTEGER}

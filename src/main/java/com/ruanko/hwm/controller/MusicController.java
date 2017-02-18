@@ -324,6 +324,8 @@ public class MusicController {
 		List<Music> musicList = musicService.getAllMusic();
 		// System.out.println(musicList);
 		model.addAttribute("musicList", musicList);
+		model.addAttribute("pageSize", pageSize);
+  		model.addAttribute("counts", musicList.size());
 		model.addAttribute("message", "修改成功");
 		model.addAttribute(music);
 		return "showManageMusic";

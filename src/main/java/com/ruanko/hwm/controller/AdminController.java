@@ -68,6 +68,18 @@ public class AdminController {
 	@RequestMapping({"/index/"})
 	public String toIndex(Model model, HttpServletRequest request) {
 		model.addAttribute("title", "首页");
+		List<Music> musicList = musicService.getAllMusic();
+		int musicCounts = musicList.size();
+		int singerCounts = singerService.getAllSinger().size();
+		int playCounts = 0;
+		for(Music m : musicList) {
+			playCounts += m.getPlaycounts();
+		}
+		
+		
+		model.addAttribute("musicCounts", musicCounts);
+		model.addAttribute("singerCounts", singerCounts);
+		model.addAttribute("playCounts", playCounts);
 		return "showAdminIndex";
 	}
 	
@@ -222,7 +234,7 @@ public class AdminController {
 		return "showAddAdmin";
 	}
 	
-	@RequestMapping({"/doAddAdmin/"}) //添加管理员
+	@RequestMapping({"/doAddAdmin/","/doAddAdmin"}) //添加管理员
 	public String logup(@ModelAttribute("admin")Admin admin, Model model, HttpServletRequest request){
 		//System.out.println(admin.getAdminname());	
 		//model.addAttribute(new Admin());
@@ -269,7 +281,7 @@ public class AdminController {
 	 * @param request
 	 * @param response
 	 */
-	@RequestMapping({ "/deleteAdmin" })
+	@RequestMapping({ "/deleteAdmin","/deleteAdmin/" })
 	public String deleteMusic(Model model, HttpServletRequest request, HttpServletResponse response) {
 		int id = Integer.parseInt(request.getParameter("id"));
 		System.out.println(id);
@@ -292,7 +304,7 @@ public class AdminController {
 	 * @param request
 	 * @param response
 	 */
-	@RequestMapping({ "/getAdmin" })
+	@RequestMapping({ "/getAdmin", "/getAdmin/" })
 	public String getSinger(Model model, HttpServletRequest request, HttpServletResponse response) {
 		int id = Integer.parseInt(request.getParameter("id"));
 		Admin admin = adminService.getAdminById(id);
@@ -319,7 +331,7 @@ public class AdminController {
 	 * @param request
 	 * @param response
 	 */
-	@RequestMapping({ "/updateAdmin" })
+	@RequestMapping({ "/updateAdmin", "/updateAdmin/" })
 	public String updateMusic(@ModelAttribute("admin") Admin admin, Model model,
 			HttpServletRequest request, HttpServletResponse response) {
 		int id = Integer.parseInt(request.getParameter("id"));
@@ -364,6 +376,8 @@ public class AdminController {
 		List<Admin> adminList = adminService.getAllAdmin();
 		// System.out.println(musicList);
 		model.addAttribute("adminList", adminList);
+		model.addAttribute("pageSize", pageSize);
+  		model.addAttribute("counts", adminList.size());
 		model.addAttribute("message", "修改成功");
 		model.addAttribute(admin);
 		return "showManageAdmin";
@@ -379,7 +393,7 @@ public class AdminController {
 	 * @param totalPage
 	 * @return
 	 */
-	@RequestMapping("/ajax_operation")
+	@RequestMapping({"/ajax_operation", "/ajax_operation/"})
 	public @ResponseBody List<Object> findSingerAjax1(String pageIndex, String pageSize, String totalPage, String adminName) {
 		//System.out.println(musicName);
 		return ajax_common1(pageIndex, pageSize, totalPage, adminName);
@@ -461,7 +475,20 @@ public class AdminController {
 			message = "账号不存在";
 			model.addAttribute("message",message);
 		}else if(ad.getPassword().equalsIgnoreCase((MD5Util.getMD5Code(admin.getPassword())))){
-			request.getSession().setAttribute("admin", admin);
+			request.getSession().setAttribute("admin", ad);
+			List<Music> musicList = musicService.getAllMusic();
+			int musicCounts = musicList.size();
+			int singerCounts = singerService.getAllSinger().size();
+			int playCounts = 0;
+			for(Music m : musicList) {
+				playCounts += m.getPlaycounts();
+			}
+			
+			
+			model.addAttribute("musicCounts", musicCounts);
+			model.addAttribute("singerCounts", singerCounts);
+			model.addAttribute("playCounts", playCounts);
+			
 			return "showAdminIndex";
 		}else{
 			message = "密码错误";
@@ -478,6 +505,14 @@ public class AdminController {
 		return "showAdminLogin";
 	}
 	
+	/**
+	 * 没有权限页面
+	 * @return
+	 */
+	@RequestMapping({"/noAuth/"})
+	public String toNoAuth() {
+		return "showNoAuth";
+	}
 	
 	
 }

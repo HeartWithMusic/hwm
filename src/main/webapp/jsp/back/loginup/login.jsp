@@ -16,34 +16,32 @@
 </head>
 <body>
 	<section id="content" class="m-t-lg wrapper-md animated fadeInUp">
-	  <div class="container aside-xxl"> <a class="navbar-brand block" href="#">心随乐动后台管理</a>
+	  <div class="container aside-xxl"> <a class="navbar-brand block" href="<%=request.getContextPath()%>/admin/login/">心随乐动后台管理</a>
 	    <section class="panel panel-default bg-white m-t-lg">
 	      <header class="panel-heading text-center"> <strong>管理员登录</strong> </header>
 	      <% String action = request.getContextPath() + "/admin/doLogin/";%>
-	     <sf:form class = "panel-body wrapper-lg" method="post" modelAttribute="admin" action="<%=action %>">
+	     <sf:form data-validate="parsley" class = "panel-body wrapper-lg" method="post" modelAttribute="admin" action="<%=action %>">
         <div class="form-group">
 	          <label class="control-label">用户名</label>
-	          <sf:input type="text" class="form-control input-lg" path ="adminname"></sf:input>
+	          <sf:input data-required="true" type="text" class="form-control input-lg" path ="adminname"></sf:input>
 	        </div>
 	        <div class="form-group">
 	          <label class="control-label">密码</label>
-	          <sf:input type="password" path="password" class="form-control input-lg"></sf:input>
+	          <sf:input data-required="true" type="password" path="password" class="form-control input-lg"></sf:input>
 	        </div>
-	        <div class="checkbox">
+	        <!--  <div class="checkbox">
 	          <label>
 	            <input type="checkbox">
 	            记住密码 </label>
 	        </div>
-	        <a href="#" class="pull-right m-t-xs"><small>忘记密码?</small></a>
-	        <button type="submit" class="btn btn-primary">登录</button>
+	        <a href="#" class="pull-right m-t-xs"><small>忘记密码?</small></a>-->
+	        <button type="submit" class="btn-primary btn btn-block">登录</button>
 	        <div class="line line-dashed"></div>
-	        <p class="text-muted text-center"><small>没有账号?</small></p>
-	        <a href="<%=request.getContextPath()%>/admin/logup/" class="btn btn-default btn-block">立即注册</a>
-	  
+		  	<div style="color:red;font-size:15px;" class="text-center">
+		      	<c:out value="${message }"></c:out>
+		     </div>
 	      </sf:form>
-	      <div>
-	      	<c:out value="${message }"></c:out>
-	      </div>
+	      
 	    </section>
 	  </div>
 	</section>
@@ -56,4 +54,8 @@
 	</footer>
 	<!-- / footer --> <script src="<%=request.getContextPath()%>/js/app.v2.js"></script> <!-- Bootstrap --> <!-- App -->
 </body>
+<script src="<%=request.getContextPath()%>/js/back/app.v2.js"></script> <!-- Bootstrap --> <!-- App -->
+<script src="<%=request.getContextPath()%>/js/parsley/parsley.min.js" cache="false"></script>
+<script src="<%=request.getContextPath()%>/js/parsley/parsley.extend.js" cache="false"></script>
+
 </html>

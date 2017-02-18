@@ -28,7 +28,7 @@
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 <h4 class="modal-title" id="myModalLabel">修改管理员</h4>
             </div>
-            <% String action = request.getContextPath() + "/admin/updateAdmin";%>
+            <% String action = request.getContextPath() + "/admin/updateAdmin/";%>
             <sf:form data-validate="parsley" style="width:800px" method="post" modelAttribute="admin" action="<%=action %>" enctype="multipart/form-data">
                   <div class="modal-body">
                   <input type="hidden" value="${admin.id }" name="id"/>
@@ -109,11 +109,11 @@
           </section>
         </section>
       </li>-->
-      <li class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown"> <span class="thumb-sm avatar pull-left"> <img src="<%=request.getContextPath()%>/img/common/user_default_icon.jpg"> </span> 用户1 <b class="caret"></b> </a>
+      <li class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown"> <span class="thumb-sm avatar pull-left"> <img src="<%=request.getContextPath()%>/img/common/user_default_icon.jpg"> </span> ${sessionScope.admin.adminname} <b class="caret"></b> </a>
         <ul class="dropdown-menu animated fadeInRight">
           <span class="arrow top"></span>
           <li> <a href="docs.html">帮助</a> </li>
-          <li> <a href="modal.lockme.html" data-toggle="ajaxModal" >注销</a> </li>
+          <li> <a href="<%=request.getContextPath()%>/admin/doLogOut/" >注销</a> </li>
         </ul>
       </li>
     </ul>
@@ -168,8 +168,8 @@
           <section class="scrollable padder">
             <ul class="breadcrumb no-border no-radius b-b b-light pull-in">
               <li><a href="<%=request.getContextPath()%>/admin/index/"><i class="fa fa-home"></i> 主页</a></li>
-              <li><a href="<%=request.getContextPath()%>/admin/index/"><i class="fa fa-home"></i> 管理员管理</a></li>
-              <li class="active">管理管理员</li>
+              <li class="active">管理员管理</li>
+              <li >管理管理员</li>
             </ul>
             <!--  <div class="m-b-md">
               <h3 class="m-b-none">Workset</h3>
@@ -277,15 +277,15 @@
 	}
 	
 	function delete_ok() {
-		window.location.href = "http://localhost:8080/hwm/admin/deleteAdmin?id=" + id1;
+		window.location.href = "http://localhost:8080/hwm/admin/deleteAdmin/?id=" + id1;
 	}
 	
 	function updateAdmin_get(id) { 
-		window.location.href = "http://localhost:8080/hwm/admin/getAdmin?id=" + id; 
+		window.location.href = "http://localhost:8080/hwm/admin/getAdmin/?id=" + id; 
 	}
 	
 	function updateAdmin() {
-		window.location.href = "http://localhost:8080/hwm/admin/updateAdmin"; 
+		window.location.href = "http://localhost:8080/hwm/admin/updateAdmin/"; 
 	}
 	
 	if("${admin.adminname}" != "" || "${message}" != "") {
@@ -294,6 +294,11 @@
 	//记录总页面和每页数
 	var ps = Number(document.getElementById("pageSize").value);
 	var tc = Number(document.getElementById("counts").value);
+	
+	if(tc == 0) {
+		$('#result').html("<span style='color:gray;font-size:20px;'>没有管理员信息</span>");
+	}
+	
 	//分页
 	$('.pagination').jqPaginator({
 		totalCounts: tc,
@@ -324,7 +329,7 @@
 		//alert(sn);
 		$.ajax({  
 	        type : "POST",  
-	        url : $('#contextPath').val() + "/admin/ajax_operation" ,  
+	        url : $('#contextPath').val() + "/admin/ajax_operation/" ,  
 	        dataType:"json",
 	        cache : false,  
 	        data : {  
@@ -357,6 +362,7 @@
 	    		}
 	    		html += ' </tbody>';
 				html += '</table>';
+				
 	    		$('#result').html(html);
 	        }  
 	    });  

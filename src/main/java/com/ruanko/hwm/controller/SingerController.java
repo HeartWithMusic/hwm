@@ -245,6 +245,8 @@ public class SingerController {
 		List<Singer> singerList = singerService.getAllSinger();
 		// System.out.println(musicList);
 		model.addAttribute("singerList", singerList);
+		model.addAttribute("pageSize", pageSize);
+  		model.addAttribute("counts", singerList.size());
 		model.addAttribute("message", "修改成功");
 		model.addAttribute(singer);
 		return "showManageSinger";

@@ -18,7 +18,17 @@
 	<mvc:resources location="/fonts/" mapping="/fonts/**"/>
 	<mvc:resources location="/music/" mapping="/music/**"/>
 	<!-- 配置登录拦截器 -->
-	
+	<mvc:interceptors>
+		<!-- 后台登陆拦截 -->
+		<mvc:interceptor>
+			<mvc:mapping path="/admin/**"/>
+			<mvc:exclude-mapping path="/admin/login/"/>
+			<mvc:exclude-mapping path="/admin/doLogin/"/>
+			<mvc:exclude-mapping path="/admin/noAuth/"/>
+			<mvc:exclude-mapping path="/admin/doLogOut/"/>
+			<bean id="adminLoginInterceptor" class="com.ruanko.hwm.interceptor.AdminLoginInterceptor"></bean>
+		</mvc:interceptor>
+	</mvc:interceptors>
     
     
 	<!-- 自动扫描该包，使SpringMVC认为包下用了@controller注解的类是控制器 -->

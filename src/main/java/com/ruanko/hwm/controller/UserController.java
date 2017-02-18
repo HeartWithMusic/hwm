@@ -156,7 +156,9 @@ public class UserController {
 
 		List<User> userList = userService.findAllUser();
 		// System.out.println(musicList);
-		model.addAttribute("singerList", userList);
+		model.addAttribute("userList", userList);
+		model.addAttribute("pageSize", pageSize);
+  		model.addAttribute("counts", userList.size());
 		model.addAttribute("message", "修改成功");
 		model.addAttribute(user);
 		return "showManageUser";

@@ -17,7 +17,7 @@ public class AdminRoleServiceImpl implements IAdminRoleService {
 	}
 
 	public Integer getRoleId(Integer adminId) {
-		return arrm.selectRoleId(adminId);
+		return arrm.selectRoleByAdminId(adminId).getRoleid();
 	}
 
 	public void updateAdminRole(AdminRoleRela arr) {

@@ -100,11 +100,11 @@
     
     <ul class="nav navbar-nav navbar-right hidden-xs nav-user">
       
-      <li class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown"> <span class="thumb-sm avatar pull-left"> <img src="<%=request.getContextPath()%>/img/common/user_default_icon.jpg"> </span> 用户1 <b class="caret"></b> </a>
+      <li class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown"> <span class="thumb-sm avatar pull-left"> <img src="<%=request.getContextPath()%>/img/common/user_default_icon.jpg"> </span> ${admin.adminname} <b class="caret"></b> </a>
         <ul class="dropdown-menu animated fadeInRight">
           <span class="arrow top"></span>
           <li> <a href="docs.html">帮助</a> </li>
-          <li> <a href="modal.lockme.html" data-toggle="ajaxModal" >注销</a> </li>
+          <li> <a href="<%=request.getContextPath()%>/admin/doLogOut/" >注销</a> </li>
         </ul>
       </li>
     </ul>
@@ -159,8 +159,8 @@
           <section class="scrollable padder">
             <ul class="breadcrumb no-border no-radius b-b b-light pull-in">
               <li><a href="<%=request.getContextPath()%>/admin/index/"><i class="fa fa-home"></i> 主页</a></li>
-              <li><a href="<%=request.getContextPath()%>/admin/index/"><i class="fa fa-home"></i> 用户管理</a></li>
-              <li class="active">管理用户</li>
+              <li class="active"> 用户管理</li>
+              <li>管理用户</li>
             </ul>
           
           <section class="panel panel-default">
@@ -283,6 +283,9 @@
 	//记录总页面和每页数
 	var ps = Number(document.getElementById("pageSize").value);
 	var tc = Number(document.getElementById("counts").value);
+	if(tc == 0) {
+		$('#result').html("<span style='color:gray;font-size:20px;'>没有用户信息</span>");
+	}
 	//分页
 	$('.pagination').jqPaginator({
 		totalCounts: tc,

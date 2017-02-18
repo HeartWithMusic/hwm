@@ -105,13 +105,13 @@
               <small>Welcome back, Noteman</small> </div>-->
             <section class="panel panel-default">
               <div class="row m-l-none m-r-none bg-light lter">
-                <div class="col-sm-6 col-md-3 padder-v b-r b-light"> <span class="fa-stack fa-2x pull-left m-r-sm"> <i class="fa fa-circle fa-stack-2x text-info"></i> <i class="fa fa-music fa-stack-1x text-white"></i> </span> <a class="clear" href="#"> <span class="h3 block m-t-xs"><strong>52,000</strong></span> <small class="text-muted text-uc">歌曲数量</small> </a> </div>
-                <div class="col-sm-6 col-md-3 padder-v b-r b-light lt"> <span class="fa-stack fa-2x pull-left m-r-sm"> <i class="fa fa-circle fa-stack-2x text-warning"></i> <i class="fa fa-male fa-stack-1x text-white"></i> </span> <a class="clear" href="#"> <span class="h3 block m-t-xs"><strong id="bugs">468</strong></span> <small class="text-muted text-uc">歌手数量</small> </a> </div>
-                <div class="col-sm-6 col-md-3 padder-v b-r b-light"> <span class="fa-stack fa-2x pull-left m-r-sm"> <i class="fa fa-circle fa-stack-2x text-danger"></i> <i class="fa fa-play fa-stack-1x text-white"></i> </span> <a class="clear" href="#"> <span class="h3 block m-t-xs"><strong id="firers">359</strong></span> <small class="text-muted text-uc">播放次数</small> </a> </div>
+                <div class="col-sm-6 col-md-3 padder-v b-r b-light"> <span class="fa-stack fa-2x pull-left m-r-sm"> <i class="fa fa-circle fa-stack-2x text-info"></i> <i class="fa fa-music fa-stack-1x text-white"></i> </span> <a class="clear" href="#"> <span class="h3 block m-t-xs"><strong>${musicCounts}</strong></span> <small class="text-muted text-uc">歌曲数量</small> </a> </div>
+                <div class="col-sm-6 col-md-3 padder-v b-r b-light lt"> <span class="fa-stack fa-2x pull-left m-r-sm"> <i class="fa fa-circle fa-stack-2x text-warning"></i> <i class="fa fa-male fa-stack-1x text-white"></i> </span> <a class="clear" href="#"> <span class="h3 block m-t-xs"><strong id="bugs">${singerCounts}</strong></span> <small class="text-muted text-uc">歌手数量</small> </a> </div>
+                <div class="col-sm-6 col-md-3 padder-v b-r b-light"> <span class="fa-stack fa-2x pull-left m-r-sm"> <i class="fa fa-circle fa-stack-2x text-danger"></i> <i class="fa fa-play fa-stack-1x text-white"></i> </span> <a class="clear" href="#"> <span class="h3 block m-t-xs"><strong id="firers">${playCounts}</strong></span> <small class="text-muted text-uc">播放次数</small> </a> </div>
                 <div class="col-sm-6 col-md-3 padder-v b-r b-light lt"> <span class="fa-stack fa-2x pull-left m-r-sm"> <i class="fa fa-circle fa-stack-2x icon-muted"></i> <i class="fa fa-clock-o fa-stack-1x text-white"></i> </span> <a class="clear" href="#"> <span style="font-size: 20px;"class="h3 block m-t-xs" id="time"></span> <small class="text-muted text-uc">时间</small> </a> </div>
               </div>
             </section>
-            <div class="row">
+            <!--  <div class="row">
               <div class="col-md-8">
                 <section class="panel panel-default">
                   <header class="panel-heading font-bold">Statistics</header>
@@ -197,9 +197,9 @@
                     <header> <a href="#"><strong>John smith</strong></a> shared a <a href="#" class="text-info">video</a> to you <span class="text-muted text-xs"> 24 minutes ago </span> </header>
                     <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi id neque quam.</div>
                   </section>
-                </article>
+                </article>-->
                 <!-- .comment-reply -->
-                <article id="comment-id-2" class="comment-reply">
+                <!-- <article id="comment-id-2" class="comment-reply">
                   <article class="comment-item"> <a class="pull-left thumb-sm"> <img src="images/avatar_default.jpg" class="img-circle"> </a>
                     <section class="comment-body m-b-lg">
                       <header> <a href="#"><strong>John smith</strong></a> <span class="text-muted text-xs"> 26 minutes ago </span> </header>
@@ -212,9 +212,9 @@
                       <div>Good idea.</div>
                     </section>
                   </article>
-                </article>
+                </article>-->
                 <!-- / .comment-reply -->
-                <article id="comment-id-2" class="comment-item"> <span class="fa-stack pull-left m-l-xs"> <i class="fa fa-circle text-danger fa-stack-2x"></i> <i class="fa fa-file-o text-white fa-stack-1x"></i> </span>
+                <!-- <article id="comment-id-2" class="comment-item"> <span class="fa-stack pull-left m-l-xs"> <i class="fa fa-circle text-danger fa-stack-2x"></i> <i class="fa fa-file-o text-white fa-stack-1x"></i> </span>
                   <section class="comment-body m-b-lg">
                     <header> <a href="#"><strong>John Doe</strong></a> <span class="text-muted text-xs"> 1 hour ago </span> </header>
                     <div>Lorem ipsum dolor sit amet, consecteter adipiscing elit.</div>
@@ -227,7 +227,41 @@
                   </section>
                 </article>
               </section>
-              <a href="#" class="btn btn-default btn-sm m-b"><i class="fa fa-plus icon-muted"></i> more</a> </div>
+              <a href="#" class="btn btn-default btn-sm m-b"><i class="fa fa-plus icon-muted"></i> more</a> </div>-->
+              
+              <section class="panel panel-default portlet-item">
+                  <header class="panel-heading">
+                    <ul class="nav nav-pills pull-right">
+                      <li> <a href="#" class="panel-toggle text-muted active"><i class="fa fa-caret-down text-active"></i><i class="fa fa-caret-up text"></i></a> </li>
+                    </ul>
+                                    <span class="h3"><i class="fa fa-bell"></i> 通知信息</span>  </header>
+                  <section class="panel-body">
+                    <article class="media">
+                      <div class="pull-left"> <span class="fa-stack fa-lg"> <i class="fa fa-circle fa-stack-2x"></i> <i class="fa fa-envelope-o fa-stack-1x text-white"></i> </span> </div>
+                      <div class="media-body"> <div class="h2">使用指南</div></br>
+                      <div class="h4">
+                      	1. 心随乐动后台管理系统对于各个管理员赋予了不同的权限;
+                      </div>
+                      <div class="h4">
+                      	2. 共有四种不同的权限:
+                      </div>
+                      <div class="h4">
+                      	&nbsp;&nbsp;一、超级管理员，其能管理管理员和赋予管理权限;
+                      </div>
+                      <div class="h4">
+                      	&nbsp;&nbsp;二、歌曲管理员，其能管理歌曲信息;
+                      </div>
+                      <div class="h4">
+                      	&nbsp;&nbsp;三、歌手管理员，其能管理歌手信息;
+                      </div>
+                      <div class="h4">
+                      	&nbsp;&nbsp;四、用户管理员，其能管理用户信息;
+                      </div><br>
+                       <em class="h6">libaoshen 发表于 <span class="text-danger">2017/02/18</span></em> </div>
+                    </article>
+                    
+                  </section>
+                </section>
           </section>
         </section>
         <a href="#" class="hide nav-off-screen-block" data-toggle="class:nav-off-screen" data-target="#nav"></a> </section>
