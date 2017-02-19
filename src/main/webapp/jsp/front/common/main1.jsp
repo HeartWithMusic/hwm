@@ -16,7 +16,7 @@
 	<script src="<%=request.getContextPath()%>/js/bootstrap.min.js"></script>
 </head>
 <body>
-	<div id="base">
+	<div id="base" >
 		<div id="top">
 			<tiles:insertAttribute name="top"/>
 		</div>
@@ -28,7 +28,9 @@
 		</div>
 	</div>
 	<script type="text/javascript">
-		parent.ifrurl(window.location);
+		var url = window.location.href;
+		window.parent.ifurl(url);
+		
 	</script>
 </body>
 </html>

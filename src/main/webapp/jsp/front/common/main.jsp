@@ -6,19 +6,68 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>${title}</title>
+<script src="<%=request.getContextPath()%>/js/common/jquery-3.1.1.js"></script>
+<script src="<%=request.getContextPath()%>/js/bootstrap.min.js"></script>
 </head>
-<body>
-	<iframe scrolling="auto" name="aa" frameborder="0" src="<%=request.getContextPath()%>/home/discover/1" style="position: absolute;left: 0;top: 0;width: 100%;height: 100%;border: 0;"></iframe>
+<body id="body">
+	<iframe scrolling="auto" name="aa" id="aa" frameborder="0" src="${url}" style="position: absolute;left: 0;top: 0;width: 100%;height: 100%;border: 0;"></iframe>
 	<jsp:include page="player.jsp"></jsp:include>
 	
-	<script type="text/javascript">
 	
-		function ifrurl(url){
+</body>
+<script type="text/javascript">
+		//var url = window.location.href;
+		//alert(url);
+		function ifurl(url){
 			var stateObject = {};
 			var title = "Wow Title";
-			var newUrl = url;
+			var newUrl = url + "/rf";
+			//alert(newUrl);
+			change_state(newUrl);
 			history.pushState(stateObject,title,newUrl);
+		};
+		//alert("${url}");
+		$("#body").bind("keydown", function(event) {
+            if (event.keyCode == 116) {
+                 if($("#aa") != null) {
+                	alert(116);
+                    $("#aa").window.location.reload();      
+                    return false;
+                } 
+            }
+        }); 
+		
+		function change_state(url) {
+			var tj = document.getElementById('aa').contentWindow.document.getElementById('tuijian');
+			var rk = document.getElementById('aa').contentWindow.document.getElementById('rank');
+			var sg = document.getElementById('aa').contentWindow.document.getElementById('song1');
+			var rd = document.getElementById('aa').contentWindow.document.getElementById('radio');
+			var sig = document.getElementById('aa').contentWindow.document.getElementById('singer1');
+			var ab = document.getElementById('aa').contentWindow.document.getElementById('album1');
+			
+			if(url == "http://localhost:8080/hwm/home/discover/1/rf") {
+				setCss(tj);
+			}else if(url == "http://localhost:8080/hwm/home/discover/rankList/rf") {
+				setCss(rk);
+			}else if(url == "http://localhost:8080/hwm/home/discover/musicList/rf") {
+				setCss(sg);
+			}else if(url == "http://localhost:8080/hwm/home/discover/radio/rf") {
+				setCss(rd);
+			}else if(url == "http://localhost:8080/hwm/home/discover/singer/rf") {
+				setCss(sig);
+			}else if(url == "http://localhost:8080/hwm/home/discover/album/rf") {
+				setCss(ab);
+			}
+			
+			
 		}
+		
+		function setCss(ob) {
+			ob.style.border = "1px solid #AA2222";
+			ob.style.borderRadius = "15px";
+			ob.style.boxShadow = "inset 0px 0px 1px 1px #BE3030";
+			ob.style.backgroundColor = "#990000";
+		}
+		
 	</script>
-</body>
 </html>

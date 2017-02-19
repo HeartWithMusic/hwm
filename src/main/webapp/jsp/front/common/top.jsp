@@ -49,7 +49,7 @@
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 				    </button>
-						  <a class="navbar-brand" href="/hwm/home/discover/1">
+						  <a class="navbar-brand" href="/hwm/home/discover/">
 			  				<img style="margin-top:-15px;width:130px;height:50px;margin-left:-18px;" src="<%=request.getContextPath()%>/img/front/home/logo.png"/>
 						  </a><!-- navbar-brand让文本看起来更大一号 -->
 			    </div>
@@ -70,7 +70,7 @@
 					    <span class="caret"></span>
 					  </button>
 					  <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1" style="background:#333;">
-					    <li role="presentation"><a class="ex3" role="menuitem" tabindex="-1" href="#" style="color:white;">网易云账号登陆</a></li>
+					    <li role="presentation"><a class="ex3" role="menuitem" tabindex="-1" href="#" style="color:white;">账号登陆</a></li>
 					    <li role="presentation"><a role="menuitem" tabindex="-1" href="#" style="color:white;">微信QQ登陆</a></li>
 					    <li role="presentation"><a role="menuitem" tabindex="-1" href="#" style="color:white;">手机登陆</a></li>
 					    <li role="presentation"><a role="menuitem" tabindex="-1" href="#" style="color:white;">微博登陆</a></li>
@@ -94,12 +94,12 @@
 		<!--我的音乐对应转换第二导航栏 -->
 		<div class="tab-pane active" id="home" style="background-image:url('<%=request.getContextPath()%>/img/front/home/redBg.png');background-repeat:repeat-x;">
 			<ul class="nav nav-pills" style="margin-left:290px;margin-top:-20px;">
-				<li><a href="/hwm/home/discover/1"  style="height:34px;color:white;">推荐</a></li>
-				<li><a href="/hwm/home/discover/rankList"  style="height:34px;color:white;">排行榜</a></li>
-				<li><a href="/hwm/home/discover/musicList"  style="height:34px;color:white;">歌单</a></li>
-				<li><a href="/hwm/home/discover/radio"  style="height:34px;color:white;">主播电台</a></li>
-				<li><a href="/hwm/home/discover/singer"  style="height:34px;color:white;">歌手</a></li>
-				<li><a href="/hwm/home/discover/album" style="height:34px;color:white;">新碟上架</a></li>
+				<li><a id="tuijian" href="/hwm/home/discover/1"  style="height:34px;color:white;">推荐</a></li>
+				<li><a id="rank" href="/hwm/home/discover/rankList"  style="height:34px;color:white;">排行榜</a></li>
+				<li><a id="song1" href="/hwm/home/discover/musicList"  style="height:34px;color:white;">歌单</a></li>
+				<li><a id="radio" href="/hwm/home/discover/radio"  style="height:34px;color:white;">主播电台</a></li>
+				<li><a id="singer1" href="/hwm/home/discover/singer"  style="height:34px;color:white;">歌手</a></li>
+				<li><a id="album1" href="/hwm/home/discover/album" style="height:34px;color:white;">新碟上架</a></li>
 			</ul>
 		</div>
 		<div class="tab-pane" id="profile">
@@ -183,7 +183,7 @@
 		</div><!-- /.modal-content -->
 	</div><!-- /.modal -->
 </div>
-	<script runat="server">
+	<script>
 		goTopEx();		
 		function toLogup() {
 			window.location.href="http://localhost:8080/hwm/home/logup";

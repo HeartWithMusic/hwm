@@ -1,6 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ page isELIgnored="false" %> 
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %>  
+<%@ taglib uri="http://www.springframework.org/tags" prefix="s" %> 
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="sf" %>
+<%@ page isELIgnored="false" %> 
 <style>
 	.left_menu {
 		float:left;
@@ -511,31 +516,38 @@
 	</div>
 	<!--右侧栏-->
 	<div style="float:right;margin-top:2px;width:250px;">
-		<!-- 没有登录显示-->
-		<!--<div style="background: 	#F5F5F5;border:1px solid  #DCDCDC">
-			<p style="font-size:10pt;margin-left:20px;margin-right:20px;margin-top:15px;">
-				登录网易云音乐，可以享受无限收藏的乐趣，并且无限同步到手机
-			</p>
-			<button type="button" class="btn btn-danger" style="margin-left:50px;margin-top:10px;margin-bottom:15px;">用户登录</button>
-		</div>
-		-->
-		<!--登录之后显示-->
-		<div style="height:200px;background: #F5F5F5;border:1px solid #DCDCDC">
-			<div>
-				<a href="#">
-					<img src="<%=request.getContextPath()%>/img/front/home/personImg.png" style="margin-left:20px;margin-top:20px;width:75px;height:90px;">
-				</a>
-				<a href="#" style="float:right;margin-right:100px;padding-top:18px;"><strong>${sessionScope.user.username}<strong></a>
-				<a href="#" style="float:right;margin-right:95px;margin-top:-70px;color:#A9A9A9"><i>LV.${sessionScope.user.level}</i></a>
-				 <button type="button" class="btn btn-primary btn-sm" style="width:100px;float:right;margin-right:25px;margin-top:-35px;">签到</button>
-				
-			</div>
-				<ul style="margin-left:10px;margin-top:20px;">
-					<li style="margin-left:-30px;float:left;list-style:none;"><a href="#" style="color:gray;font-size:15pt;">10</a></br><a style="font-size:10pt;color:gray;">动态</a></li>
-					<li style="margin-left:35px;float:left;list-style:none;"><a href="#" style="color:gray;font-size:15pt;">100</a></br><a style="font-size:10pt;color:gray;">关注</a></li>
-					<li style="margin-left:35px;float:left;list-style:none;"><a href="#" style="color:gray;font-size:15pt;">100</a></br><a style="font-size:10pt;color:gray;">粉丝</a></li>
-				</ul>
-		</div>
+		<c:choose>
+			<c:when test="${sessionScope.user == null }">
+				<!-- 没有登录显示-->
+				<div style="background: 	#F5F5F5;border:1px solid  #DCDCDC">
+					<p style="font-size:10pt;margin-left:20px;margin-right:20px;margin-top:15px;">
+						登录心随乐动，可以享受无限收藏的乐趣
+					</p>
+					<button type="button" class="btn btn-danger" style="margin-left:50px;margin-top:10px;margin-bottom:15px;" data-toggle="modal" data-target="#myModal">用户登录</button>
+				</div>
+			</c:when>
+			<c:when test="${sessionScope.user != null }">
+				<!--登录之后显示-->
+				<div style="height:200px;background: #F5F5F5;border:1px solid #DCDCDC">
+					<div>
+						<a href="#">
+							<img src="<%=request.getContextPath()%>/img/front/home/personImg.png" style="margin-left:20px;margin-top:20px;width:75px;height:90px;">
+						</a>
+						<a href="#" style="float:right;margin-right:100px;padding-top:18px;"><strong>${sessionScope.user.username}<strong></a>
+						<a href="#" style="float:right;margin-right:95px;margin-top:-70px;color:#A9A9A9"><i>LV.${sessionScope.user.level}</i></a>
+						 <button type="button" class="btn btn-primary btn-sm" style="width:100px;float:right;margin-right:25px;margin-top:-35px;">签到</button>
+						
+					</div>
+						<ul style="margin-left:10px;margin-top:20px;">
+							<li style="margin-left:-30px;float:left;list-style:none;"><a href="#" style="color:gray;font-size:15pt;">10</a></br><a style="font-size:10pt;color:gray;">动态</a></li>
+							<li style="margin-left:35px;float:left;list-style:none;"><a href="#" style="color:gray;font-size:15pt;">100</a></br><a style="font-size:10pt;color:gray;">关注</a></li>
+							<li style="margin-left:35px;float:left;list-style:none;"><a href="#" style="color:gray;font-size:15pt;">100</a></br><a style="font-size:10pt;color:gray;">粉丝</a></li>
+						</ul>
+				</div>
+			</c:when>
+		</c:choose>
+		
+		
 		
 	<!--入驻歌手-->	
 		<div style="border:1px solid #DCDCDC;">

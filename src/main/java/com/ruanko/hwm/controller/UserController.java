@@ -225,6 +225,7 @@ public class UserController {
 	@RequestMapping({"/discover/"})
 	public String toHome(Model model, HttpServletRequest request) {
 		model.addAttribute("title", "心随乐动");
+		model.addAttribute("url", request.getRequestURL()+"1");
 		model.addAttribute(new User());
 		return "showHome";
 	}
@@ -238,32 +239,90 @@ public class UserController {
 	@RequestMapping({"/discover/rankList"})
 	public String toRankList(Model model, HttpServletRequest request) {
 		model.addAttribute("title", "排行榜");
+		model.addAttribute(new User());
 		return "showRankList";
 	}
 	
 	@RequestMapping({"/discover/musicList"})
 	public String toMusicList(Model model, HttpServletRequest request) {
 		model.addAttribute("title", "歌单");
+		model.addAttribute(new User());
 		return "showMusicList";
 	}
 	
 	@RequestMapping({"/discover/radio"})
 	public String toRadio(Model model, HttpServletRequest request) {
 		model.addAttribute("title", "电台");
+		model.addAttribute(new User());
 		return "showRadio";
 	}
 	
 	@RequestMapping({"/discover/singer"})
 	public String toSinger(Model model, HttpServletRequest request) {
 		model.addAttribute("title", "歌手");
+		model.addAttribute(new User());
 		return "showSinger";
 	}
 	
 	@RequestMapping({"/discover/album"})
 	public String toAlbum(Model model, HttpServletRequest request) {
 		model.addAttribute("title", "新碟上架");
+		model.addAttribute(new User());
 		return "showAlbum";
 	}
+	
+	
+	
+	
+	@RequestMapping({"/discover/1/rf"})
+	public String toHome11(Model model, HttpServletRequest request) {
+		model.addAttribute("title", "心随乐动");
+		model.addAttribute("url", request.getRequestURL().toString().split("\\/rf")[0]);
+		//System.out.println(request.getRequestURL().toString().split("\\/rf")[0]);
+		model.addAttribute(new User());
+		return "showHome";
+	}
+	@RequestMapping({"/discover/rankList/rf"})
+	public String toRankList1(Model model, HttpServletRequest request) {
+		model.addAttribute("title", "排行榜");
+		model.addAttribute("url", request.getRequestURL().toString().split("/rf")[0]);
+		model.addAttribute(new User());
+		return "showHome";
+	}
+	
+	@RequestMapping({"/discover/musicList/rf"})
+	public String toMusicList1(Model model, HttpServletRequest request) {
+		model.addAttribute("title", "歌单");
+		model.addAttribute("url", request.getRequestURL().toString().split("/rf")[0]);
+		model.addAttribute(new User());
+		return "showHome";
+	}
+	
+	@RequestMapping({"/discover/radio/rf"})
+	public String toRadio1(Model model, HttpServletRequest request) {
+		model.addAttribute("title", "电台");
+		model.addAttribute("url", request.getRequestURL().toString().split("/rf")[0]);
+		model.addAttribute(new User());
+		return "showHome";
+	}
+	
+	@RequestMapping({"/discover/singer/rf"})
+	public String toSinger1(Model model, HttpServletRequest request) {
+		model.addAttribute("title", "歌手");
+		model.addAttribute("url", request.getRequestURL().toString().split("/rf")[0]);
+		model.addAttribute(new User());
+		return "showHome";
+	}
+	
+	@RequestMapping({"/discover/album/rf"})
+	public String toAlbum1(Model model, HttpServletRequest request) {
+		model.addAttribute("title", "新碟上架");
+		model.addAttribute("url", request.getRequestURL().toString().split("/rf")[0]);
+		model.addAttribute(new User());
+		return "showHome";
+	}
+	
+	
 	
 	@RequestMapping({"/music"})
 	public String toMusic(Model model, HttpServletRequest request) {
