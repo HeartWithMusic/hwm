@@ -12,7 +12,11 @@
 <div id="musicList">
 	<div id="musicList_choose">
 <<<<<<< HEAD
+<<<<<<< HEAD
 		<span style="font-size: 25px;">${cat}</span>
+=======
+		<span style="font-size: 25px;">${typeName}</span>
+>>>>>>> branch 'master' of https://github.com/HeartWithMusic/hwm.git
 =======
 		<span style="font-size: 25px;">${typeName}</span>
 >>>>>>> branch 'master' of https://github.com/HeartWithMusic/hwm.git
@@ -99,8 +103,13 @@
 							<li>
 									<div> 	
 <<<<<<< HEAD
+<<<<<<< HEAD
 										<a href="#"><img src="<%=request.getContextPath()%>/img/front/home/balloon.png" alt="通用的占位符缩略图"></a></br>
 										<a href="#">${music.musicname}</a>
+=======
+										<a href="#"><img src="<%=request.getContextPath()%>/static/music/img/${music.img}" alt="通用的占位符缩略图"></a></br>
+										<a href="<%=request.getContextPath()%>/home/music?id=${music.id}">${music.musicname}</a>
+>>>>>>> branch 'master' of https://github.com/HeartWithMusic/hwm.git
 =======
 										<a href="#"><img src="<%=request.getContextPath()%>/static/music/img/${music.img}" alt="通用的占位符缩略图"></a></br>
 										<a href="<%=request.getContextPath()%>/home/music?id=${music.id}">${music.musicname}</a>

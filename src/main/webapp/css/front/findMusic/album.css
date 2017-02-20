@@ -14,13 +14,8 @@
 	margin:0 auto;
 }
 #songpicture{
-<<<<<<< HEAD
-	height:450px;
-	
-=======
 	height:1000px;
 	float:left;
->>>>>>> branch 'master' of https://github.com/HeartWithMusic/hwm.git
 }
 #songpicture ul{
 	list-style:none;
