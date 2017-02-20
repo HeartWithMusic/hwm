@@ -36,7 +36,6 @@ import com.sun.mail.handlers.message_rfc822;
 @Controller
 @RequestMapping("/home")
 public class UserController {
-	
 	@Resource
 	private IUserService userService;
 	@Resource
