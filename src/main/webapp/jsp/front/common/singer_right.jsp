@@ -10,7 +10,7 @@
 
 <div id="singer_list">
 	<div style="padding-top:30px;border-bottom: 2px solid #C10D0C;">
-		<h3>华语男歌手</h3>
+		<h3>${typeName }</h3>
 	</div>
 	<div id="Letter">
 		<ul>
@@ -50,9 +50,9 @@
 					<c:forEach items="${singerList}" begin="${(i-1)*5 }" end="${(i-1)*5 + 4 }" var="singer">
 						<li >
 							<div> 	
-								<a href="#"><img src="<%=request.getContextPath()%>/img/front/home/Jay.png" alt="通用的占位符缩略图"
+								<a href="#"><img src="<%=request.getContextPath()%>/static/singer/${singer.img}" alt="通用的占位符缩略图"
 									style="height:150px;width:130px"></a></br>
-									<a href="#">${singer.singername }</a>
+									<a href="<%=request.getContextPath()%>/home/singer?id=${singer.id}">${singer.singername }</a>
 							</div>
 						</li>
 					</c:forEach>
@@ -61,19 +61,13 @@
 			
 	</div>
 	<div id="singername">
-		<ul><li style="margin-left:-10px;"><a href="#">周杰伦</a></li><li><a href="#">周杰伦</a></li><li><a href="#">周杰伦</a></li><li><a href="#">周杰伦</a></li><li><a href="#">周杰伦</a></li></ul>
-		<ul><li style="margin-left:-10px;"><a href="#">周杰伦</a></li><li><a href="#">周杰伦</a></li><li><a href="#">周杰伦</a></li><li><a href="#">周杰伦</a></li><li><a href="#">周杰伦</a></li></ul>
-		<ul><li style="margin-left:-10px;"><a href="#">周杰伦</a></li><li><a href="#">周杰伦</a></li><li><a href="#">周杰伦</a></li><li><a href="#">周杰伦</a></li><li><a href="#">周杰伦</a></li></ul>
-		<ul><li style="margin-left:-10px;"><a href="#">周杰伦</a></li><li><a href="#">周杰伦</a></li><li><a href="#">周杰伦</a></li><li><a href="#">周杰伦</a></li><li><a href="#">周杰伦</a></li></ul>
-		<ul><li style="margin-left:-10px;"><a href="#">周杰伦</a></li><li><a href="#">周杰伦</a></li><li><a href="#">周杰伦</a></li><li><a href="#">周杰伦</a></li><li><a href="#">周杰伦</a></li></ul>
-		<ul><li style="margin-left:-10px;"><a href="#">周杰伦</a></li><li><a href="#">周杰伦</a></li><li><a href="#">周杰伦</a></li><li><a href="#">周杰伦</a></li><li><a href="#">周杰伦</a></li></ul>
-		<ul><li style="margin-left:-10px;"><a href="#">周杰伦</a></li><li><a href="#">周杰伦</a></li><li><a href="#">周杰伦</a></li><li><a href="#">周杰伦</a></li><li><a href="#">周杰伦</a></li></ul>
-		<ul><li style="margin-left:-10px;"><a href="#">周杰伦</a></li><li><a href="#">周杰伦</a></li><li><a href="#">周杰伦</a></li><li><a href="#">周杰伦</a></li><li><a href="#">周杰伦</a></li></ul>
-		<ul><li style="margin-left:-10px;"><a href="#">周杰伦</a></li><li><a href="#">周杰伦</a></li><li><a href="#">周杰伦</a></li><li><a href="#">周杰伦</a></li><li><a href="#">周杰伦</a></li></ul>
-		<ul><li style="margin-left:-10px;"><a href="#">周杰伦</a></li><li><a href="#">周杰伦</a></li><li><a href="#">周杰伦</a></li><li><a href="#">周杰伦</a></li><li><a href="#">周杰伦</a></li></ul>
-		<ul><li style="margin-left:-10px;"><a href="#">周杰伦</a></li><li><a href="#">周杰伦</a></li><li><a href="#">周杰伦</a></li><li><a href="#">周杰伦</a></li><li><a href="#">周杰伦</a></li></ul>
-		<ul><li style="margin-left:-10px;"><a href="#">周杰伦</a></li><li><a href="#">周杰伦</a></li><li><a href="#">周杰伦</a></li><li><a href="#">周杰伦</a></li><li><a href="#">周杰伦</a></li></ul>
-		<ul><li style="margin-left:-10px;"><a href="#">周杰伦</a></li><li><a href="#">周杰伦</a></li><li><a href="#">周杰伦</a></li><li><a href="#">周杰伦</a></li><li><a href="#">周杰伦</a></li></ul>
+		<c:forEach begin ="1" end="14" var = "i">
+			<ul>
+				<c:forEach items="${singerList }" begin = "${(i-1)*5 }" end="${(i-1)*5 + 4 }" var="singer">
+					<li style="margin-left:-10px;"><a href="#">${singer.singername}</a></li>
+				</c:forEach>
+			</ul>
+		</c:forEach>
 		
 	</div>
 </div>

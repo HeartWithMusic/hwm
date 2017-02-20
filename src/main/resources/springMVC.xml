@@ -17,6 +17,7 @@
 	<mvc:resources location="/js/" mapping="/js/**"/>
 	<mvc:resources location="/fonts/" mapping="/fonts/**"/>
 	<mvc:resources location="/music/" mapping="/music/**"/>
+	<mvc:resources location="/static/" mapping="/static/**"/>
 	<!-- 配置登录拦截器 -->
 	<mvc:interceptors>
 		<!-- 后台登陆拦截 -->
