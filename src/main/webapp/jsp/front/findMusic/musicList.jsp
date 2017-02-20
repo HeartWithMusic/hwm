@@ -1,26 +1,33 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %>  
+<%@ taglib uri="http://www.springframework.org/tags" prefix="s" %> 
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="sf" %>
+<%@ page isELIgnored="false" %> 
 <link href="<%=request.getContextPath()%>/css/front/findMusic/musicList.css" rel="stylesheet">
 <link href="<%=request.getContextPath()%>/css/front/findMusic/album.css" rel="stylesheet">
 <div id="musicList">
 	<div id="musicList_choose">
-		<span style="font-size: 25px;">全部</span>
-		<button id="musicList_chooseBtn" type="button" class="btn btn-default" title="<button type='button' class='btn btn-default'>全部分类</button>"
+		<span style="font-size: 25px;">${cat}</span>
+		<button id="musicList_chooseBtn"  type="button" class="btn btn-default" title="<button type='button' class='btn btn-default' onclick='toAll()'>全部分类</</button>"
 			data-container="body" data-toggle="popover" data-placement="bottom" 
 			data-content='
 			
 					<div class="musicList_menu">
 						<div class="musicList_left"><span class="glyphicon glyphicon-flag"></span><span style="margin-left:10px;">语言</span></div>
 						<div class="musicList_right">
-							<a href="#">华语</a>
+							<a href="http://localhost:8080/hwm/home/discover/musicList?cat=1">华语</a>
 							<span class="musicList_line">|</span>
-							<a href="#">英语</a>
+							<a href="http://localhost:8080/hwm/home/discover/musicList?cat=2">英语</a>
 							<span class="musicList_line">|</span>
-							<a href="#">粤语</a>
+							<a href="http://localhost:8080/hwm/home/discover/musicList?cat=3">粤语</a>
 							<span class="musicList_line">|</span>
-							<a href="#">韩语</a>
+							<a href="http://localhost:8080/hwm/home/discover/musicList?cat=4">韩语</a>
 							<span class="musicList_line">|</span>
-							<a href="#">日语</a>
+							<a href="http://localhost:8080/hwm/home/discover/musicList?cat=5">日语</a>
 							<div>
 						</div>
 					</div>
@@ -28,22 +35,22 @@
 					<div class="musicList_menu">
 						<div class="musicList_left"><span class="glyphicon glyphicon-headphones"></span><span style="margin-left:10px;">风格</span></div>
 						<div class="musicList_right">
-							<a href="#">流行</a>
+							<a href="http://localhost:8080/hwm/home/discover/musicList?cat=6">流行</a>
 							<span class="musicList_line">|</span>
-							<a href="#">摇滚</a>
+							<a href="http://localhost:8080/hwm/home/discover/musicList?cat=7">摇滚</a>
 							<span class="musicList_line">|</span>
-							<a href="#">民谣</a>
+							<a href="http://localhost:8080/hwm/home/discover/musicList?cat=8">民谣</a>
 							<span class="musicList_line">|</span>
-							<a href="#">说唱</a>
+							<a href="http://localhost:8080/hwm/home/discover/musicList?cat=9">说唱</a>
 							<span class="musicList_line">|</span>
-							<a href="#">电子</a>
+							<a href="http://localhost:8080/hwm/home/discover/musicList?cat=10">电子</a>
 							<span class="musicList_line">|</span></span>
 							<br>
-							<a href="#">古风</a>
+							<a href="http://localhost:8080/hwm/home/discover/musicList?cat=11">古风</a>
 							<span class="musicList_line">|</span>
-							<a href="#">轻音乐</a>
+							<a href="http://localhost:8080/hwm/home/discover/musicList?cat=12">轻音乐</a>
 							<span class="musicList_line">|</span>
-							<a href="#">金属</a>
+							<a href="http://localhost:8080/hwm/home/discover/musicList?cat=13">金属</a>
 							<div>
 						</div>
 					</div>
@@ -52,26 +59,26 @@
 					<div class="musicList_menu">
 						<div class="musicList_left"><span class="glyphicon glyphicon-road"></span><span style="margin-left:10px;">场景</span></div>
 						<div class="musicList_right">
-							<a href="#">清晨</a>
+							<a href="http://localhost:8080/hwm/home/discover/musicList?cat=14">清晨</a>
 							<span class="musicList_line">|</span>
-							<a href="#">夜晚</a>
+							<a href="http://localhost:8080/hwm/home/discover/musicList?cat=15">夜晚</a>
 							<span class="musicList_line">|</span>
-							<a href="#">学习</a>
+							<a href="http://localhost:8080/hwm/home/discover/musicList?cat=16">学习</a>
 							<span class="musicList_line">|</span>
-							<a href="#">工作</a>
+							<a href="http://localhost:8080/hwm/home/discover/musicList?cat=17">工作</a>
 							<span class="musicList_line">|</span>
-							<a href="#">午休</a>
+							<a href="http://localhost:8080/hwm/home/discover/musicList?cat=18">午休</a>
 							<span class="musicList_line">|</span></span>
 							<br>
-							<a href="#">地铁</a>
+							<a href="http://localhost:8080/hwm/home/discover/musicList?cat=19">地铁</a>
 							<span class="musicList_line">|</span>
-							<a href="#">驾车</a>
+							<a href="http://localhost:8080/hwm/home/discover/musicList?cat=20">驾车</a>
 							<span class="musicList_line">|</span>
-							<a href="#">运动</a>
+							<a href="http://localhost:8080/hwm/home/discover/musicList?cat=21">运动</a>
 							<span class="musicList_line">|</span>
-							<a href="#">旅行</a>
+							<a href="http://localhost:8080/hwm/home/discover/musicList?cat=22">旅行</a>
 							<span class="musicList_line">|</span>
-							<a href="#">散步</a>
+							<a href="http://localhost:8080/hwm/home/discover/musicList?cat=23">散步</a>
 							<div>
 						</div>
 					</div>
@@ -82,245 +89,19 @@
 		</button>
 	</div>
 	<div id="songpicture">
-		<ul >
-				<li style="margin-left:5px;">
-					<div> 	
-						<a href="#"><img src="<%=request.getContextPath()%>/img/front/home/balloon.png" alt="通用的占位符缩略图"
-							></a></br>
-							<a href="#">周杰伦</a>
-					</div>
-				</li>
-				<li>
-					<div>
-						<a href="#"><img src="<%=request.getContextPath()%>/img/front/home/balloon.png" alt="通用的占位符缩略图"
-							></a></br><a href="#">周杰伦</a>
-					</div>
-				</li>
-				<li>
-					<div> 	
-						<a href="#"><img src="<%=request.getContextPath()%>/img/front/home/balloon.png" alt="通用的占位符缩略图"
-							></a></br><a href="#">周杰伦</a>
-					</div>
-				</li>
-				<li>
-					<div>
-						<a href="#"><img src="<%=request.getContextPath()%>/img/front/home/balloon.png" alt="通用的占位符缩略图"
-							></a></br><a href="#">周杰伦</a>
-					</div>
-				</li>
-				<li>
-					<div>
-						<a href="#"><img src="<%=request.getContextPath()%>/img/front/home/balloon.png" alt="通用的占位符缩略图"
-							></a></br>
-						<a href="#">周杰伦</a>
-					</div>
-				</li>
-			</ul>
-		
-			<ul id="second">
-				<li style="margin-left:5px;">
-					<div> 	
-						<a href="#"><img src="<%=request.getContextPath()%>/img/front/home/balloon.png" alt="通用的占位符缩略图"
-							></a></br>
-							<a href="#">周杰伦</a>
-					</div>
-				</li>
-				<li>
-					<div>
-						<a href="#"><img src="<%=request.getContextPath()%>/img/front/home/balloon.png" alt="通用的占位符缩略图"
-							></a></br><a href="#">周杰伦</a>
-					</div>
-				</li>
-				<li>
-					<div> 	
-						<a href="#"><img src="<%=request.getContextPath()%>/img/front/home/balloon.png" alt="通用的占位符缩略图"
-							></a></br><a href="#">周杰伦</a>
-					</div>
-				</li>
-				<li>
-					<div>
-						<a href="#"><img src="<%=request.getContextPath()%>/img/front/home/balloon.png" alt="通用的占位符缩略图"
-							></a></br><a href="#">周杰伦</a>
-					</div>
-				</li>
-				<li>
-					<div>
-						<a href="#"><img src="<%=request.getContextPath()%>/img/front/home/balloon.png" alt="通用的占位符缩略图"
-							></a></br>
-						<a href="#">周杰伦</a>
-					</div>
-				</li>
-			</ul>
-			<ul id="second">
-				<li style="margin-left:5px;">
-					<div> 	
-						<a href="#"><img src="<%=request.getContextPath()%>/img/front/home/balloon.png" alt="通用的占位符缩略图"
-							></a></br>
-							<a href="#">周杰伦</a>
-					</div>
-				</li>
-				<li>
-					<div>
-						<a href="#"><img src="<%=request.getContextPath()%>/img/front/home/balloon.png" alt="通用的占位符缩略图"
-							></a></br><a href="#">周杰伦</a>
-					</div>
-				</li>
-				<li>
-					<div> 	
-						<a href="#"><img src="<%=request.getContextPath()%>/img/front/home/balloon.png" alt="通用的占位符缩略图"
-							></a></br><a href="#">周杰伦</a>
-					</div>
-				</li>
-				<li>
-					<div>
-						<a href="#"><img src="<%=request.getContextPath()%>/img/front/home/balloon.png" alt="通用的占位符缩略图"
-							></a></br><a href="#">周杰伦</a>
-					</div>
-				</li>
-				<li>
-					<div>
-						<a href="#"><img src="<%=request.getContextPath()%>/img/front/home/balloon.png" alt="通用的占位符缩略图"
-							></a></br>
-						<a href="#">周杰伦</a>
-					</div>
-				</li>
-			</ul>
-			<ul id="second">
-				<li style="margin-left:5px;">
-					<div> 	
-						<a href="#"><img src="<%=request.getContextPath()%>/img/front/home/balloon.png" alt="通用的占位符缩略图"
-							></a></br>
-							<a href="#">周杰伦</a>
-					</div>
-				</li>
-				<li>
-					<div>
-						<a href="#"><img src="<%=request.getContextPath()%>/img/front/home/balloon.png" alt="通用的占位符缩略图"
-							></a></br><a href="#">周杰伦</a>
-					</div>
-				</li>
-				<li>
-					<div> 	
-						<a href="#"><img src="<%=request.getContextPath()%>/img/front/home/balloon.png" alt="通用的占位符缩略图"
-							></a></br><a href="#">周杰伦</a>
-					</div>
-				</li>
-				<li>
-					<div>
-						<a href="#"><img src="<%=request.getContextPath()%>/img/front/home/balloon.png" alt="通用的占位符缩略图"
-							></a></br><a href="#">周杰伦</a>
-					</div>
-				</li>
-				<li>
-					<div>
-						<a href="#"><img src="<%=request.getContextPath()%>/img/front/home/balloon.png" alt="通用的占位符缩略图"
-							></a></br>
-						<a href="#">周杰伦</a>
-					</div>
-				</li>
-			</ul>
-			<ul id="second">
-				<li style="margin-left:5px;">
-					<div> 	
-						<a href="#"><img src="<%=request.getContextPath()%>/img/front/home/balloon.png" alt="通用的占位符缩略图"
-							></a></br>
-							<a href="#">周杰伦</a>
-					</div>
-				</li>
-				<li>
-					<div>
-						<a href="#"><img src="<%=request.getContextPath()%>/img/front/home/balloon.png" alt="通用的占位符缩略图"
-							></a></br><a href="#">周杰伦</a>
-					</div>
-				</li>
-				<li>
-					<div> 	
-						<a href="#"><img src="<%=request.getContextPath()%>/img/front/home/balloon.png" alt="通用的占位符缩略图"
-							></a></br><a href="#">周杰伦</a>
-					</div>
-				</li>
-				<li>
-					<div>
-						<a href="#"><img src="<%=request.getContextPath()%>/img/front/home/balloon.png" alt="通用的占位符缩略图"
-							></a></br><a href="#">周杰伦</a>
-					</div>
-				</li>
-				<li>
-					<div>
-						<a href="#"><img src="<%=request.getContextPath()%>/img/front/home/balloon.png" alt="通用的占位符缩略图"
-							></a></br>
-						<a href="#">周杰伦</a>
-					</div>
-				</li>
-			</ul>
-			<ul id="second">
-				<li style="margin-left:5px;">
-					<div> 	
-						<a href="#"><img src="<%=request.getContextPath()%>/img/front/home/balloon.png" alt="通用的占位符缩略图"
-							></a></br>
-							<a href="#">周杰伦</a>
-					</div>
-				</li>
-				<li>
-					<div>
-						<a href="#"><img src="<%=request.getContextPath()%>/img/front/home/balloon.png" alt="通用的占位符缩略图"
-							></a></br><a href="#">周杰伦</a>
-					</div>
-				</li>
-				<li>
-					<div> 	
-						<a href="#"><img src="<%=request.getContextPath()%>/img/front/home/balloon.png" alt="通用的占位符缩略图"
-							></a></br><a href="#">周杰伦</a>
-					</div>
-				</li>
-				<li>
-					<div>
-						<a href="#"><img src="<%=request.getContextPath()%>/img/front/home/balloon.png" alt="通用的占位符缩略图"
-							></a></br><a href="#">周杰伦</a>
-					</div>
-				</li>
-				<li>
-					<div>
-						<a href="#"><img src="<%=request.getContextPath()%>/img/front/home/balloon.png" alt="通用的占位符缩略图"
-							></a></br>
-						<a href="#">周杰伦</a>
-					</div>
-				</li>
-			</ul>
-			<ul id="second">
-				<li style="margin-left:5px;">
-					<div> 	
-						<a href="#"><img src="<%=request.getContextPath()%>/img/front/home/balloon.png" alt="通用的占位符缩略图"
-							></a></br>
-							<a href="#">周杰伦</a>
-					</div>
-				</li>
-				<li>
-					<div>
-						<a href="#"><img src="<%=request.getContextPath()%>/img/front/home/balloon.png" alt="通用的占位符缩略图"
-							></a></br><a href="#">周杰伦</a>
-					</div>
-				</li>
-				<li>
-					<div> 	
-						<a href="#"><img src="<%=request.getContextPath()%>/img/front/home/balloon.png" alt="通用的占位符缩略图"
-							></a></br><a href="#">周杰伦</a>
-					</div>
-				</li>
-				<li>
-					<div>
-						<a href="#"><img src="<%=request.getContextPath()%>/img/front/home/balloon.png" alt="通用的占位符缩略图"
-							></a></br><a href="#">周杰伦</a>
-					</div>
-				</li>
-				<li>
-					<div>
-						<a href="#"><img src="<%=request.getContextPath()%>/img/front/home/balloon.png" alt="通用的占位符缩略图"
-							></a></br>
-						<a href="#">周杰伦</a>
-					</div>
-				</li>
-			</ul>
+			<c:forEach begin="1" end="${size}" var="i">
+				<ul id="second">
+					<c:forEach items="${musicList}" var="music"  begin="${(i-1)*5 + 0}" end="${(i-1)*5 + 4}" step="1">
+							<li>
+									<div> 	
+										<a href="#"><img src="<%=request.getContextPath()%>/img/front/home/balloon.png" alt="通用的占位符缩略图"></a></br>
+										<a href="#">${music.musicname}</a>
+									</div>
+							</li>
+					</c:forEach>
+				</ul>
+			</c:forEach>
+			
 	</div>
 	<div id="paging">
 		<ul class="pagination">
@@ -359,4 +140,8 @@
 			
 		});
 	});
+	
+	function toAll() {
+		window.location.href = "http://localhost:8080/hwm/home/discover/musicList";
+	}
 </script>

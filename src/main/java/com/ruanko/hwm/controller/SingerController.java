@@ -141,9 +141,9 @@ public class SingerController {
 		Singer singer = singerService.getSingerById(id);
 		singerService.deleteSinger(id);;
 		// 删除歌曲相关文件
-		String root = request.getSession().getServletContext().getRealPath("/WEB-INF/singer");
+		String root = request.getSession().getServletContext().getRealPath("/static/singer");
 		String singername = singer.getSingername();
-		Upload_Download.deleteFile(root + "/img/" + singername + ".jpg");
+		Upload_Download.deleteFile(root + "\\" + singername + ".jpg");
 
 		List<Singer> singerList = singerService.getAllSinger();
 		// System.out.println(musicList);

@@ -118,7 +118,7 @@ public class MusicController {
 
 		// 播放时长
 		String time = Upload_Download
-				.getMusicLength(new File(request.getSession().getServletContext().getRealPath("/WEB-INF/music/song")
+				.getMusicLength(new File(request.getSession().getServletContext().getRealPath("/static/music/song")
 						+ "/" + music.getMusicname() + ".mp3"));
 		mus.setMusictime(time);
 		// 保存歌曲信息
@@ -198,7 +198,7 @@ public class MusicController {
 		Music music = musicService.getMusicById(id);
 		musicService.deleteMusic(id);
 		// 删除歌曲相关文件
-		String root = request.getSession().getServletContext().getRealPath("/WEB-INF/music");
+		String root = request.getSession().getServletContext().getRealPath("/static/music");
 		String musicname = music.getMusicname();
 		Upload_Download.deleteFile(root + "/song/" + musicname + ".mp3");
 		Upload_Download.deleteFile(root + "/img/" + musicname + ".jpg");

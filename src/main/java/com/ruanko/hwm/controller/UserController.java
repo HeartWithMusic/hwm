@@ -16,9 +16,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.ruanko.hwm.bean.Music;
+import com.ruanko.hwm.bean.MusicTypeRela;
 import com.ruanko.hwm.bean.Singer;
 import com.ruanko.hwm.bean.SingerTypeRela;
 import com.ruanko.hwm.bean.User;
+import com.ruanko.hwm.service.IMusicService;
+import com.ruanko.hwm.service.IMusicTypeRelationService;
+import com.ruanko.hwm.service.IMusicTypeService;
 import com.ruanko.hwm.service.IUserService;
 import com.ruanko.hwm.utl.DateTime;
 import com.ruanko.hwm.utl.MD5Util;
@@ -31,7 +36,12 @@ public class UserController {
 	
 	@Resource
 	private IUserService userService;
-	
+	@Resource
+	private IMusicTypeRelationService musicTypeRelaService;
+	@Resource
+	private IMusicTypeService musicTypeService;
+	@Resource
+	private IMusicService musicService;
 	//每页项数
 	private Integer pageSize = 5;
 	
@@ -245,6 +255,29 @@ public class UserController {
 	
 	@RequestMapping({"/discover/musicList"})
 	public String toMusicList(Model model, HttpServletRequest request) {
+		
+		String typeName = "";
+		int size = 0;
+		List<Music> musicList = new ArrayList<Music>();
+		if(request.getParameter("id") == null) {
+			typeName += "全部";
+			musicList = musicService.getAllMusic();
+			size = musicList.size();
+		}else {
+			Integer id = Integer.parseInt(request.getParameter("id"));
+			//根据id获取歌曲类别信息
+			typeName = musicTypeService.getMusicTypeById(id).getTypename();
+			//获取歌曲列表
+			List<MusicTypeRela> mtrList = musicTypeRelaService.getMusicByTypeId(id);
+			for(MusicTypeRela m : mtrList) {
+				musicList.add(musicService.getMusicById(m.getMusicid()));
+			}
+			size = mtrList.size();
+		}
+		
+		model.addAttribute("musicList", musicList);
+		model.addAttribute("size", (int)Math.ceil(size*1.0/5));
+		model.addAttribute("cat", typeName);
 		model.addAttribute("title", "歌单");
 		model.addAttribute(new User());
 		return "showMusicList";
