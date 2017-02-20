@@ -24,9 +24,6 @@ import com.ruanko.hwm.bean.User;
 import com.ruanko.hwm.service.IMusicService;
 import com.ruanko.hwm.service.IMusicTypeRelationService;
 import com.ruanko.hwm.service.IMusicTypeService;
-import com.ruanko.hwm.service.ISingerService;
-import com.ruanko.hwm.service.ISingerTypeRelaService;
-import com.ruanko.hwm.service.ISingerTypeService;
 import com.ruanko.hwm.service.IUserService;
 import com.ruanko.hwm.utl.DateTime;
 import com.ruanko.hwm.utl.MD5Util;
@@ -36,6 +33,7 @@ import com.sun.mail.handlers.message_rfc822;
 @Controller
 @RequestMapping("/home")
 public class UserController {
+	
 	@Resource
 	private IUserService userService;
 	@Resource
@@ -44,12 +42,6 @@ public class UserController {
 	private IMusicTypeService musicTypeService;
 	@Resource
 	private IMusicService musicService;
-	@Resource
-	private ISingerTypeRelaService singerTypeRelaService;
-	@Resource
-	private ISingerService singerService;
-	@Resource
-	private ISingerTypeService singerTypeService;
 	//每页项数
 	private Integer pageSize = 5;
 	
@@ -266,13 +258,15 @@ public class UserController {
 		
 		String typeName = "";
 		int size = 0;
+		//System.out.println(size);
 		List<Music> musicList = new ArrayList<Music>();
-		if(request.getParameter("id") == null) {
+		if(request.getParameter("cat") == null) {
 			typeName += "全部";
 			musicList = musicService.getAllMusic();
 			size = musicList.size();
 		}else {
-			Integer id = Integer.parseInt(request.getParameter("id"));
+			Integer id = Integer.parseInt(request.getParameter("cat"));
+			//System.out.println(id);
 			//根据id获取歌曲类别信息
 			typeName = musicTypeService.getMusicTypeById(id).getTypename();
 			//获取歌曲列表
@@ -283,6 +277,7 @@ public class UserController {
 			size = mtrList.size();
 		}
 		
+		model.addAttribute("typeName", typeName);
 		model.addAttribute("musicList", musicList);
 		model.addAttribute("size", (int)Math.ceil(size*1.0/5));
 		model.addAttribute("cat", typeName);
@@ -300,21 +295,6 @@ public class UserController {
 	
 	@RequestMapping({"/discover/singer"})
 	public String toSinger(Model model, HttpServletRequest request) {
-		String typeName = "";
-		List<Singer> singerList = new ArrayList<Singer>();
-		if(request.getParameter("id") == null) {
-			model.addAttribute("title", "推荐");
-		}else {
-			int id = Integer.parseInt(request.getParameter("id"));
-			typeName = singerTypeService.getSingerTypeById(id).getTypename();
-			List<SingerTypeRela> singerTypeRelaList = singerTypeRelaService.getSingerByTypeId(id);
-			for(SingerTypeRela s : singerTypeRelaList) {
-				singerList.add(singerService.getSingerById(s.getSingerid()));
-			}
-		}
-		
-		model.addAttribute("typeName", typeName);
-		model.addAttribute("singerList", singerList);
 		model.addAttribute("title", "歌手");
 		model.addAttribute(new User());
 		return "showSinger";
