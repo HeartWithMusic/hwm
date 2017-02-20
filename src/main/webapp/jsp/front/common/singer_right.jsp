@@ -1,5 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %>  
+<%@ taglib uri="http://www.springframework.org/tags" prefix="s" %> 
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="sf" %>
+<%@ page isELIgnored="false" %>
 <link href="<%=request.getContextPath()%>/css/front/findMusic/singer.css" rel="stylesheet">
 
 <div id="singer_list">
@@ -39,74 +45,20 @@
 		</ul>
 	</div>
 	<div id="singerpicture" >
-			<ul >
-				<li style="margin-left:-15px;">
-					<div> 	
-						<a href="#"><img src="<%=request.getContextPath()%>/img/front/home/Jay.png" alt="通用的占位符缩略图"
-							style="height:150px;width:130px"></a></br>
-							<a href="#">周杰伦</a>
-					</div>
-				</li>
-				<li>
-					<div>
-						<a href="#"><img src="<%=request.getContextPath()%>/img/front/home/Jay.png" alt="通用的占位符缩略图"
-							style="height:150px;width:130px"></a></br><a href="#">周杰伦</a>
-					</div>
-				</li>
-				<li>
-					<div> 	
-						<a href="#"><img src="<%=request.getContextPath()%>/img/front/home/Jay.png" alt="通用的占位符缩略图"
-							style="height:150px;width:130px"></a></br><a href="#">周杰伦</a>
-					</div>
-				</li>
-				<li>
-					<div>
-						<a href="#"><img src="<%=request.getContextPath()%>/img/front/home/Jay.png" alt="通用的占位符缩略图"
-							style="height:150px;width:130px"></a></br><a href="#">周杰伦</a>
-					</div>
-				</li>
-				<li>
-					<div>
-						<a href="#"><img src="<%=request.getContextPath()%>/img/front/home/Jay.png" alt="通用的占位符缩略图"
-							style="height:150px;width:130px"></a></br>
-						<a href="#">周杰伦</a>
-					</div>
-				</li>
-			</ul>
-		
-			<ul id="second">
-				<li style="margin-left:-15px;">
-					<div> 	
-						<a href="#"><img src="<%=request.getContextPath()%>/img/front/home/Jay.png" alt="通用的占位符缩略图"
-							style="height:150px;width:130px"></a></br><a href="#">周杰伦</a>
-					</div>
-				</li>
-				<li>
-					<div>
-						<a href="#"><img src="<%=request.getContextPath()%>/img/front/home/Jay.png" alt="通用的占位符缩略图"
-							style="height:150px;width:130px"></a></br><a href="#">周杰伦</a>
-					</div>
-				</li>
-				<li>
-					<div> 	
-						<a href="#"><img src="<%=request.getContextPath()%>/img/front/home/Jay.png" alt="通用的占位符缩略图"
-							style="height:150px;width:130px"></a></br><a href="#">周杰伦</a>
-					</div>
-				</li>
-				<li>
-					<div>
-						<a href="#"><img src="<%=request.getContextPath()%>/img/front/home/Jay.png" alt="通用的占位符缩略图"
-							style="height:150px;width:130px"></a></br><a href="#">周杰伦</a>
-					</div>
-				</li>
-				<li>
-					<div>
-						<a href="#"><img src="<%=request.getContextPath()%>/img/front/home/Jay.png" alt="通用的占位符缩略图"
-							style="height:150px;width:130px"></a></br>
-						<a href="#">周杰伦</a>
-					</div>
-				</li>
-			</ul>
+			<c:forEach begin="1" end="2" var="i">
+				<ul>
+					<c:forEach items="${singerList}" begin="${(i-1)*5 }" end="${(i-1)*5 + 4 }" var="singer">
+						<li >
+							<div> 	
+								<a href="#"><img src="<%=request.getContextPath()%>/img/front/home/Jay.png" alt="通用的占位符缩略图"
+									style="height:150px;width:130px"></a></br>
+									<a href="#">${singer.singername }</a>
+							</div>
+						</li>
+					</c:forEach>
+				</ul>
+			</c:forEach>
+			
 	</div>
 	<div id="singername">
 		<ul><li style="margin-left:-10px;"><a href="#">周杰伦</a></li><li><a href="#">周杰伦</a></li><li><a href="#">周杰伦</a></li><li><a href="#">周杰伦</a></li><li><a href="#">周杰伦</a></li></ul>

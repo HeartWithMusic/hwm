@@ -19,6 +19,8 @@ import org.springframework.web.multipart.MultipartFile;
 import com.ruanko.hwm.bean.Singer;
 import com.ruanko.hwm.bean.SingerTypeRela;
 import com.ruanko.hwm.bean.User;
+import com.ruanko.hwm.service.ISingerService;
+import com.ruanko.hwm.service.ISingerTypeRelaService;
 import com.ruanko.hwm.service.IUserService;
 import com.ruanko.hwm.utl.DateTime;
 import com.ruanko.hwm.utl.MD5Util;
@@ -31,6 +33,10 @@ public class UserController {
 	
 	@Resource
 	private IUserService userService;
+	@Resource
+	private ISingerTypeRelaService singerTypeRelaService;
+	@Resource
+	private ISingerService singerService;
 	
 	//每页项数
 	private Integer pageSize = 5;
@@ -259,6 +265,18 @@ public class UserController {
 	
 	@RequestMapping({"/discover/singer"})
 	public String toSinger(Model model, HttpServletRequest request) {
+		List<Singer> singerList = new ArrayList<Singer>();
+		if(request.getParameter("id") == null) {
+			model.addAttribute("title", "推荐");
+		}else {
+			int id = Integer.parseInt(request.getParameter("id"));
+			List<SingerTypeRela> singerTypeRelaList = singerTypeRelaService.getSingerByTypeId(id);
+			for(SingerTypeRela s : singerTypeRelaList) {
+				singerList.add(singerService.getSingerById(s.getSingerid()));
+			}
+		}
+		
+		model.addAttribute("singerList", singerList);
 		model.addAttribute("title", "歌手");
 		model.addAttribute(new User());
 		return "showSinger";

@@ -10,7 +10,7 @@
 				<a href="<%=request.getContextPath()%>/home/discover/singer">推荐歌手</a>
 			</li>
 			<li>
-				<a href="#">入驻歌手</a>
+				<a href="<%=request.getContextPath()%>/home/discover/singer?id=0">入驻歌手</a>
 			</li>
 		</ul>
 		</div>
@@ -18,13 +18,13 @@
 			<h3>华语</h3>
 			<ul>
 				<li>
-					<a href="#">华语男歌手</a>
+					<a href="<%=request.getContextPath()%>/home/discover/singer?id=1">华语男歌手</a>
 				</li>
 				<li>
-					<a href="#">华语女歌手</a>
+					<a href="<%=request.getContextPath()%>/home/discover/singer?id=2">华语女歌手</a>
 				</li>
 				<li>
-					<a href="#">华语组合/乐队</a>
+					<a href="<%=request.getContextPath()%>/home/discover/singer?id=3">华语组合/乐队</a>
 				</li>
 			</ul>
 		</div>
@@ -32,13 +32,13 @@
 			<h3>欧美</h3>
 			<ul>
 				<li>
-					<a href="#">欧美男歌手</a>
+					<a href="<%=request.getContextPath()%>/home/discover/singer?id=4">欧美男歌手</a>
 				</li>
 				<li>
-					<a href="#">欧美女歌手</a>
+					<a href="<%=request.getContextPath()%>/home/discover/singer?id=5">欧美女歌手</a>
 				</li>
 				<li>
-					<a href="#">欧美组合/乐队</a>
+					<a href="<%=request.getContextPath()%>/home/discover/singer?id=6">欧美组合/乐队</a>
 				</li>
 			</ul>
 		</div>
@@ -46,13 +46,13 @@
 			<h3>日本</h3>
 			<ul>
 				<li>
-					<a href="#">日本男歌手</a>
+					<a href="<%=request.getContextPath()%>/home/discover/singer?id=7">日本男歌手</a>
 				</li>
 				<li>
-					<a href="#">日本女歌手</a>
+					<a href="<%=request.getContextPath()%>/home/discover/singer?id=8">日本女歌手</a>
 				</li>
 				<li>
-					<a href="#">日本组合/乐队</a>
+					<a href="<%=request.getContextPath()%>/home/discover/singer?id=9">日本组合/乐队</a>
 				</li>
 			</ul>
 		</div>
@@ -60,13 +60,13 @@
 			<h3>韩国</h3>
 			<ul>
 				<li>
-					<a href="#">韩国男歌手</a>
+					<a href="<%=request.getContextPath()%>/home/discover/singer?id=10">韩国男歌手</a>
 				</li>
 				<li>
-					<a href="#">韩国女歌手</a>
+					<a href="<%=request.getContextPath()%>/home/discover/singer?id=11">韩国女歌手</a>
 				</li>
 				<li>
-					<a href="#">韩国组合/乐队</a>
+					<a href="<%=request.getContextPath()%>/home/discover/singer?id=12">韩国组合/乐队</a>
 				</li>
 			</ul>
 		</div>
@@ -74,13 +74,13 @@
 			<h3>其他</h3>
 			<ul>
 				<li>
-					<a href="#">其他男歌手</a>
+					<a href="<%=request.getContextPath()%>/home/discover/singer?id=13">其他男歌手</a>
 				</li>
 				<li>
-					<a href="#">其他女歌手</a>
+					<a href="<%=request.getContextPath()%>/home/discover/singer?id=14">其他女歌手</a>
 				</li>
 				<li>
-					<a href="#">其他组合/乐队</a>
+					<a href="<%=request.getContextPath()%>/home/discover/singer?id=15">其他组合/乐队</a>
 				</li>
 			</ul>
 		</div>

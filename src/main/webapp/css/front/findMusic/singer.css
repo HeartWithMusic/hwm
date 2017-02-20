@@ -57,6 +57,7 @@
 }
 #Letter ul{
 	list-style:none;
+	
 }
 #Letter li{
 	float:left;
@@ -71,6 +72,13 @@
 
 #singerpicture ul{
 	list-style:none;
+	height:auto;
+	float:left;
+	overflow: hidden;
+	clear:both;
+}
+#singerpicture li:first-child{
+	margin-left:15px;
 }
 #singerpicture li{
 	float:left;
