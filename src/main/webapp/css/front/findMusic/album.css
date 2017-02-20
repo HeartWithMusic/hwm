@@ -14,8 +14,8 @@
 	margin:0 auto;
 }
 #songpicture{
-	height:450px;
-	
+	height:1000px;
+	float:left;
 }
 #songpicture ul{
 	list-style:none;

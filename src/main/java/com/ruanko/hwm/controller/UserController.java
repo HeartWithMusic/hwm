@@ -258,13 +258,15 @@ public class UserController {
 		
 		String typeName = "";
 		int size = 0;
+		//System.out.println(size);
 		List<Music> musicList = new ArrayList<Music>();
-		if(request.getParameter("id") == null) {
+		if(request.getParameter("cat") == null) {
 			typeName += "全部";
 			musicList = musicService.getAllMusic();
 			size = musicList.size();
 		}else {
-			Integer id = Integer.parseInt(request.getParameter("id"));
+			Integer id = Integer.parseInt(request.getParameter("cat"));
+			//System.out.println(id);
 			//根据id获取歌曲类别信息
 			typeName = musicTypeService.getMusicTypeById(id).getTypename();
 			//获取歌曲列表
@@ -275,6 +277,7 @@ public class UserController {
 			size = mtrList.size();
 		}
 		
+		model.addAttribute("typeName", typeName);
 		model.addAttribute("musicList", musicList);
 		model.addAttribute("size", (int)Math.ceil(size*1.0/5));
 		model.addAttribute("cat", typeName);
