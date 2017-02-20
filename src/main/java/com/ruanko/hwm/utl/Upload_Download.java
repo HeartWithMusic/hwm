@@ -97,7 +97,7 @@ public class Upload_Download {
 	 * @throws IOException
 	 */
 	public static void upload_img1(MultipartFile file, HttpServletRequest request, String name) throws FileNotFoundException, IOException {
-		String root = request.getSession().getServletContext().getRealPath("/WEB-INF/singer/");
+		String root = request.getSession().getServletContext().getRealPath("/static/singer/");
 		//判断文件夹是否存在
 		existFolder(root);
 		deleteFile(root + "\\" + name + ".jpg" );
@@ -114,7 +114,7 @@ public class Upload_Download {
 	 * @throws IOException
 	 */
 	public static void upload_img2(MultipartFile file, HttpServletRequest request, String name) throws FileNotFoundException, IOException {
-		String root = request.getSession().getServletContext().getRealPath("/WEB-INF/user/");
+		String root = request.getSession().getServletContext().getRealPath("/static/user/");
 		//判断文件夹是否存在
 		existFolder(root);
 		deleteFile(root + "\\" + name + ".jpg" );
@@ -131,12 +131,14 @@ public class Upload_Download {
 	 * @throws IOException
 	 */
 	public static void upload_img(MultipartFile file, HttpServletRequest request, String name) throws FileNotFoundException, IOException {
-		String root = request.getSession().getServletContext().getRealPath("/WEB-INF/music/img");
+		String root1 = request.getSession().getServletContext().getRealPath("/static/music");
+		String root2 = request.getSession().getServletContext().getRealPath("/static/music/img");
 		//判断文件夹是否存在
-		existFolder(root);
-		deleteFile(root + "\\" + name + ".jpg" );
+		existFolder(root1);
+		existFolder(root2);
+		deleteFile(root2 + "\\" + name + ".jpg" );
 		if (!file.isEmpty()){
-            Streams.copy(file.getInputStream(),new FileOutputStream(root + "\\" + name + ".jpg"),true);
+            Streams.copy(file.getInputStream(),new FileOutputStream(root2 + "\\" + name + ".jpg"),true);
         }
 	}
 	/**
@@ -147,7 +149,7 @@ public class Upload_Download {
 	 * @throws IOException
 	 */
 	public static void upload_lrc(MultipartFile file, HttpServletRequest request, String name) throws FileNotFoundException, IOException {
-		String root = request.getSession().getServletContext().getRealPath("/WEB-INF/music/lrc");
+		String root = request.getSession().getServletContext().getRealPath("/static/music/lrc");
 		//判断文件夹是否存在
 		existFolder(root);
 		deleteFile(root + "\\" + name + ".lrc" );
@@ -163,7 +165,7 @@ public class Upload_Download {
 	 * @throws IOException
 	 */
 	public static void upload_song(MultipartFile file, HttpServletRequest request, String name) throws FileNotFoundException, IOException {
-		String root = request.getSession().getServletContext().getRealPath("/WEB-INF/music/song");
+		String root = request.getSession().getServletContext().getRealPath("/static/music/song");
 		//判断文件夹是否存在
 		existFolder(root);
 		deleteFile(root + "\\" + name + ".mp3" );
@@ -241,7 +243,8 @@ public class Upload_Download {
      */  
     public static boolean deleteFile(String sPath) {  
         boolean flag = false;  
-        File file = new File(sPath);  
+        File file = new File(sPath); 
+        //System.out.println(sPath);
         // 路径为文件且不为空则进行删除  
         if (file.isFile() && file.exists()) {  
             file.delete();  

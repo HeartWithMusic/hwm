@@ -14,17 +14,21 @@
 	margin:0 auto;
 }
 #songpicture{
-	padding-top:30px;
 	height:450px;
 	
 }
 #songpicture ul{
 	list-style:none;
 }
-#songpicture li{
+#songpicture ul li:first-child{
+	margin-left:5px;
+	float:left;
+}
+#songpicture ul li:not(:first-child){
 	float:left;
 	margin-left:35px;
 }
+
 #songpicture img{
 	height:150px;
 	width:150px;
