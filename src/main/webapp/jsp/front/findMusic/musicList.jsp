@@ -11,6 +11,12 @@
 <link href="<%=request.getContextPath()%>/css/front/findMusic/album.css" rel="stylesheet">
 <div id="musicList">
 	<div id="musicList_choose">
+
+		<span style="font-size: 25px;">${cat}</span>
+		<span style="font-size: 25px;">${typeName}</span>
+
+		<span style="font-size: 25px;">${typeName}</span>
+
 		<span style="font-size: 25px;">${typeName}</span>
 		<button id="musicList_chooseBtn"  type="button" class="btn btn-default" title="<button type='button' class='btn btn-default' onclick='toAll()'>全部分类</</button>"
 			data-container="body" data-toggle="popover" data-placement="bottom" 
@@ -94,8 +100,11 @@
 					<c:forEach items="${musicList}" var="music"  begin="${(i-1)*5 + 0}" end="${(i-1)*5 + 4}" step="1">
 							<li>
 									<div> 	
+
 										<a href="#"><img src="<%=request.getContextPath()%>/static/music/img/${music.img}" alt="通用的占位符缩略图"></a></br>
 										<a href="<%=request.getContextPath()%>/home/music?id=${music.id}">${music.musicname}</a>
+
+
 									</div>
 							</li>
 					</c:forEach>

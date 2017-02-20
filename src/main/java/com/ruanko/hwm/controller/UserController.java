@@ -24,7 +24,11 @@ import com.ruanko.hwm.bean.User;
 import com.ruanko.hwm.service.IMusicService;
 import com.ruanko.hwm.service.IMusicTypeRelationService;
 import com.ruanko.hwm.service.IMusicTypeService;
+import com.ruanko.hwm.service.ISingerService;
+import com.ruanko.hwm.service.ISingerTypeRelaService;
+import com.ruanko.hwm.service.ISingerTypeService;
 import com.ruanko.hwm.service.IUserService;
+import com.ruanko.hwm.service.impl.SingerTypeServiceImpl;
 import com.ruanko.hwm.utl.DateTime;
 import com.ruanko.hwm.utl.MD5Util;
 import com.ruanko.hwm.utl.Upload_Download;
@@ -42,6 +46,12 @@ public class UserController {
 	private IMusicTypeService musicTypeService;
 	@Resource
 	private IMusicService musicService;
+	@Resource
+	private ISingerTypeService singerTypeService;
+	@Resource
+	private ISingerService singerService;
+	@Resource
+	private ISingerTypeRelaService singerTypeRelaService;
 	//每页项数
 	private Integer pageSize = 5;
 	
@@ -295,6 +305,21 @@ public class UserController {
 	
 	@RequestMapping({"/discover/singer"})
 	public String toSinger(Model model, HttpServletRequest request) {
+		String typeName = "";
+		List<Singer> singerList = new ArrayList<Singer>();
+		if(request.getParameter("id") == null) {
+			model.addAttribute("title", "推荐");
+		}else {
+			int id = Integer.parseInt(request.getParameter("id"));
+			typeName = singerTypeService.getSingerTypeById(id).getTypename();
+			List<SingerTypeRela> singerTypeRelaList = singerTypeRelaService.getSingerByTypeId(id);
+			for(SingerTypeRela s : singerTypeRelaList) {
+				singerList.add(singerService.getSingerById(s.getSingerid()));
+			}
+		}
+		
+		model.addAttribute("typeName", typeName);
+		model.addAttribute("singerList", singerList);
 		model.addAttribute("title", "歌手");
 		model.addAttribute(new User());
 		return "showSinger";
