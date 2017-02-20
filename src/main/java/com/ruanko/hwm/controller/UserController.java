@@ -388,11 +388,13 @@ public class UserController {
 	@RequestMapping({"/music"})
 	public String toMusic(Model model, HttpServletRequest request) {
 		model.addAttribute("title", "阳光宅男");
+		model.addAttribute(new User());
 		return "showMusicInfo";
 	}
 	@RequestMapping({"/singer"})
 	public String toSingerMess(Model model, HttpServletRequest request) {
 		model.addAttribute("title", "JayChou");
+		model.addAttribute(new User());
 		return "showSingerInfo";
 	}
 	@RequestMapping({"/logup"})
@@ -467,6 +469,10 @@ public class UserController {
 		else if(user1.getEmail().equals(user.getEmail())){
 			//message = "验证成功";
 			//model.addAttribute("message",message);
+			User user2 = userService.getUserByName(user.getUsername());
+			//System.out.println(user2.getId());
+			model.addAttribute("user2",user2);
+			
 			return "showAlterPwd";
 		}
 		else{
@@ -479,7 +485,21 @@ public class UserController {
 	}
 	@RequestMapping({"/doAlterPwd/"})//用户找回密码
 	public String doAlterPwd(@ModelAttribute("user") User user,Model model, HttpServletRequest request){
-		
-		return null;
+		String username = request.getParameter("user2");
+		//System.out.println(username);
+		User user1 = userService.getUserByName(username.trim());
+		//System.out.println(user1);
+		user1.setPassword(MD5Util.getMD5Code(user.getPassword()));
+		userService.updateUser(user1);
+		String message= "密码修改成功";
+		model.addAttribute("message",message);
+		model.addAttribute(new User());
+		return "showAlterPwd";
+	}
+	@RequestMapping({"/logOut"})
+	public String doLogOut(Model model, HttpServletRequest request){
+		request.getSession().setAttribute("user", null);
+		model.addAttribute(new User());
+		return "showHome";
 	}
 }

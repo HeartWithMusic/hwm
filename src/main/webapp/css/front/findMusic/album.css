@@ -8,36 +8,37 @@
 	margin:0 auto;
 }
 #Navigation {
-	padding-top:30px;
 	border-bottom: 2px solid #C10D0C;
 	width:920px;
 	margin:0 auto;
 }
 #songpicture{
-	height:450px;
-	
-	height:1000px;
+	height:800px;
 	float:left;
-	height:1000px;
-	float:left;
+	margin-top:10px;
 }
-#songpicture ul{
+#songpicture1 {
+	height:400px;
+	float:left;
+	margin-top:10px;
+}
+#songpicture ul,#songpicture1 ul{
 	list-style:none;
 }
-#songpicture ul li:first-child{
+#songpicture ul li:first-child,#songpicture1 ul li:first-child{
 	margin-left:5px;
 	float:left;
 }
-#songpicture ul li:not(:first-child){
+#songpicture ul li:not(:first-child),#songpicture1 ul li:not(:first-child){
 	float:left;
 	margin-left:35px;
 }
 
-#songpicture img{
+#songpicture img,#songpicture1 img{
 	height:150px;
 	width:150px;
 }
-#second li{
+#second li,#second1 li{
 	padding-top:30px;
 }
 #paging{

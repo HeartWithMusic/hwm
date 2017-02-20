@@ -65,16 +65,20 @@
 				
 				<!-- 登陆 -->
 				<div class="dropdown pull-right" >
-					  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="modal" data-target="#myModal">
-					  	<span style="margin:0 auto;color:white;">登陆</span>
-					    <span class="caret"></span>
-					  </button>
-					  <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1" style="background:#333;">
-					    <li role="presentation"><a class="ex3" role="menuitem" tabindex="-1" href="#" style="color:white;">账号登陆</a></li>
-					    <li role="presentation"><a role="menuitem" tabindex="-1" href="#" style="color:white;">微信QQ登陆</a></li>
-					    <li role="presentation"><a role="menuitem" tabindex="-1" href="#" style="color:white;">手机登陆</a></li>
-					    <li role="presentation"><a role="menuitem" tabindex="-1" href="#" style="color:white;">微博登陆</a></li>
-					  </ul>
+					  <c:choose>
+						<c:when test="${sessionScope.user == null }">
+					 		 <button class="btn btn-default" type="button" id="dropdownMenu1" data-toggle="modal" data-target="#myModal">
+					  	    	<span style="margin:0 auto;color:white;">登陆</span>
+					  			  <span class="caret"></span>
+					  		 </button>
+					     </c:when>
+					     <c:when test="${sessionScope.user != null}">
+					  		<button class="btn btn-default" type="button" id="dropdownMenu1" onclick ="toLogOut()">
+					  	    	<span style="margin:0 auto;color:white;">注销</span>
+					  			  <span class="caret"></span>
+					  		 </button>
+					  		 </c:when>
+					  </c:choose>
 				</div> 
 				
 				<!-- 搜索 -->
@@ -187,6 +191,9 @@
 		goTopEx();		
 		function toLogup() {
 			window.location.href="http://localhost:8080/hwm/home/logup";
+		}
+		function toLogOut(){
+			window.location.href="http://localhost:8080/hwm/home/logOut";
 		}
 
 		if("${message}" != "") {

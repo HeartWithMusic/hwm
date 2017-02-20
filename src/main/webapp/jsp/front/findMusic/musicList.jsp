@@ -12,10 +12,6 @@
 <div id="musicList">
 	<div id="musicList_choose">
 
-		<span style="font-size: 25px;">${cat}</span>
-		<span style="font-size: 25px;">${typeName}</span>
-
-		<span style="font-size: 25px;">${typeName}</span>
 
 		<span style="font-size: 25px;">${typeName}</span>
 		<button id="musicList_chooseBtn"  type="button" class="btn btn-default" title="<button type='button' class='btn btn-default' onclick='toAll()'>全部分类</</button>"
