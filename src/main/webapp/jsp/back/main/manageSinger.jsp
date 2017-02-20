@@ -52,41 +52,41 @@
                                        		<div>
                                             	<label>欧美</label>
                                                 <label class="checkbox-inline">
-                                                    <input id="inlineCheckbox1" name="radio" value="1" type="radio"> 欧美男歌手 </label>
+                                                    <input id="inlineCheckbox1" name="radio" value="4" type="radio"> 欧美男歌手 </label>
                                                 <label class="checkbox-inline">
-                                                    <input id="inlineCheckbox2" name="radio" value="2" type="radio"> 欧美女歌手 </label>
+                                                    <input id="inlineCheckbox2" name="radio" value="5" type="radio"> 欧美女歌手 </label>
                                                 <label class="checkbox-inline">
-                                                    <input id="inlineCheckbox3" name="radio" value="3" type="radio"> 欧美组合/乐队 </label>
+                                                    <input id="inlineCheckbox3" name="radio" value="6" type="radio"> 欧美组合/乐队 </label>
                                                
                                             </div>
                                             <div>
                                             	<label>日本</label>
                                                 <label class="checkbox-inline">
-                                                    <input id="inlineCheckbox1" name="radio" value="1" type="radio"> 日本男歌手 </label>
+                                                    <input id="inlineCheckbox1" name="radio" value="7" type="radio"> 日本男歌手 </label>
                                                 <label class="checkbox-inline">
-                                                    <input id="inlineCheckbox2" name="radio" value="2" type="radio"> 日本女歌手 </label>
+                                                    <input id="inlineCheckbox2" name="radio" value="8" type="radio"> 日本女歌手 </label>
                                                 <label class="checkbox-inline">
-                                                    <input id="inlineCheckbox3" name="radio" value="3" type="radio"> 日本组合/乐队 </label>
+                                                    <input id="inlineCheckbox3" name="radio" value="9" type="radio"> 日本组合/乐队 </label>
                                                
                                             </div>
                                             <div>
                                             	<label>韩国</label>
                                                 <label class="checkbox-inline">
-                                                    <input id="inlineCheckbox1" name="radio" value="1" type="radio"> 韩国男歌手 </label>
+                                                    <input id="inlineCheckbox1" name="radio" value="10" type="radio"> 韩国男歌手 </label>
                                                 <label class="checkbox-inline">
-                                                    <input id="inlineCheckbox2" name="radio" value="2" type="radio"> 韩国女歌手 </label>
+                                                    <input id="inlineCheckbox2" name="radio" value="11" type="radio"> 韩国女歌手 </label>
                                                 <label class="checkbox-inline">
-                                                    <input id="inlineCheckbox3" name="radio" value="3" type="radio"> 韩国组合/乐队 </label>
+                                                    <input id="inlineCheckbox3" name="radio" value="12" type="radio"> 韩国组合/乐队 </label>
                                                
                                             </div>
                                             <div>
                                             	<label>其他</label>
                                                 <label class="checkbox-inline">
-                                                    <input id="inlineCheckbox1" name="radio" value="1" type="radio"> 其他男歌手 </label>
+                                                    <input id="inlineCheckbox1" name="radio" value="13" type="radio"> 其他男歌手 </label>
                                                 <label class="checkbox-inline">
-                                                    <input id="inlineCheckbox2" name="radio" value="2" type="radio"> 其他女歌手 </label>
+                                                    <input id="inlineCheckbox2" name="radio" value="14" type="radio"> 其他女歌手 </label>
                                                 <label class="checkbox-inline">
-                                                    <input id="inlineCheckbox3" name="radio" value="3" type="radio"> 其他组合/乐队 </label>
+                                                    <input id="inlineCheckbox3" name="radio" value="15" type="radio"> 其他组合/乐队 </label>
                                                
                                             </div>
                                             

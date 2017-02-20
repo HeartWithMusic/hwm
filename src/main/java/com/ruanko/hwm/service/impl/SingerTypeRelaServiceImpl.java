@@ -28,4 +28,8 @@ public class SingerTypeRelaServiceImpl implements ISingerTypeRelaService {
 		singerTypeRelaMapper.updateByPrimaryKey(str);
 	}
 
+	public SingerTypeRela getSingerTypeBySingerId(Integer singerId) {
+		return singerTypeRelaMapper.selectBySingerId(singerId);
+	}
+
 }

@@ -18,4 +18,6 @@ public interface SingerTypeRelaMapper {
     int updateByPrimaryKey(SingerTypeRela record);
     
     List<SingerTypeRela> selectByTypeId(Integer typeid);
+    
+    SingerTypeRela selectBySingerId(Integer singerId);
 }

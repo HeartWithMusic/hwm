@@ -50,7 +50,7 @@
 					<c:forEach items="${singerList}" begin="${(i-1)*5 }" end="${(i-1)*5 + 4 }" var="singer">
 						<li >
 							<div> 	
-								<a href="#"><img src="<%=request.getContextPath()%>/static/singer/${singer.img}" alt="通用的占位符缩略图"
+								<a href="<%=request.getContextPath()%>/home/singer?id=${singer.id}"><img src="<%=request.getContextPath()%>/static/singer/${singer.img}" alt="通用的占位符缩略图"
 									style="height:150px;width:130px"></a></br>
 									<a href="<%=request.getContextPath()%>/home/singer?id=${singer.id}">${singer.singername }</a>
 							</div>

@@ -97,7 +97,7 @@
 							<li>
 									<div> 	
 
-										<a href="#"><img src="<%=request.getContextPath()%>/static/music/img/${music.img}" alt="通用的占位符缩略图"></a></br>
+										<a href="<%=request.getContextPath()%>/home/music?id=${music.id}"><img src="<%=request.getContextPath()%>/static/music/img/${music.img}" alt="通用的占位符缩略图"></a></br>
 										<a href="<%=request.getContextPath()%>/home/music?id=${music.id}">${music.musicname}</a>
 
 

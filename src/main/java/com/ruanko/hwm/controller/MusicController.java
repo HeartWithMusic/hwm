@@ -391,7 +391,8 @@ public class MusicController {
 		}
 		//获取对应的歌手
 		for(Music m : resultList) {
-			//System.out.println(m.getId());
+			System.out.println(m.getId());
+			System.out.println(musicSingerService.getSingerByMusicId(m.getId()).getSingerid());
 			Singer singer = singerService.getSingerById(musicSingerService.getSingerByMusicId(m.getId()).getSingerid());
 			singerList.add(singer);
 		}

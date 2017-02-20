@@ -82,7 +82,6 @@ public class SingerController {
         
       
 		String radio = request.getParameter("radio");
-		
 //		for(String s : checkbox) {
 //			System.out.println(s);
 //		}
@@ -265,9 +264,10 @@ public class SingerController {
 		// }
 
 		
-		SingerTypeRela str = new SingerTypeRela();
+		int typeId = Integer.parseInt(type);
+		SingerTypeRela str = singerTypeRelaService.getSingerTypeBySingerId(sid);
 		str.setSingerid(sid);
-		str.setTypeid(Integer.parseInt(type));
+		str.setTypeid(typeId);
 		singerTypeRelaService.updateSingerTR(str);
 		
 	}
