@@ -20,12 +20,12 @@
 		<div id="top">
 			<tiles:insertAttribute name="top"/>
 		</div>
-		<div style = "width:980px;height:2000px;margin:0 auto; background-color: white;border-left:1px solid #d3d3d3;border-right:1px solid #d3d3d3;"><!-- 歌手信息-->
+		<div style = "width:980px;overflow: hidden;margin:0 auto; background-color: white;border-left:1px solid #d3d3d3;border-right:1px solid #d3d3d3;"><!-- 歌手信息-->
 			<div id="singerMess_Left" style="width:710px;overflow:hidden;float:left;border-right:1px solid #d3d3d3;">
 				<tiles:insertAttribute name="singerMessTop"/>
 				<tiles:insertAttribute name="content"/>
 			</div>
-			<div id="singerMess_Right" style="width:270px;overflow:hidden;float:right;">
+			<div id="singerMess_Right" style="width:268px;float:right;">
 				<tiles:insertAttribute name="singerMessRight"/>
 			</div>	
 			
