@@ -9,6 +9,7 @@
 <%@ page isELIgnored="false" %> 
 <link href="<%=request.getContextPath()%>/css/front/findMusic/musicList.css" rel="stylesheet">
 <link href="<%=request.getContextPath()%>/css/front/findMusic/album.css" rel="stylesheet">
+
 <div id="musicList">
 	<div id="musicList_choose">
 
@@ -98,8 +99,13 @@
 									<div> 	
 
 										<a href="<%=request.getContextPath()%>/home/music?id=${music.id}"><img src="<%=request.getContextPath()%>/static/music/img/${music.img}" alt="通用的占位符缩略图"></a></br>
+										<div style="width:150px;height:25px;background-image:url('<%=request.getContextPath()%>/img/front/home/bottomBg.png');opacity:0.8;position:relative;top:-20px;color:#ccc;left:0px;">
+											<i class="glyphicon glyphicon-headphones" style="margin-left:5px;margin-top:5px;"></i>  
+											<span style="margin-top:5px;">${music.playcounts}</span>
+											<a href="#"><i class="glyphicon glyphicon-play-circle" style="color:white;margin-left:90px;font-size:18px;margin-top:2px;"></i></a>
+										</div>
 										<a href="<%=request.getContextPath()%>/home/music?id=${music.id}">${music.musicname}</a>
-
+										
 
 									</div>
 							</li>

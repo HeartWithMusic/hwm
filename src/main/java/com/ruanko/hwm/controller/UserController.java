@@ -313,7 +313,7 @@ public class UserController {
 			//获取singerList1,singerList2,size
 			int length = singerService.getAllSinger().size();
 			//获取入驻歌手
-			List<Singer> singerList1 = singerService.getAllSinger().subList(0, (length > 9 ? 9: length));
+			List<Singer> singerList1 = singerService.getAllSinger().subList(0, (length > 10? 10: length));
 			int size = (int)Math.ceil(length*1.0/5);
 			//System.out.println(size);
 			//获取热门歌手
