@@ -2,7 +2,7 @@ package com.ruanko.hwm.bean;
 
 import java.util.Date;
 
-public class Singer {
+public class Singer implements Comparable<Singer> {
     private Integer id;
 
     private String singername;
@@ -62,4 +62,8 @@ public class Singer {
     public void setUploadtime(Date uploadtime) {
         this.uploadtime = uploadtime;
     }
+
+	public int compareTo(Singer o) { 
+	    return o.getCounts().compareTo(this.getCounts());  
+	}
 }

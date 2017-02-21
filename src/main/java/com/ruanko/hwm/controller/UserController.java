@@ -2,6 +2,7 @@ package com.ruanko.hwm.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -309,6 +310,25 @@ public class UserController {
 		List<Singer> singerList = new ArrayList<Singer>();
 		if(request.getParameter("cat") == null) {
 			model.addAttribute("title", "推荐");
+			//获取singerList1,singerList2,size
+			int length = singerService.getAllSinger().size();
+			//获取入驻歌手
+			List<Singer> singerList1 = singerService.getAllSinger().subList(0, (length > 9 ? 9: length));
+			int size = (int)Math.ceil(length*1.0/5);
+			//System.out.println(size);
+			//获取热门歌手
+			List<Singer> singerList_2 = singerService.getAllSinger();
+			Collections.sort(singerList_2);  
+			//List<Singer> singerList2 = singerList_2.subList(0, (length > 9 ? 9: length));
+		
+			model.addAttribute("size", size);
+			model.addAttribute("singerList1", singerList1);
+			model.addAttribute("singerList2", singerList_2);
+			model.addAttribute(new User());
+			
+			return "showSinger1";
+		}else if(Integer.parseInt(request.getParameter("cat")) == 0){
+			
 		}else {
 			int id = Integer.parseInt(request.getParameter("cat"));
 			typeName = singerTypeService.getSingerTypeById(id).getTypename();

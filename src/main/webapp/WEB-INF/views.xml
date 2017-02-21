@@ -66,6 +66,17 @@
 	<definition name="showSinger" extends="singersort">
 		<put-attribute name="content" value="/jsp/front/common/singer_right.jsp" />
 	</definition>
+	
+	<!-- 歌手推荐界面 -->	
+	<definition name="showSinger1" extends="singersort">
+		<put-attribute name="content" value="/jsp/front/common/singer_right1.jsp" />
+	</definition>
+	
+	<!-- 歌手入驻界面 -->	
+	<definition name="showSinger2" extends="singersort">
+		<put-attribute name="content" value="/jsp/front/common/singer_right2.jsp" />
+	</definition>
+	
 	<!-- 用户注册界面 -->
 	<definition name="showLogup" template="/jsp/front/common/logup.jsp"></definition>
 	<!-- 用户找回密码界面 -->
