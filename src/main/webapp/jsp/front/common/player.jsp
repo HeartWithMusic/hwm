@@ -19,7 +19,7 @@
 			<!--显示歌单-->
 			<div class="lyric-mask1">
 				<div class="lyric-box1">
-					<ol id="m-list"></ol>  
+					<ul style="list-style:none;padding:0;" id="m-list"></ol>  
 				</div>
 			</div>            
 			

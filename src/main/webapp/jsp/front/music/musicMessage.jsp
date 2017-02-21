@@ -176,7 +176,7 @@
     
     function addPlayList() {
     	var mhtml =  parent.document.getElementById('m-list').innerHTML;
-    	mhtml += '<li><a index="3">"${music.musicname}"</a></li>';   
+    	mhtml += '<li><a index="3">${music.musicname}</a><a>${singer.singername}</a>${music.musictime}</li>';   
     	 parent.document.getElementById('m-list').innerHTML = mhtml; 
     }
 </script>		
