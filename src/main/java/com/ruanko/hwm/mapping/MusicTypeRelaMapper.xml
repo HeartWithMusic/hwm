@@ -21,6 +21,12 @@
     from tb_music_type_rela
     where typeId = #{musicTypeId,jdbcType=INTEGER}
   </select>
+  <select id="getMusicTypeByMusicId" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_music_type_rela
+    where musicId = #{musicId,jdbcType=INTEGER}
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from tb_music_type_rela
     where id = #{id,jdbcType=INTEGER}

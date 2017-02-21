@@ -24,6 +24,7 @@
 			var newUrl = url + "/rf";
 			//alert(newUrl);
 			change_state(newUrl);
+			change_state2(newUrl);
 			history.pushState(stateObject,title,newUrl);
 		};
 		//alert("${url}");
@@ -44,6 +45,7 @@
 			var rd = document.getElementById('aa').contentWindow.document.getElementById('radio');
 			var sig = document.getElementById('aa').contentWindow.document.getElementById('singer1');
 			var ab = document.getElementById('aa').contentWindow.document.getElementById('album1');
+			//alert(isContains(url,"http://localhost:8080/hwm/home/discover/singer"));
 			
 			if(url == "http://localhost:8080/hwm/home/discover/1/rf") {
 				setCss(tj);
@@ -53,7 +55,7 @@
 				setCss(sg);
 			}else if(url == "http://localhost:8080/hwm/home/discover/radio/rf") {
 				setCss(rd);
-			}else if(url == "http://localhost:8080/hwm/home/discover/singer/rf") {
+			}else if(isContains(url,"http://localhost:8080/hwm/home/discover/singer") ) {
 				setCss(sig);
 			}else if(url == "http://localhost:8080/hwm/home/discover/album/rf") {
 				setCss(ab);
@@ -69,5 +71,26 @@
 			ob.style.backgroundColor = "#990000";
 		}
 		
+		
+		
+		function change_state2(url) {
+			var a = document.getElementById('aa').contentWindow.document.getElementsByClassName("singer");
+			//alert(a.length);
+			for(var i=0;i<a.length;i++){ 
+				//alert(url);
+				if(a[i].href+"/rf" == url) {
+					setCss2(a[i]);
+				}
+				
+			}
+		}
+		
+		function setCss2(ob) {
+			ob.style.color="red";
+		}
+		
+		function isContains(str, substr) {
+		    return str.indexOf(substr) >= 0;
+		}
 	</script>
 </html>

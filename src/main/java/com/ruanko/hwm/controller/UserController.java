@@ -2,6 +2,7 @@ package com.ruanko.hwm.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -17,22 +18,23 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.ruanko.hwm.bean.Music;
+import com.ruanko.hwm.bean.MusicType;
 import com.ruanko.hwm.bean.MusicTypeRela;
 import com.ruanko.hwm.bean.Singer;
 import com.ruanko.hwm.bean.SingerTypeRela;
 import com.ruanko.hwm.bean.User;
 import com.ruanko.hwm.service.IMusicService;
+import com.ruanko.hwm.service.IMusicSingerService;
 import com.ruanko.hwm.service.IMusicTypeRelationService;
 import com.ruanko.hwm.service.IMusicTypeService;
 import com.ruanko.hwm.service.ISingerService;
 import com.ruanko.hwm.service.ISingerTypeRelaService;
 import com.ruanko.hwm.service.ISingerTypeService;
 import com.ruanko.hwm.service.IUserService;
-import com.ruanko.hwm.service.impl.SingerTypeServiceImpl;
-import com.ruanko.hwm.utl.DateTime;
+import com.ruanko.hwm.utl.LrcAnalyze;
+import com.ruanko.hwm.utl.LrcAnalyze.LrcData;
 import com.ruanko.hwm.utl.MD5Util;
 import com.ruanko.hwm.utl.Upload_Download;
-import com.sun.mail.handlers.message_rfc822;
 
 @Controller
 @RequestMapping("/home")
@@ -52,6 +54,9 @@ public class UserController {
 	private ISingerService singerService;
 	@Resource
 	private ISingerTypeRelaService singerTypeRelaService;
+	
+	@Resource
+	private IMusicSingerService musicSingerService;
 	//每页项数
 	private Integer pageSize = 5;
 	
@@ -309,6 +314,34 @@ public class UserController {
 		List<Singer> singerList = new ArrayList<Singer>();
 		if(request.getParameter("cat") == null) {
 			model.addAttribute("title", "推荐");
+			//获取singerList1,singerList2,size
+			int length = singerService.getAllSinger().size();
+			//获取入驻歌手
+			List<Singer> singerList1 = singerService.getAllSinger().subList(0, (length > 10 ? 10: length));
+			int size = (int)Math.ceil(length*1.0/5);
+			//System.out.println(size);
+			//获取热门歌手
+			List<Singer> singerList_2 = singerService.getAllSinger();
+			Collections.sort(singerList_2);  
+			//List<Singer> singerList2 = singerList_2.subList(0, (length > 9 ? 9: length));
+		
+			model.addAttribute("size", size);
+			model.addAttribute("singerList1", singerList1);
+			model.addAttribute("singerList2", singerList_2);
+			model.addAttribute(new User());
+			
+			return "showSinger1";
+		}else if(Integer.parseInt(request.getParameter("cat")) == 0){
+			model.addAttribute("title", "入驻新歌");
+			int length = singerService.getAllSinger().size();
+			List<Singer> singerList1 = singerService.getAllSinger();
+			int size = (int)Math.ceil(length*1.0/5);
+			model.addAttribute("size", size);
+			model.addAttribute("singerList1", singerList1);
+			model.addAttribute(new User());
+			
+			return "showSinger2";
+			
 		}else {
 			int id = Integer.parseInt(request.getParameter("cat"));
 			typeName = singerTypeService.getSingerTypeById(id).getTypename();
@@ -324,6 +357,7 @@ public class UserController {
 		model.addAttribute(new User());
 		return "showSinger";
 	}
+
 	
 	@RequestMapping({"/discover/album"})
 	public String toAlbum(Model model, HttpServletRequest request) {
@@ -387,7 +421,32 @@ public class UserController {
 	
 	@RequestMapping({"/music"})
 	public String toMusic(Model model, HttpServletRequest request) {
-		model.addAttribute("title", "阳光宅男");
+		int id = Integer.parseInt(request.getParameter("id"));
+		//获取歌曲和歌手
+		Music music = musicService.getMusicById(id);
+		Singer singer = singerService.getSingerById(musicSingerService.getSingerByMusicId(id).getSingerid());
+		//获取所属分类
+		List<MusicTypeRela> musicTypeRela = musicTypeRelaService.getMusicTypeByMusicId(id);
+		List<MusicType> musicType = new ArrayList<MusicType>();
+		for(MusicTypeRela mtr : musicTypeRela) {
+			musicType.add(musicTypeService.getMusicTypeById(mtr.getTypeid()));
+		}
+		//读取歌词传到前台
+		String root = request.getSession().getServletContext().getRealPath("/static/music/lrc");
+		//String lrc = Upload_Download.lrc2String(root + "//" +music.getLyr());
+		//System.out.println(lrc);
+		
+		List<LrcData> lrcList = new LrcAnalyze(root + "//" +music.getLyr()).LrcGetList();
+		List<String> lrcList1 = new ArrayList<String>();
+		for(LrcData l:lrcList) {
+			//System.out.println(l.LrcLine);
+			lrcList1.add(l.LrcLine);
+		}
+		model.addAttribute("lrcList", lrcList1);
+		model.addAttribute("musicType", musicType);
+		model.addAttribute("title", music.getMusicname());
+		model.addAttribute("music", music);
+		model.addAttribute("singer", singer);
 		model.addAttribute(new User());
 		return "showMusicInfo";
 	}

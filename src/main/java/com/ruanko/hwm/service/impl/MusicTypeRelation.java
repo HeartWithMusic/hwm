@@ -6,6 +6,7 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
+import com.ruanko.hwm.bean.MusicType;
 import com.ruanko.hwm.bean.MusicTypeRela;
 import com.ruanko.hwm.dao.MusicTypeRelaMapper;
 import com.ruanko.hwm.service.IMusicTypeRelationService;
@@ -26,6 +27,10 @@ public class MusicTypeRelation implements IMusicTypeRelationService {
 	public void updateMusicTR(MusicTypeRela mtr) {
 		mtrMapper.updateByPrimaryKey(mtr);
 		
+	}
+
+	public List<MusicTypeRela> getMusicTypeByMusicId(Integer id) {
+		return mtrMapper.getMusicTypeByMusicId(id);
 	}
 
 }
