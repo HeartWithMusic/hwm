@@ -76,7 +76,9 @@
 							style="height:150px;width:150px">
 			        </a>
 					<div style="width:140px;height:25px;background-image:url('<%=request.getContextPath()%>/img/front/home/bottomBg.png');opacity:0.8;position:relative;top:-49px;color:#ccc;left:6px;">
-						点击量:100万
+						<i class="glyphicon glyphicon-headphones" style="margin-left:5px;margin-top:5px;"></i>  
+											<span style="margin-top:5px;">0</span>
+											<a href="#"><i class="glyphicon glyphicon-play-circle" style="color:white;margin-left:80px;font-size:18px;margin-top:2px;"></i></a>
 					</div>
 					<div style="width:140px;height:25px;margin-left:10px;margin-top:-45px;"><a href="#" style="color:black;">我们的歌</a></div>
 			    </div>
@@ -87,7 +89,9 @@
 							style="height:150px;width:150px">
 			        </a>
 					<div style="width:140px;height:25px;background-image:url('<%=request.getContextPath()%>/img/front/home/bottomBg.png');opacity:0.8;position:relative;top:-49px;color:#ccc;left:6px;">
-						点击量:100万
+						<i class="glyphicon glyphicon-headphones" style="margin-left:5px;margin-top:5px;"></i>  
+											<span style="margin-top:5px;">0</span>
+											<a href="#"><i class="glyphicon glyphicon-play-circle" style="color:white;margin-left:80px;font-size:18px;margin-top:2px;"></i></a>
 					</div>
 					<div style="width:140px;height:25px;margin-left:10px;margin-top:-45px;"><a href="#" style="color:black;">我们的歌</a></div>
 			    </div>
@@ -98,7 +102,9 @@
 							style="height:150px;width:150px">
 			        </a>
 					<div style="width:140px;height:25px;background-image:url('<%=request.getContextPath()%>/img/front/home/bottomBg.png');opacity:0.8;position:relative;top:-49px;color:#ccc;left:6px;">
-						点击量:100万
+						<i class="glyphicon glyphicon-headphones" style="margin-left:5px;margin-top:5px;"></i>  
+											<span style="margin-top:5px;">0</span>
+											<a href="#"><i class="glyphicon glyphicon-play-circle" style="color:white;margin-left:80px;font-size:18px;margin-top:2px;"></i></a>
 					</div>
 					<div style="width:140px;height:25px;margin-left:10px;margin-top:-45px;"><a href="#" style="color:black;">我们的歌</a></div>
 			    </div>
@@ -109,7 +115,9 @@
 							style="height:150px;width:150px">
 			        </a>
 					<div style="width:140px;height:25px;background-image:url('<%=request.getContextPath()%>/img/front/home/bottomBg.png');opacity:0.8;position:relative;top:-49px;color:#ccc;left:6px;">
-						点击量:100万
+						<i class="glyphicon glyphicon-headphones" style="margin-left:5px;margin-top:5px;"></i>  
+											<span style="margin-top:5px;">0</span>
+											<a href="#"><i class="glyphicon glyphicon-play-circle" style="color:white;margin-left:80px;font-size:18px;margin-top:2px;"></i></a>
 					</div>
 					<div style="width:140px;height:25px;margin-left:10px;margin-top:-45px;"><a href="#" style="color:black;">我们的歌</a></div>
 			    </div>
@@ -122,7 +130,9 @@
 							style="height:150px;width:150px">
 			        </a>
 					<div style="width:140px;height:25px;background-image:url('<%=request.getContextPath()%>/img/front/home/bottomBg.png');opacity:0.8;position:relative;top:-49px;color:#ccc;left:6px;">
-						点击量:100万
+						<i class="glyphicon glyphicon-headphones" style="margin-left:5px;margin-top:5px;"></i>  
+											<span style="margin-top:5px;">0</span>
+											<a href="#"><i class="glyphicon glyphicon-play-circle" style="color:white;margin-left:80px;font-size:18px;margin-top:2px;"></i></a>
 					</div>
 					<div style="width:140px;height:25px;margin-left:10px;margin-top:-45px;"><a href="#" style="color:black;">我们的歌</a></div>
 			    </div>
@@ -133,7 +143,9 @@
 							style="height:150px;width:150px">
 			        </a>
 					<div style="width:140px;height:25px;background-image:url('<%=request.getContextPath()%>/img/front/home/bottomBg.png');opacity:0.8;position:relative;top:-49px;color:#ccc;left:6px;">
-						点击量:100万
+						<i class="glyphicon glyphicon-headphones" style="margin-left:5px;margin-top:5px;"></i>  
+											<span style="margin-top:5px;">0</span>
+											<a href="#"><i class="glyphicon glyphicon-play-circle" style="color:white;margin-left:80px;font-size:18px;margin-top:2px;"></i></a>
 					</div>
 					<div style="width:140px;height:25px;margin-left:10px;margin-top:-45px;"><a href="#" style="color:black;">我们的歌</a></div>
 			    </div>
@@ -144,7 +156,9 @@
 							style="height:150px;width:150px">
 			        </a>
 					<div style="width:140px;height:25px;background-image:url('<%=request.getContextPath()%>/img/front/home/bottomBg.png');opacity:0.8;position:relative;top:-49px;color:#ccc;left:6px;">
-						点击量:100万
+						<i class="glyphicon glyphicon-headphones" style="margin-left:5px;margin-top:5px;"></i>  
+											<span style="margin-top:5px;">0</span>
+											<a href="#"><i class="glyphicon glyphicon-play-circle" style="color:white;margin-left:80px;font-size:18px;margin-top:2px;"></i></a>
 					</div>
 					<div style="width:140px;height:25px;margin-left:10px;margin-top:-45px;"><a href="#" style="color:black;">我们的歌</a></div>
 			    </div>
@@ -155,7 +169,9 @@
 							style="height:150px;width:150px">
 			        </a>
 					<div style="width:140px;height:25px;background-image:url('<%=request.getContextPath()%>/img/front/home/bottomBg.png');opacity:0.8;position:relative;top:-49px;color:#ccc;left:6px;">
-						点击量:100万
+						<i class="glyphicon glyphicon-headphones" style="margin-left:5px;margin-top:5px;"></i>  
+											<span style="margin-top:5px;">0</span>
+											<a href="#"><i class="glyphicon glyphicon-play-circle" style="color:white;margin-left:80px;font-size:18px;margin-top:2px;"></i></a>
 					</div>
 					<div style="width:140px;height:25px;margin-left:10px;margin-top:-45px;"><a href="#" style="color:black;">我们的歌</a></div>
 			    </div>
@@ -180,7 +196,9 @@
 							style="height:150px;width:150px">
 			        </a>
 					<div style="width:140px;height:25px;background-image:url('<%=request.getContextPath()%>/img/front/home/bottomBg.png');opacity:0.8;position:relative;top:-49px;color:#ccc;left:6px;">
-						点击量:100万
+						<i class="glyphicon glyphicon-headphones" style="margin-left:5px;margin-top:5px;"></i>  
+											<span style="margin-top:5px;">0</span>
+											<a href="#"><i class="glyphicon glyphicon-play-circle" style="color:white;margin-left:80px;font-size:18px;margin-top:2px;"></i></a>
 					</div>
 					<div style="width:140px;height:25px;margin-left:10px;margin-top:-45px;"><a href="#" style="color:black;">我们的歌</a></div>
 			    </div>
@@ -191,7 +209,9 @@
 							style="height:150px;width:150px">
 			        </a>
 					<div style="width:140px;height:25px;background-image:url('<%=request.getContextPath()%>/img/front/home/bottomBg.png');opacity:0.8;position:relative;top:-49px;color:#ccc;left:6px;">
-						点击量:100万
+						<i class="glyphicon glyphicon-headphones" style="margin-left:5px;margin-top:5px;"></i>  
+											<span style="margin-top:5px;">0</span>
+											<a href="#"><i class="glyphicon glyphicon-play-circle" style="color:white;margin-left:80px;font-size:18px;margin-top:2px;"></i></a>
 					</div>
 					<div style="width:140px;height:25px;margin-left:10px;margin-top:-45px;"><a href="#" style="color:black;">我们的歌</a></div>
 			    </div>
@@ -202,7 +222,9 @@
 							style="height:150px;width:150px">
 			        </a>
 					<div style="width:140px;height:25px;background-image:url('<%=request.getContextPath()%>/img/front/home/bottomBg.png');opacity:0.8;position:relative;top:-49px;color:#ccc;left:6px;">
-						点击量:100万
+						<i class="glyphicon glyphicon-headphones" style="margin-left:5px;margin-top:5px;"></i>  
+											<span style="margin-top:5px;">0</span>
+											<a href="#"><i class="glyphicon glyphicon-play-circle" style="color:white;margin-left:80px;font-size:18px;margin-top:2px;"></i></a>
 					</div>
 					<div style="width:140px;height:25px;margin-left:10px;margin-top:-45px;"><a href="#" style="color:black;">我们的歌</a></div>
 			    </div>
@@ -213,7 +235,9 @@
 							style="height:150px;width:150px">
 			        </a>
 					<div style="width:140px;height:25px;background-image:url('<%=request.getContextPath()%>/img/front/home/bottomBg.png');opacity:0.8;position:relative;top:-49px;color:#ccc;left:6px;">
-						点击量:100万
+						<i class="glyphicon glyphicon-headphones" style="margin-left:5px;margin-top:5px;"></i>  
+											<span style="margin-top:5px;">0</span>
+											<a href="#"><i class="glyphicon glyphicon-play-circle" style="color:white;margin-left:80px;font-size:18px;margin-top:2px;"></i></a>
 					</div>
 					<div style="width:140px;height:25px;margin-left:10px;margin-top:-45px;"><a href="#" style="color:black;">我们的歌</a></div>
 			    </div>
