@@ -13,7 +13,7 @@
 		<h3>入驻歌手</h3>
 	</div>
 	
-	<div id="singerpicture" >
+	<div id="singerpicture"  style="border-bottom:none;height:400px;padding-top: 30px;" >
 			<c:forEach begin="1" end="2" var="i">
 				<ul>
 					<c:forEach items="${singerList1}" begin="${(i-1)*5 }" end="${(i-1)*5 + 4 }" var="singer">
@@ -32,7 +32,7 @@
 	<div style="padding-top:30px;border-bottom: 2px solid #C10D0C;">
 		<h3>热门歌手</h3>
 	</div>
-	<div id="singerpicture" >
+	<div id="singerpicture" style="padding-top: 30px;">
 			<c:forEach begin="1" end="2" var="i">
 				<ul>
 					<c:forEach items="${singerList2}" begin="${(i-1)*5 }" end="${(i-1)*5 + 4 }" var="singer">

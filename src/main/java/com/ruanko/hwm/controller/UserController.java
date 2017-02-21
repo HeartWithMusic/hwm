@@ -313,7 +313,7 @@ public class UserController {
 			//获取singerList1,singerList2,size
 			int length = singerService.getAllSinger().size();
 			//获取入驻歌手
-			List<Singer> singerList1 = singerService.getAllSinger().subList(0, (length > 10? 10: length));
+			List<Singer> singerList1 = singerService.getAllSinger().subList(0, (length > 10 ? 10: length));
 			int size = (int)Math.ceil(length*1.0/5);
 			//System.out.println(size);
 			//获取热门歌手
@@ -328,6 +328,15 @@ public class UserController {
 			
 			return "showSinger1";
 		}else if(Integer.parseInt(request.getParameter("cat")) == 0){
+			model.addAttribute("title", "入驻新歌");
+			int length = singerService.getAllSinger().size();
+			List<Singer> singerList1 = singerService.getAllSinger();
+			int size = (int)Math.ceil(length*1.0/5);
+			model.addAttribute("size", size);
+			model.addAttribute("singerList1", singerList1);
+			model.addAttribute(new User());
+			
+			return "showSinger2";
 			
 		}else {
 			int id = Integer.parseInt(request.getParameter("cat"));
@@ -344,6 +353,7 @@ public class UserController {
 		model.addAttribute(new User());
 		return "showSinger";
 	}
+
 	
 	@RequestMapping({"/discover/album"})
 	public String toAlbum(Model model, HttpServletRequest request) {
