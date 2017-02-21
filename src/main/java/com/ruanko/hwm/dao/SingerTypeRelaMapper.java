@@ -20,4 +20,5 @@ public interface SingerTypeRelaMapper {
     List<SingerTypeRela> selectByTypeId(Integer typeid);
     
     SingerTypeRela selectBySingerId(Integer singerId);
+
 }

@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <link href="<%=request.getContextPath()%>/css/front/findMusic/album.css" rel="stylesheet">
 <div id="album">
-	<div id="Navigation">
+	<div id="Navigation" style="margin-top: 50px;">
 		<h3>热门新歌</h3>
 	</div>
 	<div id="songpicture1" >
@@ -76,7 +76,7 @@
 				</li>
 			</ul>
 	</div>
-	<div id="Navigation">
+	<div id="Navigation" >
 		<ol class="breadcrumb" style="background:none;height:auto;margin-bottom:10px;padding:0px;" >
 			<li style="padding-bottom:-20px;""><a  style="text-decoration:none;font-size:24px; color:black;">全部新歌</a></li>
 			<li><a href="#" style="color:gray;">华语</a></li>
