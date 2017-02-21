@@ -307,10 +307,10 @@ public class UserController {
 	public String toSinger(Model model, HttpServletRequest request) {
 		String typeName = "";
 		List<Singer> singerList = new ArrayList<Singer>();
-		if(request.getParameter("id") == null) {
+		if(request.getParameter("cat") == null) {
 			model.addAttribute("title", "推荐");
 		}else {
-			int id = Integer.parseInt(request.getParameter("id"));
+			int id = Integer.parseInt(request.getParameter("cat"));
 			typeName = singerTypeService.getSingerTypeById(id).getTypename();
 			List<SingerTypeRela> singerTypeRelaList = singerTypeRelaService.getSingerByTypeId(id);
 			for(SingerTypeRela s : singerTypeRelaList) {
