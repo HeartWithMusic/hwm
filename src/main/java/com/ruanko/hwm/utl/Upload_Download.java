@@ -1,10 +1,14 @@
 package com.ruanko.hwm.utl;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.List;
 import java.util.UUID;
 
@@ -294,4 +298,29 @@ public class Upload_Download {
 	public static void download() {
 
 	}
+	
+	/**
+     * 读取lrc文件的内容
+     * @param file 想要读取的文件对象
+     * @return 返回文件内容
+     */
+    public static String lrc2String(String filePathAndName) {
+    	  String fileContent = "";
+    	  try {  
+    	   File f = new File(filePathAndName);
+    	   if(f.isFile()&&f.exists()){
+    	    InputStreamReader read = new InputStreamReader(new FileInputStream(f),"GBK");
+    	    BufferedReader reader=new BufferedReader(read);
+    	    String line;
+    	    while ((line = reader.readLine()) != null) {
+    	     fileContent += line;
+    	    }   
+    	    read.close();
+    	   }
+    	  } catch (Exception e) {
+    	   System.out.println("读取文件内容操作出错");
+    	   e.printStackTrace();
+    	  }
+    	  return fileContent;
+    }
 }

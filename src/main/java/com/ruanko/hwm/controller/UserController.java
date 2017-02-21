@@ -18,22 +18,23 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.ruanko.hwm.bean.Music;
+import com.ruanko.hwm.bean.MusicType;
 import com.ruanko.hwm.bean.MusicTypeRela;
 import com.ruanko.hwm.bean.Singer;
 import com.ruanko.hwm.bean.SingerTypeRela;
 import com.ruanko.hwm.bean.User;
 import com.ruanko.hwm.service.IMusicService;
+import com.ruanko.hwm.service.IMusicSingerService;
 import com.ruanko.hwm.service.IMusicTypeRelationService;
 import com.ruanko.hwm.service.IMusicTypeService;
 import com.ruanko.hwm.service.ISingerService;
 import com.ruanko.hwm.service.ISingerTypeRelaService;
 import com.ruanko.hwm.service.ISingerTypeService;
 import com.ruanko.hwm.service.IUserService;
-import com.ruanko.hwm.service.impl.SingerTypeServiceImpl;
-import com.ruanko.hwm.utl.DateTime;
+import com.ruanko.hwm.utl.LrcAnalyze;
+import com.ruanko.hwm.utl.LrcAnalyze.LrcData;
 import com.ruanko.hwm.utl.MD5Util;
 import com.ruanko.hwm.utl.Upload_Download;
-import com.sun.mail.handlers.message_rfc822;
 
 @Controller
 @RequestMapping("/home")
@@ -53,6 +54,9 @@ public class UserController {
 	private ISingerService singerService;
 	@Resource
 	private ISingerTypeRelaService singerTypeRelaService;
+	
+	@Resource
+	private IMusicSingerService musicSingerService;
 	//每页项数
 	private Integer pageSize = 5;
 	
@@ -417,7 +421,32 @@ public class UserController {
 	
 	@RequestMapping({"/music"})
 	public String toMusic(Model model, HttpServletRequest request) {
-		model.addAttribute("title", "阳光宅男");
+		int id = Integer.parseInt(request.getParameter("id"));
+		//获取歌曲和歌手
+		Music music = musicService.getMusicById(id);
+		Singer singer = singerService.getSingerById(musicSingerService.getSingerByMusicId(id).getSingerid());
+		//获取所属分类
+		List<MusicTypeRela> musicTypeRela = musicTypeRelaService.getMusicTypeByMusicId(id);
+		List<MusicType> musicType = new ArrayList<MusicType>();
+		for(MusicTypeRela mtr : musicTypeRela) {
+			musicType.add(musicTypeService.getMusicTypeById(mtr.getTypeid()));
+		}
+		//读取歌词传到前台
+		String root = request.getSession().getServletContext().getRealPath("/static/music/lrc");
+		//String lrc = Upload_Download.lrc2String(root + "//" +music.getLyr());
+		//System.out.println(lrc);
+		
+		List<LrcData> lrcList = new LrcAnalyze(root + "//" +music.getLyr()).LrcGetList();
+		List<String> lrcList1 = new ArrayList<String>();
+		for(LrcData l:lrcList) {
+			//System.out.println(l.LrcLine);
+			lrcList1.add(l.LrcLine);
+		}
+		model.addAttribute("lrcList", lrcList1);
+		model.addAttribute("musicType", musicType);
+		model.addAttribute("title", music.getMusicname());
+		model.addAttribute("music", music);
+		model.addAttribute("singer", singer);
 		model.addAttribute(new User());
 		return "showMusicInfo";
 	}
