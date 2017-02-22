@@ -57,7 +57,7 @@
 				<div id="navbar" class="collapse navbar-collapse"><!-- 给导航栏添加响应式，包裹在带有.collapse、.navbar-collapse  -->
 					<ul class="nav navbar-nav" id="myTab"><!--nav navbar-nav 导航栏添加链接-->
 						<li class="active"><a href="/hwm/home/discover/1"><span class="glyphicon glyphicon-search"></span> 发现音乐</a></li>
-						<li><a href="/hwm/home/music"><span class="glyphicon glyphicon-user"></span> 我的音乐</a></li>
+						<li><a href="/hwm/home/myMusic"><span class="glyphicon glyphicon-user"></span> 我的音乐</a></li>
 						<li><a href="#about"><span class="glyphicon glyphicon-save"></span> 音乐人</a></li>
 						<li><a href="#contact">关于</a></li>
 					</ul>

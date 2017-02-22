@@ -49,6 +49,12 @@
 	<definition name="showMusicInfo" extends="template_front">
 		<put-attribute name="content" value="/jsp/front/music/musicMessage.jsp" />
 	</definition>
+	
+	<!-- 显示当前用户的歌单 -->
+	<definition name="showMusicListOfUser" extends="template_front">
+		<put-attribute name="content" value="/jsp/front/common/musicList_User.jsp"/>
+	</definition>
+	
 	<!-- 歌手信息界面 -->	
 	<definition name="showSingerInfo" extends="singerMess">
 		<put-attribute name="content" value="/jsp/front/singer/singerMessage.jsp" />

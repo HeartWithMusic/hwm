@@ -19,6 +19,14 @@
     from tb_music
     where id = #{id,jdbcType=INTEGER}
   </select>
+  
+  <select id="selectMusicByUserId" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_music
+    where id in(select tb_collection.musicId from tb_collection where tb_collection.userId=#{id,jdbcType=INTEGER})
+  </select>
+  
   <select id="selectAllMusic" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />

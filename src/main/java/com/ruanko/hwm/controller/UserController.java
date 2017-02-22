@@ -8,6 +8,7 @@ import java.util.List;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -485,6 +486,21 @@ public class UserController {
 		model.addAttribute(new User());
 		return "showLogup";
 	}
+	
+	//点击我的音乐，显示用户的歌单情况
+		@RequestMapping({"/myMusic"})
+		public String toMyMusic(Model model, HttpServletRequest request) {
+			HttpSession session= request.getSession();
+			User currentUser=(User)session.getAttribute("user");
+			List<Music> musicList=musicService.findMusicByUserId(currentUser.getId());
+			//歌单注入模型
+			model.addAttribute("currentMusic", musicList);
+			
+			model.addAttribute("title", "阳光宅男");
+			model.addAttribute(new User());
+			return "showMusicListOfUser";
+		}
+		
 	@RequestMapping({"/doLogin"})//用户登录
 	public String doLogin(@ModelAttribute("user") User user, Model model,HttpServletRequest request){
 		String message = "";

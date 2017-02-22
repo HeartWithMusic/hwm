@@ -35,4 +35,8 @@ public class MusicServiceImpl implements IMusicService {
 		musicMapper.updateByPrimaryKey(music);
 	}
 
+	public List<Music> findMusicByUserId(Integer id) {
+		return musicMapper.selectMusicByUserId(id);
+	}
+
 }
