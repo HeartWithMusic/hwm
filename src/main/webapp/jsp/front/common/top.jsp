@@ -101,7 +101,6 @@
 				<li><a id="tuijian" href="/hwm/home/discover/1"  style="height:34px;color:white;">推荐</a></li>
 				<li><a id="rank" href="/hwm/home/discover/rankList"  style="height:34px;color:white;">排行榜</a></li>
 				<li><a id="song1" href="/hwm/home/discover/musicList"  style="height:34px;color:white;">歌单</a></li>
-				<li><a id="radio" href="/hwm/home/discover/radio"  style="height:34px;color:white;">主播电台</a></li>
 				<li><a id="singer1" href="/hwm/home/discover/singer"  style="height:34px;color:white;">歌手</a></li>
 				<li><a id="album1" href="/hwm/home/discover/album" style="height:34px;color:white;">新碟上架</a></li>
 			</ul>

@@ -7,12 +7,12 @@
 #tab-header .navbar-brand:hover {
 	background:none !important;
 }
+
 .tab-pane a:hover {
 	border:1px solid #AA2222;
 	border-radius:15px;
 	box-shadow:inset 0px 0px 1px 1px #BE3030;
 	background-color:#990000 !important;
-
 }
 .tab-pane a {
 }
@@ -64,4 +64,3 @@ a{
 	background-image:url('./bg.png');
 	background-repeat:repeat-x;
 }
-		

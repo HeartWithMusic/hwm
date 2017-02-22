@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
- <link href="<%=request.getContextPath()%>/css/front/findMusic/singer.css" rel="stylesheet">   
-<div>
+ <link href="<%=request.getContextPath()%>/css/front/findMusic/singer.css" rel="stylesheet">  
+ <div>
 <div id = "singerItem" style = "width:642px; min-height: 50px; margin-top:18px;margin-left:35px;">
 			<ul id="myTab" class="nav nav-tabs" style = "border: 1px solid #ccc;">
 	<li class="item" >
@@ -13,9 +13,9 @@
 	
 </ul>
 <div id="myTabContent" class="tab-content">
-	<div class="tab-pane fade in active" id="topList">
+	<div id="topList">
 		
-		<div id= "hotList">
+		<div id= "hotList" >
 			<table class="table table-striped" style = "">
 	<caption>热门歌曲</caption>	
 	<tbody>

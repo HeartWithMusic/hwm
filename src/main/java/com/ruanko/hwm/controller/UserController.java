@@ -265,7 +265,7 @@ public class UserController {
 	public String toRankList(Model model, HttpServletRequest request) {
 		model.addAttribute("title", "排行榜");
 		model.addAttribute(new User());
-		return "showRankList";
+		return "showRank";
 	}
 	
 	@RequestMapping({"/discover/musicList"})
