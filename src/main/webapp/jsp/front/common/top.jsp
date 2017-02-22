@@ -39,7 +39,7 @@
     
     function addPlayList(id) {
     	//alert(id);
-    	window.parent.addListAndPlay(id)
+    	window.parent.addListAndPlay(id);
     }
     
     function playSongById(id) {

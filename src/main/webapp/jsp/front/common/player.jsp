@@ -12,7 +12,7 @@
 			<h3 class="panel-title"> 歌曲列表 </h3>
 			<div style="float:right;margin-top:-18px;width:300px;">
 				<h3 id="panel-song-title" class="panel-title" style="float:left;" >  </h3>
-				<span id="panel-close" class="glyphicon glyphicon-remove" style="float:right;"></span>
+				<span id="panel-close" title="关闭" class="glyphicon glyphicon-remove" style="float:right;"></span>
 			</div>	
 		</div>
 		<div class="panel-body">
@@ -25,7 +25,7 @@
 			
 			<!--显示歌词-->
 			<div class="lyric-mask">
-				<div class="lyric-box">
+				<div class="lyric-box ">
 					<div class="lyric-content" id="show-lrc-content"></div>
 				</div>            
 			</div>
@@ -273,11 +273,22 @@
 		});
 		
 		function change_bg1(id) {
-			//alert(this);
-			document.getElementById(id).style.backgroundColor = "#121212";
+			//alert($("#"+id).attr("class"));
+			if($("#"+id).attr("class") == 0){
+				//alert(this);
+				$($("#"+id).children("i").get(0)).css("color","#3c3c3c");
+				document.getElementById(id).style.backgroundColor = "#3c3c3c";
+			}
 		}
 		
 		function change_bg2(id) {
-			document.getElementById(id).style.backgroundColor = "black";
+			if($("#"+id).attr("class") == 0){
+				$($("#"+id).children("i").get(0)).css("color","black");
+				document.getElementById(id).style.backgroundColor = "black";
+			}
+		}
+		
+		function click_play(id) {
+			playSongById(id);
 		}
 </script>

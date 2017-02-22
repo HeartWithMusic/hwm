@@ -167,7 +167,7 @@ music setting
 }
 .lyric-mask1 a  {
 	text-decoration:none;
-	color:#ccc !important;
+	color:#ccc;
 }
 .lyric-mask1 a:hover{
 	cursor:pointer !important;
@@ -203,7 +203,8 @@ music setting
 	bottom:25px;
 	background: #000;
     opacity: 0.96;
-	left:250px;
+	left:50%;
+	margin-left:-509px;
 	z-index:50;
 }
 

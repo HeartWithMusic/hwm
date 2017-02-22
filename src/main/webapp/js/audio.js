@@ -31,11 +31,12 @@
 			//console.info(lyric[lyric.length-1][0]);
 			for (var i = 0;i < lyric.length; i++) {
 				if (music.currentTime > lyric[i][0] - 1) {
+					//console.info(lyric[i][0]);
 					$('p[name=lyric]').css('color', '#fff'); 
 					$('p#'+i).css('color', 'red');
 
 					$('.lyric-content').css('top',210 - 30 * (i + 1));
-				};
+				}
 			};
 			//console.info("hello");
 			//拖动滑块事件	
@@ -152,10 +153,7 @@
                     //Player.$rmusic.html(Player.data[Player.currentIndex]);  
                 });  
 				
-				//绑定播放暂停控制  
-				$('.play').bind('click', function() {  
-					playAudio();  
-				});   
+				//绑定播放暂停控制 
 				  
 				var media = $('#audio')[0];   
 				
@@ -164,7 +162,9 @@
 				}); 
 				
 				//播放暂停切换  
-				function playAudio() {  
+				function playAudio() { 
+					//alert(media.paused);
+					//console.info(media.paused);
 					if(media.paused) {  
 						play();  
 					} else {  
@@ -174,13 +174,13 @@
 				   
       
                 // 播放  
-                function play() {  
+                function play() { 
                     Player.audio.play();  
 					//$('#btn-play').text("播放"); 
                 };  
       
                 // 暂停  
-                function pause() {  
+                function pause() { 
                     Player.audio.pause();  
 					//var time = media.currentTime/media.duration;;
 					//alert(time);
@@ -190,27 +190,19 @@
       
                 // 下一曲  
                 $('#div-next').click(function() {  
+                	console.info(Player.data.length);
                     if (Player.currentIndex == -1) {  
                         Player.currentIndex = 0;  
-                    } else if (Player.currentIndex == (Player.data.length - 1)) {  
+                    } else if (Player.currentIndex == (Player.data.length-1)) {  
                         Player.currentIndex = 0;  
                     } else {  
                         Player.currentIndex++;  
                     }  
-					
-					$.get(Player.lyricSrc[Player.currentIndex], function(lrc) {
-						lyric = parseLyric(lrc);
-						//console.info(lyric);
-						//debugger
-						loadLyric(lyric);
-						//palyMusic(0);
-					});
-					
-                    console.log("Player.currentIndex : " + Player.currentIndex);  
-                    Player.audio.src = Player.path + Player.data[Player.currentIndex];  
-					//console.log( Player.audio.src);
-					Player.$rmusic.html(Player.data[Player.currentIndex]);
-                    Player.audio.play();  
+                    console.info("next");
+                    console.info(Player.currentIndex);
+                    
+					Player.play(Player.data[Player.currentIndex].id);
+                    
                 });  
       
                 // 上一曲  
@@ -223,17 +215,9 @@
                         Player.currentIndex--;  
                     }  
 					
-					$.get(Player.lyricSrc[Player.currentIndex], function(lrc) {
-						lyric = parseLyric(lrc);
-						//console.info(lyric);
-						//debugger
-						loadLyric(lyric);
-						//palyMusic(0);
-					});
+                  //显示歌词
 					
-                    Player.audio.src = Player.path + Player.data[Player.currentIndex];  
-					Player.$rmusic.html(Player.data[Player.currentIndex]);
-                    Player.audio.play();  
+					Player.play(Player.data[Player.currentIndex].id);  
                 });  
 				
 				 
@@ -257,18 +241,35 @@
 				  
       
                 // 播放指定歌曲  
-                Player.play = function playByMe(i) {  
+                Player.play = function playByMe(i) { 
+                	//变换播放和未播放
+                	var list = $("#m-list li");
+                	for(var j=0;j<list.length;j++) {
+                		//alert(list.eq(j).attr("id"));
+                		if(list.eq(j).attr("id") == i) {
+                			list.eq(j).attr("class","1");
+                			$("#"+i).css("background-color","#3c3c3c");
+                			$($("#"+i).children("i").get(0)).css("display","inline");
+                			$($("#"+list.eq(j).attr("id")).children("i").get(0)).css("color","red");
+                		}else {
+                			$("#"+list.eq(j).attr("id")).css("background-color","black");
+                			list.eq(j).attr("class","0");
+                			$($("#"+list.eq(j).attr("id")).children("i").get(0)).css("color","black");
+                		}
+                		
+                	}
+                	
                     //console.log("index:", i); 
                     for(var k=0;k<Player.data.length;k++) {
                     	$.each(Player.data[k],function(j){ 
                     		if(i == Player.data[k][j]) {
-                    			
+                    			Player.currentIndex = k;
                     			Player.audio.src = Player.path + Player.data[k].name + ".mp3";  
                                 Player.audio.play();  
-                                Player.currentIndex = i;  
-                                Player.$rmusic.html(Player.data[Player.currentIndex]); 
+                                //Player.currentIndex = i;  
+                                //Player.$rmusic.html(Player.data[Player.currentIndex].name); 
             					$("#panel-song-title").text(Player.data[k].name);
-            					console.info(k);
+            					//console.info(k);
             					//显示歌词
             					$.get(Player.path2 + Player.data[k].name + ".lrc", function(lrc) {
             						//alert(lrc);
@@ -283,27 +284,17 @@
                     		}
                     	}); 
                     }
-                    
+                    $("#btn-play").removeClass("glyphicon glyphicon-play ");
+        			$("#btn-play").addClass("glyphicon glyphicon-pause");
+        			flag = 0;
                     
                     
 					//$('#btn-play').text("播放");
                 };  
                 
-                
-      
-                // 歌曲被点击  
-                $('#m-list a').click(function() {  
-                	var i = $(this).attr('index');
-                	//alert(i);
-                	Player.play($(this).attr('index'));  
-                    
-					$("#btn-play").removeClass("glyphicon glyphicon-play ");
-					$("#btn-play").addClass("glyphicon glyphicon-pause");
-					flag = 0;
-                });
             }  
         };  
-       
+		
 		/**
 		 * 添加歌曲到列表
 		 * @param id
@@ -350,15 +341,16 @@
 		   	         if(flag) {
 		   	        	Player.data.push(newData);
 		   	        	var mhtml = Player.$mList.html();
-		                mhtml += '<li id="' + data[0].id + '" onmouseover="change_bg1(' + data[0].id +')" onmouseout="change_bg2(' + data[0].id + ')" style="padding-top:5px;padding-bottom:5px;font-size:14px;margin-bottom:5px;"><i class="glyphicon glyphicon-play" style="color:red;float:left;margin-top:4px;margin-left:10px;"></i><span style="width:266px;float:left;margin-left:40px;"><a index="' + data[0].id + '">' + data[0].musicname  + '</a></span><span style="margin-left:10px;float:left;width:100px;"><a href="#" style="margin-left:5px;"><i class="glyphicon glyphicon-plus"></i></a><a href="#" style="margin-left:5px;"><i class="glyphicon glyphicon-heart"></i></a><a href="#" style="margin-left:5px;"><i class="glyphicon glyphicon-trash"></i></a></span>';
-		                mhtml += '<span style="width:100px;float:left;"><a href="#">' + data[1].singername + '</a></span><span style="color:#ccc;">' + data[0].musictime + '</span>';
+		                mhtml += '<li class="0" id="' + data[0].id + '" onmouseover="change_bg1(' + data[0].id +')" onmouseout="change_bg2(' + data[0].id + ')" style="padding-top:5px;padding-bottom:5px;font-size:14px;"><i class="glyphicon glyphicon-play"  style="color:black;float:left;margin-top:4px;margin-left:10px;"></i><span style="width:266px;float:left;margin-left:40px;" onclick="click_play(' + data[0].id + ')"><a index="' + data[0].id + '">' + data[0].musicname  + '</a></span><span style="margin-left:10px;float:left;width:100px;"><a href="#" style="margin-left:10px;" title="收藏"><i class="glyphicon glyphicon-heart"></i></a><a href="#" style="margin-left:10px;" title="下载"><i class="glyphicon glyphicon-save"></i></a><a href="#" style="margin-left:10px;" title="删除"><i class="glyphicon glyphicon-trash"></i></a></span>';
+		                mhtml += '<span style="width:100px;float:left;"><a href=' + path1 + '/home/singer?id=' + data[1].id + '>' + data[1].singername + '</a></span><span style="color:#ccc;">' + data[0].musictime + '</span>';
 		                mhtml += '</li>'
 		                Player.$mList.html(mhtml); 
-		                   
-		                Player.ready();
+		                //Player.ready();
 		   	         }
 	   	        }  
 	   	    });  
+    	   
+    	   
 	   	};
 	   	
 	   	function playSongById(id){
@@ -374,10 +366,9 @@
 	   	 * 播放歌曲
 	   	 * @param id
 	   	 */
-	   	
-        
-        Player.init();  
+        Player.init(); 
         Player.ready();
+        //Player.ready();
         //window.test = function test() {alert(Player.path);}
         //alert(Player.path);
         //alert(a()..path);

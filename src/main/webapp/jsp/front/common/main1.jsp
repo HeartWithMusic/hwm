@@ -16,7 +16,7 @@
 	<script src="<%=request.getContextPath()%>/js/bootstrap.min.js"></script>
 </head>
 <body>
-	<div id="base" >
+	<div id="base" style="padding-bottom:50px;" >
 		<div id="top">
 			<tiles:insertAttribute name="top"/>
 		</div>
