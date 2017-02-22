@@ -257,8 +257,8 @@
 				  
       
                 // 播放指定歌曲  
-                function playByMe(i) {  
-                    console.log("index:", i); 
+                Player.play = function playByMe(i) {  
+                    //console.log("index:", i); 
                     for(var k=0;k<Player.data.length;k++) {
                     	$.each(Player.data[k],function(j){ 
                     		if(i == Player.data[k][j]) {
@@ -278,23 +278,29 @@
             						loadLyric(lyric);
             						//palyMusic(0);
             					});
+            					//alert(Player.data[k]['name']);
+            					$("#rmusic").html(Player.data[k]['name']);
                     		}
                     	}); 
                     }
                     
+                    
+                    
 					//$('#btn-play').text("播放");
                 };  
+                
+                
       
                 // 歌曲被点击  
                 $('#m-list a').click(function() {  
                 	var i = $(this).attr('index');
                 	//alert(i);
-                    playByMe($(this).attr('index'));  
+                	Player.play($(this).attr('index'));  
                     
 					$("#btn-play").removeClass("glyphicon glyphicon-play ");
 					$("#btn-play").addClass("glyphicon glyphicon-pause");
 					flag = 0;
-                });  
+                });
             }  
         };  
        
@@ -321,7 +327,7 @@
 	   	        	//var jsonarray = eval('('+Player.data+')');
 	   	        	//alert(newData.id);
 	   	        	//var jsonstr="[{'name':'a','value':1},{'name':'b','value':2}]";
-	   	        	Player.data.push(newData);
+	   	        	
 	   	        	//alert(data[0].id);
 	   	        	//var key;
 	   	        	//var value;
@@ -329,61 +335,49 @@
 	   	        	   // key = i;  
 	   	        	    //value = newData[i];  
 	   	        	    //alert(key+":"+value);  
-	   	        	//});  
-	   	        
-	   	        	var mhtml = Player.$mList.html();
-	                mhtml += '<li style="font-size:14px;"><a index="' + data[0].id + '">' + data[0].musicname  + '</a>';
-	                Player.$mList.html(mhtml); 
-	                   
-	                Player.ready();
+	   	        	//});
+	   	        	//判断是否重复
+		   	         var flag = true;
+		   	         for(var k=0;k<Player.data.length;k++) {
+		   	        	$.each(Player.data[k],function(j){ 
+	                		if(id1 == Player.data[k][j]) {
+	                			
+	                			flag = false;
+	                		}
+		   	        	});
+		   	         }
+		   	         //不重复
+		   	         if(flag) {
+		   	        	Player.data.push(newData);
+		   	        	var mhtml = Player.$mList.html();
+		                mhtml += '<li id="' + data[0].id + '" onmouseover="change_bg1(' + data[0].id +')" onmouseout="change_bg2(' + data[0].id + ')" style="padding-top:5px;padding-bottom:5px;font-size:14px;margin-bottom:5px;"><i class="glyphicon glyphicon-play" style="color:red;float:left;margin-top:4px;margin-left:10px;"></i><span style="width:266px;float:left;margin-left:40px;"><a index="' + data[0].id + '">' + data[0].musicname  + '</a></span><span style="margin-left:10px;float:left;width:100px;"><a href="#" style="margin-left:5px;"><i class="glyphicon glyphicon-plus"></i></a><a href="#" style="margin-left:5px;"><i class="glyphicon glyphicon-heart"></i></a><a href="#" style="margin-left:5px;"><i class="glyphicon glyphicon-trash"></i></a></span>';
+		                mhtml += '<span style="width:100px;float:left;"><a href="#">' + data[1].singername + '</a></span><span style="color:#ccc;">' + data[0].musictime + '</span>';
+		                mhtml += '</li>'
+		                Player.$mList.html(mhtml); 
+		                   
+		                Player.ready();
+		   	         }
 	   	        }  
 	   	    });  
 	   	};
+	   	
+	   	function playSongById(id){
+	   		addListAndPlay(id);
+	   		Player.play(id);
+	   		
+	   		$("#btn-play").removeClass("glyphicon glyphicon-play ");
+			$("#btn-play").addClass("glyphicon glyphicon-pause");
+			flag = 0;
+	   	}
 	   	
 	   	/**
 	   	 * 播放歌曲
 	   	 * @param id
 	   	 */
-	   	function addListAndPlay(id){
-	    	   $.ajax({  
-		   	        type : "POST",  
-		   	        url : "http://localhost:8080/hwm/music/ajax_operation_getMusic" ,  
-		   	        dataType:"json",
-		   	        cache : false,  
-		   	        data : {  
-		   	            musicid: id
-		   	        },  
-		   	        async : false,  
-		   	        error : function() {  
-		   	            alert("网络异常！");  
-		   	        },  
-		   	        success : function(data) {
-		   	        	var id1 = data[0].id;
-		   	        	var newData = { id : data[0].id,name : data[0].musicname};
-		   	        	//var jsonarray = eval('('+Player.data+')');
-		   	        	//alert(newData.id);
-		   	        	//var jsonstr="[{'name':'a','value':1},{'name':'b','value':2}]";
-		   	        	Player.data.push(newData);
-		   	        	//alert(data[0].id);
-		   	        	//var key;
-		   	        	//var value;
-		   	        	//$.each(Player.data[0],function(i){  
-		   	        	   // key = i;  
-		   	        	    //value = newData[i];  
-		   	        	    //alert(key+":"+value);  
-		   	        	//});  
-		   	        
-		   	        	var mhtml = Player.$mList.html();;  
-		                   mhtml += '<li><a index="' + data[0].id + '">' + data[0].musicname  + '</a><a href="#">' + data[1].singername + '</a>' + data[0].musictime + '</li>'; 
-		                   Player.$mList.html(mhtml); 
-		                   
-		                   Player.ready();
-		   	        }  
-		   	    });  
-		   	};
+	   	
         
         Player.init();  
-        Player.ready();  
+        Player.ready();
         //window.test = function test() {alert(Player.path);}
         //alert(Player.path);
         //alert(a()..path);

@@ -271,4 +271,13 @@
 		$(function () { 
 			$("[data-toggle='tooltip']").tooltip();
 		});
+		
+		function change_bg1(id) {
+			//alert(this);
+			document.getElementById(id).style.backgroundColor = "#121212";
+		}
+		
+		function change_bg2(id) {
+			document.getElementById(id).style.backgroundColor = "black";
+		}
 </script>

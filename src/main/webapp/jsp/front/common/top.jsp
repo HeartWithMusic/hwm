@@ -37,6 +37,17 @@
         }  
     } 
     
+    function addPlayList(id) {
+    	//alert(id);
+    	window.parent.addListAndPlay(id)
+    }
+    
+    function playSongById(id) {
+    	//alert(id);
+    	window.parent.addListAndPlay(id);
+    	window.parent.playSongById(id);
+    }
+    
 </script>  
 	<!--第一栏 导航栏 + 搜索框 + 登陆按钮 -->
 	<div id="tab-header" >  										

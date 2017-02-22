@@ -148,10 +148,10 @@ music setting
 }
 
 .lyric-box1{
-    width: 580px;
+    width: 583px;
     height: 230px;
     margin: 20px auto 20px auto;
-    overflow: hidden;
+    margin-left:0px;
 }
 
 .lyric-mask1 {
@@ -160,14 +160,14 @@ music setting
     width: 600px;
     height: 260px;
     bottom: 15px;
-	left:10px;
+	left:-15px;
     background: #000;
     opacity: 0.95;
 	overflow: auto;
 }
 .lyric-mask1 a  {
 	text-decoration:none;
-	color:white !important;
+	color:#ccc !important;
 }
 .lyric-mask1 a:hover{
 	cursor:pointer !important;

@@ -38,7 +38,7 @@
 							</div>
 							
 							<div style = "width:380px;height:40px;">	<!--操作-->				
-								<button style = "border:0;background-image: url('<%=request.getContextPath()%>/img/front/home/button3.png');width:66px;height:31px;text-align:right;color:white;float:left;">播放</button>
+								<button onclick="playSongById(${music.id})" style = "border:0;background-image: url('<%=request.getContextPath()%>/img/front/home/button3.png');width:66px;height:31px;text-align:right;color:white;float:left;">播放</button>
 								<button onclick="addPlayList(${music.id})" style = "border:0;background-image: url('<%=request.getContextPath()%>/img/front/home/button4.png');width:33px;height:31px;float:left;margin-top:-1px;" title="添加到播放列表"></button>
 								<button class="btn btn-default" style = "width:75px;height:29px;float:left;margin-left:10px;font-size:12px;margin-top:1px;"><i class="glyphicon glyphicon-folder-open" style="margin-right:5px;"></i>收藏</button>
 								<button class="btn btn-default" style = "width:75px;height:29px;float:left;margin-left:10px;font-size:12px;margin-top:1px;"><i class=" 	glyphicon glyphicon-download-alt" style="margin-right:5px;"></i>下载</button>
@@ -172,11 +172,6 @@
     		flag = true;
     	}
     	
-    }
-    
-    function addPlayList(id) {
-    	alert(id);
-    	window.parent.addListAndPlay(id)
     }
     
     
