@@ -450,6 +450,10 @@ public class UserController {
 		model.addAttribute(new User());
 		return "showMusicInfo";
 	}
+	
+	
+	
+	
 	@RequestMapping({"/singer"})
 	public String toSingerMess(Model model, HttpServletRequest request) {
 		model.addAttribute("title", "JayChou");

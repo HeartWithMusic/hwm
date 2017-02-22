@@ -31,7 +31,9 @@ import com.ruanko.hwm.service.IMusicSingerService;
 import com.ruanko.hwm.service.IMusicTypeRelationService;
 import com.ruanko.hwm.service.ISingerService;
 import com.ruanko.hwm.utl.DateTime;
+import com.ruanko.hwm.utl.LrcAnalyze;
 import com.ruanko.hwm.utl.Upload_Download;
+import com.ruanko.hwm.utl.LrcAnalyze.LrcData;
 
 @Controller
 @RequestMapping("/music")
@@ -364,6 +366,52 @@ public class MusicController {
 		//System.out.println(musicName);
 		return ajax_common1(pageIndex, pageSize, totalPage, musicName);
 		
+	}
+	
+	/**
+	 * 获取歌词
+	 * @param musicid
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping({"/getMusicLrc"})
+	public @ResponseBody List<String> getMusicLrcInfo(String musicid, HttpServletRequest request) {
+		int id = Integer.parseInt(musicid);
+		//获取歌曲和歌手
+		Music music = musicService.getMusicById(id);
+		//读取歌词传到前台
+		String root = request.getSession().getServletContext().getRealPath("/static/music/lrc");
+		//String lrc = Upload_Download.lrc2String(root + "//" +music.getLyr());
+		//System.out.println(lrc);
+		
+		List<LrcData> lrcList = new LrcAnalyze(root + "//" +music.getLyr()).LrcGetList();
+		List<String> lrcList1 = new ArrayList<String>();
+		for(LrcData l:lrcList) {
+			//System.out.println(l.LrcLine);
+			lrcList1.add(l.LrcLine);
+		}
+		return lrcList1;
+	}
+	
+	/**
+	 * 获取歌曲和歌词信息
+	 * @param id
+	 * @return
+	 */
+	@RequestMapping("/ajax_operation_getMusic")
+	public @ResponseBody List<Object> findMusicAjax2(String musicid) {
+		//System.out.println(musicName);
+		//System.out.println(musicid);
+		int musicId = Integer.parseInt(musicid);
+		//获取音乐文件和歌手信息
+		Music music = musicService.getMusicById(musicId);
+		Singer singer = singerService.getSingerById(musicSingerService.getSingerByMusicId(musicId).getSingerid());
+		
+		List<Object> resultList = new ArrayList<Object>();
+		resultList.add(music);
+		resultList.add(singer);
+		
+		return resultList;
 	}
 	
 	/**

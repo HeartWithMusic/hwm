@@ -102,14 +102,13 @@
     	return result;
 	}
 	var path1 = document.getElementById("path").value;
+	
 	//console.info(path1);
 	//播放器事件
-	$(function() {  
-        // 播放器  
-        var Player = {  
+	var Player = {  
             // 歌曲路径  
-            path : path1 + '/music/song/',  
-            path2 : path1 + '/music/lrc/',
+            path : path1 + '/static/music/song/',  
+            path2 : path1 + '/static/music/lrc/',
             // 歌曲数据  
             data : null,  
 			
@@ -132,8 +131,8 @@
             init : function() {  
       
                 // 数据一般来自服务器端,通过ajax 加载数据,这里是模拟  
-                Player.data = ['追梦赤子心.mp3', '逃跑计划-夜空中最亮的星.mp3'];  
-				Player.lyricSrc = ['追梦赤子心.lrc','逃跑计划-夜空中最亮的星.lrc'];
+                Player.data = [];//['追梦赤子心.mp3', '逃跑计划-夜空中最亮的星.mp3'];  
+				Player.lyricSrc = [];//['追梦赤子心.lrc','逃跑计划-夜空中最亮的星.lrc'];
       
                 // 一般用模板引擎,把数据 与 模板 转换为 视图,来显示,这里是模拟  
                 var mhtml = '';  
@@ -259,35 +258,134 @@
       
                 // 播放指定歌曲  
                 function playByMe(i) {  
-                    console.log("index:", i);  
-                    Player.audio.src = Player.path + Player.data[i];  
-                    Player.audio.play();  
-                    Player.currentIndex = i;  
-                    Player.$rmusic.html(Player.data[Player.currentIndex]); 
-					$("#panel-song-title").text(Player.data[Player.currentIndex].split(".")[0]);
-					console.info(i);
-					//显示歌词
-					$.get(Player.path2 + Player.lyricSrc[i], function(lrc) {
-						lyric = parseLyric(lrc);
-						//console.info(lyric);
-						//debugger
-						loadLyric(lyric);
-						//palyMusic(0);
-					});
+                    console.log("index:", i); 
+                    for(var k=0;k<Player.data.length;k++) {
+                    	$.each(Player.data[k],function(j){ 
+                    		if(i == Player.data[k][j]) {
+                    			
+                    			Player.audio.src = Player.path + Player.data[k].name + ".mp3";  
+                                Player.audio.play();  
+                                Player.currentIndex = i;  
+                                Player.$rmusic.html(Player.data[Player.currentIndex]); 
+            					$("#panel-song-title").text(Player.data[k].name);
+            					console.info(k);
+            					//显示歌词
+            					$.get(Player.path2 + Player.data[k].name + ".lrc", function(lrc) {
+            						//alert(lrc);
+            						lyric = parseLyric(lrc);
+            						//console.info(lyric);
+            						//debugger
+            						loadLyric(lyric);
+            						//palyMusic(0);
+            					});
+                    		}
+                    	}); 
+                    }
+                    
 					//$('#btn-play').text("播放");
-                }  
+                };  
       
                 // 歌曲被点击  
                 $('#m-list a').click(function() {  
+                	var i = $(this).attr('index');
+                	//alert(i);
                     playByMe($(this).attr('index'));  
+                    
 					$("#btn-play").removeClass("glyphicon glyphicon-play ");
 					$("#btn-play").addClass("glyphicon glyphicon-pause");
 					flag = 0;
                 });  
             }  
         };  
-      
+       
+		/**
+		 * 添加歌曲到列表
+		 * @param id
+		 */
+		function addListAndPlay(id){
+    	   $.ajax({  
+	   	        type : "POST",  
+	   	        url : "http://localhost:8080/hwm/music/ajax_operation_getMusic" ,  
+	   	        dataType:"json",
+	   	        cache : false,  
+	   	        data : {  
+	   	            musicid: id
+	   	        },  
+	   	        async : false,  
+	   	        error : function() {  
+	   	            alert("网络异常！");  
+	   	        },  
+	   	        success : function(data) {
+	   	        	var id1 = data[0].id;
+	   	        	var newData = { id : data[0].id,name : data[0].musicname};
+	   	        	//var jsonarray = eval('('+Player.data+')');
+	   	        	//alert(newData.id);
+	   	        	//var jsonstr="[{'name':'a','value':1},{'name':'b','value':2}]";
+	   	        	Player.data.push(newData);
+	   	        	//alert(data[0].id);
+	   	        	//var key;
+	   	        	//var value;
+	   	        	//$.each(Player.data[0],function(i){  
+	   	        	   // key = i;  
+	   	        	    //value = newData[i];  
+	   	        	    //alert(key+":"+value);  
+	   	        	//});  
+	   	        
+	   	        	var mhtml = Player.$mList.html();
+	                mhtml += '<li style="font-size:14px;"><a index="' + data[0].id + '">' + data[0].musicname  + '</a>';
+	                Player.$mList.html(mhtml); 
+	                   
+	                Player.ready();
+	   	        }  
+	   	    });  
+	   	};
+	   	
+	   	/**
+	   	 * 播放歌曲
+	   	 * @param id
+	   	 */
+	   	function addListAndPlay(id){
+	    	   $.ajax({  
+		   	        type : "POST",  
+		   	        url : "http://localhost:8080/hwm/music/ajax_operation_getMusic" ,  
+		   	        dataType:"json",
+		   	        cache : false,  
+		   	        data : {  
+		   	            musicid: id
+		   	        },  
+		   	        async : false,  
+		   	        error : function() {  
+		   	            alert("网络异常！");  
+		   	        },  
+		   	        success : function(data) {
+		   	        	var id1 = data[0].id;
+		   	        	var newData = { id : data[0].id,name : data[0].musicname};
+		   	        	//var jsonarray = eval('('+Player.data+')');
+		   	        	//alert(newData.id);
+		   	        	//var jsonstr="[{'name':'a','value':1},{'name':'b','value':2}]";
+		   	        	Player.data.push(newData);
+		   	        	//alert(data[0].id);
+		   	        	//var key;
+		   	        	//var value;
+		   	        	//$.each(Player.data[0],function(i){  
+		   	        	   // key = i;  
+		   	        	    //value = newData[i];  
+		   	        	    //alert(key+":"+value);  
+		   	        	//});  
+		   	        
+		   	        	var mhtml = Player.$mList.html();;  
+		                   mhtml += '<li><a index="' + data[0].id + '">' + data[0].musicname  + '</a><a href="#">' + data[1].singername + '</a>' + data[0].musictime + '</li>'; 
+		                   Player.$mList.html(mhtml); 
+		                   
+		                   Player.ready();
+		   	        }  
+		   	    });  
+		   	};
+        
         Player.init();  
         Player.ready();  
-      
-    });  
+        //window.test = function test() {alert(Player.path);}
+        //alert(Player.path);
+        //alert(a()..path);
+	
+	
