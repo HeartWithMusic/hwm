@@ -5,7 +5,7 @@
 		<div id="conmmend">
 			<strong>云音乐特色榜</strong>
 			<ul class="nav nav-pills nav-stacked" style="max-width: 260px;">
-				<li >
+				<li>
 						
 					<a href="#"><img src="<%=request.getContextPath()%>/img/front/home/soar.png"  style="width:40px;height:40px;"></img>云音乐飙升榜</a>
 			
