@@ -1,6 +1,11 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" contentType="textml; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %>  
+<%@ taglib uri="http://www.springframework.org/tags" prefix="s" %> 
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="sf" %>
+<%@ page isELIgnored="false" %> 
 <script type="text/javascript">
 function change(){
 	
@@ -18,10 +23,10 @@ function change1(){
 
 	<div id = "singerMesstop"style = "width:710px;">
 		<div id = "head" style = "height:40px;margin-top:30px;">
-			<p id = "singerName" style = "float:left;margin-left:50px;font-weight: normal;font-size: 24px;color: #333;">周杰伦</p>
+			<p id = "singerName" style = "float:left;margin-left:50px;font-weight: normal;font-size: 24px;color: #333;">${singer.singername}</p>
 		</div>
 		<div id = "singerPic" style = "width:640px;margin:0 auto;">
-			<img style = "border:1px solid #d3d3d3;z-index:0;"src = "<%=request.getContextPath()%>/img/front/home/singerPic.png">
+			<img style = "width:642px;height:300px; border:1px solid #d3d3d3;z-index:0;"src = "<%=request.getContextPath()%>/static/singer/${singer.img}">
 			<div style = "margin-left:550px; margin-top: -50px;z-index:666666666;">	
 			<a style = "cursor:pointer;"> <img id="coll" onmouseover="change()" onmouseout="change1()" src="<%=request.getContextPath()%>/img/front/home/collect1.png"> </a>
 			</div>

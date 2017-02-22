@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.ruanko.hwm.bean.Music;
+import com.ruanko.hwm.bean.MusicSingerRela;
 import com.ruanko.hwm.bean.MusicType;
 import com.ruanko.hwm.bean.MusicTypeRela;
 import com.ruanko.hwm.bean.Singer;
@@ -453,10 +454,22 @@ public class UserController {
 	}
 	@RequestMapping({"/singer"})
 	public String toSingerMess(Model model, HttpServletRequest request) {
-		model.addAttribute("title", "JayChou");
+		int id = Integer.parseInt(request.getParameter("id"));
+		//获取歌手id
+		Singer singer = singerService.getSingerById(id);
+		List<Music> musicList = new ArrayList<Music>();
+		List<MusicSingerRela> musicSinger = musicSingerService.getMusicBySingerId(id);
+		for(MusicSingerRela msr : musicSinger) {
+			musicList.add(musicService.getMusicById(msr.getMusicid()));
+		}
+		model.addAttribute("musicList",musicList);
+		model.addAttribute("title", singer.getSingername());
+		model.addAttribute("introduction",singer.getIntroduction());
+		model.addAttribute("singer",singer);
 		model.addAttribute(new User());
 		return "showSingerInfo";
 	}
+
 	@RequestMapping({"/logup"})
 	public String toLogup(Model model, HttpServletRequest request) {
 		model.addAttribute("title", "用户注册");
