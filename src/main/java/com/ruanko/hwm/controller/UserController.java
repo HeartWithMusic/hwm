@@ -460,6 +460,7 @@ public class UserController {
 	public String toSingerMess(Model model, HttpServletRequest request) {
 		int id = Integer.parseInt(request.getParameter("id"));
 		//获取歌手id
+		System.out.println(id);
 		Singer singer = singerService.getSingerById(id);
 		List<Music> musicList = new ArrayList<Music>();
 		List<MusicSingerRela> musicSinger = musicSingerService.getMusicBySingerId(id);
