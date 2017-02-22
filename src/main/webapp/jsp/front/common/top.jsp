@@ -68,7 +68,7 @@
 				<div id="navbar" class="collapse navbar-collapse"><!-- 给导航栏添加响应式，包裹在带有.collapse、.navbar-collapse  -->
 					<ul class="nav navbar-nav" id="myTab"><!--nav navbar-nav 导航栏添加链接-->
 						<li class="active"><a href="/hwm/home/discover/1"><span class="glyphicon glyphicon-search"></span> 发现音乐</a></li>
-						<li><a href="/hwm/home/music"><span class="glyphicon glyphicon-user"></span> 我的音乐</a></li>
+						<li><a href="/hwm/home/myMusic"><span class="glyphicon glyphicon-user"></span> 我的音乐</a></li>
 						<li><a href="#about"><span class="glyphicon glyphicon-save"></span> 音乐人</a></li>
 						<li><a href="#contact">关于</a></li>
 					</ul>
@@ -112,7 +112,6 @@
 				<li><a id="tuijian" href="/hwm/home/discover/1"  style="height:34px;color:white;">推荐</a></li>
 				<li><a id="rank" href="/hwm/home/discover/rankList"  style="height:34px;color:white;">排行榜</a></li>
 				<li><a id="song1" href="/hwm/home/discover/musicList"  style="height:34px;color:white;">歌单</a></li>
-				<li><a id="radio" href="/hwm/home/discover/radio"  style="height:34px;color:white;">主播电台</a></li>
 				<li><a id="singer1" href="/hwm/home/discover/singer"  style="height:34px;color:white;">歌手</a></li>
 				<li><a id="album1" href="/hwm/home/discover/album" style="height:34px;color:white;">新碟上架</a></li>
 			</ul>

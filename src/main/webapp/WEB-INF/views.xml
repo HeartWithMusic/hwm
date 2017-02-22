@@ -31,8 +31,16 @@
 	</definition>
 	
 	<!-- 排行榜界面 -->	
-	<definition name="showRankList" extends="template_front">
-		<put-attribute name="content" value="/jsp/front/findMusic/rankList.jsp" />
+	<definition name="showRankList" template="/jsp/front/findMusic/rank_main.jsp">
+		<put-attribute name="top" value="/jsp/front/common/top.jsp" />
+		<put-attribute name="bottom" value="/jsp/front/common/bottom.jsp" />
+		<put-attribute name="left" value="/jsp/front/findMusic/rank_sort.jsp" />
+		<put-attribute name="content" value="" />
+	</definition>
+	
+	<!-- 排行榜界面 -->	
+	<definition name="showRank" extends="showRankList">
+		<put-attribute name="content" value="/jsp/front/findMusic/rank_right.jsp" />
 	</definition>
 	
 	<!-- 电台界面 -->	
@@ -49,6 +57,12 @@
 	<definition name="showMusicInfo" extends="template_front">
 		<put-attribute name="content" value="/jsp/front/music/musicMessage.jsp" />
 	</definition>
+	
+	<!-- 显示当前用户的歌单 -->
+	<definition name="showMusicListOfUser" extends="template_front">
+		<put-attribute name="content" value="/jsp/front/common/musicList_User.jsp"/>
+	</definition>
+	
 	<!-- 歌手信息界面 -->	
 	<definition name="showSingerInfo" extends="singerMess">
 		<put-attribute name="content" value="/jsp/front/singer/singerMessage.jsp" />

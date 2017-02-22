@@ -18,4 +18,6 @@ public interface MusicMapper {
     int updateByPrimaryKey(Music record);
     
     List<Music> selectAllMusic();
+    
+    List<Music> selectMusicByUserId(Integer id);
 }
