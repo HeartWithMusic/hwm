@@ -20,4 +20,6 @@ public interface IUserService {
 	public User getUserById(Integer id);
 	
 	public void updateUser(User user);
+
+	public void updateCurrentUser(User newUser);
 }

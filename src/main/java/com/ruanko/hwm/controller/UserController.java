@@ -90,7 +90,41 @@ public class UserController {
 		model.addAttribute(new User());
 		return "showManageUser";
 	}
-
+	//获得当前用户的资料
+	@RequestMapping({ "/personMsg" })
+	public String toPersonMsg(Model model, HttpServletRequest request, HttpServletResponse response) {
+		HttpSession session=request.getSession();
+		User currentUser=(User)session.getAttribute("user");
+		currentUser = userService.getUserById(currentUser.getId());
+		// 删除歌曲相关文件
+		System.out.println("返回当前用户信息");
+		System.out.println(currentUser.toString());
+		model.addAttribute("currentUser", currentUser);
+		
+		model.addAttribute(new User());
+		return "currentUserMsg";
+	}
+	
+	//修改当前用户的资料
+	@RequestMapping({ "/updateCurrentUser" })
+	public String toUpdateCurrentUser(String userName,String userTel,String email,String userAge,Model model, HttpServletRequest request, HttpServletResponse response) {
+		Integer userId=((User)request.getSession().getAttribute("user")).getId();
+		Integer age=Integer.parseInt(userAge);
+		System.out.println(userName+":"+userAge+":"+userId);
+		
+		User newUser=new User();
+		newUser.setId(userId);
+		newUser.setUsername(userName);
+		newUser.setAge(age);
+		newUser.setEmail(email);
+		newUser.setTel(userTel);
+		
+		userService.updateCurrentUser(newUser);
+		
+		
+		model.addAttribute(new User());
+		return toMyMusic(model, request);
+	}
 	/**
 	 * 修改用户获取用户
 	 * 

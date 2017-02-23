@@ -48,4 +48,8 @@ public class UserServiceImpl implements IUserService{
 		userMapper.updateByPrimaryKey(user);
 	}
 
+	public void updateCurrentUser(User newUser) {
+		userMapper.updateUser(newUser);
+	}
+
 }

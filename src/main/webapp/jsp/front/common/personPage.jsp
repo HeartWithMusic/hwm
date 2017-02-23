@@ -17,31 +17,39 @@
 	<div class="user f-cb">
 	<a class="face" href="/user/home?id=365946911">
 	<img src="http://p1.music.126.net/VnZiScyynLG7atLIZ2YPkw==/18686200114669622.jpg?param=200y200"></a>
-	<span class="name f-thide">${sessionScope.user.username}<a href="<%=request.getContextPath()%>/home/personMsg">修改个人资料</a></span>
+	<span class="name f-thide">${sessionScope.user.username}<a href="<%=request.getContextPath()%>/home/personMsg">修改头像</a></span>
 	</div>
 	<div class="hd f-cb">
 	<i class="type u-icn u-icn-13"></i>
-	<h2 class="f-ff2 f-thide">我喜欢的音乐</h2>
-	
-	<table class="m-table ">
-		<tr>
-			<td>音乐名</td>
-			<td>时长</td>
-			<td>歌手</td>
-		</tr>
-		<c:forEach var="music" items="${currentMusic}">
-			<tr>
-				<td>${music.musicname}</td>
-				<td>${music.musictime}</td>
-				<td>${歌手}</td>
-			</tr>
+	<form name="form1" action="<%=request.getContextPath()%>/home/updateCurrentUser" method="post">
+<table cellspacing="1" cellpadding="4" width="100%" class="tableborder"
+	id="table3">
+
+	<tr>
+		<td class="altbg1">昵称</td>
+		<td class="altbg2" colspan="11"><input type="text" name="userName" size="34" value="${currentUser.username}" ></td>
+	</tr>
+	<tr>
+		<td class="altbg1">电话</td>
+		<td class="altbg2" colspan="11"><input type="text" name="userTel" size="34" value="${currentUser.tel}"></td>
 		
-		</c:forEach>
+	</tr>
+	<tr>
+		<td class="altbg1">邮箱</td>
+		<td class="altbg2" colspan="11"><input type="text" name="email" size="34" value="${currentUser.email}"></td>
+	</tr>
+	<tr>
+		<td class="altbg1">年龄</td>
+		<td class="altbg2" colspan="11"><input type="text" name="userAge" size="34" value="${currentUser.age}"></td>
+	</tr>
 	
-	</table>
-	
-	
-	
+	<tr>
+		<td class="altbg1"></td><!-- 提交检验 -->
+		<td class="altbg2" colspan="11"><input type="submit" value="修改" name="B1" /> &nbsp; <input type="reset" value="重置" name="B2" /></td>
+	</tr>
+
+</table>
+</form>
 	</div>
 	</div></div></div></div></div>
 
