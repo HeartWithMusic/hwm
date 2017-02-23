@@ -2,7 +2,7 @@ package com.ruanko.hwm.bean;
 
 import java.util.Date;
 
-public class Music {
+public class Music implements Comparable<Music>{
     private Integer id;
 
     private String musicname;
@@ -72,4 +72,8 @@ public class Music {
     public void setMusictime(String musictime) {
         this.musictime = musictime == null ? null : musictime.trim();
     }
+
+	public int compareTo(Music o) {
+		return o.getPlaycounts().compareTo(this.getPlaycounts());  
+	}
 }

@@ -20,7 +20,6 @@ function change1(){
 
     
 </script>
-
 	<div id = "singerMesstop"style = "width:710px;">
 		<div id = "head" style = "height:40px;margin-top:30px;">
 			<p id = "singerName" style = "float:left;margin-left:50px;font-weight: normal;font-size: 24px;color: #333;">${singer.singername}</p>
@@ -32,4 +31,4 @@ function change1(){
 			</div>
 		</div>	
 	
-	</div>		
+	</div>	

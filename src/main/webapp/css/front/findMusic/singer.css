@@ -100,3 +100,11 @@
 	color: #333;
 	font-family: Arial, Helvetica, sans-serif;
 }
+
+#singer_musicList a {
+	text-decoration: none !important;
+}
+
+#singer_musicList a:hover{
+	text-decoration: none !important;
+}

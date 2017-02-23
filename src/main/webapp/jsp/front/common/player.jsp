@@ -41,7 +41,7 @@
 		<div class="container">  
 	        <div class="row" >  
 	           <div class="col-md-3" >
-					<div id="play_menu1" class="col-xs-6 col-sm-9">
+					<div id="play_menu1" class="col-xs-6 col-sm-9" style="padding-right:0px">
 						<span class="visible-xs visible-sm visible-md visible-lg">
 							<!-- 上一首按钮 -->
 							<div id="div-pre">
@@ -55,6 +55,11 @@
 							<div id="div-next">
 								<span id="btn-next" class="glyphicon glyphicon-step-forward"></span>
 							</div>
+						</span>
+						<span class="visible-xs visible-sm visible-md visible-lg">
+							<a id="music_path" href="#">
+								<img id="music_img" style="position:relative;width:35px;border:2px solid gray;margin-left: 40px;" src="<%=request.getContextPath()%>/static/music/img/default_music.jpg"/>
+							</a>
 						</span>
 					</div>
 				</div>

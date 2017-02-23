@@ -265,6 +265,33 @@ public class UserController {
 	}
 	@RequestMapping({"/discover/rankList"})
 	public String toRankList(Model model, HttpServletRequest request) {
+		String typeName = "";
+		List<Music> musicList = new ArrayList<Music>();
+		List<Singer> singerList = new ArrayList<Singer>();
+		if(request.getParameter("cat") == null) {
+			typeName += "心动飙升榜";
+			List<Music> musicList_all = musicService.getAllMusic();
+			musicList = musicList_all.subList(0, musicList_all.size() > 20 ? 20 : musicList_all.size());
+			singerList = new ArrayList<Singer>();
+			for(Music m : musicList ) {
+				singerList.add(singerService.getSingerById(musicSingerService.getSingerByMusicId(m.getId()).getSingerid()));
+			}
+		}else {
+			Integer id = Integer.parseInt(request.getParameter("cat"));
+			//System.out.println(id);
+			//根据id获取歌曲类别信息
+			typeName = musicTypeService.getMusicTypeById(id).getTypename();
+			//获取歌曲列表
+			List<MusicTypeRela> mtrList = musicTypeRelaService.getMusicByTypeId(id);
+			for(MusicTypeRela m : mtrList) {
+				musicList.add(musicService.getMusicById(m.getMusicid()));
+			}
+			//size = mtrList.size();
+		}
+		
+		model.addAttribute("typeName", typeName);
+		model.addAttribute("musicList", musicList);
+		model.addAttribute("singerList", singerList);
 		model.addAttribute("title", "排行榜");
 		model.addAttribute(new User());
 		return "showRank";

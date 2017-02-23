@@ -265,7 +265,9 @@
                     		if(i == Player.data[k][j]) {
                     			Player.currentIndex = k;
                     			Player.audio.src = Player.path + Player.data[k].name + ".mp3";  
-                                Player.audio.play();  
+                                Player.audio.play(); 
+                                $("#music_img").attr("src",path1+"/static/music/img/"+Player.data[k].name+".jpg");
+                                $("#music_path").attr("href",path1+"/home/music?id="+Player.data[k].id);
                                 //Player.currentIndex = i;  
                                 //Player.$rmusic.html(Player.data[Player.currentIndex].name); 
             					$("#panel-song-title").text(Player.data[k].name);
@@ -284,6 +286,8 @@
                     		}
                     	}); 
                     }
+                    
+                    
                     $("#btn-play").removeClass("glyphicon glyphicon-play ");
         			$("#btn-play").addClass("glyphicon glyphicon-pause");
         			flag = 0;

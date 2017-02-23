@@ -52,7 +52,7 @@
 		<c:forEach begin ="1" end="${size}" var = "i">
 			<ul>
 				<c:forEach items="${singerList2 }" begin = "${(i-1)*5 }" end="${(i-1)*5 + 4 }" var="singer">
-					<li style="margin-left:-10px;"><a href="#">${singer.singername}</a></li>
+					<li style="margin-left:-10px;"><a href="<%=request.getContextPath()%>/home/singer?id=${singer.id}">${singer.singername}</a></li>
 				</c:forEach>
 			</ul>
 		</c:forEach>

@@ -12,8 +12,8 @@
 	<div style="padding-top:30px;border-bottom: 2px solid #C10D0C;">
 		<h3>${typeName }</h3>
 	</div>
-	<div id="Letter">
-		<ul>
+	<!--<div id="Letter">
+		  <ul>
 			<li><a href="#" style="margin-left:-30px;">热门</a></li>
 			<li><a href="#">A</a></li>
 			<li><a href="#">B</a></li>
@@ -43,7 +43,7 @@
 			<li><a href="#">Z</a></li>
 			<li><a href="#">其他	</a></li>
 		</ul>
-	</div>
+	</div>-->
 	<div id="singerpicture" >
 			<c:forEach begin="1" end="2" var="i">
 				<ul>
@@ -64,7 +64,7 @@
 		<c:forEach begin ="1" end="14" var = "i">
 			<ul>
 				<c:forEach items="${singerList }" begin = "${(i-1)*5 }" end="${(i-1)*5 + 4 }" var="singer">
-					<li style="margin-left:-10px;"><a href="#">${singer.singername}</a></li>
+					<li style="margin-left:-10px;"><a href="<%=request.getContextPath()%>/home/singer?id=${singer.id}">${singer.singername}</a></li>
 				</c:forEach>
 			</ul>
 		</c:forEach>

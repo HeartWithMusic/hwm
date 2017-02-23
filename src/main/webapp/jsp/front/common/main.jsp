@@ -42,7 +42,7 @@
 			var tj = document.getElementById('aa').contentWindow.document.getElementById('tuijian');
 			var rk = document.getElementById('aa').contentWindow.document.getElementById('rank');
 			var sg = document.getElementById('aa').contentWindow.document.getElementById('song1');
-			var rd = document.getElementById('aa').contentWindow.document.getElementById('radio');
+			//var rd = document.getElementById('aa').contentWindow.document.getElementById('radio');
 			var sig = document.getElementById('aa').contentWindow.document.getElementById('singer1');
 			var ab = document.getElementById('aa').contentWindow.document.getElementById('album1');
 			//alert(isContains(url,"http://localhost:8080/hwm/home/discover/singer"));

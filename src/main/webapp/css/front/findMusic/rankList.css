@@ -12,7 +12,7 @@
 	float:left;
 	width:220px;
 	border-right:1px solid #d3d3d3;
-	height:1000px;
+	height:1150px;
 }
 
 #rank_list{
@@ -24,4 +24,8 @@
 #conmmend{
 	padding-top:30px;
 	padding-left:20px;
+}
+
+#rank_musicList a:hover{
+	text-decoration: none !important;
 }

@@ -11,8 +11,8 @@
 <div id="rank_list">
 	<div style = "width:740px;height:208px; margin: 0 auto;">
 		<div id = "item" style = "width:473px; height:114x; float:right;margin-right:50px; margin-top: 15px;">
-			<p style ="line-height: 24px;font-size: 20px;font-weight: normal;">云音乐飙升榜</p>
-			<p style = "margin-left: 28px;color:#999">(每天更新)</p>
+			<p style ="line-height: 24px;font-size: 20px;font-weight: normal;">${typeName}</p>
+			<p style = "margin-left: 28px;color:#999">每日更新</p>
 		</div>
 		<div id = "item" style = "width:473px; float:right;clear:both;margin-right: 50px;margin-top: 20px;">
 			<div style = "width:380px;height:40px;">	<!--操作-->				
@@ -30,7 +30,7 @@
 	</div>
 	<div id="topList">
 		<div id="hotList">
-			<table class="table table-striped" style="">
+			<table id="rank_musicList" class="table table-striped" style="">
 
 				<caption>
 					<h3>歌曲列表</h3>
@@ -43,50 +43,70 @@
 						<th style = "padding-left: 25px;">操作</th>
 						<th>歌手</th>
 					</tr>
-					<tr>
-						<td style = "width:40px;">1</td>
-						<td style=""><img alt=""
-							src="<%=request.getContextPath()%>/img/front/home/playBtn1.png"
-							style="width: 20px;"> &nbsp&nbsp&nbsp <a href="#">告白气球</a>
-						</td>
-						<td>Time</td>
-						<td><a href="#"><span id="coll"
-								class="glyphicon glyphicon-plus" style="margin-left: 5px;"></span>&nbsp&nbsp</a>
-							<a href="#"><span class="glyphicon glyphicon-heart"></span>&nbsp&nbsp</a>
-							<a href="#"><span class="glyphicon glyphicon-save"></span></a></td>
-						<td><a href="#">所属专辑</a></td>
-
-					</tr>
-					<tr>
-						<td style = "width:40px;">1</td>
-						<td style=""><img alt=""
-							src="<%=request.getContextPath()%>/img/front/home/playBtn1.png"
-							style="width: 20px;"> &nbsp&nbsp&nbsp <a href="#">告白气球</a>
-						</td>
-						<td>Time</td>
-						<td><a href="#"><span id="coll"
-								class="glyphicon glyphicon-plus" style="margin-left: 5px;"></span>&nbsp&nbsp</a>
-							<a href="#"><span class="glyphicon glyphicon-heart"></span>&nbsp&nbsp</a>
-							<a href="#"><span class="glyphicon glyphicon-save"></span></a></td>
-						<td><a href="#">所属专辑</a></td>
-
-					</tr>
-					<tr>
-						<td style = "width:40px;">1</td>
-						<td style=""><img alt=""
-							src="<%=request.getContextPath()%>/img/front/home/playBtn1.png"
-							style="width: 20px;"> &nbsp&nbsp&nbsp <a href="#">告白气球</a>
-						</td>
-						<td>Time</td>
-						<td><a href="#"><span id="coll"
-								class="glyphicon glyphicon-plus" style="margin-left: 5px;"></span>&nbsp&nbsp</a>
-							<a href="#"><span class="glyphicon glyphicon-heart"></span>&nbsp&nbsp</a>
-							<a href="#"><span class="glyphicon glyphicon-save"></span></a></td>
-						<td><a href="#">所属专辑</a></td>
-
-					</tr>
+					<c:forEach items="${musicList}" var="music" varStatus="i">
+						<tr>
+							<td class="rank_list" id="rank_list_${i.count}" style = "width:40px;">${i.count }</td>
+							<td style="">
+									<span class="rank_m" id="rank_m_${music.id }" onmouseover="change_rank_music_state1(${music.id })" onmouseout="change_rank_music_state2(${music.id })" onclick="change_rank_play_state(${music.id})" title="播放"  > 
+									 <i id="0"  class="glyphicon glyphicon-expand" style="width: 20px;font-size:18px;top:3px;"></i></span>
+									 &nbsp;&nbsp;&nbsp; <a href="<%=request.getContextPath()%>/home/music?id=${music.id}">${music.musicname}</a>
+							</td>
+							<td>${music.musictime}</td>
+							<td style="font-size:12px;"><a href="#" onclick="addPlayList(${music.id})" title="添加到播放列表"><span id="coll"
+									class="glyphicon glyphicon-plus"  style="margin-left: 5px;"></span>&nbsp;&nbsp;</a>
+								<a href="#" title="收藏"><span class="glyphicon glyphicon-heart"></span>&nbsp;&nbsp;</a>
+								<a href="#" title="下载"><span class="glyphicon glyphicon-save"></span></a></td>
+							<c:forEach items="${singerList}" var="singer" varStatus="j">
+								<c:if test="${i.index==j.index}">
+									<td><a href="<%=request.getContextPath()%>/home/singer?id=${singer.id}">${singer.singername }</a></td>
+								</c:if>
+							</c:forEach>
+						</tr>
+					
+					</c:forEach>
 				</tbody>
 			</table>
 		</div>
 	</div>
 </div>
+
+<script>
+	var rankList = $(".rank_list");
+	
+	for(var i=0;i<rankList.length;i++) {
+		if(rankList.eq(i).attr("id") == "rank_list_" + 1) {
+			rankList.eq(i).css({"font-size": "15px","color": "gold","font-style": "italic","font-weight": "bold"});
+		}else if(rankList.eq(i).attr("id") == "rank_list_" + 2){
+			rankList.eq(i).css({"font-size": "15px","color": "silver","font-style": "italic","font-weight": "bold"});
+		}else if(rankList.eq(i).attr("id") == "rank_list_" + 3){
+			rankList.eq(i).css({"font-size": "15px","color": "brown","font-style": "italic","font-weight": "bold"});
+		}
+	}
+	function change_rank_music_state1(id){
+		if($("#rank_m_"+id +" i").attr("id") == 0){
+			//alert("#singer_m_"+id+" i");
+			$("#rank_m_"+id+" i").css("color","red");
+			$("#rank_m_"+id).css("cursor","pointer");
+			
+		}
+		
+	}
+	
+	function change_rank_music_state2(id){
+		if($("#rank_m_"+id +" i").attr("id") == 0){
+			$("#rank_m_"+id+" i").css("color","black");
+		}
+	}
+	function change_rank_play_state(id) {
+		var singer_m_list = $(".rank_m i");
+		//alert(singer_m_list.length);
+		for(var i=0;i<singer_m_list.length;i++){
+			singer_m_list.eq(i).css("color","black"); 
+			singer_m_list.eq(i).attr("id",0);
+		}
+		$("#rank_m_"+id+" i").css("color","red");
+		$("#rank_m_"+id +" i").attr("id",1);
+		playSongById(id);
+	}
+	
+</script>
