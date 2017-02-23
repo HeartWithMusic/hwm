@@ -17,7 +17,7 @@
 	<div class="user f-cb">
 	<a class="face" href="/user/home?id=365946911">
 	<img src="http://p1.music.126.net/VnZiScyynLG7atLIZ2YPkw==/18686200114669622.jpg?param=200y200"></a>
-	<span class="name f-thide"><a href="/user/home?id=365946911" class="s-fc7" title="DoubleEn">${sessionScope.user.username}</a></span>
+	<span class="name f-thide">${sessionScope.user.username}<a href="<%=request.getContextPath()%>/home/personMsg">修改个人资料</a></span>
 	</div>
 	<div class="hd f-cb">
 	<i class="type u-icn u-icn-13"></i>
