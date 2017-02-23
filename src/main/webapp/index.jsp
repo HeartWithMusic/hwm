@@ -16,6 +16,7 @@
 		height:50px;
 		border-bottom: 2px solid #C10D0C;"
 	}
+	
 </style>    
 <!--第二层导航栏对应的转换页面-->
 <div class="tab-content" style="margin-top:20px;"></div>
@@ -56,132 +57,62 @@
 		<!-- 热门推荐 -->
 		<div class="left_menu">
 			<div class="left_menu_header">
-				<ol class="breadcrumb" style="background:none;height:30px;" >
-					<li><a href="#" style="font-size:15pt; color:black;">热门推荐</a></li>
-					<li><a href="#" style="color:gray;">华语</a></li>
-					<li><a href="#" style="color:gray;">流行</a></li>
-					<li><a href="#" style="color:gray;">摇滚</a></li>
-					<li><a href="#" style="color:gray;">民谣</a></li>
-					<li><a href="#" style="color:gray;">电子</a></li>
-					<a href="#" style="margin-left:320px;color:gray;">更多<img src="<%=request.getContextPath()%>/img/front/home/more.png" style="margin-top:-5px;"></img></a>
+				<ol class="breadcrumb" style="background:none;height:30px;padding-left: 15px;" >
+					<li><a href="<%=request.getContextPath()%>/home/discover/musicList" style="font-size:15pt; color:black;">热门推荐</a></li>
+					<li><a href="<%=request.getContextPath()%>/home/discover/musicList?cat=1" style="color:gray;">华语</a></li>
+					<li><a href="<%=request.getContextPath()%>/home/discover/musicList?cat=6" style="color:gray;">流行</a></li>
+					<li><a href="<%=request.getContextPath()%>/home/discover/musicList?cat=7" style="color:gray;">摇滚</a></li>
+					<li><a href="<%=request.getContextPath()%>/home/discover/musicList?cat=8" style="color:gray;">民谣</a></li>
+					<li><a href="<%=request.getContextPath()%>/home/discover/musicList?cat=10" style="color:gray;">电子</a></li>
+					<a href="<%=request.getContextPath()%>/home/discover/musicList" style="margin-left:320px;color:gray;">更多<img src="<%=request.getContextPath()%>/img/front/home/more.png" style="margin-top:-5px;"></img></a>
 				</ol>
 			</div>
 			<!--缩略图  热门推荐栏-->
 			<div class="row">
-					
-			    <div class="col-sm-6 col-md-3" style="margin-left:30px;margin-top:30px;height:200px;width:185px">
-			        <a href="#" class="thumbnail" style="height:160px;width:150px">
-			            <img src="<%=request.getContextPath()%>/img/front/home/music1.png"
-			                 alt="通用的占位符缩略图"
-							style="height:150px;width:150px">
-			        </a>
-					<div style="width:140px;height:25px;background-image:url('<%=request.getContextPath()%>/img/front/home/bottomBg.png');opacity:0.8;position:relative;top:-49px;color:#ccc;left:6px;">
-						<i class="glyphicon glyphicon-headphones" style="margin-left:5px;margin-top:5px;"></i>  
-											<span style="margin-top:5px;">0</span>
-											<a href="#"><i class="glyphicon glyphicon-play-circle" style="color:white;margin-left:80px;font-size:18px;margin-top:2px;"></i></a>
-					</div>
-					<div style="width:140px;height:25px;margin-left:10px;margin-top:-45px;"><a href="#" style="color:black;">我们的歌</a></div>
-			    </div>
-			    <div class="col-sm-6 col-md-3" style="margin-left:0px;margin-top:30px;height:200px;width:185px">
-			        <a href="#" class="thumbnail" style="height:160px;width:150px">
-			            <img src="<%=request.getContextPath()%>/img/front/home/music1.png"
-			                 alt="通用的占位符缩略图"
-							style="height:150px;width:150px">
-			        </a>
-					<div style="width:140px;height:25px;background-image:url('<%=request.getContextPath()%>/img/front/home/bottomBg.png');opacity:0.8;position:relative;top:-49px;color:#ccc;left:6px;">
-						<i class="glyphicon glyphicon-headphones" style="margin-left:5px;margin-top:5px;"></i>  
-											<span style="margin-top:5px;">0</span>
-											<a href="#"><i class="glyphicon glyphicon-play-circle" style="color:white;margin-left:80px;font-size:18px;margin-top:2px;"></i></a>
-					</div>
-					<div style="width:140px;height:25px;margin-left:10px;margin-top:-45px;"><a href="#" style="color:black;">我们的歌</a></div>
-			    </div>
-			     <div class="col-sm-6 col-md-3" style="margin-left:0px;margin-top:30px;height:200px;width:185px">
-			        <a href="#" class="thumbnail" style="height:160px;width:150px">
-			            <img src="<%=request.getContextPath()%>/img/front/home/music1.png"
-			                 alt="通用的占位符缩略图"
-							style="height:150px;width:150px">
-			        </a>
-					<div style="width:140px;height:25px;background-image:url('<%=request.getContextPath()%>/img/front/home/bottomBg.png');opacity:0.8;position:relative;top:-49px;color:#ccc;left:6px;">
-						<i class="glyphicon glyphicon-headphones" style="margin-left:5px;margin-top:5px;"></i>  
-											<span style="margin-top:5px;">0</span>
-											<a href="#"><i class="glyphicon glyphicon-play-circle" style="color:white;margin-left:80px;font-size:18px;margin-top:2px;"></i></a>
-					</div>
-					<div style="width:140px;height:25px;margin-left:10px;margin-top:-45px;"><a href="#" style="color:black;">我们的歌</a></div>
-			    </div>
-			    <div class="col-sm-6 col-md-3" style="margin-left:0px;margin-top:30px;height:200px;width:185px">
-			        <a href="#" class="thumbnail" style="height:160px;width:150px">
-			            <img src="<%=request.getContextPath()%>/img/front/home/music1.png"
-			                 alt="通用的占位符缩略图"
-							style="height:150px;width:150px">
-			        </a>
-					<div style="width:140px;height:25px;background-image:url('<%=request.getContextPath()%>/img/front/home/bottomBg.png');opacity:0.8;position:relative;top:-49px;color:#ccc;left:6px;">
-						<i class="glyphicon glyphicon-headphones" style="margin-left:5px;margin-top:5px;"></i>  
-											<span style="margin-top:5px;">0</span>
-											<a href="#"><i class="glyphicon glyphicon-play-circle" style="color:white;margin-left:80px;font-size:18px;margin-top:2px;"></i></a>
-					</div>
-					<div style="width:140px;height:25px;margin-left:10px;margin-top:-45px;"><a href="#" style="color:black;">我们的歌</a></div>
-			    </div>
+				<c:forEach items="${musicList1}" var="music" begin="0" end="3">
+						
+						<div class="col-sm-6 col-md-3 row_left" style="margin-left:0px;margin-top:20px;height:200px;width:185px">
+					        <a href="<%=request.getContextPath()%>/home/music?id=${music.id}" class="thumbnail" style="height:160px;width:150px">
+					            <img src="<%=request.getContextPath()%>/static/music/img/${music.img}"
+					                 alt="通用的占位符缩略图"
+									style="height:150px;width:150px">
+					        </a>
+							<div style="width:140px;height:25px;background-image:url('<%=request.getContextPath()%>/img/front/home/bottomBg.png');opacity:0.8;position:relative;top:-49px;color:#ccc;left:6px;">
+								<i class="glyphicon glyphicon-headphones"  style="color:white;margin-left:5px;margin-top:5px;"></i>  
+													<span style="margin-top:5px;">0</span>
+													<a href="#"><i class="glyphicon glyphicon-play-circle" style="color:white;margin-left:80px;font-size:18px;margin-top:2px;"></i></a>
+							</div>
+							<div style="width:140px;height:25px;margin-left:10px;margin-top:-45px;"><a href="#" style="color:black;">${music.musicname}</a></div>
+					    </div>
+						
+				</c:forEach>	
+			    
 			</div>
 			<div class="row">
-			    <div class="col-sm-6 col-md-3" style="margin-left:30px;margin-top:15px;height:200px;width:185px">
-			        <a href="#" class="thumbnail" style="height:160px;width:150px">
-			            <img src="<%=request.getContextPath()%>/img/front/home/music1.png"
-			                 alt="通用的占位符缩略图"
-							style="height:150px;width:150px">
-			        </a>
-					<div style="width:140px;height:25px;background-image:url('<%=request.getContextPath()%>/img/front/home/bottomBg.png');opacity:0.8;position:relative;top:-49px;color:#ccc;left:6px;">
-						<i class="glyphicon glyphicon-headphones" style="margin-left:5px;margin-top:5px;"></i>  
-											<span style="margin-top:5px;">0</span>
-											<a href="#"><i class="glyphicon glyphicon-play-circle" style="color:white;margin-left:80px;font-size:18px;margin-top:2px;"></i></a>
-					</div>
-					<div style="width:140px;height:25px;margin-left:10px;margin-top:-45px;"><a href="#" style="color:black;">我们的歌</a></div>
-			    </div>
-			    <div class="col-sm-6 col-md-3" style="margin-left:0px;margin-top:15px;height:200px;width:185px">
-			        <a href="#" class="thumbnail" style="height:160px;width:150px">
-			            <img src="<%=request.getContextPath()%>/img/front/home/music1.png"
-			                 alt="通用的占位符缩略图"
-							style="height:150px;width:150px">
-			        </a>
-					<div style="width:140px;height:25px;background-image:url('<%=request.getContextPath()%>/img/front/home/bottomBg.png');opacity:0.8;position:relative;top:-49px;color:#ccc;left:6px;">
-						<i class="glyphicon glyphicon-headphones" style="margin-left:5px;margin-top:5px;"></i>  
-											<span style="margin-top:5px;">0</span>
-											<a href="#"><i class="glyphicon glyphicon-play-circle" style="color:white;margin-left:80px;font-size:18px;margin-top:2px;"></i></a>
-					</div>
-					<div style="width:140px;height:25px;margin-left:10px;margin-top:-45px;"><a href="#" style="color:black;">我们的歌</a></div>
-			    </div>
-			     <div class="col-sm-6 col-md-3" style="margin-left:0px;margin-top:15px;height:200px;width:185px">
-			        <a href="#" class="thumbnail" style="height:160px;width:150px">
-			            <img src="<%=request.getContextPath()%>/img/front/home/music1.png"
-			                 alt="通用的占位符缩略图"
-							style="height:150px;width:150px">
-			        </a>
-					<div style="width:140px;height:25px;background-image:url('<%=request.getContextPath()%>/img/front/home/bottomBg.png');opacity:0.8;position:relative;top:-49px;color:#ccc;left:6px;">
-						<i class="glyphicon glyphicon-headphones" style="margin-left:5px;margin-top:5px;"></i>  
-											<span style="margin-top:5px;">0</span>
-											<a href="#"><i class="glyphicon glyphicon-play-circle" style="color:white;margin-left:80px;font-size:18px;margin-top:2px;"></i></a>
-					</div>
-					<div style="width:140px;height:25px;margin-left:10px;margin-top:-45px;"><a href="#" style="color:black;">我们的歌</a></div>
-			    </div>
-			    <div class="col-sm-6 col-md-3" style="margin-left:0px;margin-top:15px;height:200px;width:185px">
-			        <a href="#" class="thumbnail" style="height:160px;width:150px">
-			            <img src="<%=request.getContextPath()%>/img/front/home/music1.png"
-			                 alt="通用的占位符缩略图"
-							style="height:150px;width:150px">
-			        </a>
-					<div style="width:140px;height:25px;background-image:url('<%=request.getContextPath()%>/img/front/home/bottomBg.png');opacity:0.8;position:relative;top:-49px;color:#ccc;left:6px;">
-						<i class="glyphicon glyphicon-headphones" style="margin-left:5px;margin-top:5px;"></i>  
-											<span style="margin-top:5px;">0</span>
-											<a href="#"><i class="glyphicon glyphicon-play-circle" style="color:white;margin-left:80px;font-size:18px;margin-top:2px;"></i></a>
-					</div>
-					<div style="width:140px;height:25px;margin-left:10px;margin-top:-45px;"><a href="#" style="color:black;">我们的歌</a></div>
-			    </div>
-			</div>
+				<c:forEach items="${musicList1}" var="music" begin="4" end="7">
+						
+						<div class="col-sm-6 col-md-3 row_left" style="margin-left:0px;margin-top:20px;height:200px;width:185px">
+					        <a href="<%=request.getContextPath()%>/home/music?id=${music.id}" class="thumbnail" style="height:160px;width:150px">
+					            <img src="<%=request.getContextPath()%>/static/music/img/${music.img}"
+					                 alt="通用的占位符缩略图"
+									style="height:150px;width:150px">
+					        </a>
+							<div style="width:140px;height:25px;background-image:url('<%=request.getContextPath()%>/img/front/home/bottomBg.png');opacity:0.8;position:relative;top:-49px;color:#ccc;left:6px;">
+								<i class="glyphicon glyphicon-headphones"  style="color:white;margin-left:5px;margin-top:5px;"></i>  
+													<span style="margin-top:5px;">0</span>
+													<a href="#"><i class="glyphicon glyphicon-play-circle" style="color:white;margin-left:80px;font-size:18px;margin-top:2px;"></i></a>
+							</div>
+							<div style="width:140px;height:25px;margin-left:10px;margin-top:-45px;"><a href="#" style="color:black;">${music.musicname}</a></div>
+					    </div>
+						
+				</c:forEach>
+			 </div>   
 		</div>
 		
 		<!--个性化推荐   导航栏-->
 		<div class="left_menu">
 			<div class="left_menu_header">
-				<ol class="breadcrumb" style="background:none;height:30px;" >
+				<ol class="breadcrumb" style="background:none;height:30px;padding-left: 15px;" >
 					<li><a href="#" style="font-size:15pt;color:black;">个性化推荐</a></li>
 				</ol>
 			</div>
@@ -247,9 +178,9 @@
 		<!-- 新碟上架-->
 		<div class="left_menu">
 			<div class="left_menu_header" >
-				<ol class="breadcrumb" style="background:none;" >
-					<li><a href="#" style="font-size:15pt;color:black;">新碟上架</a></li>
-					<a href="#" style="margin-left:560px;color:gray;">更多<img src="<%=request.getContextPath()%>/img/front/home/more.png" style="margin-top:-5px;"></img></a>
+				<ol class="breadcrumb" style="background:none;padding-left: 15px;" >
+					<li><a href="<%=request.getContextPath()%>/home/discover/album" style="font-size:15pt;color:black;">新碟上架</a></li>
+					<a href="<%=request.getContextPath()%>/home/discover/album" style="margin-left:560px;color:gray;">更多<img src="<%=request.getContextPath()%>/img/front/home/more.png" style="margin-top:-5px;"></img></a>
 				</ol>
 			</div>
 			
@@ -263,151 +194,166 @@
 				</ol>-->   
 				<!-- 轮播（Carousel）项目 -->
 				
-				<div class="carousel-inner" style="margin-top:20px;">
+				<div class="carousel-inner" style="margin-top:20px;height:180px;border:1px solid #d3d3d3;">
 					<div class="item active">
-						<li>
+						<li style="list-style:none;">
 							<div class="item active" >
-								<a class='msk' href="#" style="margin-left:53px;">
+								<c:forEach items="${musicList2}" var="music" begin="0" end="4">
+									<a class='msk' href="<%=request.getContextPath()%>/home/music?id=${music.id}">
+											<div class="lunbo_left" style="float:left;width: 100px;margin-left:20px;margin-top: 25px;">
+											<img class='j-img' width="100px" height="100px" src="<%=request.getContextPath()%>/static/music/img/${music.img}"></img>
+												<div style="width:100px">${music.musicname }</div>
+											</div>
+										</a>
+								</c:forEach>
+							</div>
+						</li>
+						<!--  <li style="list-style:none;">
+							<div class="item active" >
+								<a class='msk' href="#">
+									
+									<div style="float:left;width: 100px;margin-left:70px;margin-top: 25px;">
 									<img class='j-img' src="<%=request.getContextPath()%>/img/front/home/music1.png"></img>
+										<div style="width:100px">第一首歌曲</div>
+									</div>
 								</a>
 								
-								<a class='msk' href="#" style="margin-left:23px;">
+								<a class='msk' href="#" >
+									
+									<div style="float:left;width: 100px;margin-left:20px;margin-top: 25px;">
 									<img class='j-img' src="<%=request.getContextPath()%>/img/front/home/music1.png"></img>
+										<div style="width:100px">第一首歌曲</div>
+									</div>
 								</a>
-								<a class='msk' href="#" style="margin-left:23px;">
+								<a class='msk' href="#" >
+									
+									<div style="float:left;width: 100px;margin-left:20px;margin-top: 25px;">
 									<img class='j-img' src="<%=request.getContextPath()%>/img/front/home/music1.png"></img>
+										<div style="width:100px">第一首歌曲</div>
+									</div>
 								</a>
-								<a class='msk' href="#" style="margin-left:23px;">
+								<a class='msk' href="#" >
+									
+									<div style="float:left;width: 100px;margin-left:20px;margin-top: 25px;">
 									<img class='j-img' src="<%=request.getContextPath()%>/img/front/home/music1.png"></img>
+										<div style="width:100px">第一首歌曲</div>
+									</div>
 								</a>
-								<a class='msk' href="#" style="margin-left:23px;">
+								<a class='msk' href="#" >
+									
+									<div style="float:left;width: 100px;margin-left:20px;margin-top: 25px;">
 									<img class='j-img' src="<%=request.getContextPath()%>/img/front/home/music1.png"></img>
+										<div style="width:100px">第一首歌曲</div>
+									</div>
 								</a>
+								
 							</div>
-						</li>
+						</li>-->
 					</div>
 					<div class="item">
-						<li>
+						<li style="list-style:none;">
 							<div class="item active" >
-								<a class='msk' href="#" style="margin-left:53px;">
-									<img class='j-img' src="<%=request.getContextPath()%>/img/front/home/music1.png"></img>
-								</a>
-								<a class='msk' href="#" style="margin-left:23px;">
-									<img class='j-img' src="<%=request.getContextPath()%>/img/front/home/music1.png"></img>
-								</a>
-								<a class='msk' href="#" style="margin-left:23px;">
-									<img class='j-img' src="<%=request.getContextPath()%>/img/front/home/music1.png"></img>
-								</a>
-								<a class='msk' href="#" style="margin-left:23px;">
-									<img class='j-img' src="<%=request.getContextPath()%>/img/front/home/music1.png"></img>
-								</a>
-								<a class='msk' href="#" style="margin-left:23px;">
-									<img class='j-img' src="<%=request.getContextPath()%>/img/front/home/music1.png"></img>
-								</a>
+								<c:forEach items="${musicList2}" var="music" begin="5" end="9">
+									<a class='msk' href="<%=request.getContextPath()%>/home/music?id=${music.id}">
+											<div class="lunbo_left" style="float:left;width: 100px;margin-left:20px;margin-top: 25px;">
+											<img width="100px" height="100px" class='j-img' src="<%=request.getContextPath()%>/static/music/img/${music.img}"></img>
+												<div style="width:100px">${music.musicname }</div>
+											</div>
+										</a>
+								</c:forEach>
 							</div>
 						</li>
 					</div>
-					<div class="item">
-						<li>
+					<!--  <div class="item">
+						<li style="list-style:none;">
 							<div class="item active" >
-								<a class='msk' href="#" style="margin-left:53px;">
+								<a class='msk' href="#">
+									
+									<div style="float:left;width: 100px;margin-left:70px;margin-top: 25px;">
 									<img class='j-img' src="<%=request.getContextPath()%>/img/front/home/music1.png"></img>
+										<div style="width:100px">第2首歌曲</div>
+									</div>
 								</a>
-								<a class='msk' href="#" style="margin-left:23px;">
+								
+								<a class='msk' href="#" >
+									
+									<div style="float:left;width: 100px;margin-left:20px;margin-top: 25px;">
 									<img class='j-img' src="<%=request.getContextPath()%>/img/front/home/music1.png"></img>
+										<div style="width:100px">第2首歌曲</div>
+									</div>
 								</a>
-								<a class='msk' href="#" style="margin-left:23px;">
+								<a class='msk' href="#" >
+									
+									<div style="float:left;width: 100px;margin-left:20px;margin-top: 25px;">
 									<img class='j-img' src="<%=request.getContextPath()%>/img/front/home/music1.png"></img>
+										<div style="width:100px">第2首歌曲</div>
+									</div>
 								</a>
-								<a class='msk' href="#" style="margin-left:23px;">
+								<a class='msk' href="#" >
+									
+									<div style="float:left;width: 100px;margin-left:20px;margin-top: 25px;">
 									<img class='j-img' src="<%=request.getContextPath()%>/img/front/home/music1.png"></img>
+										<div style="width:100px">第2首歌曲</div>
+									</div>
 								</a>
-								<a class='msk' href="#" style="margin-left:23px;">
+								<a class='msk' href="#" >
+									
+									<div style="float:left;width: 100px;margin-left:20px;margin-top: 25px;">
 									<img class='j-img' src="<%=request.getContextPath()%>/img/front/home/music1.png"></img>
+										<div style="width:100px">第2首歌曲</div>
+									</div>
 								</a>
+								
 							</div>
 						</li>
-					</div>
+					</div>-->
 			</div>
 			
 			<!-- 轮播（Carousel）导航 -->
 			<a class="carousel-control left" href="#newdish" 
-			   data-slide="prev"  style="width:30px;height:50px; margin-top:20px;font-size:40px;background:none repeat scroll 0% 0% #F5F5F5">&lsaquo;</a>
+			   data-slide="prev"  style="width:30px;height:50px; margin-top:48px;font-size:40px;background:none repeat scroll 0% 0% #F5F5F5;margin-left:2px;">&lsaquo;</a>
 			<a class="carousel-control right" href="#newdish" 
-			   data-slide="next"  style="width:30px;height:50px; margin-top:20px;font-size:40px;background:none repeat scroll 0% 0% #F5F5F5">&rsaquo;</a>
+			   data-slide="next"  style="width:30px;height:50px; margin-top:48px;font-size:40px;background:none repeat scroll 0% 0% #F5F5F5;margin-right:2px">&rsaquo;</a>
 		</div>
 		</div>
 		
 		<!-- 榜单 -->	
 		<div class="left_menu">
-			<div class="left_menu_header">
-				<ol class="breadcrumb" style="background:none;">
-					<li><a href="#" style="font-size:15pt;color:black;">榜单</a></li>
-					<a href="#" style="margin-left:600px;color:gray;">更多<img src="<%=request.getContextPath()%>/img/front/home/more.png" style="margin-top:-5px;"></img></a>
+			<div class="left_menu_header" style="width:740px;">
+				<ol class="breadcrumb" style="background:none;padding-left: 15px;">
+					<li><a href="<%=request.getContextPath()%>/home/discover/rankList" style="font-size:15pt;color:black;">音乐榜单</a></li>
+					<a href="<%=request.getContextPath()%>/home/discover/rankList" style="margin-left:564px;color:gray;">更多<img src="<%=request.getContextPath()%>/img/front/home/more.png" style="margin-top:-5px;"></img></a>
 				</ol>
 			</div>
 			
 			<!--榜单 -->
-			<div class="row" id="top-flag"  style="margin-left:30px;margin-top:20px;width:690px;background-image:url('<%=request.getContextPath()%>/img/front/home/rankListBg.png')">
+			<div class="row" id="top-flag"  style="margin-left:30px;margin-top:20px;width:690px;background-image:url('<%=request.getContextPath()%>/img/front/home/rankListBg.png');background-repeat:no-repeat;">
 				<div  class="col-sm-6 col-md-3" style="width:220px;" >
 				<dl style="width:212px;">
 					<dt class="top" style="width:212px;">
 						<div style="margin-left:5px;width:100px;float:left;" >
-							<a href="#"><img class="j-img" src="<%=request.getContextPath()%>/img/front/home/soar.png"  style="width:80px;height:80px;margin-top:20px;"></img></a>
+							<a href="<%=request.getContextPath()%>/home/discover/rankList"><img class="j-img" src="<%=request.getContextPath()%>/img/front/home/soar.png"  style="width:80px;height:80px;margin-top:20px;"></img></a>
 						</div>	
 						<div style="margin-left:5px;width:100px;height:100px;display:inline-block;">
-							<a href="#" style="float:right;margin-right:10px;margin-top:30px;">云音乐飙升榜</a>
+							<a href="<%=request.getContextPath()%>/home/discover/rankList" style="float:right;margin-right:30px;margin-top:30px;">心动飙升榜</a>
 							<!--需要加一个触发事件，鼠标经过下面图片时  改变图片  点击图片时 开始播放音乐-->
-							<img class="j-img" src="<%=request.getContextPath()%>/img/front/home/playBtn1.png"  style="float:right;margin-top:6px;margin-right:70px;width:30px;height:30px;"></img>
+							<img class="j-img" src="<%=request.getContextPath()%>/img/front/home/playBtn1.png"  style="float:right;margin-top:10px;margin-right:70px;width:30px;height:30px;"></img>
 							<img class="j-img" src="<%=request.getContextPath()%>/img/front/home/collectBtn1.png"  style="float:right;margin-top:-30px;margin-right:30px;width:30px;height:30px;"></img>
 						</div>
 						
 					</dt>
 					<dd style="width:215px;">
 						<ol>
-						<li style="margin-top:26px;">
-						<span></span>
-						<a href="#" >告白气球</a>
-						</li>
-						<li style="margin-top:12px;">
-						<span></span>
-						<a href="#">明明就</a>
-						</li>
-						<li style="margin-top:12px;">
-						<span></span>
-						<a href="#">算什么男人</a>
-						</li>
-						<li style="margin-top:12px;">
-						<span></span>
-						<a href="#">白色的风车</a>
-						</li>
-						<li style="margin-top:12px;">
-						<span></span>
-						<a href="#">春风十里</a>
-						</li>
-						<li style="margin-top:12px;">
-						<span></span>
-						<a href="#">春风十里</a>
-						</li>
-						<li style="margin-top:12px;">
-						<span></span>
-						<a href="#">春风十里</a>
-						</li>			
-						<li style="margin-top:12px;">
-						<span></span>
-						<a href="#">春风十里</a>
-						</li>
-						<li style="margin-top:12px;">
-						<span></span>
-						<a href="#">春风十里</a>
-						</li>
-						<li style="margin-top:12px;">
-						<span></span>
-						<a href="#">春风十里</a>
-						</li>
+							<c:forEach items="${musicList3}" var="music">
+								<li class="bangdan" style="margin-top:12px;">
+									<span></span>
+									<a href="<%=request.getContextPath()%>/home/music?id=${music.id}" >${music.musicname }</a>
+								</li>
+							</c:forEach>
+						
 						</ol>
 						<div style="margin-left:150px;">
-						<a href="#" style="font-size:10pt;">查看更多></a>
+						<a href="<%=request.getContextPath()%>/home/discover/rankList" style="font-size:10pt;">查看更多></a>
 						</div>
 					</dd>		
 				</dl>
@@ -416,59 +362,25 @@
 				<dl style="width:212px;">
 					<dt class="top" style="width:212px;">
 						<div style="margin-left:15px;width:90px;float:left;" >
-							<a href="#"><img class="j-img" src="<%=request.getContextPath()%>/img/front/home/newMusic.png"  style="width:80px;height:80px;margin-top:20px;"></img></a>
+							<a href="<%=request.getContextPath()%>/home/discover/rankList?cat=2"><img class="j-img" src="<%=request.getContextPath()%>/img/front/home/newMusic.png"  style="width:80px;height:80px;margin-top:20px;"></img></a>
 						</div>	
 						<div style="margin-left:5px;width:100px;height:100px;display:inline-block;">
-							<a href="#" style="float:right;margin-right:10px;margin-top:30px;">云音乐新歌榜</a>
-							<img class="j-img" src="<%=request.getContextPath()%>/img/front/home/playBtn1.png"  style="float:right;margin-top:6px;margin-right:70px;width:30px;height:30px;"></img>
+							<a href="<%=request.getContextPath()%>/home/discover/rankList?cat=2" style="float:right;margin-right:30px;margin-top:30px;">心动新歌榜</a>
+							<img class="j-img" src="<%=request.getContextPath()%>/img/front/home/playBtn1.png"  style="float:right;margin-top:10px;margin-right:70px;width:30px;height:30px;"></img>
 							<img class="j-img" src="<%=request.getContextPath()%>/img/front/home/collectBtn1.png"  style="float:right;margin-top:-30px;margin-right:30px;width:30px;height:30px;"></img>
 						</div>
 					</dt>
 					<dd style="width:215px;">
 						<ol>
-						<li style="margin-top:26px;">
-						<span></span>
-						<a href="#" >我们的歌</a>
-						</li>
-						<li style="margin-top:12px;">
-						<span></span>
-						<a href="#">海贼王</a>
-						</li>
-						<li style="margin-top:12px;">
-						<span></span>
-						<a href="#">龙卷风</a>
-						</li>
-						<li style="margin-top:12px;">
-						<span></span>
-						<a href="#">春风十里</a>
-						</li>
-						<li style="margin-top:12px;">
-						<span></span>
-						<a href="#">春风十里</a>
-						</li>
-						<li style="margin-top:12px;">
-						<span></span>
-						<a href="#">春风十里</a>
-						</li>
-						<li style="margin-top:12px;">
-						<span></span>
-						<a href="#">春风十里</a>
-						</li>			
-						<li style="margin-top:12px;">
-						<span></span>
-						<a href="#">春风十里</a>
-						</li>
-						<li style="margin-top:12px;">
-						<span></span>
-						<a href="#">春风十里</a>
-						</li>
-						<li style="margin-top:12px;">
-						<span></span>
-						<a href="#">春风十里</a>
-						</li>
+							<c:forEach items="${musicList4}" var="music">
+								<li class="bangdan" style="margin-top:12px;">
+									<span></span>
+									<a href="<%=request.getContextPath()%>/home/music?id=${music.id}" >${music.musicname }</a>
+								</li>
+							</c:forEach>
 						</ol>
 						<div style="margin-left:150px;">
-						<a href="#" style="font-size:10pt;">查看更多></a>
+						<a href="<%=request.getContextPath()%>/home/discover/rankList?cat=2" style="font-size:10pt;">查看更多></a>
 						</div>
 					</dd>		
 				</dl>
@@ -477,59 +389,25 @@
 				<dl style="width:212px;">
 					<dt class="top" style="width:230px;">
 						<div style="margin-left:25px;width:60px;float:left;" >
-							<a href="#"><img class="j-img" src="<%=request.getContextPath()%>/img/front/home/original.png"  style="width:80px;height:80px;margin-top:20px;"></img></a>
+							<a href="<%=request.getContextPath()%>/home/discover/rankList?cat=3"><img class="j-img" src="<%=request.getContextPath()%>/img/front/home/hot_big.png"  style="width:80px;height:80px;margin-top:20px;"></img></a>
 						</div>	
 						<div style="margin-left:18px;width:120px;height:100px;display:inline-block;">
-							<a href="#" style="float:right;margin-right:10px;margin-top:30px;">网易原创歌曲榜</a>
-							<img class="j-img" src="<%=request.getContextPath()%>/img/front/home/playBtn1.png"  style="float:right;margin-top:6px;margin-right:70px;width:30px;height:30px;"></img>
+							<a href="<%=request.getContextPath()%>/home/discover/rankList?cat=3" style="float:right;margin-right:30px;margin-top:30px;">心动热歌榜</a>
+							<img class="j-img" src="<%=request.getContextPath()%>/img/front/home/playBtn1.png"  style="float:right;margin-top:10px;margin-right:70px;width:30px;height:30px;"></img>
 							<img class="j-img" src="<%=request.getContextPath()%>/img/front/home/collectBtn1.png"  style="float:right;margin-top:-30px;margin-right:30px;width:30px;height:30px;"></img>
 						</div>
 					</dt>
 					<dd style="width:215px;">
 						<ol>
-						<li style="margin-top:26px;">
-						<span></span>
-						<a href="#" >我们的歌</a>
-						</li>
-						<li style="margin-top:12px;">
-						<span></span>
-						<a href="#">海贼王</a>
-						</li>
-						<li style="margin-top:12px;">
-						<span></span>
-						<a href="#">龙卷风</a>
-						</li>
-						<li style="margin-top:12px;">
-						<span></span>
-						<a href="#">春风十里</a>
-						</li>
-						<li style="margin-top:12px;">
-						<span></span>
-						<a href="#">春风十里</a>
-						</li>
-						<li style="margin-top:12px;">
-						<span></span>
-						<a href="#">春风十里</a>
-						</li>
-						<li style="margin-top:12px;">
-						<span></span>
-						<a href="#">春风十里</a>
-						</li>			
-						<li style="margin-top:12px;">
-						<span></span>
-						<a href="#">春风十里</a>
-						</li>
-						<li style="margin-top:12px;">
-						<span></span>
-						<a href="#">春风十里</a>
-						</li>
-						<li style="margin-top:12px;">
-						<span></span>
-						<a href="#">春风十里</a>
-						</li>
+							<c:forEach items="${musicList3}" var="music">
+								<li class="bangdan" style="margin-top:12px;">
+									<span></span>
+									<a href="<%=request.getContextPath()%>/home/music?id=${music.id}" >${music.musicname }</a>
+								</li>
+							</c:forEach>
 						</ol>
 						<div style="margin-left:150px;">
-						<a href="#" style="font-size:10pt;">查看更多></a>
+						<a href="<%=request.getContextPath()%>/home/discover/rankList?cat=3" style="font-size:10pt;">查看更多></a>
 						</div>
 					</dd>		
 				</dl>
@@ -574,67 +452,31 @@
 		
 		
 	<!--入驻歌手-->	
-		<div style="border:1px solid #DCDCDC;">
+		<div style="border:1px solid #DCDCDC;height:1600px">
 			<div style="margin-top:20px;">
-				<a style="margin-left:20px;">入驻歌手</a>
-				<a style="margin-left:70px;color:gray;font-size:10pt;">查看全部></a>
+				<span style="margin-left:20px;">入驻歌手</span>
+				<a href="<%=request.getContextPath()%>/home/discover/singer?cat=0" style="margin-left:70px;color:gray;font-size:10pt;">查看全部></a>
 			</div>
 			<div>
 				<img src="<%=request.getContextPath()%>/img/front/home/bottomLine.png" style="width:90%;margin-left:10px;;height:1pt;"></img>
 			</div>
-	
+			<c:forEach items="${singerList}" var="singer">
+				<div style="margin-left:25px;margin-right:25px;margin-top:10px;background: #F5F5F5;border:1px solid #DCDCDC;">
+					<a href="<%=request.getContextPath()%>/home/singer?id=${singer.id}">
+						<img src="<%=request.getContextPath()%>/static/singer/${singer.img}" style=";width:62px;height:62px;">
+						<div style="float:right;margin-right:50px;margin-top:10px;">
+							<p>${singer.singername }</p></br>
+							<!-- <a style="font-size:8pt;color:gray;">台湾歌手张惠妹</a> -->
+						</div>
+					</a>
+					
+				</div>
+			</c:forEach>
 			
-			<div style="margin-left:25px;margin-right:25px;margin-top:10px;background: #F5F5F5;border:1px solid #DCDCDC;">
-				<a href="#">
-					<img src="<%=request.getContextPath()%>/img/front/home/singer1.png" style=";width:px;height:px;">
-				</a>
-				<div style="float:right;margin-right:50px;margin-top:10px;">
-					<a>张惠妹aMei</a></br>
-					<a style="font-size:8pt;color:gray;">台湾歌手张惠妹</a>
-				</div>
-			</div>
-			<div style="margin-left:25px;margin-right:25px;margin-top:10px;background: #F5F5F5;border:1px solid #DCDCDC">
-					<a href="#">
-						<img src="<%=request.getContextPath()%>/img/front/home/singer1.png" style=";width:px;height:px;">
-					</a>
-					<div style="float:right;margin-right:50px;margin-top:10px;">
-					<a>张惠妹aMei</a></br>
-					<a style="font-size:8pt;color:gray;">台湾歌手张惠妹</a>
-					</div>
-			</div>
-				<div style="margin-left:25px;margin-right:25px;margin-top:10px;background: #F5F5F5;border:1px solid #DCDCDC">
-					<a href="#">
-						<img src="<%=request.getContextPath()%>/img/front/home/singer1.png" style=";width:px;height:px;">
-					</a>
-					<div style="float:right;margin-right:50px;margin-top:10px;">
-						<a>张惠妹aMei</a></br>
-						<a style="font-size:8pt;color:gray;">台湾歌手张惠妹</a>
-					</div>
-				</div>
-				<div style="margin-left:25px;margin-right:25px;margin-top:10px;background: #F5F5F5;border:1px solid #DCDCDC">
-					<a href="#">
-						<img src="<%=request.getContextPath()%>/img/front/home/singer1.png" style=";width:px;height:px;">
-					</a>
-					<div style="float:right;margin-right:50px;margin-top:10px;">
-					<a>张惠妹aMei</a></br>
-					<a style="font-size:8pt;color:gray;">台湾歌手张惠妹</a>
-					</div>
-				</div>
-				<div style="margin-left:25px;margin-right:25px;margin-top:10px;background: #F5F5F5;border:1px solid #DCDCDC">
-					<a href="#">
-						<img src="<%=request.getContextPath()%>/img/front/home/singer1.png" style=";width:px;height:px;">
-					</a>
-					<div style="float:right;margin-right:50px;margin-top:10px;">
-					<a>张惠妹aMei</a></br>
-					<a style="font-size:8pt;color:gray;">台湾歌手张惠妹</a>
-					</div>
-				</div>
-				<div style="margin-left:40px;margin-right:20px;margin-top:20px;margin-bottom:20px;">
-			 		<button type="button" class="btn btn-default">申请成为网易音乐人</button>	
-			 	</div>
+			
 		</div>
 	    <!--热门DJ-->
-		<div style="border:1px solid #DCDCDC;height:931px;">
+		<!--  <div style="border:1px solid #DCDCDC;height:931px;">
 			<div style="margin-top:20px;">
 				<a style="margin-left:20px;">热门DJ</a>
 			
@@ -688,7 +530,26 @@
 					<a style="font-size:8pt;color:gray;">独立DJ，CRI环球旅游广播</a>
 				</div>
 			</div>
-		</div>
+		</div>-->
 	</div>
 </div>
-
+<script>
+	var row = $(".row_left");
+	var lunbo = $(".lunbo_left");
+	var bangdan = $(".bangdan");
+	//alert(row.length);
+	for(var i=0;i<row.length;i++) {
+		if(i == 0 || i == 4)
+			row.eq(i).css("margin-left","20px")
+	}
+	
+	for(var i=0;i<lunbo.length;i++) {
+		if(i == 0 || i == 5)
+			lunbo.eq(i).css("margin-left","70px")
+	}
+	
+	for(var i=0;i<bangdan.length;i++) {
+		if(i == 0 || i == 10 || i == 20)
+			bangdan.eq(i).css("margin-top","22px")
+	}
+</script>

@@ -11,8 +11,18 @@
 <div id="rank_list">
 	<div style = "width:740px;height:208px; margin: 0 auto;">
 		<div id = "item" style = "width:473px; height:114x; float:right;margin-right:50px; margin-top: 15px;">
-			<p style ="line-height: 24px;font-size: 20px;font-weight: normal;">${typeName}</p>
-			<p style = "margin-left: 28px;color:#999">每日更新</p>
+			<c:if test="${cat == 1}">
+				<p style ="line-height: 24px;font-size: 20px;font-weight: normal;">心动飙升榜</p>
+				<p style = "color:#999">根据歌曲的播放次数排序</p>
+			</c:if>
+			<c:if test="${cat == 2}">
+				<p style ="line-height: 24px;font-size: 20px;font-weight: normal;">心动新歌榜</p>
+				<p style = "color:#999">根据歌曲的上传时间排序</p>
+			</c:if>
+			<c:if test="${cat == 3}">
+				<p style ="line-height: 24px;font-size: 20px;font-weight: normal;">心动热歌榜</p>
+				<p style = "color:#999">根据歌曲的被收藏次数排序</p>
+			</c:if>
 		</div>
 		<div id = "item" style = "width:473px; float:right;clear:both;margin-right: 50px;margin-top: 20px;">
 			<div style = "width:380px;height:40px;">	<!--操作-->				
@@ -25,7 +35,16 @@
 							</div>
 		</div>
 		<div id = "coverImage" style = "width:158px;height:158px;margin-top:40px;margin-left:30px; border: 1px solid #ccc;">
-			<img src = "<%=request.getContextPath()%>/img/front/home/biaoshengbang.jpg" style = "margin-top:3px; margin-left: 3px;">
+			<c:if test="${cat == 1}">
+				<img src = "<%=request.getContextPath()%>/img/front/home/soar_big.png" style = "margin-top:3px; margin-left: 3px;">
+			</c:if>
+			<c:if test="${cat == 2}">
+				<img src = "<%=request.getContextPath()%>/img/front/home/newMusic_big.png" style = "margin-top:3px; margin-left: 3px;">
+			</c:if>
+			<c:if test="${cat == 3}">
+				<img src = "<%=request.getContextPath()%>/img/front/home/hot_big.png" style = "margin-top:3px; margin-left: 3px;">
+			</c:if>
+			
 		</div>
 	</div>
 	<div id="topList">
@@ -33,7 +52,7 @@
 			<table id="rank_musicList" class="table table-striped" style="">
 
 				<caption>
-					<h3>歌曲列表</h3>
+					<h3 style="padding-left: 2px;border-left: 5px solid gray;margin-left: 5px;">歌曲列表</h3>
 				</caption>
 				<tbody>
 					<tr>
@@ -48,7 +67,7 @@
 							<td class="rank_list" id="rank_list_${i.count}" style = "width:40px;">${i.count }</td>
 							<td style="">
 									<span class="rank_m" id="rank_m_${music.id }" onmouseover="change_rank_music_state1(${music.id })" onmouseout="change_rank_music_state2(${music.id })" onclick="change_rank_play_state(${music.id})" title="播放"  > 
-									 <i id="0"  class="glyphicon glyphicon-expand" style="width: 20px;font-size:18px;top:3px;"></i></span>
+									 <i id="music_${music.id }"  class="glyphicon glyphicon-expand music_play" style="width: 20px;font-size:18px;top:3px;"></i></span>
 									 &nbsp;&nbsp;&nbsp; <a href="<%=request.getContextPath()%>/home/music?id=${music.id}">${music.musicname}</a>
 							</td>
 							<td>${music.musictime}</td>
@@ -83,30 +102,34 @@
 		}
 	}
 	function change_rank_music_state1(id){
-		if($("#rank_m_"+id +" i").attr("id") == 0){
+		if(!$("#rank_m_"+id +" i").is('.play_music')){
 			//alert("#singer_m_"+id+" i");
 			$("#rank_m_"+id+" i").css("color","red");
 			$("#rank_m_"+id).css("cursor","pointer");
-			
 		}
-		
 	}
 	
 	function change_rank_music_state2(id){
-		if($("#rank_m_"+id +" i").attr("id") == 0){
+		if(!$("#rank_m_"+id +" i").is('.play_music')){
 			$("#rank_m_"+id+" i").css("color","black");
 		}
 	}
 	function change_rank_play_state(id) {
-		var singer_m_list = $(".rank_m i");
-		//alert(singer_m_list.length);
-		for(var i=0;i<singer_m_list.length;i++){
-			singer_m_list.eq(i).css("color","black"); 
-			singer_m_list.eq(i).attr("id",0);
-		}
-		$("#rank_m_"+id+" i").css("color","red");
-		$("#rank_m_"+id +" i").attr("id",1);
 		playSongById(id);
+	}
+	
+	var music_play = $(".music_play");
+    //alert(music_play.length);
+    for(var k=0;k<music_play.length;k++){
+		music_play.eq(k).css("color","black"); 
+		music_play.eq(k).removeClass("play_music");
+	}
+	for(var k=0;k<music_play.length;k++) {
+		//alert(music_play.eq(k).attr("id"));
+		if(music_play.eq(k).attr("id") == "music_"+window.parent.Player.data[window.parent.Player.currentIndex].id) {
+			music_play.eq(k).css("color","red"); 
+			music_play.eq(k).addClass("play_music");
+		}
 	}
 	
 </script>

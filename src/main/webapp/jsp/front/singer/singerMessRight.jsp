@@ -1,5 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="s"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="sf"%>
+<%@ page isELIgnored="false"%>
 <div style = "width:268px;float:right;">
 	<div id= "ad"  style = "margin-top: 25px; margin-left: 30px;">
 		<img src="<%=request.getContextPath()%>/img/front/home/ad.jpg">
@@ -8,31 +14,16 @@
 		<p>相似歌手</p>
 	</div>
 	<div id= "recmdSinger">
-		<ul  class="list-inline" style = "margin-top: 10px;margin-left: 10px;">
-			<li >
-				<div>
-					<a href = "#"> <img src="<%=request.getContextPath()%>/img/front/home/linJJ.jpg"></a>					
-				</div>
-				<a href = "#" style ="clear:both;">林俊杰</a>
-			</li>
-			<li >
-				<div>
-					<a href = "#"> <img src="<%=request.getContextPath()%>/img/front/home/sunYZ.jpg"> </a>
-				</div>
-				<a href = "#" style ="clear:both;">孙燕姿</a>
-			</li>
-			<li >
-				<div>
-					<a href = "#"> <img src="<%=request.getContextPath()%>/img/front/home/xueZQ.jpg"> </a>
-				</div>
-				<a href = "#" style ="clear:both;">薛之谦</a>
-			</li>
-			<li >
-				<div>
-					<a href = "#"> <img src="<%=request.getContextPath()%>/img/front/home/yangZW.jpg"> </a>
-				</div>
-				<a href = "#" style ="clear:both;">杨宗纬</a>
-			</li>
+		<ul  class="list-inline" style="font-size:12px;margin-top:10px;margin-left:10px;">
+			<c:forEach items="${singerList}" var="singer">
+				<li>
+					<div>
+						<a href = "<%=request.getContextPath()%>/home/singer?id=${singer.id}"> <img width="45px" height="50px" src="<%=request.getContextPath()%>/static/singer/${singer.img}"></a>					
+					</div>
+					<a href = "<%=request.getContextPath()%>/home/singer?id=${singer.id}" style ="clear:both;">${singer.singername }</a>
+				</li>
+			</c:forEach>
+			
 		</ul>
 	</div>
 	

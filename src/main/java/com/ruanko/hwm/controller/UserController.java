@@ -3,7 +3,11 @@ package com.ruanko.hwm.controller;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -23,6 +27,7 @@ import com.ruanko.hwm.bean.MusicSingerRela;
 import com.ruanko.hwm.bean.MusicType;
 import com.ruanko.hwm.bean.MusicTypeRela;
 import com.ruanko.hwm.bean.Singer;
+import com.ruanko.hwm.bean.SingerType;
 import com.ruanko.hwm.bean.SingerTypeRela;
 import com.ruanko.hwm.bean.User;
 import com.ruanko.hwm.service.IMusicService;
@@ -293,18 +298,77 @@ public class UserController {
 	
 	@RequestMapping({"/discover/1"})
 	public String toHome1(Model model, HttpServletRequest request) {
+		List<Object> resultList = new ArrayList<Object>();
+		List<Music> musicList1 = new ArrayList<Music>();
+		//List<Singer> singerList = new ArrayList<Singer>();
+		List<Music> musicList_all = musicService.getAllMusic();
+		//获取十首热门歌曲
+		Collections.sort(musicList_all);
+		musicList1 = musicList_all.subList(0, musicList_all.size() > 8 ? 8 : musicList_all.size());
+		//resultList.add(musicList1);
+
+		//获取十首新碟
+		musicList_all = musicService.getAllMusic();
+		List<Music> musicList2 = new ArrayList<Music>();
+		Collections.sort(musicList_all, new Comparator<Music>(){
+            public int compare(Music arg0, Music arg1) {
+                int i = arg1.getUploadtime().compareTo(arg0.getUploadtime()); 
+                if(i<0 || i>0) {
+                	return i;
+                }else {
+                	return arg1.getPlaycounts().compareTo(arg0.getPlaycounts()) ;
+                }
+            }
+        });
+		musicList2 = musicList_all.subList(0, musicList_all.size() > 10 ? 10 : musicList_all.size());
+		//resultList.add(musicList2);
+		
+		//获取榜单歌曲
+		musicList_all = musicService.getAllMusic();
+		//Collections.sort(musicList_all);
+		List<Music> musicList3 = new ArrayList<Music>();
+		musicList3 = musicList_all.subList(0, musicList_all.size() > 10 ? 10 : musicList_all.size());
+		//resultList.add(musicList3);
+		
+		musicList_all = musicService.getAllMusic();
+		List<Music> musicList4 = new ArrayList<Music>();
+		List<Music> musicList5 = new ArrayList<Music>();
+			
+		Collections.sort(musicList_all, new Comparator<Music>(){
+		    public int compare(Music arg0, Music arg1) {
+		       return arg1.getUploadtime().compareTo(arg0.getUploadtime());
+		    }
+		});
+		musicList4 = musicList_all.subList(0, musicList_all.size() > 10 ? 10 : musicList_all.size());
+		//resultList.add(musicList4);		
+		//获取入驻歌手
+		List<Singer> singerList_all = singerService.getAllSinger();
+		List<Singer> singerList = singerList_all.subList(0, singerList_all.size() > 5 ? 5 : singerList_all.size()); 
+		
+		model.addAttribute("singerList", singerList);
+		model.addAttribute("musicList1", musicList1);
+		model.addAttribute("musicList2", musicList2);
+		model.addAttribute("musicList3", musicList3);
+		model.addAttribute("musicList4", musicList4);
+		model.addAttribute("musicList5", musicList5);
 		model.addAttribute("title", "心随乐动");
 		model.addAttribute(new User());
 		return "showHome1";
 	}
 	@RequestMapping({"/discover/rankList"})
 	public String toRankList(Model model, HttpServletRequest request) {
-		String typeName = "";
+		int cat = 1;
+		String imgPath = "";
+		String info = "";
 		List<Music> musicList = new ArrayList<Music>();
 		List<Singer> singerList = new ArrayList<Singer>();
+		List<Music> musicList_all = musicService.getAllMusic();
 		if(request.getParameter("cat") == null) {
-			typeName += "心动飙升榜";
-			List<Music> musicList_all = musicService.getAllMusic();
+//			typeName += "心动飙升榜";
+//			imgPath += "soar_big";
+//			info += "根据歌曲的播放次数排序";
+			//cat = 1;
+			Collections.sort(musicList_all);
 			musicList = musicList_all.subList(0, musicList_all.size() > 20 ? 20 : musicList_all.size());
 			singerList = new ArrayList<Singer>();
 			for(Music m : musicList ) {
@@ -312,18 +376,37 @@ public class UserController {
 			}
 		}else {
 			Integer id = Integer.parseInt(request.getParameter("cat"));
-			//System.out.println(id);
-			//根据id获取歌曲类别信息
-			typeName = musicTypeService.getMusicTypeById(id).getTypename();
-			//获取歌曲列表
-			List<MusicTypeRela> mtrList = musicTypeRelaService.getMusicByTypeId(id);
-			for(MusicTypeRela m : mtrList) {
-				musicList.add(musicService.getMusicById(m.getMusicid()));
+			if(id == 2) {
+//				typeName += "心动新歌榜";
+//				imgPath += "newMusic_big";
+//				info += "根据歌曲的播放次数排序";
+				cat = 2;
+				//List<Music> musicList_all = musicService.getAllMusic();
+				Collections.sort(musicList_all, new Comparator<Music>(){
+		            public int compare(Music arg0, Music arg1) {
+		                return arg1.getUploadtime().compareTo(arg0.getUploadtime());
+		            }
+		        });
+				musicList = musicList_all.subList(0, musicList_all.size() > 20 ? 20 : musicList_all.size());
+				singerList = new ArrayList<Singer>();
+				for(Music m : musicList ) {
+					singerList.add(singerService.getSingerById(musicSingerService.getSingerByMusicId(m.getId()).getSingerid()));
+				}
+			}else if(id == 3) {
+				cat = 3;
 			}
-			//size = mtrList.size();
+//			//System.out.println(id);
+//			//根据id获取歌曲类别信息
+//			typeName = musicTypeService.getMusicTypeById(id).getTypename();
+//			//获取歌曲列表
+//			List<MusicTypeRela> mtrList = musicTypeRelaService.getMusicByTypeId(id);
+//			for(MusicTypeRela m : mtrList) {
+//				musicList.add(musicService.getMusicById(m.getMusicid()));
+//			}
+//			//size = mtrList.size();
 		}
 		
-		model.addAttribute("typeName", typeName);
+		model.addAttribute("cat",cat);
 		model.addAttribute("musicList", musicList);
 		model.addAttribute("singerList", singerList);
 		model.addAttribute("title", "排行榜");
@@ -424,6 +507,42 @@ public class UserController {
 	
 	@RequestMapping({"/discover/album"})
 	public String toAlbum(Model model, HttpServletRequest request) {
+//			typeName += "心动新歌榜";
+//			imgPath += "newMusic_big";
+//			info += "根据歌曲的播放次数排序";
+			//cat = 2;
+			//List<Music> musicList_all = musicService.getAllMusic();
+			List<Music> musicList = new ArrayList<Music>();
+			//List<Singer> singerList = new ArrayList<Singer>();
+			List<Music> musicList_all = musicService.getAllMusic();
+			List<Music> musicList_all_1 = musicList_all;
+			Collections.sort(musicList_all, new Comparator<Music>(){
+	            public int compare(Music arg0, Music arg1) {
+	                int i = arg1.getUploadtime().compareTo(arg0.getUploadtime()); 
+	                if(i<0 || i>0) {
+	                	return i;
+	                }else {
+	                	return arg1.getPlaycounts().compareTo(arg0.getPlaycounts()) ;
+	                }
+	            }
+	        });
+			
+			Collections.sort(musicList_all_1, new Comparator<Music>(){
+	            public int compare(Music arg0, Music arg1) {
+	                return arg1.getUploadtime().compareTo(arg0.getUploadtime()); 
+	            }  
+	        });
+			
+			musicList = musicList_all.subList(0, musicList_all.size() > 10 ? 10 : musicList_all.size());
+			//singerList = new ArrayList<Singer>();
+//			for(Music m : musicList ) {
+//				singerList.add(singerService.getSingerById(musicSingerService.getSingerByMusicId(m.getId()).getSingerid()));
+//			}
+		int size = (int)Math.ceil(musicList_all_1.size()*1.0/5);
+		
+		model.addAttribute("size", size);
+		model.addAttribute("musicList", musicList);
+		model.addAttribute("musicList_all_1", musicList_all_1);
 		model.addAttribute("title", "新碟上架");
 		model.addAttribute(new User());
 		return "showAlbum";
@@ -521,13 +640,43 @@ public class UserController {
 	public String toSingerMess(Model model, HttpServletRequest request) {
 		int id = Integer.parseInt(request.getParameter("id"));
 		//获取歌手id
-		System.out.println(id);
+		//System.out.println(id);
 		Singer singer = singerService.getSingerById(id);
 		List<Music> musicList = new ArrayList<Music>();
 		List<MusicSingerRela> musicSinger = musicSingerService.getMusicBySingerId(id);
 		for(MusicSingerRela msr : musicSinger) {
 			musicList.add(musicService.getMusicById(msr.getMusicid()));
 		}
+		//获取相似歌曲
+		int singerTypeId = singerTypeRelaService.getSingerTypeBySingerId(id).getTypeid();
+		//System.out.println(singerTypeId);
+		List<SingerTypeRela> strList = singerTypeRelaService.getSingerByTypeId(singerTypeId);
+		
+		List<Singer> singerList = new ArrayList<Singer>();
+		//移除
+		Iterator<SingerTypeRela> it = strList.iterator();
+		while(it.hasNext()) {
+			SingerTypeRela str = it.next();
+			if(str.getSingerid() == id)
+				it.remove();
+		}
+		//随机获取四首歌
+		//获取四个随机数
+		Set<Integer> set = new TreeSet<Integer>();
+		while (set.size() < 4) {
+			int number = (int) (Math.random() * strList.size());
+			if (!set.contains(number)) {
+				set.add(number);
+			}
+		}
+		for(Integer in : set){
+			//System.out.println(random);
+			singerList.add(singerService.getSingerById(strList.get(in).getSingerid()));
+		}
+//		for(Singer s:singerList){
+//			System.out.println(s.getSingername());
+//		}
+		model.addAttribute("singerList", singerList);
 		model.addAttribute("musicList",musicList);
 		model.addAttribute("title", singer.getSingername());
 		model.addAttribute("introduction",singer.getIntroduction());

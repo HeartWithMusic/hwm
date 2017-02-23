@@ -259,7 +259,7 @@ public class MusicController {
 		mus.setImg(music.getMusicname() + ".jpg");
 		mus.setLyr(music.getMusicname() + ".lrc");
 		mus.setUploadtime(DateTime.getCurrentTime());
-		System.out.println(image.getContentType());
+		//System.out.println(image.getContentType());
 		String s[] = lrc.getOriginalFilename().split("\\.");
 		// System.out.println(s.length);
 		// 判断上传的文件类型
@@ -414,6 +414,15 @@ public class MusicController {
 		return resultList;
 	}
 	
+	@RequestMapping("/ajax_operation_addPlayCounts")
+	public @ResponseBody int addPlayCountsAjax3(String musicid) {
+		Music music = musicService.getMusicById(Integer.parseInt(musicid));
+		music.setPlaycounts(music.getPlaycounts()+1);
+		musicService.updateMusic(music);
+		
+		return 1;
+	}
+	
 	/**
 	 * 返回每页的数据
 	 * @param pageIndex
@@ -439,7 +448,7 @@ public class MusicController {
 		}
 		//获取对应的歌手
 		for(Music m : resultList) {
-			System.out.println(m.getId());
+			//System.out.println(m.getId());
 			System.out.println(musicSingerService.getSingerByMusicId(m.getId()).getSingerid());
 			Singer singer = singerService.getSingerById(musicSingerService.getSingerByMusicId(m.getId()).getSingerid());
 			singerList.add(singer);

@@ -19,6 +19,7 @@
 	var lyric = [];
 	//alert(lrc);
 	//绑定timeupdate事件
+	var k = 30
 	music.addEventListener('timeupdate',function(){
 		if (!isNaN(music.duration)) {
 			var progressValue = music.currentTime/music.duration; //用时间比来获取进度条的值
@@ -30,12 +31,18 @@
 			//console.info(music.currentTime);
 			//console.info(lyric[lyric.length-1][0]);
 			for (var i = 0;i < lyric.length; i++) {
-				if (music.currentTime > lyric[i][0] - 1) {
-					//console.info(lyric[i][0]);
+				if (music.currentTime > lyric[i][0] - 1 ) {
+					//var k = 30;
+					console.info($('.lyric-content').css('top'));
+					//console.info(lyric[i][0] + "  " + music.currentTime);
+					if(parseInt($('.lyric-content').css('top')) < 80) {
+						console.info("aaa");
+						k = 25;
+					}
 					$('p[name=lyric]').css('color', '#fff'); 
 					$('p#'+i).css('color', 'red');
 
-					$('.lyric-content').css('top',210 - 30 * (i + 1));
+					$('.lyric-content').css('top',210 - k * (i+1));
 				}
 			};
 			//console.info("hello");
@@ -76,7 +83,7 @@
 		var lyricContent = $('#show-lrc-content');
 		lyricContent.html("");
 		_.each(lyric, function(content, index, $){
-			lyricContent.append('<p name="lyric" id=' + index + '>' + content[1] + '</p>');
+			lyricContent.append('<p style="font-size:12px;" name="lyric" id=' + index + '>' + content[1] + '</p>');
 		});
 	}
 	//获取歌词
@@ -287,11 +294,40 @@
                     	}); 
                     }
                     
+                    var music_play = $("#aa").contents().find(".music_play");
+                    //alert(music_play.length);
+                    for(var k=0;k<music_play.length;k++){
+        				music_play.eq(k).css("color","black"); 
+        				music_play.eq(k).removeClass("play_music");
+        			}
+                	for(var k=0;k<music_play.length;k++) {
+                		//alert(music_play.eq(k).attr("id"));
+                		if(music_play.eq(k).attr("id") == "music_"+Player.data[Player.currentIndex].id) {
+                			music_play.eq(k).css("color","red"); 
+            				music_play.eq(k).addClass("play_music");
+                		}
+                	}
                     
                     $("#btn-play").removeClass("glyphicon glyphicon-play ");
         			$("#btn-play").addClass("glyphicon glyphicon-pause");
         			flag = 0;
                     
+        			$.ajax({  
+        	   	        type : "POST",  
+        	   	        url : "http://localhost:8080/hwm/music/ajax_operation_addPlayCounts" ,  
+        	   	        dataType:"json",
+        	   	        cache : false,  
+        	   	        data : {  
+        	   	            musicid: i
+        	   	        },  
+        	   	        async : false,  
+        	   	        error : function() {  
+        	   	            alert("网络异常！");  
+        	   	        },  
+        	   	        success : function(data) {
+        	   	        	console.info(data);
+        	   	        }  
+        	   	    });  
                     
 					//$('#btn-play').text("播放");
                 };  

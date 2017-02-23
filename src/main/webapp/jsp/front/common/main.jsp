@@ -25,6 +25,7 @@
 			//alert(newUrl);
 			change_state(newUrl);
 			change_state2(newUrl);
+			change_state3(newUrl);
 			history.pushState(stateObject,title,newUrl);
 		};
 		//alert("${url}");
@@ -49,9 +50,9 @@
 			
 			if(url == "http://localhost:8080/hwm/home/discover/1/rf") {
 				setCss(tj);
-			}else if(url == "http://localhost:8080/hwm/home/discover/rankList/rf") {
+			}else if(url.indexOf("http://localhost:8080/hwm/home/discover/rankList") != -1) {
 				setCss(rk);
-			}else if(url == "http://localhost:8080/hwm/home/discover/musicList/rf") {
+			}else if(url.indexOf("http://localhost:8080/hwm/home/discover/musicList") != -1) {
 				setCss(sg);
 			}else if(url == "http://localhost:8080/hwm/home/discover/radio/rf") {
 				setCss(rd);
@@ -75,6 +76,18 @@
 		
 		function change_state2(url) {
 			var a = document.getElementById('aa').contentWindow.document.getElementsByClassName("singer");
+			//alert(a.length);
+			for(var i=0;i<a.length;i++){ 
+				//alert(url);
+				if(a[i].href+"/rf" == url) {
+					setCss2(a[i]);
+				}
+				
+			}
+		}
+		
+		function change_state3(url) {
+			var a = document.getElementById('aa').contentWindow.document.getElementsByClassName("rank_sort");
 			//alert(a.length);
 			for(var i=0;i<a.length;i++){ 
 				//alert(url);
