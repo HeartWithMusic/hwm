@@ -17,6 +17,8 @@
 		border-bottom: 2px solid #C10D0C;"
 	}
 	
+	
+	
 </style>    
 <!--第二层导航栏对应的转换页面-->
 <div class="tab-content" style="margin-top:20px;"></div>
@@ -77,10 +79,10 @@
 					                 alt="通用的占位符缩略图"
 									style="height:150px;width:150px">
 					        </a>
-							<div style="width:140px;height:25px;background-image:url('<%=request.getContextPath()%>/img/front/home/bottomBg.png');opacity:0.8;position:relative;top:-49px;color:#ccc;left:6px;">
+							<div style="width:140px;height:25px;background-image:url('<%=request.getContextPath()%>/img/front/home/bottomBg.png');opacity:0.8;position:relative;top:-49px;color:#ccc;left:5px;">
 								<i class="glyphicon glyphicon-headphones"  style="color:white;margin-left:5px;margin-top:5px;"></i>  
-													<span style="margin-top:5px;">0</span>
-													<a href="#"><i class="glyphicon glyphicon-play-circle" style="color:white;margin-left:80px;font-size:18px;margin-top:2px;"></i></a>
+													<span style="margin-top:5px;width:60px;">${music.playcounts }</span>
+													<span onclick="playSongById(${music.id})" ><i id="index_${music.id }" onmouseover="change1_index(${music.id})" onmouseout="change2_index(${music.id})"  class="glyphicon glyphicon-play-circle"  style="color:#ccc;float:right;margin-right:5px;font-size:18px;margin-top:2px;"></i></span>
 							</div>
 							<div style="width:140px;height:25px;margin-left:10px;margin-top:-45px;"><a href="#" style="color:black;">${music.musicname}</a></div>
 					    </div>
@@ -97,10 +99,10 @@
 					                 alt="通用的占位符缩略图"
 									style="height:150px;width:150px">
 					        </a>
-							<div style="width:140px;height:25px;background-image:url('<%=request.getContextPath()%>/img/front/home/bottomBg.png');opacity:0.8;position:relative;top:-49px;color:#ccc;left:6px;">
+							<div style="width:140px;height:25px;background-image:url('<%=request.getContextPath()%>/img/front/home/bottomBg.png');opacity:0.8;position:relative;top:-49px;color:#ccc;left:5px;">
 								<i class="glyphicon glyphicon-headphones"  style="color:white;margin-left:5px;margin-top:5px;"></i>  
-													<span style="margin-top:5px;">0</span>
-													<a href="#"><i class="glyphicon glyphicon-play-circle" style="color:white;margin-left:80px;font-size:18px;margin-top:2px;"></i></a>
+													<span style="margin-top:5px;width:60px;">${music.playcounts }</span>
+													<span onclick="playSongById(${music.id})" ><i id="index_${music.id}" onmouseover="change1_index(${music.id})" onmouseout="change2_index(${music.id})" class="glyphicon glyphicon-play-circle"  style="color:#ccc;float:right;margin-right:5px;font-size:18px;margin-top:2px;"></i></span>
 							</div>
 							<div style="width:140px;height:25px;margin-left:10px;margin-top:-45px;"><a href="#" style="color:black;">${music.musicname}</a></div>
 					    </div>
@@ -196,15 +198,33 @@
 				
 				<div class="carousel-inner" style="margin-top:20px;height:180px;border:1px solid #d3d3d3;">
 					<div class="item active">
+						
 						<li style="list-style:none;">
 							<div class="item active" >
-								<c:forEach items="${musicList2}" var="music" begin="0" end="4">
-									<a class='msk' href="<%=request.getContextPath()%>/home/music?id=${music.id}">
-											<div class="lunbo_left" style="float:left;width: 100px;margin-left:20px;margin-top: 25px;">
-											<img class='j-img' width="100px" height="100px" src="<%=request.getContextPath()%>/static/music/img/${music.img}"></img>
-												<div style="width:100px">${music.musicname }</div>
-											</div>
-										</a>
+								<c:forEach items="${musicList2}" var="music" begin="0" end="4" varStatus="i">
+									<c:choose>
+										<c:when test="${i.index == 0}">
+											<a class='msk' href="<%=request.getContextPath()%>/home/music?id=${music.id}">
+												<div class="lunbo_left" style="float:left;width: 100px;margin-left:20px;margin-top: 25px;" onmouseover="change1_index(${music.id})" onmouseout="change2_index(${music.id})" >
+													<img width="100px" height="100px" class='j-img' src="<%=request.getContextPath()%>/static/music/img/${music.img}"></img>
+													<div style="width:100px">${music.musicname }</div>
+													<span class="index_index" onclick="playSongById(${music.id})" ><i  id="index_${music.id }" onmouseover="change1_index(${music.id})" onmouseout="change2_index(${music.id})"   class="glyphicon glyphicon-play-circle "  style="color:#ccc;float:right;margin-right:5px;font-size:18px;margin-top:-65px;"></i></span>
+												
+												</div>
+											</a>
+										</c:when>
+										<c:otherwise>
+											<a class='msk' href="<%=request.getContextPath()%>/home/music?id=${music.id}">
+												<div class="lunbo_left" style="float:left;width: 100px;margin-left:20px;margin-top: 25px;" onmouseover="change1_index(${music.id})" onmouseout="change2_index(${music.id})" >
+													<img width="100px" height="100px" class='j-img' src="<%=request.getContextPath()%>/static/music/img/${music.img}"></img>
+													<div style="width:100px">${music.musicname }</div>
+													<span class="index_index" onclick="playSongById(${music.id})" ><i  id="index_${music.id }" onmouseover="change1_index(${music.id})" onmouseout="change2_index(${music.id})"   class="glyphicon glyphicon-play-circle "  style="color:#ccc;float:right;margin-right:5px;font-size:18px;margin-top:-45px;"></i></span>
+												
+												</div>
+											</a>
+										</c:otherwise>
+									</c:choose>
+									
 								</c:forEach>
 							</div>
 						</li>
@@ -255,9 +275,11 @@
 							<div class="item active" >
 								<c:forEach items="${musicList2}" var="music" begin="5" end="9">
 									<a class='msk' href="<%=request.getContextPath()%>/home/music?id=${music.id}">
-											<div class="lunbo_left" style="float:left;width: 100px;margin-left:20px;margin-top: 25px;">
+											<div class="lunbo_left" style="float:left;width: 100px;margin-left:20px;margin-top: 25px;" onmouseover="change1_index(${music.id})" onmouseout="change2_index(${music.id})" >
 											<img width="100px" height="100px" class='j-img' src="<%=request.getContextPath()%>/static/music/img/${music.img}"></img>
 												<div style="width:100px">${music.musicname }</div>
+												<span onclick="playSongById(${music.id})" ><i id="index_${music.id }" onmouseover="change1_index(${music.id})" onmouseout="change2_index(${music.id})"   class="glyphicon glyphicon-play-circle"  style="color:#ccc;float:right;margin-right:5px;font-size:18px;margin-top:-45px;"></i></span>
+											
 											</div>
 										</a>
 								</c:forEach>
@@ -343,11 +365,17 @@
 						
 					</dt>
 					<dd style="width:215px;">
-						<ol>
+						<ol style="margin-left:-30px;">
 							<c:forEach items="${musicList3}" var="music">
 								<li class="bangdan" style="margin-top:12px;">
 									<span></span>
-									<a href="<%=request.getContextPath()%>/home/music?id=${music.id}" >${music.musicname }</a>
+									<div style="width: 100px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;"><a href="<%=request.getContextPath()%>/home/music?id=${music.id}"  >${music.musicname }</a></div>
+									<span style="float:right;margin-top:-20px;margin-right:15px;">
+										<span  onclick="playSongById(${music.id})"><i id="musicList_index1_${music.id}" onmouseover="change1_musicList_index1(${music.id})" onmouseout="change2_musicList_index1(${music.id})" class="glyphicon glyphicon-play-circle" style="color:black;font-size:15px;"></i></span>
+										<a style="text-decoration:none;" href="#" onclick="addPlayList(${music.id})" title="添加到播放列表"><span id="coll"
+									class="glyphicon glyphicon-plus"  style="margin-left: 5px;"></span>&nbsp;&nbsp;</a>
+								<a style="text-decoration:none;" href="#" title="收藏"><span class="glyphicon glyphicon-heart"></span>&nbsp;&nbsp;</a>
+									</span>
 								</li>
 							</c:forEach>
 						
@@ -371,11 +399,18 @@
 						</div>
 					</dt>
 					<dd style="width:215px;">
-						<ol>
+						<ol style="margin-left:-21px;">
 							<c:forEach items="${musicList4}" var="music">
 								<li class="bangdan" style="margin-top:12px;">
 									<span></span>
-									<a href="<%=request.getContextPath()%>/home/music?id=${music.id}" >${music.musicname }</a>
+									<div style="width: 100px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;"><a href="<%=request.getContextPath()%>/home/music?id=${music.id}" >${music.musicname }</a></div>
+									<span style="float:right;margin-top:-20px;margin-right:10px;">
+									<span  onclick="playSongById(${music.id})"><i id="musicList_index2_${music.id}" onmouseover="change1_musicList_index2(${music.id})" onmouseout="change2_musicList_index2(${music.id})" class="glyphicon glyphicon-play-circle" style="color:black;font-size:15px;"></i></span>
+										
+										<a style="text-decoration:none;" href="#" onclick="addPlayList(${music.id})" title="添加到播放列表"><span id="coll"
+									class="glyphicon glyphicon-plus"  style="margin-left: 5px;"></span>&nbsp;&nbsp;</a>
+								<a style="text-decoration:none;"  href="#" title="收藏"><span class="glyphicon glyphicon-heart"></span>&nbsp;&nbsp;</a>
+									</span>
 								</li>
 							</c:forEach>
 						</ol>
@@ -402,7 +437,14 @@
 							<c:forEach items="${musicList3}" var="music">
 								<li class="bangdan" style="margin-top:12px;">
 									<span></span>
-									<a href="<%=request.getContextPath()%>/home/music?id=${music.id}" >${music.musicname }</a>
+									<div style="width: 100px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;"><a href="<%=request.getContextPath()%>/home/music?id=${music.id}" >${music.musicname }</a></div>
+									<span style="float:right;margin-top:-20px;margin-right:-3px;">
+									<span  onclick="playSongById(${music.id})"><i id="musicList_index3_${music.id}" onmouseover="change1_musicList_index3(${music.id})" onmouseout="change2_musicList_index3(${music.id})" class="glyphicon glyphicon-play-circle" style="color:black;font-size:15px;"></i></span>
+										
+										<a style="text-decoration:none;" href="#" onclick="addPlayList(${music.id})" title="添加到播放列表"><span id="coll"
+									class="glyphicon glyphicon-plus"  style="margin-left: 5px;"></span>&nbsp;&nbsp;</a>
+								<a style="text-decoration:none;" href="#" title="收藏"><span class="glyphicon glyphicon-heart"></span>&nbsp;&nbsp;</a>
+									</span>
 								</li>
 							</c:forEach>
 						</ol>
@@ -544,12 +586,48 @@
 	}
 	
 	for(var i=0;i<lunbo.length;i++) {
-		if(i == 0 || i == 5)
-			lunbo.eq(i).css("margin-left","70px")
+		if(i == 0 || i == 5) {
+			lunbo.eq(i).css("margin-left","70px");
+			lunbo.eq(i).children("span").children("i").css("margin-top:-65px !important");
+		}
 	}
 	
 	for(var i=0;i<bangdan.length;i++) {
 		if(i == 0 || i == 10 || i == 20)
 			bangdan.eq(i).css("margin-top","22px")
+	}
+	
+	function change1_index(id) {
+		
+		$("#index_"+id).css({"color":"white","cursor":"pointer"});
+	}
+	
+	function change2_index(id) {
+		$("#index_"+id).css("color","#ccc");
+	}
+	
+	function change1_musicList_index1(id) {
+		
+		$("#musicList_index1_"+id).css({"color":"red","cursor":"pointer"});
+	}
+	
+	function change2_musicList_index1(id) {
+		$("#musicList_index1_"+id).css("color","black");
+	}
+	function change1_musicList_index2(id) {
+		
+		$("#musicList_index2_"+id).css({"color":"red","cursor":"pointer"});
+	}
+	
+	function change2_musicList_index2(id) {
+		$("#musicList_index2_"+id).css("color","black");
+	}
+	function change1_musicList_index3(id) {
+		
+		$("#musicList_index3_"+id).css({"color":"red","cursor":"pointer"});
+	}
+	
+	function change2_musicList_index3(id) {
+		$("#musicList_index3_"+id).css("color","black");
 	}
 </script>

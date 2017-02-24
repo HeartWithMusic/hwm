@@ -105,5 +105,21 @@
 		function isContains(str, substr) {
 		    return str.indexOf(substr) >= 0;
 		}
+		
+		//长数字转换算法主函数：
+		function NumberToChinese(num){
+		  var unitPos = 0;
+		  var strIns = '', chnStr = '';
+		  var needZero = false;
+		  //alert(num.toString().length);
+		  var length = num.toString().length;
+		  if(length <= 5){
+		    return num;
+		  }else if(length <= 8) {
+			return parseInt(num/10000) + "万";
+		  }else {
+			return parseInt(num/100000000) + "亿";
+		  }
+		}
 	</script>
 </html>

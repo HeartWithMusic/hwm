@@ -9,7 +9,7 @@
 <div>
 	<div class="panel panel-default" id="list_lyc">
 		<div class="panel-heading"> 
-			<h3 class="panel-title"> 歌曲列表 </h3>
+			<h3 class="panel-title"> 播放列表(<span id="play_counts">0</span>) </h3>
 			<div style="float:right;margin-top:-18px;width:300px;">
 				<h3 id="panel-song-title" class="panel-title" style="float:left;" >  </h3>
 				<span id="panel-close" title="关闭" class="glyphicon glyphicon-remove" style="float:right;"></span>
@@ -92,7 +92,8 @@
 						<!--播放模式-->
 						<span id="btn-playWays" class="glyphicon glyphicon-repeat" data-toggle="tooltip" data-trigger="click" title="单曲循环"></span>
 						<!--显示歌单和歌词-->
-						<span id="btn-showMenu" class="glyphicon glyphicon-tasks"  ></span>
+						<span id="showTip" style="float: right;color: white;position: fixed;bottom: 50px;background-color: black;width: 140px;height: 30px;text-align: center;line-height: 2;margin-left: -30px;display: none;"></span>
+						<span id="btn-showMenu" class="glyphicon glyphicon-tasks" ></span>
 						<!-- 音量控制 -->
 						<span id="btn-showVolume" class="glyphicon glyphicon-volume-up"  ></span>
 	           		</div>
@@ -271,11 +272,22 @@
 			}
 			
 		});
-		
+		var isShow = 0;
 		//启用popover
 		$(function () { 
 			$("[data-toggle='tooltip']").tooltip();
 		});
+		
+		
+		
+		
+		function show() {
+			//isShow = 1;
+		}
+		
+		function hidden() {
+			//setTimeout("$(function () {$('#btn-showMenu').popover('hide');}); ",3000);
+		}
 		
 		function change_bg1(id) {
 			//alert($("#"+id).attr("class"));
@@ -296,4 +308,5 @@
 		function click_play(id) {
 			playSongById(id);
 		}
+		
 </script>

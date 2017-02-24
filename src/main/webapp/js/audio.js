@@ -124,7 +124,10 @@
 			lyricSrc : null,
       
             // 当前播放歌曲的 索引  
-            currentIndex : -1,  
+            currentIndex : -1, 
+            
+            //当前播放的歌曲id
+            currentId : -1,
       
             //播放器元素jquery对象  
             $audio : $('audio'),  
@@ -240,8 +243,15 @@
 						$('#btn-next').click(); 
 						//alert("hah1");						
 					}else if(flag2 == 2){// 随机播放
-						var i = parseInt((Player.data.length - 1) * Math.random());  
-                        playByMe(i);
+						//alert(Player.data.length);
+						var k = parseInt((Player.data.length - 1) * Math.random());
+						//alert(k);
+			            $.each(Player.data[k],function(j){
+			            	if(j == "id")
+			            		i = Player.data[k][j];	
+			            });
+			            //alert(i);
+                        Player.play(i);
 						//alert("hah2");						
 					}
                 }; 
@@ -249,6 +259,7 @@
       
                 // 播放指定歌曲  
                 Player.play = function playByMe(i) { 
+                	Player.currentId = i;
                 	//变换播放和未播放
                 	var list = $("#m-list li");
                 	for(var j=0;j<list.length;j++) {
@@ -330,6 +341,10 @@
         	   	    });  
                     
 					//$('#btn-play').text("播放");
+        			$("#showTip").css("display","inline");
+		   	        $("#showTip").html("已开始播放");
+		   	         
+		   	        setTimeout("$('#showTip').css('display','none');",3000);
                 };  
                 
             }  
@@ -354,7 +369,7 @@
 	   	        },  
 	   	        success : function(data) {
 	   	        	var id1 = data[0].id;
-	   	        	var newData = { id : data[0].id,name : data[0].musicname};
+	   	        	var newData = { id : data[0].id, name : data[0].musicname, sid : data[1].id, sname : data[1].singername, mtime : data[0].musictime};
 	   	        	//var jsonarray = eval('('+Player.data+')');
 	   	        	//alert(newData.id);
 	   	        	//var jsonstr="[{'name':'a','value':1},{'name':'b','value':2}]";
@@ -381,16 +396,119 @@
 		   	         if(flag) {
 		   	        	Player.data.push(newData);
 		   	        	var mhtml = Player.$mList.html();
-		                mhtml += '<li class="0" id="' + data[0].id + '" onmouseover="change_bg1(' + data[0].id +')" onmouseout="change_bg2(' + data[0].id + ')" style="padding-top:5px;padding-bottom:5px;font-size:14px;"><i class="glyphicon glyphicon-play"  style="color:black;float:left;margin-top:4px;margin-left:10px;"></i><span style="width:266px;float:left;margin-left:40px;" onclick="click_play(' + data[0].id + ')"><a index="' + data[0].id + '">' + data[0].musicname  + '</a></span><span style="margin-left:10px;float:left;width:100px;"><a href="#" style="margin-left:10px;" title="收藏"><i class="glyphicon glyphicon-heart"></i></a><a href="#" style="margin-left:10px;" title="下载"><i class="glyphicon glyphicon-save"></i></a><a href="#" style="margin-left:10px;" title="删除"><i class="glyphicon glyphicon-trash"></i></a></span>';
+		                mhtml += '<li class="0" id="' + data[0].id + '" onmouseover="change_bg1(' + data[0].id +')" onmouseout="change_bg2(' + data[0].id + ')" style="padding-top:5px;padding-bottom:5px;font-size:14px;"><i class="glyphicon glyphicon-play"  style="color:black;float:left;margin-top:4px;margin-left:10px;"></i><span style="width:266px;float:left;margin-left:40px;" onclick="click_play(' + data[0].id + ')"><a index="' + data[0].id + '">' + data[0].musicname  + '</a></span><span style="margin-left:10px;float:left;width:100px;"><a href="#" style="margin-left:10px;" title="收藏"><i class="glyphicon glyphicon-heart"></i></a><a href="#" style="margin-left:10px;" title="下载"><i class="glyphicon glyphicon-save"></i></a><a onclick="deleteSongById(' + data[0].id   + ')" href="#" style="margin-left:10px;" title="删除"><i class="glyphicon glyphicon-trash"></i></a></span>';
 		                mhtml += '<span style="width:100px;float:left;"><a href=' + path1 + '/home/singer?id=' + data[1].id + '>' + data[1].singername + '</a></span><span style="color:#ccc;">' + data[0].musictime + '</span>';
 		                mhtml += '</li>'
 		                Player.$mList.html(mhtml); 
 		                //Player.ready();
 		   	         }
+		   	         
+		   	         
+		   	         $("#play_counts").html(Player.data.length);
+		   	         $("#showTip").css("display","inline");
+		   	         $("#showTip").html("已添加到播放列表");
+		   	         
+		   	         setTimeout("$('#showTip').css('display','none');",3000);
 	   	        }  
 	   	    });  
     	   
     	   
+	   	};
+	   	
+	   	/**
+	   	 * 删除播放列表中的歌曲
+	   	 * @param id
+	   	 */
+	   	function deleteSongById(id) {
+	   		//alert(id);
+	   		var m;
+	   		var n;
+	   		//alert(Player.data.length);
+	   		for(var k=0;k<Player.data.length;k++) {
+            	$.each(Player.data[k],function(j){
+            		if(id == Player.data[k][j]) {
+            			//alert(Player.data[k]["id"]);
+            			m = k;
+            		    //return true;
+            		    //alert(Player.data[k][id]);
+            		}
+            	});
+            }
+	   		//删除歌曲
+	   		Player.data.splice(m,1);
+	   		
+	   		for(var k=0;k<Player.data.length;k++) {
+            	$.each(Player.data[k],function(j){
+            		if(k == 0 && j == "id") {
+            			n = Player.data[k][j];
+            		}
+            	});
+            }
+	   		//alert(n);
+	   		if(Player.currentIndex == m) {
+	   			playSongById(n);
+	   			Player.audio.pause(); 
+	   			$("#btn-play").removeClass("glyphicon glyphicon-pause ");
+    			$("#btn-play").addClass("glyphicon glyphicon-play");
+    			flag = 0;
+	   		}
+	   		
+	   		
+	   		//alert(Player.data.length);
+	   		//Player.data.push(newData);
+	   		
+            
+	   		Player.$mList.html("");
+	   		var mhtml = Player.$mList.html();
+	   		for(var k=0;k<Player.data.length;k++) {
+	   			var idd;
+	   			var name;
+	   			var sidd;
+	   			var sname;
+	   			var mtime;
+	   			
+            	$.each(Player.data[k],function(j){
+            		
+            		idd = Player.data[k]["id"];
+    	   			name = Player.data[k]["name"];
+    	   			sidd = Player.data[k]["sidd"];
+    	   			sname = Player.data[k]["sname"];
+    	   			mtime = Player.data[k]["mtime"];
+    	   			
+            		//alert(Player.data[k]["name"]);
+            		//alert(j);
+            		
+            		//alert(Player.data[k][j]);
+            	});
+            	
+            	
+            	//alert(idd + " " + name + " " + sidd + " " + sname + " " + mtime);
+            	mhtml += '<li class="0" id="' + idd + '" onmouseover="change_bg1(' + idd +')" onmouseout="change_bg2(' + idd + ')" style="padding-top:5px;padding-bottom:5px;font-size:14px;"><i class="glyphicon glyphicon-play"  style="color:black;float:left;margin-top:4px;margin-left:10px;"></i><span style="width:266px;float:left;margin-left:40px;" onclick="click_play(' + idd + ')"><a index="' + idd + '">' + name  + '</a></span><span style="margin-left:10px;float:left;width:100px;"><a href="#" style="margin-left:10px;" title="收藏"><i class="glyphicon glyphicon-heart"></i></a><a href="#" style="margin-left:10px;" title="下载"><i class="glyphicon glyphicon-save"></i></a><a onclick="deleteSongById(' + idd   + ')" href="#" style="margin-left:10px;" title="删除"><i class="glyphicon glyphicon-trash"></i></a></span>';
+                mhtml += '<span style="width:100px;float:left;"><a href=' + path1 + '/home/singer?id=' + sidd + '>' + sname + '</a></span><span style="color:#ccc;">' + mtime + '</span>';
+                mhtml += '</li>'
+            	
+            }
+	   		
+	   		Player.$mList.html(mhtml);
+	   		//变换播放和未播放
+        	var list = $("#m-list li");
+        	for(var j=0;j<list.length;j++) {
+        		//alert(id);
+        		//alert(list.eq(j).attr("id"));
+        		if(list.eq(j).attr("id") == Player.currentId) {
+        			list.eq(j).attr("class","1");
+        			$("#"+Player.currentId).css("background-color","#3c3c3c");
+        			$($("#"+Player.currentId).children("i").get(0)).css("display","inline");
+        			$($("#"+list.eq(j).attr("id")).children("i").get(0)).css("color","red");
+        		}else {
+        			$("#"+list.eq(j).attr("id")).css("background-color","black");
+        			list.eq(j).attr("class","0");
+        			$($("#"+list.eq(j).attr("id")).children("i").get(0)).css("color","black");
+        		}
+        		
+        	}
+        	
+        	$("#play_counts").html(Player.data.length);
 	   	};
 	   	
 	   	function playSongById(id){

@@ -26,8 +26,8 @@
 		</div>
 		<div id = "item" style = "width:473px; float:right;clear:both;margin-right: 50px;margin-top: 20px;">
 			<div style = "width:380px;height:40px;">	<!--操作-->				
-								<button style = "border:0;background-image: url('<%=request.getContextPath()%>/img/front/home/button3.png');width:66px;height:31px;text-align:right;color:white;float:left;">播放</button>
-								<button onclick="addPlayList()" style = "border:0;background-image: url('<%=request.getContextPath()%>/img/front/home/button4.png');width:33px;height:31px;float:left;margin-top:-1px;" title="添加到播放列表"></button>
+								<button onclick="playList1()" style = "border:0;background-image: url('<%=request.getContextPath()%>/img/front/home/button3.png');width:66px;height:31px;text-align:right;color:white;float:left;">播放</button>
+								<button onclick="addPlayList1()" style = "border:0;background-image: url('<%=request.getContextPath()%>/img/front/home/button4.png');width:33px;height:31px;float:left;margin-top:-1px;" title="添加到播放列表"></button>
 								<button class="btn btn-default" style = "width:75px;height:29px;float:left;margin-left:10px;font-size:12px;margin-top:1px;"><i class="glyphicon glyphicon-folder-open" style="margin-right:5px;"></i>收藏</button>
 								<button class="btn btn-default" style = "width:75px;height:29px;float:left;margin-left:10px;font-size:12px;margin-top:1px;"><i class=" 	glyphicon glyphicon-download-alt" style="margin-right:5px;"></i>下载</button>
 								<a href = "#pinglun" class = "btn btn-default"style = "width:100px;height:29px;float:left;margin-left:10px;font-size:12px;margin-top:1px;"><i class="glyphicon glyphicon-comment" style="margin-right:5px;"></i>评论（10）</a>
@@ -130,6 +130,30 @@
 			music_play.eq(k).css("color","red"); 
 			music_play.eq(k).addClass("play_music");
 		}
+	}
+	function addPlayList1() {
+		var musicList = new Array();
+		musicList = "${musicList}".split("[");
+		musicList = musicList[1];
+		musicList = musicList.split("]");
+		musicList = musicList[0].split(",");
+		for(var i=0;i<musicList.length;i++) {
+			var k = parseInt(musicList[i]);
+			//alert(k);
+			if(!isNaN(k)) {
+				addPlayList(k);
+			}
+		}
+	}
+	
+	function playList1() {
+		addPlayList1();
+		var musicList = new Array();
+		musicList = "${musicList}".split("[");
+		musicList = musicList[1];
+		musicList = musicList.split("]");
+		musicList = musicList[0].split(",");
+		playSongById(parseInt(musicList[0]));
 	}
 	
 </script>

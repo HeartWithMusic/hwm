@@ -76,4 +76,9 @@ public class Music implements Comparable<Music>{
 	public int compareTo(Music o) {
 		return o.getPlaycounts().compareTo(this.getPlaycounts());  
 	}
+	
+	@Override
+	public String toString() {
+		return this.id.toString();
+	}
 }

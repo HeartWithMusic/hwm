@@ -31,6 +31,7 @@
 		var url = window.location.href;
 		window.parent.ifurl(url);
 		
+		
 	</script>
 </body>
 </html>
