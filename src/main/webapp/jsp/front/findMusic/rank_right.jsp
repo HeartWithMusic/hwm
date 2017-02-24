@@ -71,10 +71,10 @@
 									 &nbsp;&nbsp;&nbsp; <a href="<%=request.getContextPath()%>/home/music?id=${music.id}">${music.musicname}</a>
 							</td>
 							<td>${music.musictime}</td>
-							<td style="font-size:12px;"><a href="#" onclick="addPlayList(${music.id})" title="添加到播放列表"><span id="coll"
-									class="glyphicon glyphicon-plus"  style="margin-left: 5px;"></span>&nbsp;&nbsp;</a>
-								<a href="#" title="收藏"><span class="glyphicon glyphicon-heart"></span>&nbsp;&nbsp;</a>
-								<a href="#" title="下载"><span class="glyphicon glyphicon-save"></span></a></td>
+							<td style="font-size:12px;"><span id="rankList1_index1_${music.id}" onmouseover="change1_rankList1_index1(${music.id})" onmouseout="change2_rankList1_index1(${music.id})" onclick="addPlayList(${music.id})" title="添加到播放列表"><i id="coll"
+									class="glyphicon glyphicon-plus"  style="margin-left: 5px;"></i>&nbsp;&nbsp;</span>
+								<span id="rankList2_index1_${music.id}" onmouseover="change1_rankList2_index1(${music.id})" onmouseout="change2_rankList2_index1(${music.id})"  title="收藏"><i class="glyphicon glyphicon-heart"></i>&nbsp;&nbsp;</span>
+								<span id="rankList3_index1_${music.id}" onmouseover="change1_rankList3_index1(${music.id})" onmouseout="change2_rankList3_index1(${music.id})"  title="下载"><i class="glyphicon glyphicon-save"></i></span></td>
 							<c:forEach items="${singerList}" var="singer" varStatus="j">
 								<c:if test="${i.index==j.index}">
 									<td><a href="<%=request.getContextPath()%>/home/singer?id=${singer.id}">${singer.singername }</a></td>
@@ -154,6 +154,33 @@
 		musicList = musicList.split("]");
 		musicList = musicList[0].split(",");
 		playSongById(parseInt(musicList[0]));
+	}
+	
+	function change1_rankList1_index1(id) {
+		
+		$("#rankList1_index1_"+id).css({"color":"red","cursor":"pointer"});
+	}
+	
+	function change2_rankList1_index1(id) {
+		$("#rankList1_index1_"+id).css("color","black");
+	}
+	
+	function change1_rankList2_index1(id) {
+		
+		$("#rankList2_index1_"+id).css({"color":"red","cursor":"pointer"});
+	}
+	
+	function change2_rankList2_index1(id) {
+		$("#rankList2_index1_"+id).css("color","black");
+	}
+	
+	function change1_rankList3_index1(id) {
+		
+		$("#rankList3_index1_"+id).css({"color":"red","cursor":"pointer"});
+	}
+	
+	function change2_rankList3_index1(id) {
+		$("#rankList3_index1_"+id).css("color","black");
 	}
 	
 </script>

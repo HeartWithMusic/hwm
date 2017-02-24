@@ -25,7 +25,7 @@ function change1(){
 			<p id = "singerName" style = "float:left;margin-left:50px;font-weight: normal;font-size: 24px;color: #333;">${singer.singername}</p>
 		</div>
 		<div id = "singerPic" style = "width:640px;margin:0 auto;">
-			<img style = "width:642px;height:300px; border:1px solid #d3d3d3;z-index:0;"src = "<%=request.getContextPath()%>/static/singer/${singer.img}">
+			<img style = "width:642px;height:400px; border:1px solid #d3d3d3;z-index:0;"src = "<%=request.getContextPath()%>/static/singer/${singer.img}">
 			<div style = "margin-left:550px; margin-top: -50px;z-index:666666666;">	
 			<a style = "cursor:pointer;"> <img id="coll" onmouseover="change()" onmouseout="change1()" src="<%=request.getContextPath()%>/img/front/home/collect1.png"> </a>
 			</div>

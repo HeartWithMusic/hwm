@@ -16,15 +16,18 @@
 				<ul style="float:left;font-size:13px;">
 					<c:forEach items="${musicList}" begin="${(i-1)*5 }" end="${(i-1)*5 + 4 }" var="music">
 						<li>
-							<div>
-								<a href="<%=request.getContextPath()%>/home/music?id=${music.id}"><img src="<%=request.getContextPath()%>/static/music/img/${music.img}" alt="通用的占位符缩略图"></a></br>
+									<div> 	
+
+										<a href="<%=request.getContextPath()%>/home/music?id=${music.id}"><img src="<%=request.getContextPath()%>/static/music/img/${music.img}" alt="通用的占位符缩略图"></a></br>
 										<div style="width:150px;height:25px;background-image:url('<%=request.getContextPath()%>/img/front/home/bottomBg.png');opacity:0.8;position:relative;top:-20px;color:#ccc;left:0px;">
-											<i class="glyphicon glyphicon-headphones" style="margin-left:5px;margin-top:5px;"></i>  
-											<span style="margin-top:5px;">${music.playcounts}</span>
-											<a href="#" onclick="playSongById(${music.id})"><i class="glyphicon glyphicon-play-circle" style="color:white;margin-left:90px;font-size:18px;margin-top:2px;"></i></a>
+											<i class="glyphicon glyphicon-headphones" style="margin-left:5px;margin-top:5px;color:white"></i>  
+											<span id="play_counts_index_${music.id }" style="margin-top:5px;color:white;width:60px;">${music.playcounts}</span>
+											<span  onclick="playSongById(${music.id})"><i id="musicList_${music.id}" onmouseover="change1_musicList(${music.id})" onmouseout="change2_musicList(${music.id})" class="glyphicon glyphicon-play-circle" style="color:#ccc;float:right;margin-right:5px;font-size:18px;margin-top:2px;"></i></span>
 										</div>
 										<a href="<%=request.getContextPath()%>/home/music?id=${music.id}">${music.musicname}</a>
-							</div>
+										
+
+									</div>
 						</li>
 					</c:forEach>
 				</ul>
@@ -47,17 +50,17 @@
 							<li>
 									<div> 	
 
-										<a href="<%=request.getContextPath()%>/home/music?id=${music.id}"><img src="<%=request.getContextPath()%>/static/music/img/${music.img}" alt="通用的占位符缩略图"></a><br>
+										<a href="<%=request.getContextPath()%>/home/music?id=${music.id}"><img src="<%=request.getContextPath()%>/static/music/img/${music.img}" alt="通用的占位符缩略图"></a></br>
 										<div style="width:150px;height:25px;background-image:url('<%=request.getContextPath()%>/img/front/home/bottomBg.png');opacity:0.8;position:relative;top:-20px;color:#ccc;left:0px;">
-											<i class="glyphicon glyphicon-headphones" style="margin-left:5px;margin-top:5px;"></i>  
-											<span style="margin-top:5px;">${music.playcounts}</span>
-											<a href="#" onclick="playSongById(${music.id})"><i class="glyphicon glyphicon-play-circle" style="color:white;margin-left:90px;font-size:18px;margin-top:2px;"></i></a>
+											<i class="glyphicon glyphicon-headphones" style="margin-left:5px;margin-top:5px;color:white"></i>  
+											<span id="play_counts_index_${music.id }" style="margin-top:5px;color:white;width:60px;">${music.playcounts}</span>
+											<span  onclick="playSongById(${music.id})"><i id="musicList_1_${music.id}" onmouseover="change1_musicList1(${music.id})" onmouseout="change2_musicList1(${music.id})" class="glyphicon glyphicon-play-circle" style="color:#ccc;float:right;margin-right:5px;font-size:18px;margin-top:2px;"></i></span>
 										</div>
 										<a href="<%=request.getContextPath()%>/home/music?id=${music.id}">${music.musicname}</a>
 										
 
 									</div>
-							</li>
+						</li>
 					</c:forEach>
 				</ul>
 		</c:forEach>
@@ -81,3 +84,23 @@
 	</div>
 	
 </div>
+
+<script>
+function change1_musicList(id) {
+	
+	$("#musicList_"+id).css({"color":"white","cursor":"pointer"});
+}
+
+function change2_musicList(id) {
+	$("#musicList_"+id).css("color","#ccc");
+}
+
+function change1_musicList1(id) {
+	
+	$("#musicList_1_"+id).css({"color":"white","cursor":"pointer"});
+}
+
+function change2_musicList1(id) {
+	$("#musicList_1_"+id).css("color","#ccc");
+}
+</script>

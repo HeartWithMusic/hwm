@@ -10,7 +10,7 @@
 
 <div id="singer_list">
 	<div style="padding-top:30px;border-bottom: 2px solid #C10D0C;">
-		<h3>入住歌手</h3>
+		<h3>入驻歌手</h3>
 	</div>
 	
 	<div id="singerpicture" style="border-bottom:none;height:400px;padding-top: 30px;" >

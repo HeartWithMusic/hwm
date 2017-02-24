@@ -30,10 +30,10 @@
 									<a href="<%=request.getContextPath()%>/home/music?id=${music.id}">${music.musicname}</a>
 								</td>
 								<td style="font-size:12px;">${music.musictime}</td>
-								<td style="font-size:15px;" ><a href="#" onclick="addPlayList(${music.id})" title="添加到播放列表"><span id="coll"
-										class="glyphicon glyphicon-plus" style="margin-left: 5px;"></span>&nbsp;&nbsp;</a>
-									<a href="#" title="收藏歌曲"><span class="glyphicon glyphicon-heart"></span>&nbsp;&nbsp;</a>
-									<a href="#" title="下载歌曲"><span class="glyphicon glyphicon-save"></span></a></td>
+								<td style="font-size:15px;" ><span id="singerList1_index1_${music.id}" onmouseover="change1_singerList1_index1(${music.id})" onmouseout="change2_singerList1_index1(${music.id})" onclick="addPlayList(${music.id})" title="添加到播放列表"><i id="coll"
+										class="glyphicon glyphicon-plus" style="margin-left: 5px;"></i>&nbsp;&nbsp;</span>
+									<span  id="singerList2_index1_${music.id}" onmouseover="change1_singerList2_index1(${music.id})" onmouseout="change2_singerList2_index1(${music.id})" title="收藏歌曲"><i class="glyphicon glyphicon-heart"></i>&nbsp;&nbsp;</span>
+									<span  id="singerList3_index1_${music.id}" onmouseover="change1_singerList3_index1(${music.id})" onmouseout="change2_singerList3_index1(${music.id})" title="下载歌曲"><i class="glyphicon glyphicon-save"></i></span></td>
 								<td style="font-size:12px;" ><a  title="播放次数" ><i class="glyphicon glyphicon-headphones" style="margin-right:5px;"></i>${ music.playcounts}</a></td>
 
 							</tr>
@@ -74,12 +74,49 @@
 		music_play.eq(k).css("color","black"); 
 		music_play.eq(k).removeClass("play_music");
 	}
+    var currentId;
+    $.each(window.parent.Player.data[window.parent.Player.currentIndex],function(j){
+    	currentId = window.parent.Player.data[window.parent.Player.currentIndex]["id"];			
+    });
+    
 	for(var k=0;k<music_play.length;k++) {
 		//alert(music_play.eq(k).attr("id"));
-		if(music_play.eq(k).attr("id") == "music_"+window.parent.Player.data[window.parent.Player.currentIndex].id) {
+		
+		if(music_play.eq(k).attr("id") == "music_" + currentId) {
 			music_play.eq(k).css("color","red"); 
 			music_play.eq(k).addClass("play_music");
 		}
 	}
+	
+	function change1_singerList1_index1(id) {
+		
+		$("#singerList1_index1_"+id).css({"color":"red","cursor":"pointer"});
+	}
+	
+	function change2_singerList1_index1(id) {
+		$("#singerList1_index1_"+id).css("color","black");
+	}
+	
+	function change1_singerList2_index1(id) {
+		
+		$("#singerList2_index1_"+id).css({"color":"red","cursor":"pointer"});
+	}
+	
+	function change2_singerList2_index1(id) {
+		$("#singerList2_index1_"+id).css("color","black");
+	}
+	
+	function change1_singerList3_index1(id) {
+		
+		$("#singerList3_index1_"+id).css({"color":"red","cursor":"pointer"});
+	}
+	
+	function change2_singerList3_index1(id) {
+		$("#singerList3_index1_"+id).css("color","black");
+	}
+	
+	
+	
+	
 	
 </script>
