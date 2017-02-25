@@ -15,5 +15,5 @@ public interface IMusicService {
 	
 	public void updateMusic(Music music);
 	
-	public List<Music> findMusicByUserId(Integer id);
+	//public List<Music> findMusicByUserId(Integer id);
 }

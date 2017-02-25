@@ -1,5 +1,7 @@
 package com.ruanko.hwm.dao;
 
+import java.util.List;
+
 import com.ruanko.hwm.bean.Collection;
 
 public interface CollectionMapper {
@@ -14,4 +16,6 @@ public interface CollectionMapper {
     int updateByPrimaryKeySelective(Collection record);
 
     int updateByPrimaryKey(Collection record);
+    
+    List<Collection> getCollectionByUserid(Integer userid);
 }

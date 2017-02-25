@@ -7,44 +7,304 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="sf" %>
 <%@ page isELIgnored="false" %> 
-<link href="<%=request.getContextPath()%>/css/front/findMusic/musicList.css" rel="stylesheet">
-<link href="<%=request.getContextPath()%>/css/front/findMusic/album.css" rel="stylesheet">
-
-<div id="musicList">
-	<div class="f-pr">
-<div class="j-flag" id="auto-id-3RUC65BISpr0c08v"> <div class="g-wrap"><div class="cnt">
-	<div class="cntc m-info">
-	<div class="user f-cb">
-	<a class="face" href="/user/home?id=365946911">
-	<img src="http://p1.music.126.net/VnZiScyynLG7atLIZ2YPkw==/18686200114669622.jpg?param=200y200"></a>
-	<span class="name f-thide">${sessionScope.user.username}<a href="<%=request.getContextPath()%>/home/personMsg">修改个人资料</a></span>
-	</div>
-	<div class="hd f-cb">
-	<i class="type u-icn u-icn-13"></i>
-	<h2 class="f-ff2 f-thide">我喜欢的音乐</h2>
+<style>
+	#user_whole {
+		width:1000px;
+		margin:0 auto;
+		min-height:700px;
+		border:1px solid #d3d3d3;
+		background-color: white;
+	}	
 	
-	<table class="m-table ">
-		<tr>
-			<td>音乐名</td>
-			<td>时长</td>
-			<td>歌手</td>
-		</tr>
-		<c:forEach var="music" items="${currentMusic}">
-			<tr>
-				<td>${music.musicname}</td>
-				<td>${music.musictime}</td>
-				<td>${歌手}</td>
-			</tr>
+	#user_whole_padding {
+		padding:40px;
+	}
+	
+	#user_header {
+		margin-bottom:40px;
+		overflow:hidden;
+	}
+	
+	#user_header_img {
+		float:left;
+		width:180px;
+		margin-right:40px;
 		
-		</c:forEach>
+	}
 	
-	</table>
+	#user_header_info {
+		float:left;
+		width:670px;
+	}
 	
+	#user_header_info1 {
+		padding-bottom: 10px;
+		margin-bottom: 10px;
+		border-bottom: 1px solid #ddd;
+		overflow: hidden;
+	}
 	
+	#user_header_info2 ul li {
+		border-right:2px solid #d3d3d3;
+		padding-left:15px;
+		padding-right:15px;
+		float:left;
+		
+	}
+	#user_header_info2 {
+		overflow:hidden;
+	}
 	
-	</div>
-	</div></div></div></div></div>
-
-
+	#user_header_info2 ul {
+		border-bottom:1px solid #d3d3d3;
+		padding-bottom:20px;
+	}
+	#user_header_info2 ul li:last-child {
+		border-right:none;
+	}
+	
+	#user_header_info2 ul li a strong{
+		display:block;
+		margin-bottom:5px;
+		font-size:24px;
+	}
+	
+	#user_header_info2 ul li a span {
+		font-size:12px;
+	}
+	
+	#user_header_info2 ul li a  {
+		color:#666;
+		text-decoration: none;
+	}
+	#user_header_info2 ul li a:hover {
+		color:#0c73c2;
+		cursor:pointer;
+	}
+	
+	#user_header_info3 {
+		margin-top:10px;
+		color:#666;
+		font-size:15px;
+	}
+</style>
+<div id="user_whole">
+	<c:choose>
+			<c:when test="${sessionScope.user == null }">
+				<!-- 没有登录显示-->
+				<div style="background:#F5F5F5;border:1px solid  #DCDCDC;width: 800px;margin: 20px auto;height: 200px;">
+					<p style="width:400px;margin:20px auto;font-size:10pt;margin: 50px auto;font-size:20px;">
+						登录心随乐动，可以享受无限收藏的乐趣
+					</p>
+					<div style="width:82px;margin:50px auto;">
+						<button type="button" class="btn btn-danger" style="margin-top:10px;margin-bottom:15px;" data-toggle="modal" data-target="#myModal">用户登录</button>
+					</div>
+				</div>
+			</c:when>
+			<c:when test="${sessionScope.user != null }">
+				<!--登录之后显示-->
+				<div id="user_whole_padding">
+					<div id="user_header">
+						<div id="user_header_img">
+							<img style="border:2px solid #d3d3d3;border-radius:5px;padding:3px;" src="http://p1.music.126.net/VnZiScyynLG7atLIZ2YPkw==/18686200114669622.jpg?param=200y200"></a>
+						</div>
+						<div id="user_header_info">
+							<div id="user_header_info1">
+								<div style="float:left;">
+									<h2 style="margin:0;padding:0;display:inline;float:left;">${sessionScope.user.username}</h2>
+									<span style="font-size: 15px;color: gold;font-style: italic;border: 2px solid #e03a24;border-radius: 12px;padding-left: 5px;padding-right: 5px;font-weight: bolder;float: left;margin: 5px 10px;">Lv.${sessionScope.user.level}</span>
+								</div>
+								<div style="float:right;margin-right:10px;">
+									<a  href="<%=request.getContextPath()%>/home/personMsg"><i style="border:1px solid #d3d3d3;border-radius:3px;padding:5px;box-shadow:1px 1px 3px #d3d3d3;background-color:#f5f5f5; display: inline-block;height: 31px;overflow: hidden;vertical-align: top;text-align: center;cursor: pointer;">修改个人资料</i></a>
+								</div>
+							</div>
+							<div id="user_header_info2">
+								<ul  style="list-style:none;padding-left:0px;overflow:hidden;">
+									<li>
+										<a href="#gequ">
+											<strong>
+												${fn:length(musicList) }
+											</strong>
+											<span>收藏的歌曲</span>
+										</a>
+									</li>
+									<li>
+										<a href="#geshou">
+											<strong>${fn:length(singerList1) }</strong>
+											<span>关注的歌手</span>
+										</a>
+									</li>
+									<li>
+										<a href="#download">
+											<strong>${fn:length(musicList1) }</strong>
+											<span>下载的歌曲</span>
+										</a>
+									</li>
+									<li>
+										<a>
+											<strong>${sessionScope.user.playcount}</strong>
+											<span>播放次数</span>
+										</a>
+									</li>
+								</ul>
+							</div>
+							<div id="user_header_info3">
+								<span>最近一次登录时间:</span>
+								<span>2012年12月11日 12时12分12秒</span>
+							</div>
+						</div>
+					</div>
+					<div id="user_musicList">
+						<div id="user_musicList_header" style="border-bottom: 2px solid #c20c0c;overflow:hidden;margin-bottom:10px;">
+							<a id="gequ"></a>
+							<h4><i class="glyphicon glyphicon-music" style="float:left;margin-left:3px"></i><span style="margin-left:5px;">收藏的歌曲(${fn:length(musicList) })</span></h4>
+						</div>
+						<div id="user_musicList_info">
+							<c:forEach begin="0" end="${size1}" var="i">
+								<ul  style="list-style:none;padding-left:0px;overflow:hidden;margin-left:10px;">
+									<c:forEach items="${musicList}" var="music" begin="${i*3}" end="${i*3 + 2}" varStatus="j">
+										<li style="float:left;padding:10px;width:290px;margin:5px;border:1px solid #ccc;">
+										<div style="float:left;">
+											<img width="60px"; height="60px"; src="<%=request.getContextPath()%>/static/music/img/${music.img}"></a>
+										</div>
+										<div style="float:left;margin-left:0px;padding:5px;">
+											<div style="width: 150px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">
+												歌名:<a href="<%=request.getContextPath()%>/home/music?id=${music.id}">${music.musicname }</a>
+											</div>
+											<c:forEach items="${singerList}" var="singer" varStatus="i">
+												<c:if test="${i.index == j.index }">
+													<div style="width: 150px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">
+														歌手:<a href="<%=request.getContextPath()%>/home/singer?id=${singer.id}">${singer.singername }</a>
+													</div>
+												</c:if>
+											</c:forEach>
+										</div>
+										<div style="float: right;">
+											<span  onclick="playSongById(${music.id})"><i title="播放" id="mymusic_index1_${music.id}" onmouseover="change1_mymusic_index1(${music.id})" onmouseout="change2_mymusic_index1(${music.id})" class="glyphicon glyphicon-play-circle" style="color:black;font-size:20px;"></i></span>
+													
+													<span id="mymusic_index2_${music.id}" onmouseover="change1_mymusic_index2(${music.id})" onmouseout="change2_mymusic_index2(${music.id})" style="text-decoration:none;" href="#" onclick="addPlayList(${music.id})" title="添加到播放列表"><i id="coll"
+												class="glyphicon glyphicon-plus"  style="margin-left: 5px;font-size:20px;"></i>&nbsp;&nbsp;</span>
+											
+										</div>
+									</li>
+									</c:forEach>
+								</ul>
+							</c:forEach>
+							
+						</div>
+					</div>
+					<div id="user_singerList">
+						<div id="user_singerList_header" style="border-bottom: 2px solid #c20c0c;overflow:hidden;margin-bottom:10px;">
+							<a id="geshou"></a>
+							<h4><i class="glyphicon glyphicon-user" style="float:left;margin-left:3px"></i><span style="margin-left:5px;">关注的歌手(${fn:length(singerList1) })</span></h4>
+						</div>
+						<div id="user_singerList_info">
+							<c:forEach begin="0" end="${size2}" var="i">
+								<ul  style="list-style:none;padding-left:0px;overflow:hidden;margin-left:10px;">
+									<c:forEach items="${singerList1}" var="singer" begin="${i*3}" end="${i*3 + 2}" varStatus="j">
+										<li style="float:left;padding:10px;width:290px;margin:5px;border:1px solid #ccc;">
+										<div style="float:left;">
+											<img width="60px"; height="60px"; src="<%=request.getContextPath()%>/static/singer/${singer.img}"></a>
+										</div>
+										<div style="float:left;margin-left:20px;padding:10px;">
+											<div>
+												歌手:<a href="<%=request.getContextPath()%>/home/singer?id=${singer.id}">${singer.singername }</a>
+											</div>
+											<div style="width: 150px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">
+												简介:${singer.introduction}
+											</div>
+										</div>
+									</li>
+									</c:forEach>
+								</ul>
+							</c:forEach>
+							
+						</div>
+					</div>
+					<div id="user_downloadList">
+						<div id="user_downloadList_header" style="border-bottom: 2px solid #c20c0c;overflow:hidden;margin-bottom:10px;">
+							<a id="download"></a>
+							<h4><i class="glyphicon glyphicon-download-alt" style="float:left;margin-left:3px"></i><span style="margin-left:5px;">下载的歌曲(${fn:length(musicList1) })</span></h4>
+						</div>
+						<div id="user_downloadList_info">
+							<c:forEach begin="0" end="${size3}" var="i">
+								<ul  style="list-style:none;padding-left:0px;overflow:hidden;margin-left:10px;">
+									<c:forEach items="${musicList1}" var="music" begin="${i*3}" end="${i*3 + 2}" varStatus="j">
+										<li style="float:left;padding:10px;width:290px;margin:5px;border:1px solid #ccc;">
+											<div style="float:left;">
+												<img width="60px"; height="60px"; src="<%=request.getContextPath()%>/static/music/img/${music.img}"></a>
+											</div>
+											<div style="float:left;margin-left:0px;padding:10px;">
+												<div>
+													歌名:<a href="<%=request.getContextPath()%>/home/music?id=${music.id}">${music.musicname }</a>
+												</div>
+												<c:forEach items="${singerList2}" var="singer" varStatus="i">
+													<c:if test="${i.index == j.index }">
+														<div >
+															歌手:<a href="<%=request.getContextPath()%>/home/singer?id=${singer.id}">${singer.singername }</a>
+														</div>
+													</c:if>
+												</c:forEach>
+												<c:forEach items="${downloadList}" var="download" varStatus="k">
+													<c:if test="${download.musicid == music.id}">
+														<div style="font-size:10px;">
+															下载时间:${download.downloadtime}
+														</div>
+													</c:if>
+												</c:forEach>
+												
+											</div>
+											<div style="float: right;">
+											<span  onclick="playSongById(${music.id})"><i title="播放" id="mymusic_index3_${music.id}" onmouseover="change1_mymusic_index3(${music.id})" onmouseout="change2_mymusic_index3(${music.id})" class="glyphicon glyphicon-play-circle" style="color:black;font-size:20px;"></i></span>
+													
+													<span id="mymusic_index4_${music.id}" onmouseover="change1_mymusic_index4(${music.id})" onmouseout="change2_mymusic_index4(${music.id})" style="text-decoration:none;" href="#" onclick="addPlayList(${music.id})" title="添加到播放列表"><i id="coll"
+												class="glyphicon glyphicon-plus"  style="margin-left: 5px;font-size:20px;"></i>&nbsp;&nbsp;</span>
+											
+										</div>
+										</li>
+									</c:forEach>
+								</ul>
+							</c:forEach>
+						</div>
+					</div>
+				</div>
+			</c:when>
+	</c:choose>
+	
 </div>
-</div>
+<script>
+function change1_mymusic_index1(id) {
+		
+		$("#mymusic_index1_"+id).css({"color":"red","cursor":"pointer"});
+	}
+	
+	function change2_mymusic_index1(id) {
+		$("#mymusic_index1_"+id).css("color","black");
+	}
+	
+	function change1_mymusic_index2(id) {
+		
+		$("#mymusic_index2_"+id).css({"color":"red","cursor":"pointer"});
+	}
+	
+	function change2_mymusic_index2(id) {
+		$("#mymusic_index2_"+id).css("color","black");
+	}
+function change1_mymusic_index3(id) {
+		
+		$("#mymusic_index3_"+id).css({"color":"red","cursor":"pointer"});
+	}
+	
+	function change2_mymusic_index3(id) {
+		$("#mymusic_index3_"+id).css("color","black");
+	}
+	
+	function change1_mymusic_index4(id) {
+		
+		$("#mymusic_index4_"+id).css({"color":"red","cursor":"pointer"});
+	}
+	
+	function change2_mymusic_index4(id) {
+		$("#mymusic_index4_"+id).css("color","black");
+	}
+	</script>

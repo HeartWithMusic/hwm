@@ -1,0 +1,9 @@
+package com.ruanko.hwm.service;
+
+import java.util.List;
+
+import com.ruanko.hwm.bean.DownloadRela;
+
+public interface IDownloadService {
+	List<DownloadRela> getDownloadRelaByUserid(Integer userid); 
+}
