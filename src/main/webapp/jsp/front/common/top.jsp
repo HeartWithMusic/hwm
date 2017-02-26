@@ -67,10 +67,9 @@
 					
 				<div id="navbar" class="collapse navbar-collapse"><!-- 给导航栏添加响应式，包裹在带有.collapse、.navbar-collapse  -->
 					<ul class="nav navbar-nav" id="myTab"><!--nav navbar-nav 导航栏添加链接-->
-						<li class="active"><a href="/hwm/home/discover/1"><span class="glyphicon glyphicon-search"></span> 发现音乐</a></li>
-						<li><a href="/hwm/home/myMusic"><span class="glyphicon glyphicon-user"></span> 我的音乐</a></li>
-						<li><a href="#about"><span class="glyphicon glyphicon-save"></span> 音乐人</a></li>
-						<li><a href="#contact">关于</a></li>
+						<li id="top_first" class="active"><a href="/hwm/home/discover/1"><span class="glyphicon glyphicon-search"></span> 发现音乐</a></li>
+						<li id="top_second"><a href="/hwm/home/myMusic"><span class="glyphicon glyphicon-user"></span> 我的音乐</a></li>
+						<li id="top_third"><a href="#contact">关于</a></li>
 					</ul>
 				</div>
 				
@@ -164,9 +163,9 @@
 							</div>
 							<div style = "height:15px;width:200px;margin-top:10px;">
 								<label style = "height:15px;width:200px;">
-									<input type="checkbox" style = "float:left;"> 
-									 <p style = "height:12px;color:gray;font-size:90%;font-weight:lighter;float:left; padding-top:2px;padding-left:10px;">自动登录</p>
-									 <a href = "<%=request.getContextPath()%>/home/getPassword/" style = "color:gray;font-size:90%;font-weight:lighter;float:left;padding-top:2px;padding-left:60px;">
+									<!-- <input type="checkbox" style = "float:left;"> -->
+									 <!--<p style = "height:12px;color:gray;font-size:90%;font-weight:lighter;float:left; padding-top:2px;padding-left:10px;">自动登录</p>-->
+									 <a href = "<%=request.getContextPath()%>/home/getPassword/" style = "margin-left: 70px;color:gray;font-size:90%;font-weight:lighter;float:left;padding-top:2px;padding-left:60px;">
 										忘记密码？
 									 </a>
 								</label>
@@ -227,6 +226,8 @@
 		        }  
 		    }); 
 		}
+		
+		
 		
 	</script>
 	  

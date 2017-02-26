@@ -1,5 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %>  
+<%@ taglib uri="http://www.springframework.org/tags" prefix="s" %> 
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="sf" %>
+<%@ page isELIgnored="false" %> 
+
 <link href="<%=request.getContextPath()%>/css/bootstrap.min.css" rel="stylesheet">
 <link href="<%=request.getContextPath()%>/css/front/common/body.css" rel="stylesheet">
 <link href="<%=request.getContextPath()%>/css/front/common/top.css" rel="stylesheet">
@@ -307,6 +314,75 @@
 		
 		function click_play(id) {
 			playSongById(id);
-		}
+		};
+		
+		// 文件下载
+		function download11(url, method,filename){
+		    jQuery('<form action="'+url+'" method="'+(method||'post')+'">' +  // action请求路径及推送方法
+		                '<input type="text" name="filename" value="'+filename+'"/>' + // 文件名称
+		            '</form>')
+		    .appendTo('body').submit().remove();
+		};
+		function download12(id) {
+			//alert(id);
+			//alert("${sessionScope.user == null}");
+			var user = "${sessionScope.user}";
+			var userid = "${sessionScope.user.id}";
+			if(user == "") {
+				$("#myModal").modal('show');
+			}else {
+				//alert(id);
+				$.ajax({  
+			        type : "post",  
+			        url : $('#path').val() + "/music/download",  
+			        dataType:"json",
+			        cache : false,  
+			        data : {  
+			            userid : userid,
+			            musicid : id
+			        },  
+			        async : false,  
+			        error : function() {  
+			        	 alert("网络异常！");  
+			        },  
+			        success : function(data) { 
+		                 download11($('#path').val() + "/music/download1", 'post', data[0]); // 下载文件
+			        }  
+			    }); 
+			}
+		};
+		
+		function addCollection(id) {
+			//alert(id);
+			//alert("${sessionScope.user == null}");
+			var user = "${sessionScope.user}";
+			var userid = "${sessionScope.user.id}";
+			//alert(user);
+			if(user == "") {
+				$("#myModal").modal('show');
+			}else {
+				//alert(id);
+				$.ajax({  
+			        type : "post",  
+			        url : $('#path').val() + "/music/addCollection",  
+			        dataType:"json",
+			        cache : false,  
+			        data : {  
+			            userid : userid,
+			            musicid : id
+			        },  
+			        async : false,  
+			        error : function() {  
+			        	 alert("网络异常！");  
+			        },  
+			        success : function(data) { 
+			        	alert(data[0]);
+			        }  
+			    }); 
+			}
+		};
+		
+		
+		
 		
 </script>

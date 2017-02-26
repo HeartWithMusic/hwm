@@ -22,10 +22,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
+import com.ruanko.hwm.bean.Collection;
+import com.ruanko.hwm.bean.DownloadRela;
 import com.ruanko.hwm.bean.Music;
 import com.ruanko.hwm.bean.MusicSingerRela;
 import com.ruanko.hwm.bean.MusicTypeRela;
 import com.ruanko.hwm.bean.Singer;
+import com.ruanko.hwm.service.ICollectionService;
+import com.ruanko.hwm.service.IDownloadService;
 import com.ruanko.hwm.service.IMusicService;
 import com.ruanko.hwm.service.IMusicSingerService;
 import com.ruanko.hwm.service.IMusicTypeRelationService;
@@ -51,6 +57,11 @@ public class MusicController {
 	@Resource
 	public IMusicTypeRelationService musicTypeService;
 
+	@Resource
+	public ICollectionService collectionService;
+	
+	@Resource
+	public IDownloadService downloadService;
 		
 	//每页项数
 	private Integer pageSize = 5;
@@ -472,6 +483,122 @@ public class MusicController {
 		return resultList3;
 	}
 	
+	/**
+	 * 添加到收藏列表
+	 * @param musicid
+	 * @param userid
+	 * @return
+	 */
+	@RequestMapping("/addCollection")
+	public @ResponseBody List<String> addCollection(String musicid, String userid) {
+		com.ruanko.hwm.bean.Collection coll = new Collection();
+		int userId = Integer.parseInt(userid);
+		int musicId = Integer.parseInt(musicid);
+		//System.out.println(userid + musicid);
+		String message_coll = "";
+		//判断用户是否已经收藏
+		boolean flag = true;
+		List<Collection> collList = collectionService.getCollectionByUserid(userId);
+		for(Collection c : collList) {
+			if(c.getMusicid() == musicId) {
+				flag = false;
+			}
+		}
+		
+		if(flag) {
+			coll.setMusicid(musicId);
+			coll.setUserid(userId);
+			message_coll += "收藏成功";
+			collectionService.addCollection(coll);
+		}else {
+			message_coll += "您已经收藏成功";
+		}
+		//System.out.println(message_coll);
+		List<String> resultList = new ArrayList<String>();
+ 		resultList.add(message_coll);
+		return resultList;
+	}
 	
-
+	/**
+	 * 添加列表到收藏列表
+	 * @param musicid
+	 * @param userid
+	 * @return
+	 */
+	@RequestMapping("/addListCollection")
+	public @ResponseBody List<String> addListCollection(String list) {
+		//解析json数据
+		String[] idList = list.split(",|\"|\\[|\\]");
+		List<Integer> idList1 = new ArrayList<Integer>();
+		for(String id : idList) {
+			if(!id.equals("")){
+				//System.out.println(id);
+				idList1.add(Integer.parseInt(id));
+			}
+		}
+		
+		//收藏
+		String message_coll = "";
+		int userid = idList1.get(idList1.size()-1);
+		List<Collection> collList = collectionService.getCollectionByUserid(userid);
+		for(int i=0;i<idList1.size()-1;i++) {
+			
+			//判断用户是否已经收藏
+			boolean flag = true;
+			
+			for(Collection c : collList) {
+				if(c.getMusicid() == idList1.get(i)) {
+					flag = false;
+				}
+			}
+			
+			if(flag) {
+				com.ruanko.hwm.bean.Collection coll = new Collection();
+				coll.setMusicid(idList1.get(i));
+				coll.setUserid(userid);
+				collectionService.addCollection(coll);
+			}
+		}
+		
+		message_coll += "收藏成功";
+		//System.out.println(message_coll);
+		List<String> resultList = new ArrayList<String>();
+ 		resultList.add(message_coll);
+		return resultList;
+	}
+	
+	
+	/**
+	 * 添加列表到收藏列表
+	 * @param musicid
+	 * @param userid
+	 * @return
+	 * @throws IOException 
+	 */
+	@RequestMapping("/download1")
+	public void download(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		String fileName = request.getParameter("filename");
+		//得到要下载的文件名
+		int i =  Upload_Download.downloadByFilename(fileName, request, response);
+		//System.out.println(fileName);
+	}
+	
+	@RequestMapping("/download")
+	public @ResponseBody List<String> download1(String userid, String musicid)  {
+		//得到要下载的文件名
+		String fileName = musicService.getMusicById(Integer.parseInt(musicid)).getMusicname(); 
+		//System.out.println(fileName);
+		List<String> resultList = new ArrayList<String>();
+		//System.out.println(fileName);
+		resultList.add(fileName);
+		//保存下载记录到数据库
+		DownloadRela download = new DownloadRela();
+		download.setUserid(Integer.parseInt(userid));
+		download.setMusicid(Integer.parseInt(musicid));
+		download.setDownloadtime(DateTime.getCurrentTime());
+		downloadService.addDownloadRela(download);
+		
+		return resultList;
+	}
+	
 }

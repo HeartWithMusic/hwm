@@ -18,5 +18,9 @@ public class DownloadServiceImpl implements IDownloadService {
 	public List<DownloadRela> getDownloadRelaByUserid(Integer userid) {
 		return downloadMapper.getDownloadByUserid(userid);
 	}
+
+	public void addDownloadRela(DownloadRela download) {
+		downloadMapper.insert(download);
+	}
 	
 }

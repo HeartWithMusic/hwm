@@ -44,6 +44,7 @@ import com.ruanko.hwm.service.ISingerTypeRelaService;
 import com.ruanko.hwm.service.ISingerTypeService;
 import com.ruanko.hwm.service.IUserService;
 import com.ruanko.hwm.service.IUserSingerService;
+import com.ruanko.hwm.utl.DateTime;
 import com.ruanko.hwm.utl.LrcAnalyze;
 import com.ruanko.hwm.utl.LrcAnalyze.LrcData;
 import com.ruanko.hwm.utl.MD5Util;
@@ -130,53 +131,36 @@ public class UserController {
 		
 		us.setAge(user.getAge());
 		us.setEmail(user.getEmail());
-		
 		us.setTel(user.getTel());
-		us.setUsername(user.getUsername());
+		
 		
 		
 		//System.out.println(image.getContentType());
 		//String s[] = lrc.getOriginalFilename().split("\\.");
 		// System.out.println(s.length);
-		if(image == null){
+		System.out.println(image.getSize());
+		if(image.getSize() == 0){
+			Upload_Download.updateFileName(us.getUsername(), user.getUsername(), request);
+		}else {
+			if (!image.getContentType().equals("image/jpeg")) {
+				model.addAttribute("message", "图片文件必须是jpg格式");
+				model.addAttribute(user);
+				return toPersonMsg(model,request,response);
+			} 
+
+			try {
+				Upload_Download.upload_img2(image, request, user.getUsername());
+			} catch (IOException e) {
+				System.out.println("文件上传失败");
+				e.printStackTrace();
+			}
+			
+			us.setUsername(user.getUsername());
 			us.setImg(user.getUsername() + ".jpg");
+			
 		}
-		// 判断上传的文件类型
-		if (!image.getContentType().equals("image/jpeg")) {
-			model.addAttribute("message", "图片文件必须是jpg格式");
-			model.addAttribute(user);
-			return toPersonMsg(model,request,response);
-		} 
-
-		try {
-			Upload_Download.upload_img2(image, request, user.getUsername());
-		} catch (IOException e) {
-			System.out.println("文件上传失败");
-			e.printStackTrace();
-		}
-
-		// 播放时长
-//		String time = Upload_Download
-//				.getMusicLength(new File(request.getSession().getServletContext().getRealPath("/WEB-INF/music/song")
-//						+ "/" + music.getMusicname() + ".mp3"));
-//		mus.setMusictime(time);
-
+		
 		userService.updateUser(us);
-
-//		// 更新至歌曲类别表中
-//		String radio = request.getParameter("radio");
-//		// System.out.println(musicId);
-//		// for(String s1 : checkbox) {
-//		// System.out.println(s1);
-//		// }
-//		updateSingerAndTypeToRela(radio, id);
-
-		// 更新至歌曲歌手关联表
-//		int singerId = Integer.parseInt(request.getParameter("select"));
-//		MusicSingerRela msr = new MusicSingerRela();
-//		msr.setMusicid(id);
-//		msr.setSingerid(singerId);
-//		musicSingerService.updateMS(msr);
 		
 		model.addAttribute(new User());
 		return toMyMusic(model, request);
@@ -343,6 +327,7 @@ public class UserController {
 	public String toHome(Model model, HttpServletRequest request) {
 		model.addAttribute("title", "心随乐动");
 		model.addAttribute("url", request.getRequestURL()+"1");
+		
 		model.addAttribute(new User());
 		return "showHome";
 	}
@@ -395,6 +380,28 @@ public class UserController {
 		//获取入驻歌手
 		List<Singer> singerList_all = singerService.getAllSinger();
 		List<Singer> singerList = singerList_all.subList(0, singerList_all.size() > 5 ? 5 : singerList_all.size()); 
+		
+		//获取收藏、关注、下载的数量
+		HttpSession session= request.getSession();
+		User currentUser=(User)session.getAttribute("user");
+		if(currentUser != null) {
+			List<Music> musicList_l= new ArrayList<Music>();//musicService.findMusicByUserId(currentUser.getId());
+			List<Singer> singerList_l = new ArrayList<Singer>();
+			//获取收藏歌单
+			List<com.ruanko.hwm.bean.Collection> collectionList = collectionService.getCollectionByUserid(currentUser.getId());
+			
+			//获取关注的歌手
+			List<UserSingerRela> userSinger = new ArrayList<UserSingerRela>();
+			userSinger = userSingerService.getUserSingerByUserid(currentUser.getId());
+			
+			//获取下载的歌曲信息
+			List<DownloadRela> downloadList = downloadService.getDownloadRelaByUserid(currentUser.getId());
+			
+			model.addAttribute("size1_l",collectionList.size());
+			model.addAttribute("size2_l", userSinger.size());
+			model.addAttribute("size3_l", downloadList.size());
+		}
+		
 		
 		model.addAttribute("singerList", singerList);
 		model.addAttribute("musicList1", musicList1);
@@ -788,7 +795,9 @@ public class UserController {
 				singerList.add(singerService.getSingerById(musicSingerService.getSingerByMusicId(m.getId()).getSingerid()));
 			}
 			model.addAttribute("musicList", musicList);
-			model.addAttribute("size1", (int)Math.ceil(musicList.size()*0.1/3));
+			//System.out.println(musicList.size());
+			//System.out.println((int)Math.ceil(musicList.size()*1.0/3));
+			model.addAttribute("size1", (int)Math.ceil(musicList.size()*1.0/3));
 			model.addAttribute("singerList", singerList);
 			
 			//获取关注的歌手
@@ -798,7 +807,7 @@ public class UserController {
 			for(UserSingerRela usr : userSinger) {
 				singerList1.add(singerService.getSingerById(usr.getSingerid()));
 			}
-			model.addAttribute("size2", (int)Math.ceil(singerList1.size()*0.1/3));
+			model.addAttribute("size2", (int)Math.ceil(singerList1.size()*1.0/3));
 			model.addAttribute("singerList1", singerList1);	
 			
 			//获取下载的歌曲信息
@@ -813,12 +822,10 @@ public class UserController {
 				singerList2.add(singerService.getSingerById(musicSingerService.getSingerByMusicId(m.getId()).getSingerid()));
 			}
 			model.addAttribute("musicList1", musicList1);
-			model.addAttribute("size3", (int)Math.ceil(musicList1.size()*0.1/3));
+			model.addAttribute("size3", (int)Math.ceil(musicList1.size()*1.0/3));
 			model.addAttribute("singerList2", singerList2);
 			model.addAttribute("downloadList", downloadList);
-			model.addAttribute("musicList", musicList);
-			model.addAttribute("size1", (int)Math.ceil(musicList.size()*0.1/3));
-			model.addAttribute("singerList", singerList);
+			
 			model.addAttribute("title", "我的音乐");
 			model.addAttribute(new User());
 			return "showMusicListOfUser";
@@ -834,19 +841,26 @@ public class UserController {
 			message = "用户名不存在";
 		}
 		else if(user1.getPassword().equalsIgnoreCase(MD5Util.getMD5Code(user.getPassword()))){
-			request.getSession().setAttribute("user", user1);			
+			request.getSession().setAttribute("user", user1);	
+			user1.setLastlogintime(DateTime.getCurrentTime());
+			user1.setLastloginip(request.getRemoteAddr());
+			userService.updateUser(user1);
+			
+			//model.addAttribute("url", request.getContextPath() + "/home/discover/" +"1");
 		}
 		else{
 			message = "密码错误";
 			
 		}
 		model.addAttribute(new User());
+		//model.addAttribute("login_state", 1);
 		request.getSession().setAttribute("message",message);	
-		return "showHome";
+		return toHome1(model,request);
 	}
 	@RequestMapping({"/clearSession/"})
 	public @ResponseBody void clearSession(HttpServletRequest request) {
 		request.getSession().setAttribute("message", "");
+		request.getSession().setAttribute("login_state", "");
 	}
 	@RequestMapping({"/getPassword/"})
 	public String toGetPwd(Model model, HttpServletRequest request){
@@ -900,6 +914,6 @@ public class UserController {
 	public String doLogOut(Model model, HttpServletRequest request){
 		request.getSession().setAttribute("user", null);
 		model.addAttribute(new User());
-		return "showHome";
+		return toHome1(model,request);
 	}
 }

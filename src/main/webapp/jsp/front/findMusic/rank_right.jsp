@@ -28,9 +28,9 @@
 			<div style = "width:380px;height:40px;">	<!--操作-->				
 								<button onclick="playList1()" style = "border:0;background-image: url('<%=request.getContextPath()%>/img/front/home/button3.png');width:66px;height:31px;text-align:right;color:white;float:left;">播放</button>
 								<button onclick="addPlayList1()" style = "border:0;background-image: url('<%=request.getContextPath()%>/img/front/home/button4.png');width:33px;height:31px;float:left;margin-top:-1px;" title="添加到播放列表"></button>
-								<button class="btn btn-default" style = "width:75px;height:29px;float:left;margin-left:10px;font-size:12px;margin-top:1px;"><i class="glyphicon glyphicon-folder-open" style="margin-right:5px;"></i>收藏</button>
-								<button class="btn btn-default" style = "width:75px;height:29px;float:left;margin-left:10px;font-size:12px;margin-top:1px;"><i class=" 	glyphicon glyphicon-download-alt" style="margin-right:5px;"></i>下载</button>
-								<a href = "#pinglun" class = "btn btn-default"style = "width:100px;height:29px;float:left;margin-left:10px;font-size:12px;margin-top:1px;"><i class="glyphicon glyphicon-comment" style="margin-right:5px;"></i>评论（10）</a>
+								<button onclick="addListColl2(${musicList})" class="btn btn-default" style = "width:75px;height:29px;float:left;margin-left:10px;font-size:12px;margin-top:1px;"><i class="glyphicon glyphicon-folder-open" style="margin-right:5px;"></i>收藏</button>
+								<!--  <button class="btn btn-default" style = "width:75px;height:29px;float:left;margin-left:10px;font-size:12px;margin-top:1px;"><i class=" 	glyphicon glyphicon-download-alt" style="margin-right:5px;"></i>下载</button>-->
+								<!--  <a href = "#pinglun" class = "btn btn-default"style = "width:100px;height:29px;float:left;margin-left:10px;font-size:12px;margin-top:1px;"><i class="glyphicon glyphicon-comment" style="margin-right:5px;"></i>评论（10）</a>-->
 							
 							</div>
 		</div>
@@ -73,8 +73,8 @@
 							<td>${music.musictime}</td>
 							<td style="font-size:12px;"><span id="rankList1_index1_${music.id}" onmouseover="change1_rankList1_index1(${music.id})" onmouseout="change2_rankList1_index1(${music.id})" onclick="addPlayList(${music.id})" title="添加到播放列表"><i id="coll"
 									class="glyphicon glyphicon-plus"  style="margin-left: 5px;"></i>&nbsp;&nbsp;</span>
-								<span id="rankList2_index1_${music.id}" onmouseover="change1_rankList2_index1(${music.id})" onmouseout="change2_rankList2_index1(${music.id})"  title="收藏"><i class="glyphicon glyphicon-heart"></i>&nbsp;&nbsp;</span>
-								<span id="rankList3_index1_${music.id}" onmouseover="change1_rankList3_index1(${music.id})" onmouseout="change2_rankList3_index1(${music.id})"  title="下载"><i class="glyphicon glyphicon-save"></i></span></td>
+								<span onclick="addColl2(${music.id})" id="rankList2_index1_${music.id}" onmouseover="change1_rankList2_index1(${music.id})" onmouseout="change2_rankList2_index1(${music.id})"  title="收藏"><i class="glyphicon glyphicon-heart"></i>&nbsp;&nbsp;</span>
+								<span onclick="download(${music.id})" id="rankList3_index1_${music.id}" onmouseover="change1_rankList3_index1(${music.id})" onmouseout="change2_rankList3_index1(${music.id})"  title="下载"><i class="glyphicon glyphicon-save"></i></span></td>
 							<c:forEach items="${singerList}" var="singer" varStatus="j">
 								<c:if test="${i.index==j.index}">
 									<td><a href="<%=request.getContextPath()%>/home/singer?id=${singer.id}">${singer.singername }</a></td>
@@ -182,5 +182,121 @@
 	function change2_rankList3_index1(id) {
 		$("#rankList3_index1_"+id).css("color","black");
 	}
+	function addColl2(id) {
+		addCollection(id);
+	}
+	function addListColl2(id) {
+		addListCollection(id);
+	}
+	function addCollection(id) {
+		//alert(id);
+		//alert("${sessionScope.user == null}");
+		var user = "${sessionScope.user}";
+		var userid = "${sessionScope.user.id}";
+		if(user == "") {
+			$("#myModal").modal('show');
+		}else {
+			//alert(id);
+			$.ajax({  
+		        type : "post",  
+		        url : $('#contextPath').val() + "/music/addCollection",  
+		        dataType:"json",
+		        cache : false,  
+		        data : {  
+		            userid : userid,
+		            musicid : id
+		        },  
+		        async : false,  
+		        error : function() {  
+		        	 alert("网络异常！");  
+		        },  
+		        success : function(data) { 
+		        	alert(data[0]);
+		        }  
+		    }); 
+		}
+	};
+	
+	function addListCollection(list) {
+		//alert(id);
+		//alert("${sessionScope.user == null}");
+		
+		//alert(list.length);
+		//alert(list[1]);
+		//alert(typeof(list));
+		var list1 = new Array();
+		//alert(typeof(list1));
+		var i=0;
+		for(;i<list.length;i++) {
+			list1[i] = "" + list[i];
+		}
+		//alert(list1.length);
+
+		
+		
+		var user = "${sessionScope.user}";
+		var userid = "${sessionScope.user.id}";
+		
+		list1[i] =  userid;
+		var params = {};  
+		params = JSON.stringify(list1); 
+		//alert(params);
+		if(user == "") {
+			$("#myModal").modal('show');
+		}else {
+			//alert(id);
+			$.ajax({  
+		        type : "post",  
+		        url : $('#contextPath').val() + "/music/addListCollection",  
+		        dataType:"json",
+		        cache : false,  
+		        data : {list :params},
+		        async : false,  
+		        error : function() {  
+		        	 alert("网络异常！");  
+		        },  
+		        success : function(data) { 
+		        	alert(data[0]);
+		        }  
+		    }); 
+		}
+	};
+	// 文件下载
+	function download1(url, method,filename){
+	    jQuery('<form action="'+url+'" method="'+(method||'post')+'">' +  // action请求路径及推送方法
+	                '<input type="text" name="filename" value="'+filename+'"/>' + // 文件名称
+	            '</form>')
+	    .appendTo('body').submit().remove();
+	};
+	function download(id) {
+		//alert(id);
+		//alert("${sessionScope.user == null}");
+		var user = "${sessionScope.user}";
+		var userid = "${sessionScope.user.id}";
+		if(user == "") {
+			$("#myModal").modal('show');
+		}else {
+			//alert(id);
+			$.ajax({  
+		        type : "post",  
+		        url : $('#contextPath').val() + "/music/download",  
+		        dataType:"json",
+		        cache : false,  
+		        data : {  
+		            userid : userid,
+		            musicid : id
+		        },  
+		        async : false,  
+		        error : function() {  
+		        	 alert("网络异常！");  
+		        },  
+		        success : function(data) { 
+	                 download1($('#contextPath').val() + "/music/download1", 'post', data[0]); // 下载文件
+		        }  
+		    }); 
+		}
+	};
+	
+	
 	
 </script>

@@ -5,5 +5,7 @@ import java.util.List;
 import com.ruanko.hwm.bean.Collection;
 
 public interface ICollectionService {
-	List<Collection> getCollectionByUserid(Integer userid); 
+	List<Collection> getCollectionByUserid(Integer userid);
+	
+	void addCollection(Collection coll);
 }

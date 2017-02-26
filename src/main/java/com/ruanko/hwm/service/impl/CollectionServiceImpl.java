@@ -18,5 +18,9 @@ public class CollectionServiceImpl implements ICollectionService {
 	public List<Collection> getCollectionByUserid(Integer userid) {
 		return collectionMapper.getCollectionByUserid(userid);
 	}
+
+	public void addCollection(Collection coll) {
+		collectionMapper.insert(coll);
+	}
 	
 }

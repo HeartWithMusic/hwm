@@ -6,4 +6,6 @@ import com.ruanko.hwm.bean.UserSingerRela;
 
 public interface IUserSingerService {
 	List<UserSingerRela> getUserSingerByUserid(Integer userid);
+	
+	void addUserSinger(UserSingerRela usr);
 }

@@ -33,10 +33,10 @@
 			for (var i = 0;i < lyric.length; i++) {
 				if (music.currentTime > lyric[i][0] - 1 ) {
 					//var k = 30;
-					console.info($('.lyric-content').css('top'));
+					//console.info($('.lyric-content').css('top'));
 					//console.info(lyric[i][0] + "  " + music.currentTime);
 					if(parseInt($('.lyric-content').css('top')) < 80) {
-						console.info("aaa");
+						//console.info("aaa");
 						k = 25;
 					}
 					$('p[name=lyric]').css('color', '#fff'); 
@@ -396,7 +396,7 @@
 		   	         if(flag) {
 		   	        	Player.data.push(newData);
 		   	        	var mhtml = Player.$mList.html();
-		                mhtml += '<li class="0" id="' + data[0].id + '" onmouseover="change_bg1(' + data[0].id +')" onmouseout="change_bg2(' + data[0].id + ')" style="padding-top:5px;padding-bottom:5px;font-size:14px;"><i class="glyphicon glyphicon-play"  style="color:black;float:left;margin-top:4px;margin-left:10px;"></i><span style="width:266px;float:left;margin-left:40px;" onclick="click_play(' + data[0].id + ')"><a index="' + data[0].id + '">' + data[0].musicname  + '</a></span><span style="margin-left:10px;float:left;width:100px;"><a href="#" style="margin-left:10px;" title="收藏"><i class="glyphicon glyphicon-heart"></i></a><a href="#" style="margin-left:10px;" title="下载"><i class="glyphicon glyphicon-save"></i></a><a onclick="deleteSongById(' + data[0].id   + ')" href="#" style="margin-left:10px;" title="删除"><i class="glyphicon glyphicon-trash"></i></a></span>';
+		                mhtml += '<li class="0" id="' + data[0].id + '" onmouseover="change_bg1(' + data[0].id +')" onmouseout="change_bg2(' + data[0].id + ')" style="padding-top:5px;padding-bottom:5px;font-size:14px;"><i class="glyphicon glyphicon-play"  style="color:black;float:left;margin-top:4px;margin-left:10px;"></i><span style="width:266px;float:left;margin-left:40px;" onclick="click_play(' + data[0].id + ')"><a index="' + data[0].id + '">' + data[0].musicname  + '</a></span><span style="margin-left:10px;float:left;width:100px;"><a href="#" onclick="addCollection(' + data[0].id + ')"  style="margin-left:10px;" title="收藏"><i class="glyphicon glyphicon-heart"></i></a><a href="#" onclick="download12(' + data[0].id + ')" style="margin-left:10px;" title="下载"><i class="glyphicon glyphicon-save"></i></a><a onclick="deleteSongById(' + data[0].id   + ')" href="#" style="margin-left:10px;" title="删除"><i class="glyphicon glyphicon-trash"></i></a></span>';
 		                mhtml += '<span style="width:100px;float:left;"><a href=' + path1 + '/home/singer?id=' + data[1].id + '>' + data[1].singername + '</a></span><span style="color:#ccc;">' + data[0].musictime + '</span>';
 		                mhtml += '</li>'
 		                Player.$mList.html(mhtml); 

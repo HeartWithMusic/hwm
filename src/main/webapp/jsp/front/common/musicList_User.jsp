@@ -106,8 +106,13 @@
 				<div id="user_whole_padding">
 					<div id="user_header">
 						<div id="user_header_img">
-							<img style="border:2px solid #d3d3d3;border-radius:5px;padding:3px;" src="http://p1.music.126.net/VnZiScyynLG7atLIZ2YPkw==/18686200114669622.jpg?param=200y200"></a>
-						</div>
+							<c:if test="${sessionScope.user.img == '0'}">
+								<a ><img style="border:2px solid #d3d3d3;border-radius:5px;padding:3px;" src="<%=request.getContextPath()%>/img/front/home/default_user.jpg"></a>
+							</c:if>
+							<c:if test="${sessionScope.user.img != '0'}">
+								<a ><img style="width: 200px;height: 200px;border:2px solid #d3d3d3;border-radius:5px;padding:3px;" src="<%=request.getContextPath()%>/static/user/${sessionScope.user.img}"></a>			
+							</c:if>
+							</div>
 						<div id="user_header_info">
 							<div id="user_header_info1">
 								<div style="float:left;">
@@ -150,7 +155,7 @@
 							</div>
 							<div id="user_header_info3">
 								<span>最近一次登录时间:</span>
-								<span>2012年12月11日 12时12分12秒</span>
+								<span>${sessionScope.user.lastlogintime}</span>
 							</div>
 						</div>
 					</div>
@@ -168,12 +173,12 @@
 											<img width="60px"; height="60px"; src="<%=request.getContextPath()%>/static/music/img/${music.img}"></a>
 										</div>
 										<div style="float:left;margin-left:0px;padding:5px;">
-											<div style="width: 150px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">
+											<div title="${music.musicname }" style="width: 150px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">
 												歌名:<a href="<%=request.getContextPath()%>/home/music?id=${music.id}">${music.musicname }</a>
 											</div>
 											<c:forEach items="${singerList}" var="singer" varStatus="i">
 												<c:if test="${i.index == j.index }">
-													<div style="width: 150px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">
+													<div title="${singer.singername }" style="width: 150px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">
 														歌手:<a href="<%=request.getContextPath()%>/home/singer?id=${singer.id}">${singer.singername }</a>
 													</div>
 												</c:if>
@@ -207,10 +212,10 @@
 											<img width="60px"; height="60px"; src="<%=request.getContextPath()%>/static/singer/${singer.img}"></a>
 										</div>
 										<div style="float:left;margin-left:20px;padding:10px;">
-											<div>
+											<div title="${singer.singername }">
 												歌手:<a href="<%=request.getContextPath()%>/home/singer?id=${singer.id}">${singer.singername }</a>
 											</div>
-											<div style="width: 150px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">
+											<div title="${singer.introduction}" style="width: 150px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">
 												简介:${singer.introduction}
 											</div>
 										</div>
@@ -235,19 +240,19 @@
 												<img width="60px"; height="60px"; src="<%=request.getContextPath()%>/static/music/img/${music.img}"></a>
 											</div>
 											<div style="float:left;margin-left:0px;padding:10px;">
-												<div>
+												<div title="${music.musicname }" style="width: 150px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">
 													歌名:<a href="<%=request.getContextPath()%>/home/music?id=${music.id}">${music.musicname }</a>
 												</div>
 												<c:forEach items="${singerList2}" var="singer" varStatus="i">
 													<c:if test="${i.index == j.index }">
-														<div >
+														<div title="${singer.singername }" style="width: 150px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">
 															歌手:<a href="<%=request.getContextPath()%>/home/singer?id=${singer.id}">${singer.singername }</a>
 														</div>
 													</c:if>
 												</c:forEach>
 												<c:forEach items="${downloadList}" var="download" varStatus="k">
 													<c:if test="${download.musicid == music.id}">
-														<div style="font-size:10px;">
+														<div title="${download.downloadtime}" style="width: 188px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;font-size:10px;">
 															下载时间:${download.downloadtime}
 														</div>
 													</c:if>

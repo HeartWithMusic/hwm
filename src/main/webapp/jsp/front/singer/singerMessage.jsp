@@ -32,8 +32,8 @@
 								<td style="font-size:12px;">${music.musictime}</td>
 								<td style="font-size:15px;" ><span id="singerList1_index1_${music.id}" onmouseover="change1_singerList1_index1(${music.id})" onmouseout="change2_singerList1_index1(${music.id})" onclick="addPlayList(${music.id})" title="添加到播放列表"><i id="coll"
 										class="glyphicon glyphicon-plus" style="margin-left: 5px;"></i>&nbsp;&nbsp;</span>
-									<span  id="singerList2_index1_${music.id}" onmouseover="change1_singerList2_index1(${music.id})" onmouseout="change2_singerList2_index1(${music.id})" title="收藏歌曲"><i class="glyphicon glyphicon-heart"></i>&nbsp;&nbsp;</span>
-									<span  id="singerList3_index1_${music.id}" onmouseover="change1_singerList3_index1(${music.id})" onmouseout="change2_singerList3_index1(${music.id})" title="下载歌曲"><i class="glyphicon glyphicon-save"></i></span></td>
+									<span onclick="addCollection(${music.id})"  id="singerList2_index1_${music.id}" onmouseover="change1_singerList2_index1(${music.id})" onmouseout="change2_singerList2_index1(${music.id})" title="收藏歌曲"><i class="glyphicon glyphicon-heart"></i>&nbsp;&nbsp;</span>
+									<span onclick="download(${music.id})"  id="singerList3_index1_${music.id}" onmouseover="change1_singerList3_index1(${music.id})" onmouseout="change2_singerList3_index1(${music.id})" title="下载歌曲"><i class="glyphicon glyphicon-save"></i></span></td>
 								<td style="font-size:12px;" ><a  title="播放次数" ><i class="glyphicon glyphicon-headphones" style="margin-right:5px;"></i>${ music.playcounts}</a></td>
 
 							</tr>
@@ -116,7 +116,70 @@
 	}
 	
 	
+	function addCollection(id) {
+		//alert(id);
+		//alert("${sessionScope.user == null}");
+		var user = "${sessionScope.user}";
+		var userid = "${sessionScope.user.id}";
+		if(user == "") {
+			$("#myModal").modal('show');
+		}else {
+			//alert(id);
+			$.ajax({  
+		        type : "post",  
+		        url : $('#contextPath').val() + "/music/addCollection",  
+		        dataType:"json",
+		        cache : false,  
+		        data : {  
+		            userid : userid,
+		            musicid : id
+		        },  
+		        async : false,  
+		        error : function() {  
+		        	 alert("网络异常！");  
+		        },  
+		        success : function(data) { 
+		        	alert(data[0]);
+		        }  
+		    }); 
+		}
+	};
 	
+	// 文件下载
+	function download1(url, method,filename){
+	    jQuery('<form action="'+url+'" method="'+(method||'post')+'">' +  // action请求路径及推送方法
+	                '<input type="text" name="filename" value="'+filename+'"/>' + // 文件名称
+	            '</form>')
+	    .appendTo('body').submit().remove();
+	};
+	function download(id) {
+		//alert(id);
+		//alert("${sessionScope.user == null}");
+		var user = "${sessionScope.user}";
+		var userid = "${sessionScope.user.id}";
+		if(user == "") {
+			$("#myModal").modal('show');
+		}else {
+			//alert(id);
+			$.ajax({  
+		        type : "post",  
+		        url : $('#contextPath').val() + "/music/download",  
+		        dataType:"json",
+		        cache : false,  
+		        data : {  
+		            userid : userid,
+		            musicid : id
+		        },  
+		        async : false,  
+		        error : function() {  
+		        	 alert("网络异常！");  
+		        },  
+		        success : function(data) { 
+	                 download1($('#contextPath').val() + "/music/download1", 'post', data[0]); // 下载文件
+		        }  
+		    }); 
+		}
+	};
 	
 	
 </script>

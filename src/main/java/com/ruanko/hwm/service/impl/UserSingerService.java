@@ -18,5 +18,9 @@ public class UserSingerService implements IUserSingerService {
 	public List<UserSingerRela> getUserSingerByUserid(Integer userid) {
 		return userSingerRelaMapper.getUserSingerRelaByUserid(userid);
 	}
+
+	public void addUserSinger(UserSingerRela usr) {
+		userSingerRelaMapper.insert(usr);
+	}
 	
 }

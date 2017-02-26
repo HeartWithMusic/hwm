@@ -20,14 +20,17 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.ruanko.hwm.bean.Collection;
 import com.ruanko.hwm.bean.Music;
 import com.ruanko.hwm.bean.MusicSingerRela;
 import com.ruanko.hwm.bean.MusicTypeRela;
 import com.ruanko.hwm.bean.Singer;
 import com.ruanko.hwm.bean.SingerTypeRela;
+import com.ruanko.hwm.bean.UserSingerRela;
 import com.ruanko.hwm.service.IMusicService;
 import com.ruanko.hwm.service.ISingerService;
 import com.ruanko.hwm.service.ISingerTypeRelaService;
+import com.ruanko.hwm.service.IUserSingerService;
 import com.ruanko.hwm.utl.DateTime;
 import com.ruanko.hwm.utl.Upload_Download;
 
@@ -40,6 +43,9 @@ public class SingerController {
 	public ISingerService singerService;	
 	@Resource
 	public ISingerTypeRelaService singerTypeRelaService;
+	@Resource
+	public IUserSingerService userSingerService;
+	
 	
 	//每页项数
 	private Integer pageSize = 5;
@@ -325,6 +331,42 @@ public class SingerController {
 			resultList = singerList.subList((pageIndex1 - 1) * pageSize1, totalPage1);
 		}
 		
+		return resultList;
+	}
+	
+	/**
+	 * 添加到歌手关注表
+	 * @param musicid
+	 * @param userid
+	 * @return
+	 */
+	@RequestMapping("/addUserSinger")
+	public @ResponseBody List<String> addUserSinger(String singerid, String userid) {
+		UserSingerRela usr = new UserSingerRela();
+		int userId = Integer.parseInt(userid);
+		int singerId = Integer.parseInt(singerid);
+		//System.out.println(userid + musicid);
+		String message_coll = "";
+		//判断用户是否已经收藏
+		boolean flag = true;
+		List<UserSingerRela> usrList = userSingerService.getUserSingerByUserid(userId);
+		for(UserSingerRela u : usrList) {
+			if(u.getSingerid() == singerId) {
+				flag = false;
+			}
+		}
+		
+		if(flag) {
+			usr.setSingerid(singerId);
+			usr.setUserid(userId);
+			message_coll += "收藏成功";
+			userSingerService.addUserSinger(usr);
+		}else {
+			message_coll += "您已经收藏成功";
+		}
+		//System.out.println(message_coll);
+		List<String> resultList = new ArrayList<String>();
+ 		resultList.add(message_coll);
 		return resultList;
 	}
 }
