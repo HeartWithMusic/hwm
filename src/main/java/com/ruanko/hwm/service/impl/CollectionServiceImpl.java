@@ -22,5 +22,9 @@ public class CollectionServiceImpl implements ICollectionService {
 	public void addCollection(Collection coll) {
 		collectionMapper.insert(coll);
 	}
+
+	public List<Collection> getAllCollection() {
+		return collectionMapper.selectAll();
+	}
 	
 }

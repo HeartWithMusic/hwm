@@ -8,4 +8,8 @@ public interface IDownloadService {
 	List<DownloadRela> getDownloadRelaByUserid(Integer userid); 
 	
 	void addDownloadRela(DownloadRela download);
+	
+	DownloadRela getDownloadById(Integer id);
+	
+	void updateDownloadRela(DownloadRela download);
 }

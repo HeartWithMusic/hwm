@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+     <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %>  
 <%@ taglib uri="http://www.springframework.org/tags" prefix="s" %> 
@@ -28,7 +29,7 @@
 								<p style = "width:50px;">歌手：</p>  <a href = "<%=request.getContextPath()%>/home/singer?id=${singer.id}" style = "color:blue;float:left;margin-top:-27px;margin-left:40px;">${singer.singername }</a>
 								<div>
 									<p style = "width:70px;">所属分类：</p>  
-									<div style="position:relative;left:70px;bottom:27px;">
+									<div style="position:relative;left:70px;bottom:27px;width:350px;">
 										<c:forEach items="${musicType}" var="musicType">
 											<span><a href = "<%=request.getContextPath()%>/home/discover/musicList?cat=${musicType.id}" style="color:blue;">${musicType.typename}</a></span>
 										</c:forEach>
@@ -37,12 +38,12 @@
 								
 							</div>
 							
-							<div style = "width:380px;height:40px;">	<!--操作-->				
+							<div style = "width:380px;height:40px;margin-top:20px;">	<!--操作-->				
 								<button onclick="playSongById(${music.id})" style = "border:0;background-image: url('<%=request.getContextPath()%>/img/front/home/button3.png');width:66px;height:31px;text-align:right;color:white;float:left;">播放</button>
 								<button onclick="addPlayList(${music.id})" style = "border:0;background-image: url('<%=request.getContextPath()%>/img/front/home/button4.png');width:33px;height:31px;float:left;margin-top:-1px;" title="添加到播放列表"></button>
 								<button onclick="addCollection(${music.id})" class="btn btn-default" style = "width:75px;height:29px;float:left;margin-left:10px;font-size:12px;margin-top:1px;"><i class="glyphicon glyphicon-folder-open" style="margin-right:5px;"></i>收藏</button>
 								<button onclick="download(${music.id})" class="btn btn-default" style = "width:75px;height:29px;float:left;margin-left:10px;font-size:12px;margin-top:1px;"><i class=" 	glyphicon glyphicon-download-alt" style="margin-right:5px;"></i>下载</button>
-								<a href = "#pinglun" class = "btn btn-default"style = "width:100px;height:29px;float:left;margin-left:10px;font-size:12px;margin-top:1px;"><i class="glyphicon glyphicon-comment" style="margin-right:5px;"></i>评论（10）</a>
+								<a href = "#pinglun" class = "btn btn-default"style = "width:100px;height:29px;float:left;margin-left:10px;font-size:12px;margin-top:1px;"><i class="glyphicon glyphicon-comment" style="margin-right:5px;"></i>评论（${fn:length(commentList) }）</a>
 							
 							</div>
 							<div style="margin-top:17px;font-size: 12px;height:auto;float:left;clear:both;"> 	<!--歌词-->
@@ -64,7 +65,12 @@
 										<p> 歌曲评论</p>
 									</div>
 									<div style = "margin-top:30px;width:580px;margin-left:-200px;height:120px;">
-										<img src = "<%=request.getContextPath()%>/img/front/home/touxiang.png" style = "width:50px;height:50px;float:left;" ></img>
+										<c:if test="${sessionScope.user == null}">
+											<img src = "<%=request.getContextPath()%>/img/front/home/touxiang.png" style = "width:50px;height:50px;float:left;" ></img>
+										</c:if>
+										<c:if test="${sessionScope.user != null}">
+											<img src = "<%=request.getContextPath()%>/static/user/${sessionScope.user.img}" style = "width:50px;height:50px;float:left;" ></img>
+										</c:if>
 										<textarea id="comment_info" onclick="judgeLogin()" placeholder="评论" style = "margin-left:20px;width:510px;resize:none;border:1px solid #d3d3d3;"></textarea>
 										<button onclick="pinglun(${music.id})" class="btn btn-primary" style = "margin-bottom:-70px;margin-left:-60px;">评论</button>
 										
@@ -83,16 +89,17 @@
 																<img src = "<%=request.getContextPath()%>/static/user/${user.img}" style = "width:50px;height:50px;float:left;margin-top:10px;"></img>
 															</c:otherwise>
 														</c:choose>
-														<a href = "#" style = "margin-left:10px;float:left;margin-top:15px;">用户名:${user.username }</a>
+														<a href = "#" style = "margin-left:10px;float:left;margin-top:15px;color:#0c73c2;">${user.username }</a>
 													</c:if>
 												</c:forEach>
 												
 												<p style = "margin-top:16px;float:right;width:460px;">${comment.comment }</p>	
 												 <a href="#" style = "float:right;clear:both;margin-top:-15px;">
 												
-			         								 <span class="glyphicon glyphicon-thumbs-up">  <p style = "display:inline;">${comment.love}</p></span>
-			         								
+			         								 <span class="glyphicon glyphicon-thumbs-up" style="margin-right:10px;">  <p style = "display:inline;">${comment.love}</p></span>
+			         								 
 			        							 </a>
+			        							 <span style="float: right;margin: 10px;font-size:12px;"><fmt:formatDate value="${comment.commenttime}" pattern="yyyy年MM月dd日 HH:mm:ss"/></span>
 											</div>
 										</c:forEach>
 									</div>
@@ -201,7 +208,7 @@
 			if(comment == "") {
 				alert("评论不能为空");
 			}else {
-				alert(comment);
+				//alert(comment);
 				$.ajax({  
 				        type : "post",  
 				        url : $('#path24').val() + "/home/comment",  
@@ -217,9 +224,27 @@
 				        	 alert("网络异常！");  
 				        },  
 				        success : function(data) { 
+				        	 function getMyDate(str){  
+				                 var oDate = new Date(str),  
+				                 oYear = oDate.getFullYear(),  
+				                 oMonth = oDate.getMonth()+1,  
+				                 oDay = oDate.getDate(),  
+				                 oHour = oDate.getHours(),  
+				                 oMin = oDate.getMinutes(),  
+				                 oSen = oDate.getSeconds(),  
+				                 oTime = oYear +'年'+ getzf(oMonth) +'月'+ getzf(oDay) +'日  '+ getzf(oHour) +'时'+ getzf(oMin) +'分'+getzf(oSen)+'秒';//最后拼接时间  
+				                 return oTime;  
+				             };  
+				             //补0操作  
+				             function getzf(num){  
+				                 if(parseInt(num) < 10){  
+				                     num = '0'+num;  
+				                 }  
+				                 return num;  
+				             };  
 				        	var html=""
 				        	if(data[2] == "success") {
-				        		alert(data[2]);
+				        		//alert(data[2]);
 				        		for(var i=0;i<data[0].length;i++) {
 				        			html+='<div style = "width:580px;height:140px;margin-left:-200px;margin-bottom:50px;border-bottom:1px dotted #ccc;">';
 				        			if(data[1][i].img == '0'){
@@ -231,7 +256,7 @@
 									html+='<p style = "margin-top:16px;float:right;width:460px;">' + data[0][i].comment + '</p>';	
 									html+='<a href="#" style = "float:right;clear:both;margin-top:-15px;">';
 									html+='<span class="glyphicon glyphicon-thumbs-up">  <p style = "display:inline;">' + data[0][i].love + '</p></span> </a>';
-									html+='<span>' + data[0][i].commentTime + '</span>';
+									html+='<span style="float: right;margin: 10px;"> 评论时间 : ' + getMyDate(data[0][i].commenttime) + '</span>';
 									html+='</div>';
 				        		}
 				        	}

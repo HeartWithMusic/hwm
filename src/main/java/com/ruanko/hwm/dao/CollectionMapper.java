@@ -18,4 +18,6 @@ public interface CollectionMapper {
     int updateByPrimaryKey(Collection record);
     
     List<Collection> getCollectionByUserid(Integer userid);
+    
+    List<Collection> selectAll();
 }

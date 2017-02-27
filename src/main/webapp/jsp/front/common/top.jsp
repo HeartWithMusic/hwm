@@ -186,8 +186,8 @@
 						<c:out value="${message}"></c:out></div>
 					</div>
 						<input type="hidden" value="<%=request.getContextPath()%>" id="contextPath"/>
-					
-					
+						<input type="hidden" value="${sessionoScope.user }" id="sessionuser"/>
+						<input type="hidden" value="${sessionScope.user.id }" id="sessionuserid"/>
 					
 	
 			
@@ -228,7 +228,9 @@
 		    }); 
 		}
 		
-		
+		function showModal() {
+			$('#myModal').modal('show');
+		}
 		
 	</script>
 	  

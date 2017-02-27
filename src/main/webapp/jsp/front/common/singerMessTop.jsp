@@ -35,4 +35,8 @@
 		</div>
 	</div>
 </body>
+<script type="text/javascript">
+	var url = window.location.href;
+	window.parent.ifurl(url);
+</script>
 </html>

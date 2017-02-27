@@ -110,13 +110,13 @@
 								<a ><img style="border:2px solid #d3d3d3;border-radius:5px;padding:3px;" src="<%=request.getContextPath()%>/img/front/home/default_user.jpg"></a>
 							</c:if>
 							<c:if test="${sessionScope.user.img != '0'}">
-								<a ><img style="width: 200px;height: 200px;border:2px solid #d3d3d3;border-radius:5px;padding:3px;" src="<%=request.getContextPath()%>/static/user/${sessionScope.user.img}"></a>			
+								<a ><img style="width: 200px;height: 200px;border:2px solid #d3d3d3;border-radius:5px;padding:3px;" src="<%=request.getContextPath()%>/static/user/${user1.img}"></a>			
 							</c:if>
 							</div>
 						<div id="user_header_info">
 							<div id="user_header_info1">
 								<div style="float:left;">
-									<h2 style="margin:0;padding:0;display:inline;float:left;">${sessionScope.user.username}</h2>
+									<h2 style="margin:0;padding:0;display:inline;float:left;">${user1.username}</h2>
 									<span style="font-size: 15px;color: gold;font-style: italic;border: 2px solid #e03a24;border-radius: 12px;padding-left: 5px;padding-right: 5px;font-weight: bolder;float: left;margin: 5px 10px;">Lv.${sessionScope.user.level}</span>
 								</div>
 								<div style="float:right;margin-right:10px;">
@@ -146,8 +146,8 @@
 										</a>
 									</li>
 									<li>
-										<a>
-											<strong>${sessionScope.user.playcount}</strong>
+										<a href="#playRecord">
+											<strong>${user1.playcount}</strong>
 											<span>播放次数</span>
 										</a>
 									</li>
@@ -155,7 +155,7 @@
 							</div>
 							<div id="user_header_info3">
 								<span>最近一次登录时间:</span>
-								<span>${sessionScope.user.lastlogintime}</span>
+								<span><fmt:formatDate value="${sessionScope.user.lastlogintime}" pattern="yyyy年MM月dd日 HH时mm分ss秒"/></span>
 							</div>
 						</div>
 					</div>
@@ -252,8 +252,60 @@
 												</c:forEach>
 												<c:forEach items="${downloadList}" var="download" varStatus="k">
 													<c:if test="${download.musicid == music.id}">
+														<div title='<fmt:formatDate value="${download.downloadtime}" pattern="yyyy年MM月dd日 HH时mm分ss秒"/>' style="width: 188px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;font-size:10px;">
+															最近一次下载时间:<fmt:formatDate value="${download.downloadtime}" pattern="yyyy年MM月dd日 HH时mm分ss秒"/>
+														</div>
 														<div title="${download.downloadtime}" style="width: 188px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;font-size:10px;">
-															下载时间:${download.downloadtime}
+															下载次数:${download.counts}
+														</div>
+													</c:if>
+												</c:forEach>
+												
+											</div>
+											<div style="float: right;">
+											<span  onclick="playSongById(${music.id})"><i title="播放" id="mymusic_index3_${music.id}" onmouseover="change1_mymusic_index3(${music.id})" onmouseout="change2_mymusic_index3(${music.id})" class="glyphicon glyphicon-play-circle" style="color:black;font-size:20px;"></i></span>
+													
+													<span id="mymusic_index4_${music.id}" onmouseover="change1_mymusic_index4(${music.id})" onmouseout="change2_mymusic_index4(${music.id})" style="text-decoration:none;" href="#" onclick="addPlayList(${music.id})" title="添加到播放列表"><i id="coll"
+												class="glyphicon glyphicon-plus"  style="margin-left: 5px;font-size:20px;"></i>&nbsp;&nbsp;</span>
+											
+										</div>
+										</li>
+									</c:forEach>
+								</ul>
+							</c:forEach>
+						</div>
+					</div>
+					<div id="user_playRecordList">
+						<div id="user_playRecordList_header" style="border-bottom: 2px solid #c20c0c;overflow:hidden;margin-bottom:10px;">
+							<a id="playRecord"></a>
+							<h4><i class="glyphicon glyphicon-calendar" style="float:left;margin-left:3px"></i><span style="margin-left:5px;">播放记录</span></h4>
+						</div>
+						<div id="user_playRecordist_info">
+							<c:forEach begin="0" end="${size_record}" var="i">
+								<ul  style="list-style:none;padding-left:0px;overflow:hidden;margin-left:10px;">
+									<c:forEach items="${musicRecordList}" var="music" begin="${i*3}" end="${i*3 + 2}" varStatus="j">
+										<li style="float:left;padding:10px;width:290px;margin:5px;border:1px solid #ccc;">
+											<div style="float:left;">
+												<img width="60px"; height="60px"; src="<%=request.getContextPath()%>/static/music/img/${music.img}"></a>
+											</div>
+											<div style="float:left;margin-left:0px;padding:10px;">
+												<div title="${music.musicname }" style="width: 150px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">
+													歌名:<a href="<%=request.getContextPath()%>/home/music?id=${music.id}">${music.musicname }</a>
+												</div>
+												<c:forEach items="${singerRecordList}" var="singer" varStatus="i">
+													<c:if test="${i.index == j.index }">
+														<div title="${singer.singername }" style="width: 150px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">
+															歌手:<a href="<%=request.getContextPath()%>/home/singer?id=${singer.id}">${singer.singername }</a>
+														</div>
+													</c:if>
+												</c:forEach>
+												<c:forEach items="${playRecordList}" var="playRecord" varStatus="k">
+													<c:if test="${playRecord.musicid == music.id}">
+														<div title='<fmt:formatDate value="${playRecord.playtime}" pattern="yyyy年MM月dd日 HH时mm分ss秒"/>' style="width: 188px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;font-size:10px;">
+															最近一次播放时间:<fmt:formatDate value="${playRecord.playtime}" pattern="yyyy年MM月dd日 HH时mm分ss秒"/>
+														</div>
+														<div title="${download.downloadtime}" style="width: 188px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;font-size:10px;">
+															播放次数:${playRecord.playcounts}
 														</div>
 													</c:if>
 												</c:forEach>

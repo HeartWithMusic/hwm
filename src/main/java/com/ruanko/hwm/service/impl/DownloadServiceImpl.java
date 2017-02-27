@@ -22,5 +22,13 @@ public class DownloadServiceImpl implements IDownloadService {
 	public void addDownloadRela(DownloadRela download) {
 		downloadMapper.insert(download);
 	}
+
+	public DownloadRela getDownloadById(Integer id) {
+		return downloadMapper.selectByPrimaryKey(id);
+	}
+
+	public void updateDownloadRela(DownloadRela download) {
+		downloadMapper.updateByPrimaryKey(download);
+	}
 	
 }

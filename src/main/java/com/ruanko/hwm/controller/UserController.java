@@ -5,8 +5,11 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -29,6 +32,7 @@ import com.ruanko.hwm.bean.Music;
 import com.ruanko.hwm.bean.MusicSingerRela;
 import com.ruanko.hwm.bean.MusicType;
 import com.ruanko.hwm.bean.MusicTypeRela;
+import com.ruanko.hwm.bean.PlayRecord;
 import com.ruanko.hwm.bean.Singer;
 import com.ruanko.hwm.bean.SingerType;
 import com.ruanko.hwm.bean.SingerTypeRela;
@@ -41,6 +45,7 @@ import com.ruanko.hwm.service.IMusicService;
 import com.ruanko.hwm.service.IMusicSingerService;
 import com.ruanko.hwm.service.IMusicTypeRelationService;
 import com.ruanko.hwm.service.IMusicTypeService;
+import com.ruanko.hwm.service.IPlayRecordService;
 import com.ruanko.hwm.service.ISingerService;
 import com.ruanko.hwm.service.ISingerTypeRelaService;
 import com.ruanko.hwm.service.ISingerTypeService;
@@ -80,6 +85,8 @@ public class UserController {
 	private IDownloadService downloadService;
 	@Resource
 	private ICommentService commentService;
+	@Resource
+	private IPlayRecordService playRecordService;
 	
 	//每页项数
 	private Integer pageSize = 5;
@@ -127,6 +134,15 @@ public class UserController {
 		return "currentUserMsg";
 	}
 	
+	@RequestMapping({"/personMsg/rf"})
+	public String toPersonMsg1(Model model, HttpServletRequest request) {
+		model.addAttribute("title", "我的音乐");
+		model.addAttribute("url", request.getRequestURL().toString().split("\\/rf")[0]);
+		//System.out.println(request.getRequestURL().toString().split("\\/rf")[0]);
+		model.addAttribute(new User());
+		return "showHome";
+	}
+	
 	//修改当前用户的资料
 	@RequestMapping({ "/updateUserInfo" })
 	public String toUpdateCurrentUser(@ModelAttribute("user") User user ,@RequestParam("imageInfo") MultipartFile image, Model model, HttpServletRequest request, HttpServletResponse response) {
@@ -159,11 +175,11 @@ public class UserController {
 				e.printStackTrace();
 			}
 			
-			us.setUsername(user.getUsername());
-			us.setImg(user.getUsername() + ".jpg");
+			
 			
 		}
-		
+		us.setUsername(user.getUsername());
+		us.setImg(user.getUsername() + ".jpg");
 		userService.updateUser(us);
 		
 		model.addAttribute(new User());
@@ -420,8 +436,8 @@ public class UserController {
 	@RequestMapping({"/discover/rankList"})
 	public String toRankList(Model model, HttpServletRequest request) {
 		int cat = 1;
-		String imgPath = "";
-		String info = "";
+		//String imgPath = "";
+		//String info = "";
 		List<Music> musicList = new ArrayList<Music>();
 		List<Singer> singerList = new ArrayList<Singer>();
 		List<Music> musicList_all = musicService.getAllMusic();
@@ -434,6 +450,8 @@ public class UserController {
 			musicList = musicList_all.subList(0, musicList_all.size() > 20 ? 20 : musicList_all.size());
 			singerList = new ArrayList<Singer>();
 			for(Music m : musicList ) {
+				//System.out.println(m.getId());
+				//System.out.println(musicSingerService.getSingerByMusicId(m.getId()));
 				singerList.add(singerService.getSingerById(musicSingerService.getSingerByMusicId(m.getId()).getSingerid()));
 			}
 		}else {
@@ -456,16 +474,38 @@ public class UserController {
 				}
 			}else if(id == 3) {
 				cat = 3;
+				Map<Integer, Integer> coll_music = new HashMap<Integer, Integer>();  
+				List<com.ruanko.hwm.bean.Collection> collectionList = collectionService.getAllCollection();
+				//获取每首歌的被收藏数量
+				for(Music m : musicList_all) {
+					int count = 0;
+					for(com.ruanko.hwm.bean.Collection c : collectionList ) {
+						if(c.getMusicid() == m.getId()) {
+							count++;
+						}
+					}
+					
+					coll_music.put(m.getId(), count);
+				}
+				//降序排序
+				List<Map.Entry<Integer, Integer>> list = new ArrayList<Map.Entry<Integer, Integer>>(coll_music.entrySet());
+			
+				Collections.sort(list, new Comparator<Map.Entry<Integer, Integer>>() {
+					public int compare(Entry<Integer, Integer> o1, Entry<Integer, Integer> o2) {
+						return o2.getValue().compareTo(o1.getValue());
+					}
+				});
+				
+				for(Map.Entry<Integer, Integer> m : list) {
+					//System.out.println(m.getValue());
+					musicList.add(musicService.getMusicById(m.getKey()));
+				}
+				
+				singerList = new ArrayList<Singer>();
+				for(Music m : musicList ) {
+					singerList.add(singerService.getSingerById(musicSingerService.getSingerByMusicId(m.getId()).getSingerid()));
+				}
 			}
-//			//System.out.println(id);
-//			//根据id获取歌曲类别信息
-//			typeName = musicTypeService.getMusicTypeById(id).getTypename();
-//			//获取歌曲列表
-//			List<MusicTypeRela> mtrList = musicTypeRelaService.getMusicByTypeId(id);
-//			for(MusicTypeRela m : mtrList) {
-//				musicList.add(musicService.getMusicById(m.getMusicid()));
-//			}
-//			//size = mtrList.size();
 		}
 		
 		model.addAttribute("cat",cat);
@@ -660,52 +700,67 @@ public class UserController {
 		model.addAttribute(new User());
 		return "showHome";
 	}
-	
+	@RequestMapping({"/myMusic/rf"})
+	public String toMyMusic11(Model model, HttpServletRequest request) {
+		model.addAttribute("title", "我的音乐");
+		model.addAttribute("url", request.getRequestURL().toString().split("\\/rf")[0]);
+		//System.out.println(request.getRequestURL().toString().split("\\/rf")[0]);
+		model.addAttribute(new User());
+		return "showHome";
+	}
 	
 	
 	@RequestMapping({"/music"})
 	public String toMusic(Model model, HttpServletRequest request) {
-		int id = Integer.parseInt(request.getParameter("id"));
-		//获取歌曲和歌手
-		Music music = musicService.getMusicById(id);
-		Singer singer = singerService.getSingerById(musicSingerService.getSingerByMusicId(id).getSingerid());
-		//获取所属分类
-		List<MusicTypeRela> musicTypeRela = musicTypeRelaService.getMusicTypeByMusicId(id);
-		List<MusicType> musicType = new ArrayList<MusicType>();
-		for(MusicTypeRela mtr : musicTypeRela) {
-			musicType.add(musicTypeService.getMusicTypeById(mtr.getTypeid()));
+		if(!request.getParameter("id").contains("/rf")) {
+			int id = Integer.parseInt(request.getParameter("id"));
+			//获取歌曲和歌手
+			Music music = musicService.getMusicById(id);
+			Singer singer = singerService.getSingerById(musicSingerService.getSingerByMusicId(id).getSingerid());
+			//获取所属分类
+			List<MusicTypeRela> musicTypeRela = musicTypeRelaService.getMusicTypeByMusicId(id);
+			List<MusicType> musicType = new ArrayList<MusicType>();
+			for(MusicTypeRela mtr : musicTypeRela) {
+				musicType.add(musicTypeService.getMusicTypeById(mtr.getTypeid()));
+			}
+			//读取歌词传到前台
+			String root = request.getSession().getServletContext().getRealPath("/static/music/lrc");
+			//String lrc = Upload_Download.lrc2String(root + "//" +music.getLyr());
+			//System.out.println(lrc);
+			
+			List<LrcData> lrcList = new LrcAnalyze(root + "//" +music.getLyr()).LrcGetList();
+			List<String> lrcList1 = new ArrayList<String>();
+			for(LrcData l:lrcList) {
+				//System.out.println(l.LrcLine);
+				lrcList1.add(l.LrcLine);
+			}
+			
+			//获取评论信息
+			
+			//查询出该歌曲的所有评论
+			List<Comments> commentsList = commentService.getCommentsListByMusicId(id);
+			List<User> userList = new ArrayList<User>();
+			for(Comments c : commentsList) {
+				userList.add(userService.getUserById(c.getUserid()));
+			}
+			
+			
+			model.addAttribute("commentList", commentsList);
+			model.addAttribute("userList", userList);
+			model.addAttribute("lrcList", lrcList1);
+			model.addAttribute("musicType", musicType);
+			model.addAttribute("title", music.getMusicname());
+			model.addAttribute("music", music);
+			model.addAttribute("singer", singer);
+			model.addAttribute(new User());
+			return "showMusicInfo";
+		}else {
+			model.addAttribute("title", "心随乐动");
+			model.addAttribute("url", request.getRequestURL().toString() + "?id=" +request.getParameter("id").split("\\/rf")[0]);
+			//System.out.println(request.getRequestURL().toString().split("\\/rf")[0]);
+			model.addAttribute(new User());
+			return "showHome";
 		}
-		//读取歌词传到前台
-		String root = request.getSession().getServletContext().getRealPath("/static/music/lrc");
-		//String lrc = Upload_Download.lrc2String(root + "//" +music.getLyr());
-		//System.out.println(lrc);
-		
-		List<LrcData> lrcList = new LrcAnalyze(root + "//" +music.getLyr()).LrcGetList();
-		List<String> lrcList1 = new ArrayList<String>();
-		for(LrcData l:lrcList) {
-			//System.out.println(l.LrcLine);
-			lrcList1.add(l.LrcLine);
-		}
-		
-		//获取评论信息
-		
-		//查询出该歌曲的所有评论
-		List<Comments> commentsList = commentService.getCommentsListByMusicId(id);
-		List<User> userList = new ArrayList<User>();
-		for(Comments c : commentsList) {
-			userList.add(userService.getUserById(c.getUserid()));
-		}
-		
-		
-		model.addAttribute("commentList", commentsList);
-		model.addAttribute("userList", userList);
-		model.addAttribute("lrcList", lrcList1);
-		model.addAttribute("musicType", musicType);
-		model.addAttribute("title", music.getMusicname());
-		model.addAttribute("music", music);
-		model.addAttribute("singer", singer);
-		model.addAttribute(new User());
-		return "showMusicInfo";
 	}
 	
 	
@@ -713,51 +768,59 @@ public class UserController {
 	
 	@RequestMapping({"/singer"})
 	public String toSingerMess(Model model, HttpServletRequest request) {
-		int id = Integer.parseInt(request.getParameter("id"));
-		//获取歌手id
-		//System.out.println(id);
-		Singer singer = singerService.getSingerById(id);
-		List<Music> musicList = new ArrayList<Music>();
-		List<MusicSingerRela> musicSinger = musicSingerService.getMusicBySingerId(id);
-		for(MusicSingerRela msr : musicSinger) {
-			musicList.add(musicService.getMusicById(msr.getMusicid()));
-		}
-		//获取相似歌曲
-		int singerTypeId = singerTypeRelaService.getSingerTypeBySingerId(id).getTypeid();
-		//System.out.println(singerTypeId);
-		List<SingerTypeRela> strList = singerTypeRelaService.getSingerByTypeId(singerTypeId);
-		
-		List<Singer> singerList = new ArrayList<Singer>();
-		//移除
-		Iterator<SingerTypeRela> it = strList.iterator();
-		while(it.hasNext()) {
-			SingerTypeRela str = it.next();
-			if(str.getSingerid() == id)
-				it.remove();
-		}
-		//随机获取四首歌
-		//获取四个随机数
-		Set<Integer> set = new TreeSet<Integer>();
-		while (set.size() < 4) {
-			int number = (int) (Math.random() * strList.size());
-			if (!set.contains(number)) {
-				set.add(number);
+		if(!request.getParameter("id").contains("/rf")) {
+			int id = Integer.parseInt(request.getParameter("id"));
+			//获取歌手id
+			//System.out.println(id);
+			Singer singer = singerService.getSingerById(id);
+			List<Music> musicList = new ArrayList<Music>();
+			List<MusicSingerRela> musicSinger = musicSingerService.getMusicBySingerId(id);
+			for(MusicSingerRela msr : musicSinger) {
+				musicList.add(musicService.getMusicById(msr.getMusicid()));
 			}
+			//获取相似歌曲
+			int singerTypeId = singerTypeRelaService.getSingerTypeBySingerId(id).getTypeid();
+			//System.out.println(singerTypeId);
+			List<SingerTypeRela> strList = singerTypeRelaService.getSingerByTypeId(singerTypeId);
+			
+			List<Singer> singerList = new ArrayList<Singer>();
+			//移除
+			Iterator<SingerTypeRela> it = strList.iterator();
+			while(it.hasNext()) {
+				SingerTypeRela str = it.next();
+				if(str.getSingerid() == id)
+					it.remove();
+			}
+			//随机获取四首歌
+			//获取四个随机数
+			Set<Integer> set = new TreeSet<Integer>();
+			while (set.size() < 4) {
+				int number = (int) (Math.random() * strList.size());
+				if (!set.contains(number)) {
+					set.add(number);
+				}
+			}
+			for(Integer in : set){
+				//System.out.println(random);
+				singerList.add(singerService.getSingerById(strList.get(in).getSingerid()));
+			}
+	//		for(Singer s:singerList){
+	//			System.out.println(s.getSingername());
+	//		}
+			model.addAttribute("singerList", singerList);
+			model.addAttribute("musicList",musicList);
+			model.addAttribute("title", singer.getSingername());
+			model.addAttribute("introduction",singer.getIntroduction());
+			model.addAttribute("singer",singer);
+			model.addAttribute(new User());
+			return "showSingerInfo";
+		}else {
+			model.addAttribute("title", "心随乐动");
+			model.addAttribute("url", request.getRequestURL().toString() + "?id=" +request.getParameter("id").split("\\/rf")[0]);
+			//System.out.println(request.getRequestURL().toString().split("\\/rf")[0]);
+			model.addAttribute(new User());
+			return "showHome";
 		}
-		for(Integer in : set){
-			//System.out.println(random);
-			singerList.add(singerService.getSingerById(strList.get(in).getSingerid()));
-		}
-//		for(Singer s:singerList){
-//			System.out.println(s.getSingername());
-//		}
-		model.addAttribute("singerList", singerList);
-		model.addAttribute("musicList",musicList);
-		model.addAttribute("title", singer.getSingername());
-		model.addAttribute("introduction",singer.getIntroduction());
-		model.addAttribute("singer",singer);
-		model.addAttribute(new User());
-		return "showSingerInfo";
 	}
 
 	@RequestMapping({"/logup"})
@@ -838,6 +901,28 @@ public class UserController {
 			for(Music m : musicList1) {
 				singerList2.add(singerService.getSingerById(musicSingerService.getSingerByMusicId(m.getId()).getSingerid()));
 			}
+			
+			//获取用户的播放记录
+			List<PlayRecord> playRecordList = playRecordService.getPlayRecordByUserid(currentUser.getId());
+			List<Music> musicRecordList = new ArrayList<Music>();
+			List<Singer> singerRecordList = new ArrayList<Singer>();
+			for(PlayRecord pr : playRecordList) {
+				musicRecordList.add(musicService.getMusicById(pr.getMusicid()));
+			}
+			
+			for(Music m : musicRecordList) {
+				singerRecordList.add(singerService.getSingerById(musicSingerService.getSingerByMusicId(m.getId()).getSingerid()));
+			}
+			
+			model.addAttribute("musicRecordList", musicRecordList);
+			model.addAttribute("singerRecordList", singerRecordList);
+			model.addAttribute("playRecordList", playRecordList);
+			model.addAttribute("size_record", (int)Math.ceil(playRecordList.size()*1.0/3));
+			
+			
+			//返回用户信息
+			User user1 = userService.getUserById(currentUser.getId());
+			model.addAttribute("user1", user1);
 			model.addAttribute("musicList1", musicList1);
 			model.addAttribute("size3", (int)Math.ceil(musicList1.size()*1.0/3));
 			model.addAttribute("singerList2", singerList2);
@@ -869,6 +954,7 @@ public class UserController {
 			message = "密码错误";
 			
 		}
+		model.addAttribute("user1", user1);
 		model.addAttribute(new User());
 		//model.addAttribute("login_state", 1);
 		request.getSession().setAttribute("message",message);	

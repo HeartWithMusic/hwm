@@ -29,13 +29,17 @@ import com.ruanko.hwm.bean.DownloadRela;
 import com.ruanko.hwm.bean.Music;
 import com.ruanko.hwm.bean.MusicSingerRela;
 import com.ruanko.hwm.bean.MusicTypeRela;
+import com.ruanko.hwm.bean.PlayRecord;
 import com.ruanko.hwm.bean.Singer;
+import com.ruanko.hwm.bean.User;
 import com.ruanko.hwm.service.ICollectionService;
 import com.ruanko.hwm.service.IDownloadService;
 import com.ruanko.hwm.service.IMusicService;
 import com.ruanko.hwm.service.IMusicSingerService;
 import com.ruanko.hwm.service.IMusicTypeRelationService;
+import com.ruanko.hwm.service.IPlayRecordService;
 import com.ruanko.hwm.service.ISingerService;
+import com.ruanko.hwm.service.IUserService;
 import com.ruanko.hwm.utl.DateTime;
 import com.ruanko.hwm.utl.LrcAnalyze;
 import com.ruanko.hwm.utl.Upload_Download;
@@ -62,6 +66,12 @@ public class MusicController {
 	
 	@Resource
 	public IDownloadService downloadService;
+	
+	@Resource
+	public IPlayRecordService playRecordService;
+	
+	@Resource
+	public IUserService userService;
 		
 	//每页项数
 	private Integer pageSize = 5;
@@ -426,8 +436,44 @@ public class MusicController {
 	}
 	
 	@RequestMapping("/ajax_operation_addPlayCounts")
-	public @ResponseBody int addPlayCountsAjax3(String musicid) {
-		Music music = musicService.getMusicById(Integer.parseInt(musicid));
+	public @ResponseBody int addPlayCountsAjax3(String musicid, HttpServletRequest request) {
+		User user = (User)request.getSession().getAttribute("user");
+		int musicId = Integer.parseInt(musicid);
+		Music music = musicService.getMusicById(musicId);
+		//判断是否登录
+		if(user != null) {
+			//判断是否已有数据
+			PlayRecord playRecord = new PlayRecord();
+			List<PlayRecord> playRecordList = playRecordService.getPlayRecordByUserid(user.getId());
+			boolean flag = false;
+			for(PlayRecord pr : playRecordList) {
+				if(pr.getMusicid() == musicId) {
+					playRecord = pr;
+					flag = true;
+					break;
+				}
+			}
+			if(flag){
+				playRecord.setPlaycounts(playRecord.getPlaycounts() + 1);
+				playRecord.setPlaytime(DateTime.getCurrentTime());
+				//更新播放记录表
+				playRecordService.uploadPlayRecord(playRecord);
+			}else {
+				playRecord.setMusicid(musicId);
+				playRecord.setUserid(user.getId());
+				playRecord.setPlaycounts(1);
+				playRecord.setPlaytime(DateTime.getCurrentTime());
+				//更新播放记录表
+				playRecordService.addPlayRecord(playRecord);
+			}
+			//更新用户播放次数
+			User user1 = userService.getUserById(user.getId());
+			user1.setPlaycount(user1.getPlaycount() + 1);
+			userService.updateUser(user1);
+			
+			
+		}
+			
 		music.setPlaycounts(music.getPlaycounts()+1);
 		musicService.updateMusic(music);
 		
@@ -585,18 +631,40 @@ public class MusicController {
 	
 	@RequestMapping("/download")
 	public @ResponseBody List<String> download1(String userid, String musicid)  {
+		int userId = Integer.parseInt(userid);
+		int musicId = Integer.parseInt(musicid);
 		//得到要下载的文件名
-		String fileName = musicService.getMusicById(Integer.parseInt(musicid)).getMusicname(); 
+		String fileName = musicService.getMusicById(musicId).getMusicname(); 
 		//System.out.println(fileName);
 		List<String> resultList = new ArrayList<String>();
 		//System.out.println(fileName);
 		resultList.add(fileName);
-		//保存下载记录到数据库
+		//获取该用户的下载列表
+		boolean flag = false;//判断是否重复
+		List<DownloadRela> downloadList = downloadService.getDownloadRelaByUserid(userId);
 		DownloadRela download = new DownloadRela();
-		download.setUserid(Integer.parseInt(userid));
-		download.setMusicid(Integer.parseInt(musicid));
-		download.setDownloadtime(DateTime.getCurrentTime());
-		downloadService.addDownloadRela(download);
+		for(DownloadRela d : downloadList) {
+			if(d.getMusicid() == musicId) {
+				download = downloadService.getDownloadById(d.getId());
+				flag = true;
+				break;
+			}
+		}
+		
+		if(flag) {
+			download.setCounts(download.getCounts() + 1);
+			download.setDownloadtime(DateTime.getCurrentTime());
+			//保存下载记录到数据库
+			downloadService.updateDownloadRela(download);
+		}else {
+			download.setUserid(Integer.parseInt(userid));
+			download.setMusicid(Integer.parseInt(musicid));
+			download.setDownloadtime(DateTime.getCurrentTime());
+			download.setCounts(1);
+			//保存下载记录到数据库
+			downloadService.addDownloadRela(download);
+		}
+		
 		
 		return resultList;
 	}

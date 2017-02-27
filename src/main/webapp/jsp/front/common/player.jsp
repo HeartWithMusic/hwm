@@ -326,10 +326,14 @@
 		function download12(id) {
 			//alert(id);
 			//alert("${sessionScope.user == null}");
-			var user = "${sessionScope.user}";
-			var userid = "${sessionScope.user.id}";
-			if(user == "") {
-				$("#myModal").modal('show');
+			var user = window.frames["aa"].document.getElementById("sessionuser").value;
+			var userid = window.frames["aa"].document.getElementById("sessionuserid").value;
+			
+			//alert(user);
+			//alert(typeof(user));
+			if(userid == "") {
+				//alert("请先登录");
+				document.getElementById('aa').contentWindow.showModal();
 			}else {
 				//alert(id);
 				$.ajax({  
@@ -355,11 +359,12 @@
 		function addCollection(id) {
 			//alert(id);
 			//alert("${sessionScope.user == null}");
-			var user = "${sessionScope.user}";
-			var userid = "${sessionScope.user.id}";
+			var user = window.frames["aa"].document.getElementById("sessionuser").value;
+			var userid = window.frames["aa"].document.getElementById("sessionuserid").value;
 			//alert(user);
-			if(user == "") {
-				$("#myModal").modal('show');
+			//alert(userid);
+			if(userid == "") {
+				document.getElementById('aa').contentWindow.showModal();
 			}else {
 				//alert(id);
 				$.ajax({  

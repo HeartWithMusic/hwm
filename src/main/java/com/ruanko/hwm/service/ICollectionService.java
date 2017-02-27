@@ -8,4 +8,6 @@ public interface ICollectionService {
 	List<Collection> getCollectionByUserid(Integer userid);
 	
 	void addCollection(Collection coll);
+	
+	List<Collection> getAllCollection();
 }

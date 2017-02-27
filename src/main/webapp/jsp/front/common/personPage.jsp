@@ -56,7 +56,7 @@
 					    <div style="margin-left:286px;margin-top:25px;" class="col-sm-offset-2 col-sm-10">
 					      <span style="color:red;"><c:out value="${message }" ></c:out></span>
 					   
-							<input type="submit" value="保存"/>
+							<input type="submit" style="width: 100px;height: 40px;" value="保存"/>
 					    </div>
 					  </div>
 		</sf:form>

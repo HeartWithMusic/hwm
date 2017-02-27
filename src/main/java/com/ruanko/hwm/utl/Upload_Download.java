@@ -124,6 +124,7 @@ public class Upload_Download {
 	 */
 	public static void upload_img2(MultipartFile file, HttpServletRequest request, String name) throws FileNotFoundException, IOException {
 		String root = request.getSession().getServletContext().getRealPath("/static/user/");
+		//System.out.println(root);
 		//判断文件夹是否存在
 		existFolder(root);
 		deleteFile(root + "\\" + name + ".jpg" );

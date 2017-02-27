@@ -112,15 +112,15 @@
 		</div>
 		
 		<!--个性化推荐   导航栏-->
-		<div class="left_menu">
+		<!-- <div class="left_menu">
 			<div class="left_menu_header">
 				<ol class="breadcrumb" style="background:none;height:30px;padding-left: 15px;" >
 					<li><a href="#" style="font-size:15pt;color:black;">个性化推荐</a></li>
 				</ol>
-			</div>
+			</div>-->
 			
 			<!-- 缩略图   个性化推荐-->
-			
+			<!--  
 			<div class="row">
 			    <div class="col-sm-6 col-md-3" style="margin-left:30px;margin-top:20px;	height:200px;width:185px">
 			        <a href="#" class="thumbnail" style="height:160px;width:150px">
@@ -175,7 +175,7 @@
 					<div style="width:140px;height:25px;margin-left:10px;margin-top:-45px;"><a href="#" style="color:black;">我们的歌</a></div>
 			    </div>
 			</div>
-		</div>
+		</div>-->
 		
 		<!-- 新碟上架-->
 		<div class="left_menu">
@@ -203,7 +203,7 @@
 							<div class="item active" >
 								<c:forEach items="${musicList2}" var="music" begin="0" end="4" varStatus="i">
 									<c:choose>
-										<c:when test="${i.index == 0}">
+										<c:when test="${i.index == 1}">
 											<a class='msk' href="<%=request.getContextPath()%>/home/music?id=${music.id}">
 												<div class="lunbo_left" style="float:left;width: 100px;margin-left:20px;margin-top: 25px;" onmouseover="change1_index(${music.id})" onmouseout="change2_index(${music.id})" >
 													<img width="100px" height="100px" class='j-img' src="<%=request.getContextPath()%>/static/music/img/${music.img}"></img>

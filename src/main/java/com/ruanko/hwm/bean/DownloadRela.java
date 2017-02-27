@@ -11,6 +11,8 @@ public class DownloadRela {
 
     private Date downloadtime;
 
+    private Integer counts;
+
     public Integer getId() {
         return id;
     }
@@ -41,5 +43,13 @@ public class DownloadRela {
 
     public void setDownloadtime(Date downloadtime) {
         this.downloadtime = downloadtime;
+    }
+
+    public Integer getCounts() {
+        return counts;
+    }
+
+    public void setCounts(Integer counts) {
+        this.counts = counts;
     }
 }
