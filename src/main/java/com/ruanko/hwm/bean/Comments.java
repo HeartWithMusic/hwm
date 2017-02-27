@@ -1,5 +1,7 @@
 package com.ruanko.hwm.bean;
 
+import java.util.Date;
+
 public class Comments {
     private Integer id;
 
@@ -8,6 +10,10 @@ public class Comments {
     private Integer musicid;
 
     private String comment;
+
+    private Date commenttime;
+
+    private Integer love;
 
     public Integer getId() {
         return id;
@@ -39,5 +45,21 @@ public class Comments {
 
     public void setComment(String comment) {
         this.comment = comment == null ? null : comment.trim();
+    }
+
+    public Date getCommenttime() {
+        return commenttime;
+    }
+
+    public void setCommenttime(Date commenttime) {
+        this.commenttime = commenttime;
+    }
+
+    public Integer getLove() {
+        return love;
+    }
+
+    public void setLove(Integer love) {
+        this.love = love;
     }
 }

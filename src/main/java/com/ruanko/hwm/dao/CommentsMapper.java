@@ -1,5 +1,7 @@
 package com.ruanko.hwm.dao;
 
+import java.util.List;
+
 import com.ruanko.hwm.bean.Comments;
 
 public interface CommentsMapper {
@@ -14,4 +16,6 @@ public interface CommentsMapper {
     int updateByPrimaryKeySelective(Comments record);
 
     int updateByPrimaryKey(Comments record);
+    
+    List<Comments> selectByMusicId(Integer musicid);
 }

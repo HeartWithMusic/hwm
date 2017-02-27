@@ -65,33 +65,39 @@
 									</div>
 									<div style = "margin-top:30px;width:580px;margin-left:-200px;height:120px;">
 										<img src = "<%=request.getContextPath()%>/img/front/home/touxiang.png" style = "width:50px;height:50px;float:left;" ></img>
-										<textarea placeholder="评论" style = "margin-left:20px;width:510px;resize:none;border:1px solid #d3d3d3;"></textarea>
-										<button class="btn btn-primary" style = "margin-bottom:-70px;margin-left:-60px;">评论</button>
+										<textarea id="comment_info" onclick="judgeLogin()" placeholder="评论" style = "margin-left:20px;width:510px;resize:none;border:1px solid #d3d3d3;"></textarea>
+										<button onclick="pinglun(${music.id})" class="btn btn-primary" style = "margin-bottom:-70px;margin-left:-60px;">评论</button>
 										
 									</div>
 									<div style = "width:580px;margin-left:-200px;margin-top:10px;margin-bottom:10px;border-bottom:1px solid #ccc;color:black"><p>精彩评论</p></div>
-									
-			<!--评论文字-->			<div style = "width:580px;height:140px;margin-left:-200px;margin-bottom:50px;border-bottom:1px dotted #ccc;">
-										<img src = "<%=request.getContextPath()%>/img/front/home/touxiang.png" style = "width:50px;height:50px;float:left;margin-top:10px;"></img>
-										<a href = "#" style = "margin-left:10px;float:left;margin-top:15px;">用户名:</a>
-										<p style = "margin-top:16px;float:right;width:460px;">在ktv的时候总会点mine mine 然后把我不配唱进去..阿萨德阿萨德按时啊是的阿萨德阿萨德阿德阿萨德按时.(杰伦总喜欢耍宝..同样的编曲他非要玩两首歌..所以一点都不违和..) 有兴趣的童鞋还可以试试 阳光宅男和公主病 , .....霍元甲和黄金甲....第一次听的观众绝对会嘴巴成o型呆呆瞄着你~~~那时候你就尽情耍帅就行了..</p>	
-										 <a href="#" style = "float:right;clear:both;margin-top:-15px;">
-										
-	         								 <span class="glyphicon glyphicon-thumbs-up">  <p style = "display:inline;">100</p></span>
-	         								
-	        							 </a>
+									<div id="jingcaipinglun">
+										<c:forEach items="${commentList}" var="comment" varStatus="i">
+											<div style = "width:580px;height:140px;margin-left:-200px;margin-bottom:50px;border-bottom:1px dotted #ccc;">
+												<c:forEach items="${userList }" var="user" varStatus="j">
+													<c:if test="${i.index == j.index }">
+														<c:choose>
+															<c:when test="${user.img == '0' }">
+																<img src = "<%=request.getContextPath()%>/img/front/home/touxiang.png" style = "width:50px;height:50px;float:left;margin-top:10px;"></img>
+															</c:when>
+															<c:otherwise>
+																<img src = "<%=request.getContextPath()%>/static/user/${user.img}" style = "width:50px;height:50px;float:left;margin-top:10px;"></img>
+															</c:otherwise>
+														</c:choose>
+														<a href = "#" style = "margin-left:10px;float:left;margin-top:15px;">用户名:${user.username }</a>
+													</c:if>
+												</c:forEach>
+												
+												<p style = "margin-top:16px;float:right;width:460px;">${comment.comment }</p>	
+												 <a href="#" style = "float:right;clear:both;margin-top:-15px;">
+												
+			         								 <span class="glyphicon glyphicon-thumbs-up">  <p style = "display:inline;">${comment.love}</p></span>
+			         								
+			        							 </a>
+											</div>
+										</c:forEach>
 									</div>
-									<div style = "width:580px;height:140px;margin-left:-200px;margin-bottom:50px;border-bottom:1px dotted #ccc;">
-										<img src = "<%=request.getContextPath()%>/img/front/home/touxiang.png" style = "width:50px;height:50px;float:left;margin-top:10px;"></img>
-										<a href = "#" style = "margin-left:10px;float:left;margin-top:15px;">用户名:</a>
-										<p style = "margin-top:16px;float:right;width:460px;">在ktv的时候总会点mine mine 然后把我不配唱进去..阿萨德阿萨德按时啊是的阿萨德阿萨德阿德阿萨德按时.(杰伦总喜欢耍宝..同样的编曲他非要玩两首歌..所以一点都不违和..) 有兴趣的童鞋还可以试试 阳光宅男和公主病 , .....霍元甲和黄金甲....第一次听的观众绝对会嘴巴成o型呆呆瞄着你~~~那时候你就尽情耍帅就行了..</p>	
-										 <a href="#" style = "float:right;clear:both;margin-top:-15px;">
-										
-	         								 <span class="glyphicon glyphicon-thumbs-up">  <p style = "display:inline;">100</p></span>
-	         								
-	        							 </a>
-									</div>
-									
+			<!--评论文字-->			
+									<input id="path24" type="hidden" value="<%=request.getContextPath()%>"/>
 									
 									
 										
@@ -174,8 +180,68 @@
     	
     }
     
-    
- 
+    function judgeLogin() {
+    	var user = "${sessionScope.user}";
+		//var userid = "${sessionScope.user.id}";
+		if(user == "") {
+			$("#myModal").modal('show');
+		}
+    };
+ 	
+    function pinglun(id) {
+    	var user = "${sessionScope.user}";
+		var userid = "${sessionScope.user.id}";
+		var comment = document.getElementById("comment_info").value;
+		//alert(comment);
+		
+		if(user == "") {
+			$("#myModal").modal('show');
+		}else {
+			//alert(id);
+			if(comment == "") {
+				alert("评论不能为空");
+			}else {
+				alert(comment);
+				$.ajax({  
+				        type : "post",  
+				        url : $('#path24').val() + "/home/comment",  
+				        dataType:"json",
+				        cache : false,  
+				        data : {  
+				            userid : userid,
+				            musicid : id,
+				            comment : comment
+				        },  
+				        async : false,  
+				        error : function() {  
+				        	 alert("网络异常！");  
+				        },  
+				        success : function(data) { 
+				        	var html=""
+				        	if(data[2] == "success") {
+				        		alert(data[2]);
+				        		for(var i=0;i<data[0].length;i++) {
+				        			html+='<div style = "width:580px;height:140px;margin-left:-200px;margin-bottom:50px;border-bottom:1px dotted #ccc;">';
+				        			if(data[1][i].img == '0'){
+										html+='<img src = "<%=request.getContextPath()%>/img/front/home/touxiang.png" style = "width:50px;height:50px;float:left;margin-top:10px;"></img>';
+				        			}else{
+				        				html+='<img src = "<%=request.getContextPath()%>/static/user/' + data[1][i].img + '"  style="width:50px;height:50px;float:left;margin-top:10px;"></img>';
+				        			} 
+				        			html+='<a href = "#" style = "margin-left:10px;float:left;margin-top:15px;">用户名:' + data[1][i].username + '</a>';
+									html+='<p style = "margin-top:16px;float:right;width:460px;">' + data[0][i].comment + '</p>';	
+									html+='<a href="#" style = "float:right;clear:both;margin-top:-15px;">';
+									html+='<span class="glyphicon glyphicon-thumbs-up">  <p style = "display:inline;">' + data[0][i].love + '</p></span> </a>';
+									html+='<span>' + data[0][i].commentTime + '</span>';
+									html+='</div>';
+				        		}
+				        	}
+				        	
+				        	$("#jingcaipinglun").html(html);
+				       }  
+				 }); 
+			}
+		}
+	};
     
 </script>		
 		

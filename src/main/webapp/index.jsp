@@ -474,12 +474,18 @@
 				<!--登录之后显示-->
 				<div style="height:200px;background: #F5F5F5;border:1px solid #DCDCDC">
 					<div>
+						
 						<a href="<%=request.getContextPath()%>/home/myMusic">
-							<img src="<%=request.getContextPath()%>/img/front/home/default_user.jpg" style="margin-left:20px;margin-top:20px;width:75px;height:90px;border:2px solid #d3d3d3;border-radius:5px;padding:3px;">
-						</a>
+							<c:if test="${sessionScope.user.img == '0'}">
+								<img src="<%=request.getContextPath()%>/img/front/home/default_user.jpg" style="margin-left:20px;margin-top:20px;width:75px;height:90px;border:2px solid #d3d3d3;border-radius:5px;padding:3px;">
+							</c:if>
+							<c:if test="${sessionScope.user.img != '0'}">
+								<img src="<%=request.getContextPath()%>/static/user/${sessionScope.user.img}" style="margin-left:20px;margin-top:20px;width:75px;height:90px;border:2px solid #d3d3d3;border-radius:5px;padding:3px;">
+						</c:if>
+								</a>
 						<a href="<%=request.getContextPath()%>/home/myMusic" style="float:right;margin-right:60px;padding-top:18px;"><strong>${sessionScope.user.username}<strong></a>
 						<a href="<%=request.getContextPath()%>/home/myMusic" style="float:right;margin-right:95px;margin-top:-70px;color:#A9A9A9"><i>LV.${sessionScope.user.level}</i></a>
-						 <button type="button" class="btn btn-primary btn-sm" style="width:100px;float:right;margin-right:25px;margin-top:-35px;">签到</button>
+						 <button onclick="addExperience()" type="button" class="btn btn-primary btn-sm" style="width:100px;float:right;margin-right:25px;margin-top:-35px;">签到</button>
 						
 					</div>
 						<ul  style="list-style:none;padding-left:0px;overflow:hidden;font-size:12.5px;margin:25px auto;">
@@ -598,6 +604,7 @@
 		</div>-->
 	</div>
 </div>
+<input id="path23" type="hidden" value="<%=request.getContextPath()%>"/>
 <script>
 	var row = $(".row_left");
 	var lunbo = $(".lunbo_left");
@@ -778,4 +785,34 @@
 		addListCollection(list);
 	}
 	
+	function addExperience() {
+		//alert(id);
+		//alert("${sessionScope.user == null}");
+		var user = "${sessionScope.user}";
+		var userid = "${sessionScope.user.id}";
+		if(user == "") {
+			$("#myModal").modal('show');
+		}else {
+			//alert(id);
+			$.ajax({  
+		        type : "post",  
+		        url : $('#path23').val() + "/home/addLevel",  
+		        dataType:"json",
+		        cache : false,  
+		        data : {  
+		            userid : userid,
+		        },  
+		        async : false,  
+		        error : function() {  
+		        	 alert("网络异常！");  
+		        },  
+		        success : function(data) { 
+		        	if(data[0] == "success") {
+		        		alert(" + 10点经验");
+		        	}
+		        	
+		        }  
+		    }); 
+		}
+	};
 </script>

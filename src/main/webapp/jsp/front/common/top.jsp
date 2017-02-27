@@ -93,9 +93,10 @@
 				
 				<!-- 搜索 -->
 				<div class="btn-group  pull-right">
-					<form  class="navbar-form navbar-left" role="search"> 
+					<% String action1 = request.getContextPath() + "/home/search";%>
+					<form  class="navbar-form navbar-left" role="search" action="<%=action1%>"> 
 						<div class="form-group"> 
-							<input style="width:200px;border-radius:20px;" type="text" class="form-control" placeholder="单曲/歌手/专辑/歌单/mv/用户"> 
+							<input name="searchCondition" style="width:200px;border-radius:20px;" type="text" class="form-control" placeholder="单曲/歌手/专辑/歌单/mv/用户"> 
 						</div> 
 						
 					</form>

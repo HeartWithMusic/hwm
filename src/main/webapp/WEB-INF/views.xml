@@ -68,6 +68,11 @@
 		<put-attribute name="content" value="/jsp/front/common/personPage.jsp"/>
 	</definition>
 	
+	<!-- 显示搜索结果 -->
+	<definition name="showSearchResult" extends="template_front">
+		<put-attribute name="content" value="/jsp/front/common/showSearchResult.jsp"/>
+	</definition>
+	
 	<!-- 歌手信息界面 -->	
 	<definition name="showSingerInfo" extends="singerMess">
 		<put-attribute name="content" value="/jsp/front/singer/singerMessage.jsp" />

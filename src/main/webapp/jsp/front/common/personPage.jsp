@@ -61,20 +61,19 @@
 					  </div>
 		</sf:form>
 		<div style="float: left;margin: 25px;">
-				<img style="width:191px;border:2px solid #d3d3d3;border-radius:5px;padding:3px;" src="http://p1.music.126.net/VnZiScyynLG7atLIZ2YPkw==/18686200114669622.jpg?param=200y200"></a>
-				<a href="#" onclick="showFile()">
-					<c:choose>
-						<c:when test="${currentUser.img == 0 }">
+				<c:choose>
+						<c:when test="${currentUser.img == '0' }">
+							<img style="width:191px;border:2px solid #d3d3d3;border-radius:5px;padding:3px;" src="http://p1.music.126.net/VnZiScyynLG7atLIZ2YPkw==/18686200114669622.jpg?param=200y200"></a>
+						</c:when>
+						<c:otherwise>
+							<img style="width:191px;border:2px solid #d3d3d3;border-radius:5px;padding:3px;" src="<%=request.getContextPath()%>/static/user/${currentUser.img}"></a>
+						</c:otherwise>
+							</c:choose>
+					<a href="#" onclick="showFile()">
+					
 							<div style="width:209px;height:35px;background-repeat:no-repeat;background-image:url('<%=request.getContextPath()%>/img/front/home/bottomBg.png');opacity:0.8;position:relative;top:-25px;color:#ccc;left:0px;">
 								<i style="margin-left: 65px;margin-top: 2px;font-size: 15px;">更换头像</i>
 							</div>
-						</c:when>
-						<c:when test="${currentUser.img != 0 }">
-							<div style="width:209px;height:35px;background-repeat:no-repeat;background-image:url('<%=request.getContextPath()%>/static/user/${currentUser.img}');opacity:0.8;position:relative;top:-25px;color:#ccc;left:0px;">
-								<i style="margin-left: 65px;margin-top: 2px;font-size: 15px;">更换头像</i>
-							</div>
-						</c:when>
-					</c:choose>
 					
 				</a>
 		</div>

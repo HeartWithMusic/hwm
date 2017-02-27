@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.ruanko.hwm.bean.Comments;
 import com.ruanko.hwm.bean.DownloadRela;
 import com.ruanko.hwm.bean.Music;
 import com.ruanko.hwm.bean.MusicSingerRela;
@@ -34,6 +35,7 @@ import com.ruanko.hwm.bean.SingerTypeRela;
 import com.ruanko.hwm.bean.User;
 import com.ruanko.hwm.bean.UserSingerRela;
 import com.ruanko.hwm.service.ICollectionService;
+import com.ruanko.hwm.service.ICommentService;
 import com.ruanko.hwm.service.IDownloadService;
 import com.ruanko.hwm.service.IMusicService;
 import com.ruanko.hwm.service.IMusicSingerService;
@@ -76,6 +78,8 @@ public class UserController {
 	private IMusicSingerService musicSingerService;
 	@Resource
 	private IDownloadService downloadService;
+	@Resource
+	private ICommentService commentService;
 	
 	//每页项数
 	private Integer pageSize = 5;
@@ -682,6 +686,19 @@ public class UserController {
 			//System.out.println(l.LrcLine);
 			lrcList1.add(l.LrcLine);
 		}
+		
+		//获取评论信息
+		
+		//查询出该歌曲的所有评论
+		List<Comments> commentsList = commentService.getCommentsListByMusicId(id);
+		List<User> userList = new ArrayList<User>();
+		for(Comments c : commentsList) {
+			userList.add(userService.getUserById(c.getUserid()));
+		}
+		
+		
+		model.addAttribute("commentList", commentsList);
+		model.addAttribute("userList", userList);
 		model.addAttribute("lrcList", lrcList1);
 		model.addAttribute("musicType", musicType);
 		model.addAttribute("title", music.getMusicname());
@@ -915,5 +932,119 @@ public class UserController {
 		request.getSession().setAttribute("user", null);
 		model.addAttribute(new User());
 		return toHome1(model,request);
+	}
+	
+	@RequestMapping({"/addLevel"})
+	public @ResponseBody List<String> addLevel(String userid){
+		int userId = Integer.parseInt(userid);
+		User user = userService.findUser(userId);
+		//int userGrade = user.getGrade();
+		user.setGrade(user.getGrade() + 10);
+		user.setLevel(setLevel(user.getGrade(), user.getLevel()));
+		
+		//保存到数据库
+		userService.updateUser(user);
+		List<String> resultList = new ArrayList<String>();
+		resultList.add("success");
+		return resultList;
+	}
+	
+	@RequestMapping({"/search"})
+	public String search(Model model, HttpServletRequest request){
+		String search = request.getParameter("searchCondition").trim();
+		List<Music> musicList = musicService.getAllMusic();
+		List<Singer> singerList = singerService.getAllSinger();
+		
+		List<Music> musicResultList = new ArrayList<Music>();
+		List<Singer> singerResultList1 = new ArrayList<Singer>();
+		List<Singer> singerResultList = new ArrayList<Singer>();
+		
+		for(Music m : musicList) {
+			if(m.getMusicname().contains(search)) {
+				musicResultList.add(m);
+			}
+		}
+		
+		for(Music m : musicResultList) {
+			singerResultList1.add(singerService.getSingerById(musicSingerService.getSingerByMusicId(m.getId()).getSingerid()));
+		}
+		
+		for(Singer s : singerList) {
+			if(s.getSingername().contains(search)) {
+				singerResultList.add(s);
+			}
+		}
+	
+		model.addAttribute("totalSize", musicResultList.size() + singerResultList.size());
+		model.addAttribute("size1", (int)Math.ceil(musicResultList.size()*1.0/3));
+		model.addAttribute("size2", (int)Math.ceil(singerResultList.size()*1.0/3));
+		model.addAttribute("musicList", musicResultList);
+		model.addAttribute("singerResultList1", singerResultList1);
+		model.addAttribute("singerResultList", singerResultList);
+		model.addAttribute("search", search);
+		model.addAttribute(new User());
+		return "showSearchResult";
+	}
+	
+	@RequestMapping({"/comment"})
+	public @ResponseBody List<Object> comment(String userid, String musicid, String comment){
+		int userId = Integer.parseInt(userid);
+		int musicId = Integer.parseInt(musicid);
+		
+		Comments comments = new Comments();
+		comments.setUserid(userId);
+		comments.setMusicid(musicId);
+		comments.setComment(comment);
+		comments.setCommenttime(DateTime.getCurrentTime());
+		comments.setLove(0);
+		//添加到数据库
+		commentService.addComment(comments);
+		
+		//查询出该歌曲的所有评论
+		List<Comments> commentsList = commentService.getCommentsListByMusicId(musicId);
+		List<User> userList = new ArrayList<User>();
+		for(Comments c : commentsList) {
+			userList.add(userService.getUserById(c.getUserid()));
+		}
+		
+		
+		List<Object> resultList = new ArrayList<Object>();
+		resultList.add(commentsList);
+		resultList.add(userList);
+		resultList.add("success");
+		return resultList;
+	}
+	
+	public int setLevel(int userGrade, int userLevel) {
+		if(userGrade >= 500 && userGrade <1000) {
+			userLevel = 1;
+		}else if(userGrade >=1000 && userGrade <2000) {
+			userLevel += 1;
+		}if(userGrade >= 2000 && userGrade <3000) {
+			userLevel = 2;
+		}else if(userGrade >=3000 && userGrade <4000) {
+			userLevel += 1;
+		}if(userGrade >= 4000 && userGrade <5000) {
+			userLevel = 3;
+		}else if(userGrade >=5000 && userGrade <6000) {
+			userLevel = 4;
+		}
+		if(userGrade >= 6000 && userGrade <7000) {
+			userLevel = 5;
+		}else if(userGrade >=7000 && userGrade <8000) {
+			userLevel = 6;
+		}
+		if(userGrade >= 8000 && userGrade <90000) {
+			userLevel = 7;
+		}else if(userGrade >=9000 && userGrade <10000) {
+			userLevel = 8;
+		}
+		if(userGrade >= 10000 && userGrade <11000) {
+			userLevel = 9;
+		}else if(userGrade >=11000 && userGrade <12000) {
+			userLevel = 10;
+		}
+		
+		return userLevel;
 	}
 }

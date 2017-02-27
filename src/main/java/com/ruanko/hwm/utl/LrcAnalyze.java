@@ -182,7 +182,7 @@ public class LrcAnalyze {
   
     private void LrcAnalyzeStart() {  
     	try {  
-            BufferedReader br = new BufferedReader(new InputStreamReader(filein, "UTF-8"));  
+            BufferedReader br = new BufferedReader(new InputStreamReader(filein, "GBK"));  
             String ContentLine;  
             while((ContentLine = br.readLine()) != null){  
                 // System.out.println(ContentLine[i]);  

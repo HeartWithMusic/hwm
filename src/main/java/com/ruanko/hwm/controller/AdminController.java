@@ -1,6 +1,6 @@
 package com.ruanko.hwm.controller;
 
-import java.io.IOException;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,16 +12,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.ruanko.hwm.bean.Admin;
 import com.ruanko.hwm.bean.AdminRoleRela;
 import com.ruanko.hwm.bean.Music;
 import com.ruanko.hwm.bean.Role;
 import com.ruanko.hwm.bean.Singer;
-import com.ruanko.hwm.bean.SingerTypeRela;
 import com.ruanko.hwm.bean.User;
 import com.ruanko.hwm.service.IAdminRoleService;
 import com.ruanko.hwm.service.IAdminService;
@@ -29,9 +26,7 @@ import com.ruanko.hwm.service.IMusicService;
 import com.ruanko.hwm.service.IRoleService;
 import com.ruanko.hwm.service.ISingerService;
 import com.ruanko.hwm.service.IUserService;
-import com.ruanko.hwm.utl.DateTime;
 import com.ruanko.hwm.utl.MD5Util;
-import com.ruanko.hwm.utl.Upload_Download;
 
 @Controller
 @RequestMapping("/admin")
