@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.fileupload.util.Streams;
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.ruanko.hwm.bean.Admin;
 import com.ruanko.hwm.bean.Collection;
 import com.ruanko.hwm.bean.Music;
 import com.ruanko.hwm.bean.MusicSingerRela;
@@ -46,6 +48,7 @@ public class SingerController {
 	@Resource
 	public IUserSingerService userSingerService;
 	
+	private static Logger logger = Logger.getLogger(SingerController.class);
 	
 	//每页项数
 	private Integer pageSize = 5;
@@ -148,8 +151,9 @@ public class SingerController {
 		// 删除歌曲相关文件
 		String root = request.getSession().getServletContext().getRealPath("/static/singer");
 		String singername = singer.getSingername();
-		Upload_Download.deleteFile(root + "\\" + singername + ".jpg");
-
+		//Upload_Download.deleteFile(root + "\\" + singername + ".jpg");
+		Admin admin = (Admin)request.getSession().getAttribute("admin");
+		logger.info("[AdminInfo:" + admin.getId() + "," + admin.getAdminname() + "] : delete the music[SingerInfo : " + singer.getId() + "," + singer.getSingername() + "]");
 		List<Singer> singerList = singerService.getAllSinger();
 		// System.out.println(musicList);
 		model.addAttribute("singerList", singerList);

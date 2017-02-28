@@ -21,9 +21,11 @@ public class TestAdmin {
 	
 	@Test
 	public void testMybatis(){
-		Admin admin = adminService.getAdminById(1);
+		Admin admin = adminService.getAdminById(6);
 	
 		logger.info(JSON.toJSONString(admin));
+		logger.info("欢迎您");
+		logger.error("错误");
 		
 		System.out.println(admin.getAdminname());
 		

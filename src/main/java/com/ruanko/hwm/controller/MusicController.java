@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.fileupload.util.Streams;
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -24,6 +25,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.ruanko.hwm.bean.Admin;
 import com.ruanko.hwm.bean.Collection;
 import com.ruanko.hwm.bean.DownloadRela;
 import com.ruanko.hwm.bean.Music;
@@ -75,6 +77,8 @@ public class MusicController {
 		
 	//每页项数
 	private Integer pageSize = 5;
+	
+	private static Logger logger = Logger.getLogger(MusicController.class);
 	/**
 	 * 添加音乐
 	 * 
@@ -221,11 +225,13 @@ public class MusicController {
 		Music music = musicService.getMusicById(id);
 		musicService.deleteMusic(id);
 		// 删除歌曲相关文件
-		String root = request.getSession().getServletContext().getRealPath("/static/music");
-		String musicname = music.getMusicname();
-		Upload_Download.deleteFile(root + "/song/" + musicname + ".mp3");
-		Upload_Download.deleteFile(root + "/img/" + musicname + ".jpg");
-		Upload_Download.deleteFile(root + "/lrc/" + musicname + ".lrc");
+		//String root = request.getSession().getServletContext().getRealPath("/static/music");
+		//String musicname = music.getMusicname();
+		//Upload_Download.deleteFile(root + "/song/" + musicname + ".mp3");
+		//Upload_Download.deleteFile(root + "/img/" + musicname + ".jpg");
+		//Upload_Download.deleteFile(root + "/lrc/" + musicname + ".lrc");
+		Admin admin = (Admin)request.getSession().getAttribute("admin");
+		logger.info("[AdminInfo:" + admin.getId() + "," + admin.getAdminname() + "] : delete the music[MusicInfo : " + music.getId() + "," + music.getMusicname() + "]");
 
 		List<Music> musicList = musicService.getAllMusic();
 		// System.out.println(musicList);
@@ -506,7 +512,7 @@ public class MusicController {
 		//获取对应的歌手
 		for(Music m : resultList) {
 			//System.out.println(m.getId());
-			System.out.println(musicSingerService.getSingerByMusicId(m.getId()).getSingerid());
+			//System.out.println(musicSingerService.getSingerByMusicId(m.getId()).getSingerid());
 			Singer singer = singerService.getSingerById(musicSingerService.getSingerByMusicId(m.getId()).getSingerid());
 			singerList.add(singer);
 		}

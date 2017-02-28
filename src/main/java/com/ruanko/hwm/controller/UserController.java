@@ -18,6 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -51,6 +52,7 @@ import com.ruanko.hwm.service.ISingerTypeRelaService;
 import com.ruanko.hwm.service.ISingerTypeService;
 import com.ruanko.hwm.service.IUserService;
 import com.ruanko.hwm.service.IUserSingerService;
+import com.ruanko.hwm.test1.TestAdmin;
 import com.ruanko.hwm.utl.DateTime;
 import com.ruanko.hwm.utl.LrcAnalyze;
 import com.ruanko.hwm.utl.LrcAnalyze.LrcData;
@@ -90,6 +92,8 @@ public class UserController {
 	
 	//每页项数
 	private Integer pageSize = 5;
+	
+	private static Logger logger = Logger.getLogger(UserController.class);
 	
 	/**
 	 * 删除用户
@@ -347,7 +351,7 @@ public class UserController {
 	public String toHome(Model model, HttpServletRequest request) {
 		model.addAttribute("title", "心随乐动");
 		model.addAttribute("url", request.getRequestURL()+"1");
-		
+		logger.info(request.getRemoteAddr() + " : visit the websit");
 		model.addAttribute(new User());
 		return "showHome";
 	}
