@@ -8,4 +8,8 @@ public interface ICommentService {
 	void addComment(Comments comments);
 	
 	List<Comments> getCommentsListByMusicId(Integer musicid);
+	
+	void updateComment(Comments comment);
+	
+	Comments getCommentsById(Integer commentid);
 }

@@ -36,4 +36,18 @@ public class DateTime {
 		return new java.sql.Date(new java.util.Date().getTime());
 	}
 	
+	/**
+	 * 判断两个日期是不是同一天
+	 * @param lastDate
+	 * @param now
+	 * @return
+	 */
+	public static boolean judgeSameDay(Date lastDate, Date now) {
+		if(lastDate.getYear() == now.getYear() && lastDate.getMonth() == now.getMonth() && lastDate.getDay() == now.getDay()) {
+			return true;
+		}
+		
+		return false;
+	}
+	
 }

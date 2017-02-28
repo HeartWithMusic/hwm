@@ -809,6 +809,8 @@
 		        success : function(data) { 
 		        	if(data[0] == "success") {
 		        		alert(" + 10点经验");
+		        	}else {
+		        		alert("一日只能签到一次");
 		        	}
 		        	
 		        }  

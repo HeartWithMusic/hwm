@@ -94,11 +94,11 @@
 												</c:forEach>
 												
 												<p style = "margin-top:16px;float:right;width:460px;">${comment.comment }</p>	
-												 <a href="#" style = "float:right;clear:both;margin-top:-15px;">
+												 <span onmouseover="onLoveState(${comment.id })"  onclick="love(${comment.id})" style = "float:right;clear:both;margin-top:-15px;">
 												
-			         								 <span class="glyphicon glyphicon-thumbs-up" style="margin-right:10px;">  <p style = "display:inline;">${comment.love}</p></span>
+			         								 <span id="com_${comment.id }" class="glyphicon glyphicon-thumbs-up" style="margin-right:10px;">  <p id="comment_${comment.id}" style = "display:inline;">${comment.love}</p></span>
 			         								 
-			        							 </a>
+			        							 </span>
 			        							 <span style="float: right;margin: 10px;font-size:12px;"><fmt:formatDate value="${comment.commenttime}" pattern="yyyy年MM月dd日 HH:mm:ss"/></span>
 											</div>
 										</c:forEach>
@@ -254,8 +254,8 @@
 				        			} 
 				        			html+='<a href = "#" style = "margin-left:10px;float:left;margin-top:15px;">用户名:' + data[1][i].username + '</a>';
 									html+='<p style = "margin-top:16px;float:right;width:460px;">' + data[0][i].comment + '</p>';	
-									html+='<a href="#" style = "float:right;clear:both;margin-top:-15px;">';
-									html+='<span class="glyphicon glyphicon-thumbs-up">  <p style = "display:inline;">' + data[0][i].love + '</p></span> </a>';
+									html+='<span onmouseover="onLoveState(' + data[0][i].id + ')"  onclick="love(' + data[0][i].id + ')" style = "float:right;clear:both;margin-top:-15px;">';
+									html+='<span id="com_' + data[0][i].id + '" class="glyphicon glyphicon-thumbs-up">  <p id="comment_' + data[0][i].id + '" style = "display:inline;">' + data[0][i].love + '</p></span> </span>';
 									html+='<span style="float: right;margin: 10px;"> 评论时间 : ' + getMyDate(data[0][i].commenttime) + '</span>';
 									html+='</div>';
 				        		}
@@ -268,5 +268,45 @@
 		}
 	};
     
+	//点赞
+	function love(id) {
+    	var user = "${sessionScope.user}";
+		var userid = "${sessionScope.user.id}";
+		//alert(comment);
+		//alert(id);
+		if(user == "") {
+			$("#myModal").modal('show');
+		}else {
+			$.ajax({  
+				      type : "post",  
+				      url : $('#path24').val() + "/home/addLove",  
+				      dataType:"json",
+				      cache : false,  
+				      data : {  
+				          userid : userid,
+				          commentid : id
+				      },  
+				      async : false,  
+				      error : function() {  
+				          alert("网络异常！");  
+				      },  
+				      success : function(data) { 
+				    	  if(data[1] == '0'){
+				    		  //取消赞
+				    		  $("#com_"+id).css("color","black");
+				    	  }else {
+				    		  //点赞
+				    		  $("#com_"+id).css("color","red");
+				    	  }
+				        	
+				    	  $("#comment_"+id).html(data[0]);
+				      }
+				});
+		}
+	}
+	
+	function onLoveState(id) {
+		$("#com_"+id).css("cursor","pointer");
+	}
 </script>		
 		

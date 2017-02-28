@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -29,11 +30,13 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.ruanko.hwm.bean.Comments;
 import com.ruanko.hwm.bean.DownloadRela;
+import com.ruanko.hwm.bean.LoveRela;
 import com.ruanko.hwm.bean.Music;
 import com.ruanko.hwm.bean.MusicSingerRela;
 import com.ruanko.hwm.bean.MusicType;
 import com.ruanko.hwm.bean.MusicTypeRela;
 import com.ruanko.hwm.bean.PlayRecord;
+import com.ruanko.hwm.bean.SignRela;
 import com.ruanko.hwm.bean.Singer;
 import com.ruanko.hwm.bean.SingerType;
 import com.ruanko.hwm.bean.SingerTypeRela;
@@ -42,11 +45,13 @@ import com.ruanko.hwm.bean.UserSingerRela;
 import com.ruanko.hwm.service.ICollectionService;
 import com.ruanko.hwm.service.ICommentService;
 import com.ruanko.hwm.service.IDownloadService;
+import com.ruanko.hwm.service.ILoveRelaService;
 import com.ruanko.hwm.service.IMusicService;
 import com.ruanko.hwm.service.IMusicSingerService;
 import com.ruanko.hwm.service.IMusicTypeRelationService;
 import com.ruanko.hwm.service.IMusicTypeService;
 import com.ruanko.hwm.service.IPlayRecordService;
+import com.ruanko.hwm.service.ISignService;
 import com.ruanko.hwm.service.ISingerService;
 import com.ruanko.hwm.service.ISingerTypeRelaService;
 import com.ruanko.hwm.service.ISingerTypeService;
@@ -88,7 +93,13 @@ public class UserController {
 	@Resource
 	private ICommentService commentService;
 	@Resource
+	private ILoveRelaService loveRelaService;
+	
+	@Resource
 	private IPlayRecordService playRecordService;
+	
+	@Resource
+	private ISignService signService;
 	
 	//每页项数
 	private Integer pageSize = 5;
@@ -347,6 +358,53 @@ public class UserController {
 	}
 	
 	
+	@RequestMapping("/ajax_musicList_operation/")
+	public @ResponseBody List<Music> findMusicAjax1(String pageIndex, String pageSize, String totalPage, String cat) {
+		//System.out.println(musicName);
+		return ajax_common_musicList(pageIndex, pageSize, totalPage, cat);
+		
+	}
+	
+	/**
+	 * 返回每页的数据
+	 * @param pageIndex
+	 * @param pageSize
+	 * @param totalPage
+	 * @return
+	 */
+	public List<Music> ajax_common_musicList(String pageIndex, String pageSize, String totalPage, String cat) {
+		List<Music> musicList = new ArrayList<Music>();
+		//判断是否为搜索
+		if(cat.equals("0")) {
+			musicList = musicService.getAllMusic();
+			//System.out.println("adfsfds");
+		}else {
+			Integer catid = Integer.parseInt(cat);
+			//System.out.println(id);
+			//根据id获取歌曲类别信息
+			//String typeName = musicTypeService.getMusicTypeById(catid).getTypename();
+			//获取歌曲列表
+			List<MusicTypeRela> mtrList = musicTypeRelaService.getMusicByTypeId(catid);
+			for(MusicTypeRela m : mtrList) {
+				musicList.add(musicService.getMusicById(m.getMusicid()));
+			}
+		}
+		
+		Integer pageIndex1 = Integer.parseInt(pageIndex);
+		Integer pageSize1 = Integer.parseInt(pageSize);
+		Integer totalPage1 = Integer.parseInt(totalPage);
+		//System.out.println(totalPage1);
+		//System.out.println(musicList.size());
+		List<Music> resultList = new ArrayList<Music>();
+		if (pageIndex1 <= totalPage1 / pageSize1) {
+			resultList = musicList.subList((pageIndex1 - 1) * pageSize1, pageIndex1 * pageSize1);
+		} else {
+			resultList = musicList.subList((pageIndex1 - 1) * pageSize1, totalPage1);
+		}
+		
+		return resultList;
+	}
+	
 	@RequestMapping({"/discover/"})
 	public String toHome(Model model, HttpServletRequest request) {
 		model.addAttribute("title", "心随乐动");
@@ -522,17 +580,21 @@ public class UserController {
 	
 	@RequestMapping({"/discover/musicList"})
 	public String toMusicList(Model model, HttpServletRequest request) {
-		
+  		int counts = 0;
 		String typeName = "";
 		int size = 0;
+		String cat = "";
 		//System.out.println(size);
 		List<Music> musicList = new ArrayList<Music>();
 		if(request.getParameter("cat") == null) {
 			typeName += "全部";
 			musicList = musicService.getAllMusic();
+			counts = musicList.size();
 			size = musicList.size();
+			cat += "";
 		}else {
 			Integer id = Integer.parseInt(request.getParameter("cat"));
+			cat += id.toString();
 			//System.out.println(id);
 			//根据id获取歌曲类别信息
 			typeName = musicTypeService.getMusicTypeById(id).getTypename();
@@ -542,12 +604,14 @@ public class UserController {
 				musicList.add(musicService.getMusicById(m.getMusicid()));
 			}
 			size = mtrList.size();
+			counts = size;
 		}
-		
+		model.addAttribute("cat", cat);
+		model.addAttribute("pageSize", 20);
+		model.addAttribute("counts", counts);
 		model.addAttribute("typeName", typeName);
 		model.addAttribute("musicList", musicList);
 		model.addAttribute("size", (int)Math.ceil(size*1.0/5));
-		model.addAttribute("cat", typeName);
 		model.addAttribute("title", "歌单");
 		model.addAttribute(new User());
 		return "showMusicList";
@@ -1027,15 +1091,46 @@ public class UserController {
 	@RequestMapping({"/addLevel"})
 	public @ResponseBody List<String> addLevel(String userid){
 		int userId = Integer.parseInt(userid);
-		User user = userService.findUser(userId);
-		//int userGrade = user.getGrade();
-		user.setGrade(user.getGrade() + 10);
-		user.setLevel(setLevel(user.getGrade(), user.getLevel()));
+		String message = "";
+		SignRela signRela = signService.getSignRelaByUseid(userId);
+		if(signRela == null) {
+			//添加到签到记录表
+			SignRela signRela1 = new SignRela();
+			signRela1.setUserid(userId);
+			signRela1.setSigntime(DateTime.getCurrentTime());
+			
+			signService.addSignRela(signRela1);
+			//保存积分
+			User user = userService.findUser(userId);
+			//int userGrade = user.getGrade();
+			user.setGrade(user.getGrade() + 10);
+			user.setLevel(setLevel(user.getGrade(), user.getLevel()));
+			
+			userService.updateUser(user);
+			
+			message += "success";
+		}else {
+			Date lastSignDate = signRela.getSigntime();
+			Date now = DateTime.getCurrentTime();
+			if(DateTime.judgeSameDay(lastSignDate, now)) {
+				message += "sameday";
+			}else {
+				//更新签到时间
+				signRela.setSigntime(now);
+				signService.updateSignRela(signRela);
+				//保存积分
+				User user = userService.findUser(userId);
+				//int userGrade = user.getGrade();
+				user.setGrade(user.getGrade() + 10);
+				user.setLevel(setLevel(user.getGrade(), user.getLevel()));
+				
+				userService.updateUser(user);
+				message += "success";
+			}
+		}
 		
-		//保存到数据库
-		userService.updateUser(user);
 		List<String> resultList = new ArrayList<String>();
-		resultList.add("success");
+		resultList.add(message);
 		return resultList;
 	}
 	
@@ -1102,6 +1197,41 @@ public class UserController {
 		resultList.add(commentsList);
 		resultList.add(userList);
 		resultList.add("success");
+		return resultList;
+	}
+	
+	@RequestMapping({"/addLove"})
+	public @ResponseBody List<String> addLove(String userid, String commentid){
+		int userId = Integer.parseInt(userid);
+		int commentId = Integer.parseInt(commentid);
+		//int musicId = Integer.parseInt(musicid);
+		//判断点赞表是否存在该点赞信息
+		LoveRela love = new LoveRela();
+		love.setUserid(userId);
+		love.setCommentid(commentId);
+		Integer i;
+		LoveRela love2 = loveRelaService.getLoveByUserAndComment(love);
+		if(love2 == null) {
+			//添加点赞记录并为评论点赞数加1
+			loveRelaService.addLoveRela(love);
+			Comments comment = commentService.getCommentsById(commentId);
+			comment.setLove(comment.getLove() + 1);
+			commentService.updateComment(comment);
+			i = 1;
+		}else {
+			//取消点赞
+			loveRelaService.deleteLoveRela(love2);
+			Comments comment = commentService.getCommentsById(commentId);
+			comment.setLove(comment.getLove() - 1);
+			commentService.updateComment(comment);
+			i = 0;
+		}
+		Comments comment = commentService.getCommentsById(commentId);
+		//返回该评论的点赞数
+		List<String> resultList = new ArrayList<String>();
+		resultList.add(comment.getLove().toString());
+		resultList.add(i.toString());
+		
 		return resultList;
 	}
 	

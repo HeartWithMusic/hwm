@@ -23,4 +23,12 @@ public class CommentServiceImpl implements ICommentService {
 		return commentsMapper.selectByMusicId(musicid);
 	}
 
+	public void updateComment(Comments comment) {
+		commentsMapper.updateByPrimaryKey(comment);
+	}
+
+	public Comments getCommentsById(Integer commentid) {
+		return commentsMapper.selectByPrimaryKey(commentid);
+	}
+
 }
