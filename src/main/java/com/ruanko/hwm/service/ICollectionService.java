@@ -10,4 +10,6 @@ public interface ICollectionService {
 	void addCollection(Collection coll);
 	
 	List<Collection> getAllCollection();
+	
+	void deleteCollectionById(Integer id);
 }

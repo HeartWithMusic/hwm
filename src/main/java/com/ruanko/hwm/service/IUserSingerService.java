@@ -8,4 +8,6 @@ public interface IUserSingerService {
 	List<UserSingerRela> getUserSingerByUserid(Integer userid);
 	
 	void addUserSinger(UserSingerRela usr);
+	
+	void deleteUserSingerById(Integer id);
 }

@@ -89,6 +89,8 @@
 	}
 </style>
 <div id="user_whole">
+	<input type="hidden" value="<%=request.getContextPath()%>" id="contextPath1"/>
+	<input type="hidden" value="${sessionScope.user.id }" id="sessionuserid1"/>
 	<c:choose>
 			<c:when test="${sessionScope.user == null }">
 				<!-- 没有登录显示-->
@@ -191,6 +193,9 @@
 												class="glyphicon glyphicon-plus"  style="margin-left: 5px;font-size:20px;"></i>&nbsp;&nbsp;</span>
 											
 										</div>
+										<div style="float: right;">
+											<button class="btn btn-primary" style = "width: 50px;font-size: 10px;padding: 2px;float: right;margin-top: -50px;margin-right: -50px;" onclick="cancelMusic(${music.id})" >取消收藏</button>
+										</div>
 									</li>
 									</c:forEach>
 								</ul>
@@ -218,6 +223,9 @@
 											<div title="${singer.introduction}" style="width: 150px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">
 												简介:${singer.introduction}
 											</div>
+										</div>
+										<div style="float: right;">
+											<button class="btn btn-primary" style = "width: 50px;font-size: 10px;padding: 2px;float: right;" onclick="cancelSinger(${singer.id})" >取消关注</button>
 										</div>
 									</li>
 									</c:forEach>
@@ -329,6 +337,58 @@
 	</c:choose>
 	
 </div>
+<div class="modal fade" id="myModal_tip2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog" id = "dialog" style = "width:500px;margin-top:150px" role="document"> <!--修改窗口位置-->
+		<div class="modal-content" style = "width:500px;height:300px;">
+			<div class="modal-header" id ="aaa" style = "padding:0px !important; background-color:#2D2D2D;border-radius:5px 5px 0px 0px;height:40px;">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true" style = "color:white;padding-right:20px;padding-top:10px;">
+					&times;
+				</button>
+				<h4 class="modal-title" id="myModalLabel" style = "color:white;font-size:150%;padding-left:15px;padding-top:5px;">
+					提示信息
+				</h4>
+			</div>
+			<div class="modal-body" style = "height:260px;width:500px;"> 
+				<div id="my_tip_info" style="font-size:18px;height:130px;margin-top:40px;text-align: center;word-break:break-all;"  >
+					确定取消收藏歌曲?
+				</div>
+				<div style = "padding-top: 30px;width: 400px;margin-top: -20px;margin-left: 80px;">
+						<button type="button" style="width:150px;" class="btn btn-default" data-dismiss="modal">取消
+						</button>
+						<button onclick="deleteMusic()" type="button" style="width:150px;" class="btn btn-primary">
+							确定
+						</button>
+				</div>
+			</div>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal -->
+</div>
+<div class="modal fade" id="myModal_tip3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog" id = "dialog" style = "width:500px;margin-top:150px" role="document"> <!--修改窗口位置-->
+		<div class="modal-content" style = "width:500px;height:300px;">
+			<div class="modal-header" id ="aaa" style = "padding:0px !important; background-color:#2D2D2D;border-radius:5px 5px 0px 0px;height:40px;">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true" style = "color:white;padding-right:20px;padding-top:10px;">
+					&times;
+				</button>
+				<h4 class="modal-title" id="myModalLabel" style = "color:white;font-size:150%;padding-left:15px;padding-top:5px;">
+					提示信息
+				</h4>
+			</div>
+			<div class="modal-body" style = "height:260px;width:500px;"> 
+				<div id="my_tip_info" style="font-size:18px;height:130px;margin-top:40px;text-align: center;word-break:break-all;"  >
+					确定取消关注歌手?
+				</div>
+				<div style = "padding-top: 30px;width: 400px;margin-top: -20px;margin-left: 80px;">
+						<button type="button" style="width:150px;" class="btn btn-default" data-dismiss="modal">取消
+						</button>
+						<button onclick="deleteSinger()" type="button" style="width:150px;" class="btn btn-primary">
+							确定
+						</button>
+				</div>
+			</div>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal -->
+</div>
 <script>
 function change1_mymusic_index1(id) {
 		
@@ -363,5 +423,26 @@ function change1_mymusic_index3(id) {
 	
 	function change2_mymusic_index4(id) {
 		$("#mymusic_index4_"+id).css("color","black");
+	}
+	
+	var musicid;
+	var singerid;
+	
+	function cancelMusic(id){
+		$("#myModal_tip2").modal('show');
+		musicid = id;
+	}
+
+	function cancelSinger(id){
+		$("#myModal_tip3").modal('show');
+		singerid = id;
+	}
+	
+	function deleteMusic(){
+		window.location.href=document.getElementById("contextPath1").value + "/home/deleteMusicCollection?userid=" + document.getElementById("sessionuserid1").value  + "&musicid=" + musicid ;
+	}
+
+	function deleteSinger(){
+		window.location.href=document.getElementById("contextPath1").value + "/home/deleteUserSinger?userid=" + document.getElementById("sessionuserid1").value  + "&singerid=" + singerid ;
 	}
 	</script>

@@ -31,7 +31,7 @@
 		var url = window.location.href;
 		window.parent.ifurl(url);
 		
-		console.info("${title}");
+		//console.info("${title}");
 		if("${title}" == null) {
 			$("#top_first").addClass("active");
 			$("#top_second").removeClass("active");
@@ -66,10 +66,12 @@
 			        },  
 			        async : false,  
 			        error : function() {  
-			        	 alert("网络异常！");  
+			        	$("#myModal_tip").modal('show');
+						$("#my_tip_info").html("网络异常");  
 			        },  
 			        success : function(data) { 
-			        	alert(data[0]);
+			        	$("#myModal_tip").modal('show');
+						$("#my_tip_info").html(data[0]);
 			        }  
 			    }); 
 			}
@@ -111,10 +113,12 @@
 			        data : {list :params},
 			        async : false,  
 			        error : function() {  
-			        	 alert("网络异常！");  
+			        	$("#myModal_tip").modal('show');
+						$("#my_tip_info").html("网络异常");
 			        },  
 			        success : function(data) { 
-			        	alert(data[0]);
+			        	$("#myModal_tip").modal('show');
+						$("#my_tip_info").html(data[0]);
 			        }  
 			    }); 
 			}
@@ -147,7 +151,8 @@
 			        },  
 			        async : false,  
 			        error : function() {  
-			        	 alert("网络异常！");  
+			        	$("#myModal_tip").modal('show');
+						$("#my_tip_info").html("网络异常");  
 			        },  
 			        success : function(data) { 
 		                 download1($('#contextPath').val() + "/music/download1", 'post', data[0]); // 下载文件

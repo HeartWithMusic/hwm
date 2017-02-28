@@ -22,5 +22,9 @@ public class UserSingerService implements IUserSingerService {
 	public void addUserSinger(UserSingerRela usr) {
 		userSingerRelaMapper.insert(usr);
 	}
+
+	public void deleteUserSingerById(Integer id) {
+		userSingerRelaMapper.deleteByPrimaryKey(id);
+	}
 	
 }

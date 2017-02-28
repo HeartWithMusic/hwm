@@ -38,10 +38,12 @@ function addSingerColl(id) {
 		        },  
 		        async : false,  
 		        error : function() {  
-		        	 alert("网络异常！");  
+		        	$("#myModal_tip").modal('show');
+					$("#my_tip_info").html("网络异常");  
 		        },  
 		        success : function(data) { 
-		        	alert(data[0]);
+		        	$("#myModal_tip").modal('show');
+					$("#my_tip_info").html(data[0]);  
 		        }  
 		    }); 
 		}

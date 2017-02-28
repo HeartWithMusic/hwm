@@ -58,7 +58,7 @@
 						</div>
 			</div>
 			
-				<div id="musicMess_left_bottom" style="margin:50px 10px 50px 250px;float:left;" >
+				<div id="musicMess_left_bottom" style="margin:50px 10px 200px 250px;float:left;" >
 								<a id="pinglun"></a>
 								<div id = "comment" style="height:100px;">
 									<div style = "width:580px;height:33px;margin-left:-200px;border-bottom:2px solid #c20c0c">
@@ -69,7 +69,14 @@
 											<img src = "<%=request.getContextPath()%>/img/front/home/touxiang.png" style = "width:50px;height:50px;float:left;" ></img>
 										</c:if>
 										<c:if test="${sessionScope.user != null}">
-											<img src = "<%=request.getContextPath()%>/static/user/${sessionScope.user.img}" style = "width:50px;height:50px;float:left;" ></img>
+											<c:choose>
+												<c:when test="${sessionScope.user.img == '0' }">
+													<img src = "<%=request.getContextPath()%>/img/front/home/default_user.jpg" style = "width:50px;height:50px;float:left;"></img>
+												</c:when>
+												<c:otherwise>
+													<img src = "<%=request.getContextPath()%>/static/user/${sessionScope.user.img}" style = "width:50px;height:50px;float:left;"></img>
+												</c:otherwise>
+											</c:choose>
 										</c:if>
 										<textarea id="comment_info" onclick="judgeLogin()" placeholder="评论" style = "margin-left:20px;width:510px;resize:none;border:1px solid #d3d3d3;"></textarea>
 										<button onclick="pinglun(${music.id})" class="btn btn-primary" style = "margin-bottom:-70px;margin-left:-60px;">评论</button>
@@ -83,7 +90,7 @@
 													<c:if test="${i.index == j.index }">
 														<c:choose>
 															<c:when test="${user.img == '0' }">
-																<img src = "<%=request.getContextPath()%>/img/front/home/touxiang.png" style = "width:50px;height:50px;float:left;margin-top:10px;"></img>
+																<img src = "<%=request.getContextPath()%>/img/front/home/default_user.jpg" style = "width:50px;height:50px;float:left;margin-top:10px;"></img>
 															</c:when>
 															<c:otherwise>
 																<img src = "<%=request.getContextPath()%>/static/user/${user.img}" style = "width:50px;height:50px;float:left;margin-top:10px;"></img>
@@ -206,7 +213,8 @@
 		}else {
 			//alert(id);
 			if(comment == "") {
-				alert("评论不能为空");
+				$("#myModal_tip").modal('show');
+				$("#my_tip_info").html("评论不能为空");  
 			}else {
 				//alert(comment);
 				$.ajax({  
@@ -221,7 +229,8 @@
 				        },  
 				        async : false,  
 				        error : function() {  
-				        	 alert("网络异常！");  
+				        	$("#myModal_tip").modal('show');
+							$("#my_tip_info").html("网络异常");   
 				        },  
 				        success : function(data) { 
 				        	 function getMyDate(str){  
@@ -252,11 +261,11 @@
 				        			}else{
 				        				html+='<img src = "<%=request.getContextPath()%>/static/user/' + data[1][i].img + '"  style="width:50px;height:50px;float:left;margin-top:10px;"></img>';
 				        			} 
-				        			html+='<a href = "#" style = "margin-left:10px;float:left;margin-top:15px;">用户名:' + data[1][i].username + '</a>';
+				        			html+='<a href = "#" style = "margin-left:10px;float:left;margin-top:15px;color:#0373c2;">' + data[1][i].username + '</a>';
 									html+='<p style = "margin-top:16px;float:right;width:460px;">' + data[0][i].comment + '</p>';	
 									html+='<span onmouseover="onLoveState(' + data[0][i].id + ')"  onclick="love(' + data[0][i].id + ')" style = "float:right;clear:both;margin-top:-15px;">';
 									html+='<span id="com_' + data[0][i].id + '" class="glyphicon glyphicon-thumbs-up">  <p id="comment_' + data[0][i].id + '" style = "display:inline;">' + data[0][i].love + '</p></span> </span>';
-									html+='<span style="float: right;margin: 10px;"> 评论时间 : ' + getMyDate(data[0][i].commenttime) + '</span>';
+									html+='<span style="float: right;margin: 10px;font-size:12px;">  ' + getMyDate(data[0][i].commenttime) + '</span>';
 									html+='</div>';
 				        		}
 				        	}
@@ -288,7 +297,8 @@
 				      },  
 				      async : false,  
 				      error : function() {  
-				          alert("网络异常！");  
+				    	  $("#myModal_tip").modal('show');
+							$("#my_tip_info").html("网络异常");    
 				      },  
 				      success : function(data) { 
 				    	  if(data[1] == '0'){

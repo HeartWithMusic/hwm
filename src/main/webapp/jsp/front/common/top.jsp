@@ -197,6 +197,29 @@
 		</div><!-- /.modal-content -->
 	</div><!-- /.modal -->
 </div>
+<div class="modal fade" id="myModal_tip" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog" id = "dialog" style = "width:500px;margin-top:150px" role="document"> <!--修改窗口位置-->
+		<div class="modal-content" style = "width:500px;height:300px;">
+			<div class="modal-header" id ="aaa" style = "padding:0px !important; background-color:#2D2D2D;border-radius:5px 5px 0px 0px;height:40px;">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true" style = "color:white;padding-right:20px;padding-top:10px;">
+					&times;
+				</button>
+				<h4 class="modal-title" id="myModalLabel" style = "color:white;font-size:150%;padding-left:15px;padding-top:5px;">
+					提示信息
+				</h4>
+			</div>
+			<div class="modal-body" style = "height:260px;width:500px;"> 
+				<div id="my_tip_info" style="font-size:18px;height:130px;margin-top:40px;text-align: center;word-break:break-all;"  >
+					
+				</div>
+				<div style = "padding-top:30px;margin-left:45px;width:200px">
+							<button  class="btn btn-primary" style = "width:200px;margin-top: -30px;margin-left: 90px;" data-dismiss="modal">确定</button>
+				</div>
+			</div>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal -->
+</div>
+<!--<button class="btn btn-primary" style = "width:200px;" onclick="showModal1()" >登陆</button>-->
 	<script>
 		goTopEx();		
 		function toLogup() {
@@ -230,6 +253,11 @@
 		
 		function showModal() {
 			$('#myModal').modal('show');
+		}
+		
+		function showModal_my(data){
+			$("#myModal_tip").modal('show');
+			$("#my_tip_info").html(data);
 		}
 		
 	</script>

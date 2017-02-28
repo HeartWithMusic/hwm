@@ -26,5 +26,11 @@ public class CollectionServiceImpl implements ICollectionService {
 	public List<Collection> getAllCollection() {
 		return collectionMapper.selectAll();
 	}
+
+	public void deleteCollectionById(Integer id) {
+		collectionMapper.deleteByPrimaryKey(id);
+	}
+
+	
 	
 }

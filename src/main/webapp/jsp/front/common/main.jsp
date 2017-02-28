@@ -13,7 +13,6 @@
 	<iframe scrolling="auto" name="aa" id="aa" frameborder="0" src="${url == null ? 'http://localhost:8080/hwm/home/discover/1' : url}" style="position: absolute;left: 0;top: 0;width: 100%;height: 100%;border: 0;"></iframe>
 	<jsp:include page="player.jsp"></jsp:include>
 	
-	
 </body>
 <script type="text/javascript">
 		//var url = window.location.href;
@@ -32,7 +31,7 @@
 		$("#body").bind("keydown", function(event) {
             if (event.keyCode == 116) {
                  if($("#aa") != null) {
-                	alert(116);
+                	//alert(116);
                     $("#aa").window.location.reload();      
                     return false;
                 } 

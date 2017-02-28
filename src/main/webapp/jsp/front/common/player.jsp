@@ -347,7 +347,7 @@
 			        },  
 			        async : false,  
 			        error : function() {  
-			        	 alert("网络异常！");  
+			        	document.getElementById('aa').contentWindow.showModal_my("网络异常");
 			        },  
 			        success : function(data) { 
 		                 download11($('#path').val() + "/music/download1", 'post', data[0]); // 下载文件
@@ -378,10 +378,10 @@
 			        },  
 			        async : false,  
 			        error : function() {  
-			        	 alert("网络异常！");  
+			        	document.getElementById('aa').contentWindow.showModal_my("网络异常");
 			        },  
 			        success : function(data) { 
-			        	alert(data[0]);
+			        	document.getElementById('aa').contentWindow.showModal_my(data[0]);  
 			        }  
 			    }); 
 			}

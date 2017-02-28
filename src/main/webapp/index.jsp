@@ -203,7 +203,7 @@
 							<div class="item active" >
 								<c:forEach items="${musicList2}" var="music" begin="0" end="4" varStatus="i">
 									<c:choose>
-										<c:when test="${i.index == 1}">
+										<c:when test="${i.index == 4}">
 											<a class='msk' href="<%=request.getContextPath()%>/home/music?id=${music.id}">
 												<div class="lunbo_left" style="float:left;width: 100px;margin-left:20px;margin-top: 25px;" onmouseover="change1_index(${music.id})" onmouseout="change2_index(${music.id})" >
 													<img width="100px" height="100px" class='j-img' src="<%=request.getContextPath()%>/static/music/img/${music.img}"></img>
@@ -464,10 +464,10 @@
 			<c:when test="${sessionScope.user == null }">
 				<!-- 没有登录显示-->
 				<div style="background: 	#F5F5F5;border:1px solid  #DCDCDC">
-					<p style="font-size:10pt;margin-left:20px;margin-right:20px;margin-top:15px;">
+					<p style="font-size:10pt;margin-left:20px;margin-right:20px;margin-top:15px;text-align: center;">
 						登录心随乐动，可以享受无限收藏的乐趣
 					</p>
-					<button type="button" class="btn btn-danger" style="margin-left:50px;margin-top:10px;margin-bottom:15px;" data-toggle="modal" data-target="#myModal">用户登录</button>
+					<button type="button" class="btn btn-danger" style="margin-left:80px;margin-top:10px;margin-bottom:15px;" data-toggle="modal" data-target="#myModal">用户登录</button>
 				</div>
 			</c:when>
 			<c:when test="${sessionScope.user != null }">
@@ -523,7 +523,7 @@
 		
 		
 	<!--入驻歌手-->	
-		<div style="border:1px solid #DCDCDC;height:1600px">
+		<div style="border:1px solid #DCDCDC;height:1300px">
 			<div style="margin-top:20px;">
 				<span style="margin-left:20px;">入驻歌手</span>
 				<a href="<%=request.getContextPath()%>/home/discover/singer?cat=0" style="margin-left:70px;color:gray;font-size:10pt;">查看全部></a>
@@ -804,13 +804,16 @@
 		        },  
 		        async : false,  
 		        error : function() {  
-		        	 alert("网络异常！");  
+		        	$("#myModal_tip").modal('show');
+					$("#my_tip_info").html("网络异常");    
 		        },  
 		        success : function(data) { 
 		        	if(data[0] == "success") {
-		        		alert(" + 10点经验");
+		        		$("#myModal_tip").modal('show');
+						$("#my_tip_info").html("+ 10点经验");  
 		        	}else {
-		        		alert("一日只能签到一次");
+		        		$("#myModal_tip").modal('show');
+						$("#my_tip_info").html("一日只能签到一次");  
 		        	}
 		        	
 		        }  

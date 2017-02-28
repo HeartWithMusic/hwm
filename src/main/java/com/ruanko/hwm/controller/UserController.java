@@ -405,6 +405,58 @@ public class UserController {
 		return resultList;
 	}
 	
+	@RequestMapping("/ajax_album_operation/")
+	public @ResponseBody List<Music> findAlbumAjax1(String pageIndex, String pageSize, String totalPage, String cat) {
+		//System.out.println(musicName);
+		return ajax_common_albumList(pageIndex, pageSize, totalPage, cat);
+		
+	}
+	
+	/**
+	 * 返回每页的数据
+	 * @param pageIndex
+	 * @param pageSize
+	 * @param totalPage
+	 * @return
+	 */
+	public List<Music> ajax_common_albumList(String pageIndex, String pageSize, String totalPage, String cat) {
+		List<Music> musicList = new ArrayList<Music>();
+		//判断是否为搜索
+		if(cat.equals("0")) {
+			musicList = musicService.getAllMusic();
+			//System.out.println("adfsfds");
+		}else {
+			Integer catid = Integer.parseInt(cat);
+			//System.out.println(id);
+			//根据id获取歌曲类别信息
+			//String typeName = musicTypeService.getMusicTypeById(catid).getTypename();
+			//获取歌曲列表
+			List<MusicTypeRela> mtrList = musicTypeRelaService.getMusicByTypeId(catid);
+			for(MusicTypeRela m : mtrList) {
+				musicList.add(musicService.getMusicById(m.getMusicid()));
+			}
+		}
+		
+		Integer pageIndex1 = Integer.parseInt(pageIndex);
+		Integer pageSize1 = Integer.parseInt(pageSize);
+		Integer totalPage1 = Integer.parseInt(totalPage);
+		//System.out.println(totalPage1);
+		//System.out.println(musicList.size());
+		Collections.sort(musicList, new Comparator<Music>(){
+            public int compare(Music arg0, Music arg1) {
+                return arg1.getUploadtime().compareTo(arg0.getUploadtime()); 
+            }  
+        });
+		List<Music> resultList = new ArrayList<Music>();
+		if (pageIndex1 <= totalPage1 / pageSize1) {
+			resultList = musicList.subList((pageIndex1 - 1) * pageSize1, pageIndex1 * pageSize1);
+		} else {
+			resultList = musicList.subList((pageIndex1 - 1) * pageSize1, totalPage1);
+		}
+		
+		return resultList;
+	}
+	
 	@RequestMapping({"/discover/"})
 	public String toHome(Model model, HttpServletRequest request) {
 		model.addAttribute("title", "心随乐动");
@@ -497,6 +549,7 @@ public class UserController {
 	}
 	@RequestMapping({"/discover/rankList"})
 	public String toRankList(Model model, HttpServletRequest request) {
+		
 		int cat = 1;
 		//String imgPath = "";
 		//String info = "";
@@ -517,6 +570,10 @@ public class UserController {
 				singerList.add(singerService.getSingerById(musicSingerService.getSingerByMusicId(m.getId()).getSingerid()));
 			}
 		}else {
+//			String cat1 = "";
+//			if(request.getParameter("cat").contains("/rf")){
+//				cat1 += cat1.split("\\/rf")[0];
+//			}
 			Integer id = Integer.parseInt(request.getParameter("cat"));
 			if(id == 2) {
 //				typeName += "心动新歌榜";
@@ -685,7 +742,18 @@ public class UserController {
 			List<Music> musicList = new ArrayList<Music>();
 			//List<Singer> singerList = new ArrayList<Singer>();
 			List<Music> musicList_all = musicService.getAllMusic();
-			List<Music> musicList_all_1 = musicList_all;
+			String cat = request.getParameter("cat");
+			List<Music> musicList_all_1 = new  ArrayList<Music>();
+			if(cat == null || cat.equals("0")) {
+				musicList_all_1 = musicList_all;
+			}else {
+				int catid = Integer.parseInt(cat);
+				List<MusicTypeRela> mtrList = musicTypeRelaService.getMusicByTypeId(catid);
+				for(MusicTypeRela mtr1 : mtrList) {
+					musicList_all_1.add(musicService.getMusicById(mtr1.getMusicid()));
+				}
+			}
+			
 			Collections.sort(musicList_all, new Comparator<Music>(){
 	            public int compare(Music arg0, Music arg1) {
 	                int i = arg1.getUploadtime().compareTo(arg0.getUploadtime()); 
@@ -710,6 +778,9 @@ public class UserController {
 //			}
 		int size = (int)Math.ceil(musicList_all_1.size()*1.0/5);
 		
+		model.addAttribute("pageSize", 20);
+		model.addAttribute("counts", musicList_all_1.size());
+		model.addAttribute("cat", cat);
 		model.addAttribute("size", size);
 		model.addAttribute("musicList", musicList);
 		model.addAttribute("musicList_all_1", musicList_all_1);
@@ -1266,5 +1337,55 @@ public class UserController {
 		}
 		
 		return userLevel;
+	}
+	
+	/**
+	 * 删除收藏
+	 * @return
+	 */
+	@RequestMapping("/deleteMusicCollection")
+	public String deleteMusicCollection(Model model, HttpServletRequest request) {
+		if(!request.getParameter("musicid").contains("/rf")) {
+			int userId = Integer.parseInt(request.getParameter("userid"));
+			int musicId = Integer.parseInt(request.getParameter("musicid"));
+			int id = 0;
+			List<com.ruanko.hwm.bean.Collection> collectionList = collectionService.getCollectionByUserid(userId);
+			for(com.ruanko.hwm.bean.Collection c : collectionList) {
+				if(c.getMusicid() == musicId) {
+					id = c.getId();
+				}
+			}
+			
+			if(id != 0) {
+				collectionService.deleteCollectionById(id);
+			}
+		}
+		
+		return toMyMusic(model, request);
+	}
+	
+	/**
+	 * 删除收藏
+	 * @return
+	 */
+	@RequestMapping("/deleteUserSinger")
+	public String deleteUserSinger(Model model, HttpServletRequest request) {
+		if(!request.getParameter("singerid").contains("/rf")) {
+			int userId = Integer.parseInt(request.getParameter("userid"));
+			int singerId = Integer.parseInt(request.getParameter("singerid"));
+			int id = 0;
+			List<UserSingerRela> usr = userSingerService.getUserSingerByUserid(userId);
+			for(UserSingerRela u : usr) {
+				if(u.getSingerid() == singerId) {
+					id = u.getId();
+				}
+			}
+			
+			if(id != 0) {
+				userSingerService.deleteUserSingerById(id);
+			}
+		}
+		
+		return toMyMusic(model, request);
 	}
 }

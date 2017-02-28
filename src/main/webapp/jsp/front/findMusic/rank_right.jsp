@@ -126,7 +126,7 @@
 	}
 	for(var k=0;k<music_play.length;k++) {
 		//alert(music_play.eq(k).attr("id"));
-		if(music_play.eq(k).attr("id") == "music_"+window.parent.Player.data[window.parent.Player.currentIndex].id) {
+		if(music_play.eq(k).attr("id") == "music_" + window.parent.Player.data[window.parent.Player.currentIndex].id) {
 			music_play.eq(k).css("color","red"); 
 			music_play.eq(k).addClass("play_music");
 		}
@@ -208,10 +208,12 @@
 		        },  
 		        async : false,  
 		        error : function() {  
-		        	 alert("网络异常！");  
+		        	$("#myModal_tip").modal('show');
+					$("#my_tip_info").html("网络异常");    
 		        },  
 		        success : function(data) { 
-		        	alert(data[0]);
+		        	$("#myModal_tip").modal('show');
+					$("#my_tip_info").html(data[0]);  
 		        }  
 		    }); 
 		}
@@ -253,10 +255,12 @@
 		        data : {list :params},
 		        async : false,  
 		        error : function() {  
-		        	 alert("网络异常！");  
+		        	$("#myModal_tip").modal('show');
+					$("#my_tip_info").html("网络异常");    
 		        },  
 		        success : function(data) { 
-		        	alert(data[0]);
+		        	$("#myModal_tip").modal('show');
+					$("#my_tip_info").html(data[0]);  
 		        }  
 		    }); 
 		}
@@ -288,7 +292,8 @@
 		        },  
 		        async : false,  
 		        error : function() {  
-		        	 alert("网络异常！");  
+		        	$("#myModal_tip").modal('show');
+					$("#my_tip_info").html("网络异常");  
 		        },  
 		        success : function(data) { 
 	                 download1($('#contextPath').val() + "/music/download1", 'post', data[0]); // 下载文件
