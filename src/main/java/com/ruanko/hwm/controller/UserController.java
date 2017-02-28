@@ -619,7 +619,7 @@ public class UserController {
 					//System.out.println(m.getValue());
 					musicList.add(musicService.getMusicById(m.getKey()));
 				}
-				
+				musicList = musicList.subList(0, musicList_all.size() > 20 ? 20 : musicList_all.size());
 				singerList = new ArrayList<Singer>();
 				for(Music m : musicList ) {
 					singerList.add(singerService.getSingerById(musicSingerService.getSingerByMusicId(m.getId()).getSingerid()));

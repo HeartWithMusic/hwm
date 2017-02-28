@@ -207,8 +207,8 @@
 											<a class='msk' href="<%=request.getContextPath()%>/home/music?id=${music.id}">
 												<div class="lunbo_left" style="float:left;width: 100px;margin-left:20px;margin-top: 25px;" onmouseover="change1_index(${music.id})" onmouseout="change2_index(${music.id})" >
 													<img width="100px" height="100px" class='j-img' src="<%=request.getContextPath()%>/static/music/img/${music.img}"></img>
-													<div style="width:100px">${music.musicname }</div>
-													<span class="index_index" onclick="playSongById(${music.id})" ><i  id="index_${music.id }" onmouseover="change1_index(${music.id})" onmouseout="change2_index(${music.id})"   class="glyphicon glyphicon-play-circle "  style="color:#ccc;float:right;margin-right:5px;font-size:18px;margin-top:-65px;"></i></span>
+													<div style="width:100px;text-overflow: ellipsis;white-space: nowrap;overflow: hidden;">${music.musicname }</div>
+													<span class="index_index" onclick="playSongById(${music.id})" ><i  id="index_${music.id }" onmouseover="change1_index(${music.id})" onmouseout="change2_index(${music.id})"   class="glyphicon glyphicon-play-circle "  style="color:#ccc;float:right;margin-right:5px;font-size:18px;margin-top:-45px;"></i></span>
 												
 												</div>
 											</a>
@@ -217,7 +217,7 @@
 											<a class='msk' href="<%=request.getContextPath()%>/home/music?id=${music.id}">
 												<div class="lunbo_left" style="float:left;width: 100px;margin-left:20px;margin-top: 25px;" onmouseover="change1_index(${music.id})" onmouseout="change2_index(${music.id})" >
 													<img width="100px" height="100px" class='j-img' src="<%=request.getContextPath()%>/static/music/img/${music.img}"></img>
-													<div style="width:100px">${music.musicname }</div>
+													<div style="width:100px;text-overflow: ellipsis;white-space: nowrap;overflow: hidden;">${music.musicname }</div>
 													<span class="index_index" onclick="playSongById(${music.id})" ><i  id="index_${music.id }" onmouseover="change1_index(${music.id})" onmouseout="change2_index(${music.id})"   class="glyphicon glyphicon-play-circle "  style="color:#ccc;float:right;margin-right:5px;font-size:18px;margin-top:-45px;"></i></span>
 												
 												</div>
@@ -277,7 +277,7 @@
 									<a class='msk' href="<%=request.getContextPath()%>/home/music?id=${music.id}">
 											<div class="lunbo_left" style="float:left;width: 100px;margin-left:20px;margin-top: 25px;" onmouseover="change1_index(${music.id})" onmouseout="change2_index(${music.id})" >
 											<img width="100px" height="100px" class='j-img' src="<%=request.getContextPath()%>/static/music/img/${music.img}"></img>
-												<div style="width:100px">${music.musicname }</div>
+												<div style="width:100px;text-overflow: ellipsis;white-space: nowrap;overflow: hidden;">${music.musicname }</div>
 												<span onclick="playSongById(${music.id})" ><i id="index_${music.id }" onmouseover="change1_index(${music.id})" onmouseout="change2_index(${music.id})"   class="glyphicon glyphicon-play-circle"  style="color:#ccc;float:right;margin-right:5px;font-size:18px;margin-top:-45px;"></i></span>
 											
 											</div>
