@@ -29,6 +29,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.ruanko.hwm.bean.Comments;
+import com.ruanko.hwm.bean.CustomException;
 import com.ruanko.hwm.bean.DownloadRela;
 import com.ruanko.hwm.bean.LoveRela;
 import com.ruanko.hwm.bean.Music;
@@ -548,9 +549,10 @@ public class UserController {
 		return "showHome1";
 	}
 	@RequestMapping({"/discover/rankList"})
-	public String toRankList(Model model, HttpServletRequest request) {
+	public String toRankList(Model model, HttpServletRequest request) throws Exception {
 		
 		int cat = 1;
+		
 		//String imgPath = "";
 		//String info = "";
 		List<Music> musicList = new ArrayList<Music>();
@@ -567,6 +569,9 @@ public class UserController {
 			for(Music m : musicList ) {
 				//System.out.println(m.getId());
 				//System.out.println(musicSingerService.getSingerByMusicId(m.getId()));
+				if(singerService.getSingerById(musicSingerService.getSingerByMusicId(m.getId()).getSingerid()) == null) {
+					throw new CustomException("歌手的信息不存在!");  
+				}
 				singerList.add(singerService.getSingerById(musicSingerService.getSingerByMusicId(m.getId()).getSingerid()));
 			}
 		}else {
@@ -589,6 +594,9 @@ public class UserController {
 				musicList = musicList_all.subList(0, musicList_all.size() > 20 ? 20 : musicList_all.size());
 				singerList = new ArrayList<Singer>();
 				for(Music m : musicList ) {
+					if(singerService.getSingerById(musicSingerService.getSingerByMusicId(m.getId()).getSingerid()) == null) {
+						throw new CustomException("歌手的信息不存在!");  
+					}
 					singerList.add(singerService.getSingerById(musicSingerService.getSingerByMusicId(m.getId()).getSingerid()));
 				}
 			}else if(id == 3) {
@@ -622,16 +630,21 @@ public class UserController {
 				musicList = musicList.subList(0, musicList_all.size() > 20 ? 20 : musicList_all.size());
 				singerList = new ArrayList<Singer>();
 				for(Music m : musicList ) {
+					if(singerService.getSingerById(musicSingerService.getSingerByMusicId(m.getId()).getSingerid()) == null) {
+						throw new CustomException("歌手的信息不存在!");  
+					}
 					singerList.add(singerService.getSingerById(musicSingerService.getSingerByMusicId(m.getId()).getSingerid()));
 				}
 			}
 		}
+		
 		
 		model.addAttribute("cat",cat);
 		model.addAttribute("musicList", musicList);
 		model.addAttribute("singerList", singerList);
 		model.addAttribute("title", "排行榜");
 		model.addAttribute(new User());
+		 
 		return "showRank";
 	}
 	
